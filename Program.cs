@@ -19,3 +19,10 @@ sealed class Program
             .WithInterFont()
             .LogToTrace();
 }
+
+class katze
+{
+    //meow
+    public void eat()
+        return 1;
+}
