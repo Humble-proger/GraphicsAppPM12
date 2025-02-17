@@ -46,30 +46,30 @@ dotnet_style_parentheses_in_other_operators = never_if_unnecessary:silent
 dotnet_style_parentheses_in_relational_binary_operators = always_for_clarity:silent
 
 # Modifier preferences
-dotnet_style_require_accessibility_modifiers = for_non_interface_members:silent
+dotnet_style_require_accessibility_modifiers = for_non_interface_members:silent # Нужно ли писать модификаторы
 
 # Expression-level preferences
-dotnet_style_coalesce_expression = true:suggestion
-dotnet_style_collection_initializer = true:suggestion
-dotnet_style_explicit_tuple_names = true:suggestion
-dotnet_style_null_propagation = true:suggestion
-dotnet_style_object_initializer = true:suggestion
-dotnet_style_operator_placement_when_wrapping = beginning_of_line
-dotnet_style_prefer_auto_properties = true:suggestion
+dotnet_style_coalesce_expression = false:suggestion # Блоки проверки Null проверяется в if конструкторе. ПРи False проверка производится с помощью конструктора if иначе ??
+dotnet_style_collection_initializer = true:suggestion # Блоки инициализации происходят List<string> name = []
+dotnet_style_explicit_tuple_names = true:suggestion # Писать имена элементов картежей
+dotnet_style_null_propagation = true:suggestion # Упрощение синтаксиса, если на вход к функции может подаваться null, например var v = o?.ToString();
+dotnet_style_object_initializer = true:suggestion # ПРи создании объекта свойства пишутся внутри {}
+dotnet_style_operator_placement_when_wrapping = beginning_of_line # При переносе выражения, операция должна переносится вместе с переменной
+dotnet_style_prefer_auto_properties = true:suggestion # Автоматический конструкторы get и set
 dotnet_style_prefer_compound_assignment = true:suggestion
-dotnet_style_prefer_conditional_expression_over_assignment = true:suggestion
-dotnet_style_prefer_conditional_expression_over_return = true:suggestion
-dotnet_style_prefer_inferred_anonymous_type_member_names = true:suggestion
-dotnet_style_prefer_inferred_tuple_names = true:suggestion
-dotnet_style_prefer_is_null_check_over_reference_equality_method = true:suggestion
-dotnet_style_prefer_simplified_boolean_expressions = true:suggestion
-dotnet_style_prefer_simplified_interpolation = true:suggestion
+dotnet_style_prefer_conditional_expression_over_assignment = true:suggestion # Предпочтительней использовать составные операторы x += 5
+dotnet_style_prefer_conditional_expression_over_return = true:suggestion # Предпочтительно использовать тернарнй оператор, если это возможно и блок маленький
+dotnet_style_prefer_inferred_anonymous_type_member_names = false:suggestion # Предпочтительней писать имена элементов кортежа
+dotnet_style_prefer_inferred_tuple_names = true:suggestion # Предпочтительней писать имена элементов кортежа
+dotnet_style_prefer_is_null_check_over_reference_equality_method = true:suggestion # Предпочтительней конструкция is null
+dotnet_style_prefer_simplified_boolean_expressions = true:suggestion # Если false, то предпочтительней использование террнарного оператора при логических операциях
+dotnet_style_prefer_simplified_interpolation = true:suggestion # При false, нужно ли писать .ToString() в строках
 
 # Field preferences
-dotnet_style_readonly_field = true:warning
+dotnet_style_readonly_field = true:warning # Нужно ли предупреждать об readonly
 
 # Parameter preferences
-dotnet_code_quality_unused_parameters = all:suggestion
+dotnet_code_quality_unused_parameters = non_public:suggestion # Не давать возможность писать неиспользуемые параметры в public функциях
 
 # Suppression preferences
 dotnet_remove_unnecessary_suppression_exclusions = none
@@ -78,18 +78,18 @@ dotnet_remove_unnecessary_suppression_exclusions = none
 [*.cs]
 
 # var preferences
-csharp_style_var_elsewhere = false:silent
-csharp_style_var_for_built_in_types = false:silent
-csharp_style_var_when_type_is_apparent = false:silent
+csharp_style_var_elsewhere = true:silent # Писать var вместо встроенных типов
+csharp_style_var_for_built_in_types = true:silent
+csharp_style_var_when_type_is_apparent = true:silent
 
 # Expression-bodied members
 csharp_style_expression_bodied_accessors = true:silent
-csharp_style_expression_bodied_constructors = false:silent
+csharp_style_expression_bodied_constructors = true:silent # Не писать {} при => при реализации функции
 csharp_style_expression_bodied_indexers = true:silent
 csharp_style_expression_bodied_lambdas = true:suggestion
-csharp_style_expression_bodied_local_functions = false:silent
-csharp_style_expression_bodied_methods = false:silent
-csharp_style_expression_bodied_operators = false:silent
+csharp_style_expression_bodied_local_functions = true:silent
+csharp_style_expression_bodied_methods = true:silent
+csharp_style_expression_bodied_operators = true:silent
 csharp_style_expression_bodied_properties = true:silent
 
 # Pattern matching preferences
@@ -97,17 +97,17 @@ csharp_style_pattern_matching_over_as_with_null_check = true:suggestion
 csharp_style_pattern_matching_over_is_with_cast_check = true:suggestion
 csharp_style_prefer_not_pattern = true:suggestion
 csharp_style_prefer_pattern_matching = true:silent
-csharp_style_prefer_switch_expression = true:suggestion
+csharp_style_prefer_switch_expression = false:suggestion
 
 # Null-checking preferences
 csharp_style_conditional_delegate_call = true:suggestion
 
 # Modifier preferences
-csharp_prefer_static_local_function = true:warning
+csharp_prefer_static_local_function = true:warning # Тут закончил
 csharp_preferred_modifier_order = public,private,protected,internal,static,extern,new,virtual,abstract,sealed,override,readonly,unsafe,volatile,async:silent
 
 # Code-block preferences
-csharp_prefer_braces = true:silent
+csharp_prefer_braces = false:silent
 csharp_prefer_simple_using_statement = true:suggestion
 
 # Expression-level preferences
@@ -117,7 +117,7 @@ csharp_style_inlined_variable_declaration = true:suggestion
 csharp_style_pattern_local_over_anonymous_function = true:suggestion
 csharp_style_prefer_index_operator = true:suggestion
 csharp_style_prefer_range_operator = true:suggestion
-csharp_style_throw_expression = true:suggestion
+csharp_style_throw_expression = false:suggestion
 csharp_style_unused_value_assignment_preference = discard_variable:suggestion
 csharp_style_unused_value_expression_statement_preference = discard_variable:silent
 
@@ -139,12 +139,12 @@ csharp_new_line_between_query_expression_clauses = true
 csharp_indent_block_contents = true
 csharp_indent_braces = false
 csharp_indent_case_contents = true
-csharp_indent_case_contents_when_block = true
-csharp_indent_labels = one_less_than_current
+csharp_indent_case_contents_when_block = false
+csharp_indent_labels = no_change
 csharp_indent_switch_labels = true
 
 # Space preferences
-csharp_space_after_cast = false
+csharp_space_after_cast = true
 csharp_space_after_colon_in_inheritance_clause = true
 csharp_space_after_comma = true
 csharp_space_after_dot = false
