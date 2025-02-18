@@ -7,4 +7,23 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-</Project>
+    <PropertyGroup Label="Avalonia">
+        <AvaloniaUseCompiledBindingsByDefault>False</AvaloniaUseCompiledBindingsByDefault>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Avalonia" Version="11.2.4" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Avalonia.ReactiveUI" Version="11.2.4" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Avalonia.Desktop" Version="11.2.4" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Avalonia.Themes.Fluent" Version="11.2.3" />
+    </ItemGroup>
+ </Project>
