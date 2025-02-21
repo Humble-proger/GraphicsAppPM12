@@ -10,6 +10,6 @@ public class Point : Avalonia.Controls.Shapes.Ellipse
         Fill = new SolidColorBrush(Color.Parse(color));
         Canvas.SetLeft(this, x);
         Canvas.SetTop(this, y);
+
     }
 }
-
