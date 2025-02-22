@@ -14,6 +14,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Views\pictures\layers\del_layer.png" />
+    <None Remove="Views\pictures\layers\down.png" />
+    <None Remove="Views\pictures\layers\new_layer.png" />
+    <None Remove="Views\pictures\layers\up.png" />
     <None Remove="Views\pictures\settings\create.png" />
     <None Remove="Views\pictures\settings\open3.png" />
     <None Remove="Views\pictures\settings\save.png" />
@@ -28,6 +32,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <AvaloniaResource Include="Views\pictures\layers\del_layer.png" />
+    <AvaloniaResource Include="Views\pictures\layers\down.png" />
+    <AvaloniaResource Include="Views\pictures\layers\new_layer.png" />
+    <AvaloniaResource Include="Views\pictures\layers\up.png" />
     <AvaloniaResource Include="Views\pictures\settings\create.png" />
     <AvaloniaResource Include="Views\pictures\settings\open3.png" />
     <AvaloniaResource Include="Views\pictures\settings\save.png" />

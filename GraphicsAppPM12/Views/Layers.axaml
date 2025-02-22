@@ -1,0 +1,43 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="GraphicsApp.Views.Layers"
+             >
+            
+    <Grid RowDefinitions="Auto, *" ShowGridLines="True">
+        <StackPanel Orientation="Horizontal" Spacing="20" Grid.Row="0" Margin="10">
+            <Button Height="35" Width="35" Background="#ededed">
+                <ToolTip.Tip>
+                    <TextBlock Text="Новый слой"/>
+                </ToolTip.Tip>
+                <Image Source="pictures/layers/new_layer.png" Height="30" Width="30" ></Image>
+            </Button>
+
+            <Button Height="35" Width="35" Background="#ededed">
+                <ToolTip.Tip>
+                    <TextBlock Text="Удалить слой"/>
+                </ToolTip.Tip>
+                <Image Source="pictures/layers/del_layer.png" Height="30" Width="30" ></Image>
+            </Button>
+
+            <Button Height="35" Width="35" Background="#ededed">
+                <ToolTip.Tip>
+                    <TextBlock Text="Слить вниз"/>
+                </ToolTip.Tip>
+                <Image Source="pictures/layers/down.png" Height="30" Width="30" ></Image>
+            </Button>
+
+            <Button Height="35" Width="35" Background="#ededed">
+                <ToolTip.Tip>
+                    <TextBlock Text="Поднять вверх"/>
+                </ToolTip.Tip>
+                <Image Source="pictures/layers/up.png" Height="30" Width="30" ></Image>
+            </Button>
+        </StackPanel>
+        <StackPanel>
+                
+        </StackPanel>
+    </Grid>
+</UserControl>
