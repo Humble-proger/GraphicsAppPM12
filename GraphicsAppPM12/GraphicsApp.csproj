@@ -78,5 +78,8 @@
     <Compile Update="Views\ToolBars.axaml.cs">
       <DependentUpon>ToolBars.axaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\Footer.axaml.cs">
+      <DependentUpon>Footer.axaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 </Project>
