@@ -1,10 +1,10 @@
-using Avalonia.Controls;
+﻿using Avalonia.Controls;
 
 namespace GraphicsApp.Views
 {
-    public partial class MainWindow : Window
+    public partial class Canvas : UserControl
     {
-        public MainWindow()
+        public Canvas()
         {
             InitializeComponent();
         }
