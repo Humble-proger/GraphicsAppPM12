@@ -1,7 +1,28 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\Program\\Budancev\\\u041F\u0440\u043E\u0433\u0440\u0430\u043C\u043C\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0435 \u0433\u0440\u0430\u0444\u0438\u0447\u0435\u0441\u043A\u043E\u0433\u043E \u043F\u0440\u0438\u043B\u043E\u0436\u0435\u043D\u0438\u044F\\GraphicsAppPM12\\",
-  "Documents": [],
+  "WorkspaceRootPath": "C:\\\u0423\u0447\u0451\u0431\u0430\\8 \u0441\u0435\u043C\u0435\u0441\u0442\u0440\\\u0421\u0422\u041F\\GraphicsAppPM12\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{EF011138-64AE-49B0-ABCC-1920187554F0}|GraphicsAppPM12\\GraphicsApp.csproj|c:\\\u0443\u0447\u0451\u0431\u0430\\8 \u0441\u0435\u043C\u0435\u0441\u0442\u0440\\\u0441\u0442\u043F\\graphicsapppm12\\graphicsapppm12\\views\\mainwindow.axaml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{EF011138-64AE-49B0-ABCC-1920187554F0}|GraphicsAppPM12\\GraphicsApp.csproj|solutionrelative:graphicsapppm12\\views\\mainwindow.axaml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EF011138-64AE-49B0-ABCC-1920187554F0}|GraphicsAppPM12\\GraphicsApp.csproj|c:\\\u0443\u0447\u0451\u0431\u0430\\8 \u0441\u0435\u043C\u0435\u0441\u0442\u0440\\\u0441\u0442\u043F\\graphicsapppm12\\graphicsapppm12\\graphicsapp.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{EF011138-64AE-49B0-ABCC-1920187554F0}|GraphicsAppPM12\\GraphicsApp.csproj|solutionrelative:graphicsapppm12\\graphicsapp.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EF011138-64AE-49B0-ABCC-1920187554F0}|GraphicsAppPM12\\GraphicsApp.csproj|c:\\\u0443\u0447\u0451\u0431\u0430\\8 \u0441\u0435\u043C\u0435\u0441\u0442\u0440\\\u0441\u0442\u043F\\graphicsapppm12\\graphicsapppm12\\viewmodels\\mainwindowviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EF011138-64AE-49B0-ABCC-1920187554F0}|GraphicsAppPM12\\GraphicsApp.csproj|solutionrelative:graphicsapppm12\\viewmodels\\mainwindowviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EF011138-64AE-49B0-ABCC-1920187554F0}|GraphicsAppPM12\\GraphicsApp.csproj|c:\\\u0443\u0447\u0451\u0431\u0430\\8 \u0441\u0435\u043C\u0435\u0441\u0442\u0440\\\u0441\u0442\u043F\\graphicsapppm12\\graphicsapppm12\\viewmodels\\viewmodelbase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EF011138-64AE-49B0-ABCC-1920187554F0}|GraphicsAppPM12\\GraphicsApp.csproj|solutionrelative:graphicsapppm12\\viewmodels\\viewmodelbase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EF011138-64AE-49B0-ABCC-1920187554F0}|GraphicsAppPM12\\GraphicsApp.csproj|c:\\\u0443\u0447\u0451\u0431\u0430\\8 \u0441\u0435\u043C\u0435\u0441\u0442\u0440\\\u0441\u0442\u043F\\graphicsapppm12\\graphicsapppm12\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EF011138-64AE-49B0-ABCC-1920187554F0}|GraphicsAppPM12\\GraphicsApp.csproj|solutionrelative:graphicsapppm12\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,11 +30,72 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "GraphicsApp.csproj",
+              "DocumentMoniker": "C:\\\u0423\u0447\u0451\u0431\u0430\\8 \u0441\u0435\u043C\u0435\u0441\u0442\u0440\\\u0421\u0422\u041F\\GraphicsAppPM12\\GraphicsAppPM12\\GraphicsApp.csproj",
+              "RelativeDocumentMoniker": "GraphicsAppPM12\\GraphicsApp.csproj",
+              "ToolTip": "C:\\\u0423\u0447\u0451\u0431\u0430\\8 \u0441\u0435\u043C\u0435\u0441\u0442\u0440\\\u0421\u0422\u041F\\GraphicsAppPM12\\GraphicsAppPM12\\GraphicsApp.csproj",
+              "RelativeToolTip": "GraphicsAppPM12\\GraphicsApp.csproj",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-02-22T06:00:39.125Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MainWindow.axaml",
+              "DocumentMoniker": "C:\\\u0423\u0447\u0451\u0431\u0430\\8 \u0441\u0435\u043C\u0435\u0441\u0442\u0440\\\u0421\u0422\u041F\\GraphicsAppPM12\\GraphicsAppPM12\\Views\\MainWindow.axaml",
+              "RelativeDocumentMoniker": "GraphicsAppPM12\\Views\\MainWindow.axaml",
+              "ToolTip": "C:\\\u0423\u0447\u0451\u0431\u0430\\8 \u0441\u0435\u043C\u0435\u0441\u0442\u0440\\\u0421\u0422\u041F\\GraphicsAppPM12\\GraphicsAppPM12\\Views\\MainWindow.axaml",
+              "RelativeToolTip": "GraphicsAppPM12\\Views\\MainWindow.axaml",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAAABoAAAAHAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-02-22T05:49:10.402Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "MainWindowViewModel.cs",
+              "DocumentMoniker": "C:\\\u0423\u0447\u0451\u0431\u0430\\8 \u0441\u0435\u043C\u0435\u0441\u0442\u0440\\\u0421\u0422\u041F\\GraphicsAppPM12\\GraphicsAppPM12\\ViewModels\\MainWindowViewModel.cs",
+              "RelativeDocumentMoniker": "GraphicsAppPM12\\ViewModels\\MainWindowViewModel.cs",
+              "ToolTip": "C:\\\u0423\u0447\u0451\u0431\u0430\\8 \u0441\u0435\u043C\u0435\u0441\u0442\u0440\\\u0421\u0422\u041F\\GraphicsAppPM12\\GraphicsAppPM12\\ViewModels\\MainWindowViewModel.cs",
+              "RelativeToolTip": "GraphicsAppPM12\\ViewModels\\MainWindowViewModel.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-22T05:38:45.542Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ViewModelBase.cs",
+              "DocumentMoniker": "C:\\\u0423\u0447\u0451\u0431\u0430\\8 \u0441\u0435\u043C\u0435\u0441\u0442\u0440\\\u0421\u0422\u041F\\GraphicsAppPM12\\GraphicsAppPM12\\ViewModels\\ViewModelBase.cs",
+              "RelativeDocumentMoniker": "GraphicsAppPM12\\ViewModels\\ViewModelBase.cs",
+              "ToolTip": "C:\\\u0423\u0447\u0451\u0431\u0430\\8 \u0441\u0435\u043C\u0435\u0441\u0442\u0440\\\u0421\u0422\u041F\\GraphicsAppPM12\\GraphicsAppPM12\\ViewModels\\ViewModelBase.cs",
+              "RelativeToolTip": "GraphicsAppPM12\\ViewModels\\ViewModelBase.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-22T05:38:29.671Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\\u0423\u0447\u0451\u0431\u0430\\8 \u0441\u0435\u043C\u0435\u0441\u0442\u0440\\\u0421\u0422\u041F\\GraphicsAppPM12\\GraphicsAppPM12\\Program.cs",
+              "RelativeDocumentMoniker": "GraphicsAppPM12\\Program.cs",
+              "ToolTip": "C:\\\u0423\u0447\u0451\u0431\u0430\\8 \u0441\u0435\u043C\u0435\u0441\u0442\u0440\\\u0421\u0422\u041F\\GraphicsAppPM12\\GraphicsAppPM12\\Program.cs",
+              "RelativeToolTip": "GraphicsAppPM12\\Program.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-22T05:36:45.904Z"
             }
           ]
         }
