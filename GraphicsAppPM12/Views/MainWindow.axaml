@@ -15,7 +15,7 @@
         <vm:MainWindowViewModel/>
     </Design.DataContext> -->
 
-    <Grid RowDefinitions="Auto, Auto, *, Auto" ShowGridLines="True">
+    <Grid RowDefinitions="Auto, Auto, *, Auto" ShowGridLines="True" Background="#FFFFFF">
         <!--Панель с кнопками сохранить\сохранит как и тд-->
             <local:Settings/>
        
@@ -23,19 +23,19 @@
         <!--Панель с инструментами-->
             <local:ToolBars Grid.Row="1" />
 
-        <Grid Grid.Row="2" ColumnDefinitions="*, 4*, *">
+        <Grid Grid.Row="2" ColumnDefinitions="*, 4*, *" >
 
-            <ListBox Grid.Column="0">
-                <ListBoxItem Content="bla"/>
-                <ListBoxItem Content="bla"/>
+            <ListBox Grid.Column="0" Background="#F6F6F6">
+                <ListBoxItem Content="bla" Foreground="Black"/>
+                <ListBoxItem Content="bla" Foreground="Black"/>
             </ListBox>
             
             <!--Подключение холста-->
             <local:Canvas Grid.Column="1" />
 
-            <ListBox Grid.Column="2">
-                <ListBoxItem Content="bla"/>
-                <ListBoxItem Content="bla"/>
+            <ListBox Grid.Column="2" Background="#F6F6F6">
+                <ListBoxItem Content="bla" Foreground="Black"/>
+                <ListBoxItem Content="bla" Foreground="Black"/>
             </ListBox>
 
         </Grid>
