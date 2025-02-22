@@ -10,3 +10,4 @@ namespace GraphicsApp.Views
         }
     }
 }
+//добавляем снова на гитхаб
