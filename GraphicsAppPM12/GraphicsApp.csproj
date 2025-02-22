@@ -13,9 +13,6 @@
     <AvaloniaResource Include="Assets\**" />
     <None Remove="Assets\layers.png" />
     <None Remove="Views\pictures\ToolBars\layers.png" />
-    <AvaloniaResource Include="Views\pictures\ToolBars\layers.png" />
-    <None Remove="Views\pictures\ToolBars\layers.svg" />
-    <AvaloniaResource Include="Views\pictures\ToolBars\layers.svg" />
     <None Remove="Views\pictures\ToolBars\triangle.png" />
     <AvaloniaResource Include="Views\pictures\ToolBars\triangle.png" />
     <None Remove="Views\pictures\ToolBars\square.png" />
@@ -59,12 +56,6 @@
     <AvaloniaResource Include="Views\pictures\settings\save.png" />
     <AvaloniaResource Include="Views\pictures\settings\save_as.png" />
     <AvaloniaResource Include="Views\pictures\settings\settings.png" />
-    <AvaloniaResource Include="Views\pictures\ToolBars\cursor3.png" />
-    <AvaloniaResource Include="Views\pictures\ToolBars\erase.png" />
-    <AvaloniaResource Include="Views\pictures\ToolBars\filling.png" />
-    <AvaloniaResource Include="Views\pictures\ToolBars\highlight.png" />
-    <AvaloniaResource Include="Views\pictures\ToolBars\stylus.png" />
-    <AvaloniaResource Include="Views\pictures\ToolBars\thickness.png" />
   </ItemGroup>
 
   <ItemGroup>
