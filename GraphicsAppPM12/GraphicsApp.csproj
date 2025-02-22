@@ -11,6 +11,24 @@
   <ItemGroup>
     <Folder Include="Models\" />
     <AvaloniaResource Include="Assets\**" />
+    <None Remove="Assets\layers.png" />
+    <None Remove="Views\pictures\ToolBars\layers.png" />
+    <AvaloniaResource Include="Views\pictures\ToolBars\layers.png" />
+    <None Remove="Views\pictures\ToolBars\layers.svg" />
+    <AvaloniaResource Include="Views\pictures\ToolBars\layers.svg" />
+    <None Remove="Views\pictures\ToolBars\triangle.png" />
+    <AvaloniaResource Include="Views\pictures\ToolBars\triangle.png" />
+    <None Remove="Views\pictures\ToolBars\square.png" />
+    <AvaloniaResource Include="Views\pictures\ToolBars\square.png" />
+    <None Remove="Views\pictures\ToolBars\polyline.png" />
+    <AvaloniaResource Include="Views\pictures\ToolBars\polyline.png" />
+    <None Remove="Views\pictures\ToolBars\line.png" />
+    <AvaloniaResource Include="Views\pictures\ToolBars\line.png" />
+    <None Remove="Views\pictures\ToolBars\circle.png" />
+    <AvaloniaResource Include="Views\pictures\ToolBars\circle.png" />
+    <None Remove="Views\pictures\ToolBars\further.png" />
+    <None Remove="Views\pictures\ToolBars\chevron-down.png" />
+    <AvaloniaResource Include="Views\pictures\ToolBars\further.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -52,6 +70,8 @@
   <ItemGroup>
     <PackageReference Include="Avalonia" Version="11.2.1" />
     <PackageReference Include="Avalonia.Desktop" Version="11.2.1" />
+    <PackageReference Include="Avalonia.Svg" Version="11.2.0.2" />
+    <PackageReference Include="Avalonia.Svg.Skia" Version="11.2.0.2" />
     <PackageReference Include="Avalonia.Themes.Fluent" Version="11.2.1" />
     <PackageReference Include="Avalonia.Fonts.Inter" Version="11.2.1" />
     <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
@@ -60,6 +80,7 @@
       <PrivateAssets Condition="'$(Configuration)' != 'Debug'">All</PrivateAssets>
     </PackageReference>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1" />
+    <PackageReference Include="Svg" Version="3.4.7" />
   </ItemGroup>
 
   <ItemGroup>

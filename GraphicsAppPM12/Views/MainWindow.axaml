@@ -15,7 +15,7 @@
         <vm:MainWindowViewModel/>
     </Design.DataContext> -->
 
-    <Grid RowDefinitions="Auto, Auto, *, Auto" ShowGridLines="True">
+    <Grid RowDefinitions="Auto, Auto, *, Auto" ShowGridLines="True" Background="#FFFFFF">
         <!--Панель с кнопками сохранить\сохранит как и тд-->
             <local:Settings/>
        
