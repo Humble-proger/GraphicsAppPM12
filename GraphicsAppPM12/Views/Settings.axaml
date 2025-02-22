@@ -1,0 +1,48 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="GraphicsApp.Views.Settings">
+
+    <Border BorderBrush="Black" BorderThickness="0,1,0,1">
+        <StackPanel  Grid.Row="0" Orientation="Horizontal" Margin="10" Spacing="20">
+            <!--Кнопка настроек-->
+            <Button Height="30" Width="30" Background="#ededed">
+                <ToolTip.Tip>
+                    <TextBlock Text="Настройки"/>
+                </ToolTip.Tip>
+                 <Image Source="pictures/settings/settings.png" Height="25" Width="25" ></Image>   
+             </Button>
+            <!--Кнопка создать-->
+            <Button Height="30" Width="30" Background="#ededed">
+                <ToolTip.Tip>
+                    <TextBlock Text="Создать файл"/>
+                </ToolTip.Tip>
+                 <Image Source="pictures/settings/create.png" Height="25" Width="25" ></Image>   
+             </Button>
+            <!--Кнопка открыть-->
+            <Button Height="30" Width="30" Background="#ededed">
+                <ToolTip.Tip>
+                    <TextBlock Text="Открыть файл"/>
+                </ToolTip.Tip>
+                 <Image Source="pictures/settings/open3.png" Height="26" Width="26" ></Image>   
+             </Button>
+            <!--Кнопка сохранить-->
+            <Button Height="30" Width="30" Background="#ededed">
+                <ToolTip.Tip>
+                    <TextBlock Text="Сохранить"/>
+                </ToolTip.Tip>
+                 <Image Source="pictures/settings/save.png" Height="25" Width="25" ></Image>   
+             </Button>
+            <!--Кнопка "сохранить как"-->
+            <Button Height="30" Width="30" Background="#ededed">
+                <ToolTip.Tip>
+                    <TextBlock Text="Сохранить как"/>
+                </ToolTip.Tip>
+                 <Image Source="pictures/settings/save_as.png" Height="23" Width="23" ></Image>   
+             </Button>
+
+        </StackPanel>
+    </Border>
+</UserControl>

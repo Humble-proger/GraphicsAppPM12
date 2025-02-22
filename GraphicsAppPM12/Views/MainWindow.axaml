@@ -17,10 +17,8 @@
 
     <Grid RowDefinitions="Auto, Auto, *, Auto" ShowGridLines="True">
         <!--Панель с кнопками сохранить\сохранит как и тд-->
-        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="10" Spacing="20">
-            <Button Height="30" Width="30"/>
-            <Button Height="30" Width="30"/>
-        </StackPanel>
+            <local:Settings/>
+       
 
         <!--Панель с инструментами-->
         <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="10" Spacing="20">

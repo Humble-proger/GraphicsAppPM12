@@ -14,6 +14,26 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Views\pictures\settings\create.png" />
+    <None Remove="Views\pictures\settings\open1.png" />
+    <None Remove="Views\pictures\settings\open2.png" />
+    <None Remove="Views\pictures\settings\open3.png" />
+    <None Remove="Views\pictures\settings\save.png" />
+    <None Remove="Views\pictures\settings\save_as.png" />
+    <None Remove="Views\pictures\settings\settings.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AvaloniaResource Include="Views\pictures\settings\create.png" />
+    <AvaloniaResource Include="Views\pictures\settings\open1.png" />
+    <AvaloniaResource Include="Views\pictures\settings\open2.png" />
+    <AvaloniaResource Include="Views\pictures\settings\open3.png" />
+    <AvaloniaResource Include="Views\pictures\settings\save.png" />
+    <AvaloniaResource Include="Views\pictures\settings\save_as.png" />
+    <AvaloniaResource Include="Views\pictures\settings\settings.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Avalonia" Version="11.2.1" />
     <PackageReference Include="Avalonia.Desktop" Version="11.2.1" />
     <PackageReference Include="Avalonia.Themes.Fluent" Version="11.2.1" />
