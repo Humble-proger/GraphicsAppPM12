@@ -1,6 +1,7 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:vm="using:GraphicsApp.ViewModels"
+        xmlns:vm="clr-namespace:GraphicsApp.ViewModels"
+        xmlns:local="clr-namespace:GraphicsApp.Views"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
@@ -9,12 +10,45 @@
         Icon="/Assets/avalonia-logo.ico"
         Title="GraphicsApp">
 
-    <Design.DataContext>
-        <!-- This only sets the DataContext for the previewer in an IDE,
-             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+    <!-- <Design.DataContext>
+        
         <vm:MainWindowViewModel/>
-    </Design.DataContext>
+    </Design.DataContext> -->
 
-    <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+    <Grid RowDefinitions="Auto, Auto, *, Auto" ShowGridLines="True">
+        <!--Панель с кнопками сохранить\сохранит как и тд-->
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="10" Spacing="20">
+            <Button Height="30" Width="30"/>
+            <Button Height="30" Width="30"/>
+        </StackPanel>
+
+        <!--Панель с инструментами-->
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="10" Spacing="20">
+            <Button Height="30" Width="30"/>
+            <Button Height="30" Width="30"/>
+        </StackPanel>
+
+        <Grid Grid.Row="2" ColumnDefinitions="*, 4*, *">
+
+            <ListBox Grid.Column="0">
+                <ListBoxItem Content="bla"/>
+                <ListBoxItem Content="bla"/>
+            </ListBox>
+            
+            <!--Подключение холста-->
+            <local:Canvas Grid.Column="1" />
+
+            <ListBox Grid.Column="2">
+                <ListBoxItem Content="bla"/>
+                <ListBoxItem Content="bla"/>
+            </ListBox>
+
+        </Grid>
+
+        <StackPanel Grid.Row="3" Margin="10">
+            <TextBlock Text="футер"/>
+        </StackPanel>
+    </Grid>
 
 </Window>
+
