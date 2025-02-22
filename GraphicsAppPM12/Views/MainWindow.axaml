@@ -37,9 +37,9 @@
 
         </Grid>
 
-        <StackPanel Grid.Row="3" Margin="10">
+        <StackPanel Grid.Row="3" Margin="0">
             <!--Подключение холста-->
-            <local:Canvas/>
+            <local:Footer/>
         </StackPanel>
     </Grid>
 

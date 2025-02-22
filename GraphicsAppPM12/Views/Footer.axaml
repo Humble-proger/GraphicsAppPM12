@@ -1,8 +1,39 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="GraphicsApp.Views.Footer">
+             x:Class="GraphicsApp.Views.Footer"
+             Background="White"
+             Height="35">
+    <Border BorderBrush="#8B8B8B" BorderThickness="0">
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="10" Spacing="20" VerticalAlignment="Center">
+            <!-- Курсор -->
+            <StackPanel Orientation="Horizontal" Spacing="5">
+                <Canvas Width="20" Height="20">
+                    <Path Stroke="#606060" StrokeThickness="1.5" StrokeLineCap="Round" StrokeJoin="Round"
+                          Data="M15 7V2C15 1.5 14.5 1 14 1H2C1.5 1 1 1.5 1 2V14C1 14.5 1.5 15 2 15H7" />
+                    <Path Stroke="#606060" StrokeThickness="1.5" StrokeLineCap="Round" StrokeJoin="Round"
+                          Data="M0 0L4 9L5 5L9 4L0 0Z">
+                        <Path.RenderTransform>
+                            <TranslateTransform X="7" Y="7" />
+                        </Path.RenderTransform>
+                    </Path>
+                </Canvas>
+                <TextBlock x:Name="CursorPositionText" Text="X: 0 мм, Y: 0 мм" Foreground="#414141" VerticalAlignment="Center"/>
+            </StackPanel>
 
-</UserControl>          
+            <!-- Размер полотна -->
+            <StackPanel Orientation="Horizontal" Spacing="5">
+                <Canvas Width="20" Height="20">
+                    <Path Stroke="#606060" StrokeThickness="1.5" StrokeLineCap="Round" StrokeJoin="Round"
+                          Data="M18 3L6 15" />
+                    <Path Stroke="#606060" StrokeThickness="1.5" StrokeLineCap="Round" StrokeJoin="Round"
+                          Data="M10 3H3v14h14v-7" />
+                    <Path Stroke="#606060" StrokeThickness="1.5" StrokeLineCap="Round" StrokeJoin="Round"
+                          Data="M14 3h4v4" />
+                    <Path Stroke="#606060" StrokeThickness="1.5" StrokeLineCap="Round" StrokeJoin="Round"
+                          Data="M12 15H7v-5" />
+                </Canvas>
+                <TextBlock x:Name="CanvasSizeText" Text="0 × 0 мм" Foreground="#414141" VerticalAlignment="Center"/>
+            </StackPanel>
+        </StackPanel>
+    </Border>
+</UserControl>
