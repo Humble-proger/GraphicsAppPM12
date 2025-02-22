@@ -24,7 +24,11 @@
                             </Path.RenderTransform>
                         </Path>
                     </Canvas>
-                    <TextBlock x:Name="CursorPositionText" Text="X: 0 мм, Y: 0 мм" Foreground="#414141" VerticalAlignment="Center"/>
+                    <TextBlock x:Name="CursorPositionText" Text="X: 0 мм, Y: 0 мм" Foreground="#414141" VerticalAlignment="Center">
+                        <ToolTip.Tip>
+                            <TextBlock Text="Курсор"/>
+                        </ToolTip.Tip>
+                    </TextBlock>
                 </StackPanel>
 
                 <!-- Размер полотна -->
@@ -38,8 +42,14 @@
                               Data="M14 3h4v4" />
                         <Path Stroke="#606060" StrokeThickness="1.5" StrokeLineCap="Round" StrokeJoin="Round"
                               Data="M12 15H7v-5" />
+                        
                     </Canvas>
-                    <TextBlock x:Name="CanvasSizeText" Text="0 × 0 мм" Foreground="#414141" VerticalAlignment="Center"/>
+                    
+                    <TextBlock x:Name="CanvasSizeText" Text="0 × 0 мм" Foreground="#414141" VerticalAlignment="Center">
+                        <ToolTip.Tip>
+                            <TextBlock Text="Размер полотна"/>
+                        </ToolTip.Tip>
+                    </TextBlock>
                 </StackPanel>
             </StackPanel>
 
@@ -51,6 +61,9 @@
                             <Path Data="M4 6H8" Stroke="#606060" StrokeThickness="1.5" StrokeLineCap="Round" StrokeJoin="Round"/>
                         </Canvas>
                     </Viewbox>
+                    <ToolTip.Tip>
+                        <TextBlock Text="Уменьшить"/>
+                    </ToolTip.Tip>
                 </Button>
                 <TextBlock x:Name="ZoomText" Text="100%" Foreground="#414141" VerticalAlignment="Center"/>
                 <Button Height="25" Width="25" Background="#F6F6F6" Click="OnZoomInClicked">
@@ -60,6 +73,9 @@
                             <Path Data="M4 6H8" Stroke="#606060" StrokeThickness="1.5" StrokeLineCap="Round" StrokeJoin="Round"/>
                         </Canvas>
                     </Viewbox>
+                    <ToolTip.Tip>
+                        <TextBlock Text="Увеличить"/>
+                    </ToolTip.Tip>
                 </Button>
             </StackPanel>
         </Grid>
