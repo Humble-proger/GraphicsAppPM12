@@ -5,8 +5,8 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="GraphicsApp.Views.ToolBars">
 
-    <Border BorderBrush="#8B8B8B" BorderThickness="0"> 
-        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="10,20,10,5" Spacing="30" HorizontalAlignment="Center" VerticalAlignment="Center">
+    <Border BorderBrush="#8B8B8B" BorderThickness="0,0,0,1"> 
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="10,20,10,5" Spacing="30" >
 
             
             <!--Кнопка курсора-->

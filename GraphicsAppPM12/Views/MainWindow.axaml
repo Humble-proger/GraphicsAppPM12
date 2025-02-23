@@ -15,7 +15,7 @@
         <vm:MainWindowViewModel/>
     </Design.DataContext> -->
 
-    <Grid RowDefinitions="Auto, Auto, *, Auto" ShowGridLines="True" Background="#FFFFFF">
+    <Grid RowDefinitions="Auto, Auto, *, Auto" Background="#FFFFFF">
         <!--Панель с кнопками сохранить\сохранит как и тд-->
             <local:Settings/>
        
@@ -29,7 +29,7 @@
                 <!--Подключение холста-->
                 <local:Canvas/>
                 <!--Подключение панели редактирования-->
-                <!-- <local:FigureEdit/> -->
+                <!--<local:FigureEdit/>--> 
                 
             </StackPanel>
             
