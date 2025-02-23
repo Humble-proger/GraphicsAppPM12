@@ -1,0 +1,75 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="GraphicsApp.Views.FigureEdit">
+
+    <!-- <Border Background="Red" PointerPressed="Border_PointerPressed">
+        <FlyoutBase.AttachedFlyout>
+            <Flyout>
+                <TextBlock Text="Red Rectangle Flyout." />
+            </Flyout>
+        </FlyoutBase.AttachedFlyout>
+    </Border> -->
+
+    <StackPanel>
+        <ListBox  Width="180" Height="200" ScrollViewer.VerticalScrollBarVisibility="Visible">
+            
+            <ListBoxItem>
+                <TextBlock Text="Отмена" FontSize="10"/>
+            </ListBoxItem>
+            <ListBoxItem>
+                <TextBlock Text="Изменить цвет" FontSize="10"/>
+                
+            </ListBoxItem>
+            <ListBoxItem>
+                <TextBlock Text="Изменить цвет обводки" FontSize="10"/>
+            </ListBoxItem>
+            <ListBoxItem>
+                <TextBlock Text="Изменить толщину обводки" FontSize="10"/>
+            </ListBoxItem>
+            <ListBoxItem>
+                <TextBlock Text="Изменить тип обводки" FontSize="10"/>
+            </ListBoxItem>
+            <ListBoxItem>
+                <TextBlock Text="Переместить" FontSize="10"/>
+            </ListBoxItem>
+            <ListBoxItem>
+                <TextBlock Text="Размер" FontSize="10"/>
+                <ListBoxItem.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem FontSize="10" Header="+"/>
+                        <MenuItem FontSize="10" Header="_"/>
+                    </ContextMenu>
+                </ListBoxItem.ContextMenu>
+            </ListBoxItem>
+            <ListBoxItem>
+                <TextBlock Text="Повернуть" FontSize="10"/>
+                <ListBoxItem.ContextMenu>
+                    <ContextMenu>
+                        <TextBox FontSize="10" Watermark="В градусах"/>
+                    </ContextMenu>
+                </ListBoxItem.ContextMenu>
+                
+            </ListBoxItem>
+            <ListBoxItem>
+                <TextBlock Text="Выравнивание" FontSize="10"/>
+                <ListBoxItem.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem FontSize="10" Header="По центру"/>
+                        <MenuItem FontSize="10" Header="По левой границе"/>
+                        <MenuItem FontSize="10" Header="По правой границе"/>
+                    </ContextMenu>
+                </ListBoxItem.ContextMenu>
+            </ListBoxItem>
+            <ListBoxItem>
+                <TextBlock Text="Дублировать" FontSize="10"/>
+            </ListBoxItem>
+            <ListBoxItem>
+                <TextBlock Text="Выравнивание Anchor Point" FontSize="10"/>
+            </ListBoxItem>
+        </ListBox>
+    </StackPanel>
+    
+</UserControl>

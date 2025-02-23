@@ -11,11 +11,58 @@
   <ItemGroup>
     <Folder Include="Models\" />
     <AvaloniaResource Include="Assets\**" />
+    <None Remove="Assets\layers.png" />
+    <None Remove="Views\pictures\ToolBars\layers.png" />
+    <None Remove="Views\pictures\ToolBars\triangle.png" />
+    <AvaloniaResource Include="Views\pictures\ToolBars\triangle.png" />
+    <None Remove="Views\pictures\ToolBars\square.png" />
+    <AvaloniaResource Include="Views\pictures\ToolBars\square.png" />
+    <None Remove="Views\pictures\ToolBars\polyline.png" />
+    <AvaloniaResource Include="Views\pictures\ToolBars\polyline.png" />
+    <None Remove="Views\pictures\ToolBars\line.png" />
+    <AvaloniaResource Include="Views\pictures\ToolBars\line.png" />
+    <None Remove="Views\pictures\ToolBars\circle.png" />
+    <AvaloniaResource Include="Views\pictures\ToolBars\circle.png" />
+    <None Remove="Views\pictures\ToolBars\further.png" />
+    <None Remove="Views\pictures\ToolBars\chevron-down.png" />
+    <AvaloniaResource Include="Views\pictures\ToolBars\further.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Views\pictures\layers\del_layer.png" />
+    <None Remove="Views\pictures\layers\down.png" />
+    <None Remove="Views\pictures\layers\new_layer.png" />
+    <None Remove="Views\pictures\layers\up.png" />
+    <None Remove="Views\pictures\settings\create.png" />
+    <None Remove="Views\pictures\settings\open3.png" />
+    <None Remove="Views\pictures\settings\save.png" />
+    <None Remove="Views\pictures\settings\save_as.png" />
+    <None Remove="Views\pictures\settings\settings.png" />
+    <None Remove="Views\pictures\ToolBars\cursor3.png" />
+    <None Remove="Views\pictures\ToolBars\erase.png" />
+    <None Remove="Views\pictures\ToolBars\filling.png" />
+    <None Remove="Views\pictures\ToolBars\highlight.png" />
+    <None Remove="Views\pictures\ToolBars\stylus.png" />
+    <None Remove="Views\pictures\ToolBars\thickness.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AvaloniaResource Include="Views\pictures\layers\del_layer.png" />
+    <AvaloniaResource Include="Views\pictures\layers\down.png" />
+    <AvaloniaResource Include="Views\pictures\layers\new_layer.png" />
+    <AvaloniaResource Include="Views\pictures\layers\up.png" />
+    <AvaloniaResource Include="Views\pictures\settings\create.png" />
+    <AvaloniaResource Include="Views\pictures\settings\open3.png" />
+    <AvaloniaResource Include="Views\pictures\settings\save.png" />
+    <AvaloniaResource Include="Views\pictures\settings\save_as.png" />
+    <AvaloniaResource Include="Views\pictures\settings\settings.png" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Avalonia" Version="11.2.1" />
     <PackageReference Include="Avalonia.Desktop" Version="11.2.1" />
+    <PackageReference Include="Avalonia.Svg" Version="11.2.0.2" />
+    <PackageReference Include="Avalonia.Svg.Skia" Version="11.2.0.2" />
     <PackageReference Include="Avalonia.Themes.Fluent" Version="11.2.1" />
     <PackageReference Include="Avalonia.Fonts.Inter" Version="11.2.1" />
     <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
@@ -24,5 +71,15 @@
       <PrivateAssets Condition="'$(Configuration)' != 'Debug'">All</PrivateAssets>
     </PackageReference>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1" />
+    <PackageReference Include="Svg" Version="3.4.7" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Views\ToolBars.axaml.cs">
+      <DependentUpon>ToolBars.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Footer.axaml.cs">
+      <DependentUpon>Footer.axaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 </Project>
