@@ -3,6 +3,11 @@ using Avalonia.Media;
 
 public class MyEllipse : Avalonia.Controls.Shapes.Ellipse, IShapeNamed
 {
+    public string name
+    {
+        set { name = value; }
+        get { return name; }
+    }
     public MyEllipse(double x = 0, double y = 0)
     {
         Canvas.SetLeft(this, x);

@@ -1,8 +1,12 @@
-using Avalonia.Controls;
 using Avalonia.Media;
 
 public class MyPolygon : Avalonia.Controls.Shapes.Polygon, IShapeOfPoints
 {
+    public string name
+    {
+        set { name = value; }
+        get { return name; }
+    }
     List<Avalonia.Point> IShapeOfPoints.Points
     {
         get { return (List<Avalonia.Point>) base.Points; }

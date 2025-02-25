@@ -3,6 +3,11 @@ using Avalonia.Media;
 
 public class MyRectangle : Avalonia.Controls.Shapes.Rectangle, IShapeNamed
 {
+    public string name
+    {
+        set { name = value; }
+        get { return name; }
+    }
     public MyRectangle(double x = 0, double y = 0)
     {
         Canvas.SetLeft(this, x);
