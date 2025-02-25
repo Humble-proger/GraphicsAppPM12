@@ -206,23 +206,6 @@
                 </Border>
                 <TextBlock Text="Цвета" HorizontalAlignment="Center" FontSize="11"  Foreground="#414141"/>
             </StackPanel>
-            
-            <!--Слои-->
-            <StackPanel>
-                <Button Height="50" Width="50" Background="#ededed" Margin="0,-10,0,3">
-                    <Viewbox Width="35" Height="35">
-                        <Canvas Width="24" Height="24">
-                            <Path Data="M12 2L2 7L12 12L22 7L12 2Z" 
-                                  Stroke="#606060" StrokeThickness="1.5" StrokeLineCap="Round" StrokeJoin="Round"/>
-                            <Path Data="M2 17L12 22L22 17" 
-                                  Stroke="#606060" StrokeThickness="1.5" StrokeLineCap="Round" StrokeJoin="Round"/>
-                            <Path Data="M2 12L12 17L22 12" 
-                                  Stroke="#606060" StrokeThickness="1.5" StrokeLineCap="Round" StrokeJoin="Round"/>
-                        </Canvas>
-                    </Viewbox>
-                </Button>
-                <TextBlock Text="Слои" HorizontalAlignment="Center" FontSize="11" Foreground="#414141"/>
-            </StackPanel>
 
 
         </StackPanel>

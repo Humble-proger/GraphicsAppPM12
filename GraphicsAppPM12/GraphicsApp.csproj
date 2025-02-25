@@ -51,11 +51,6 @@
     <AvaloniaResource Include="Views\pictures\layers\down.png" />
     <AvaloniaResource Include="Views\pictures\layers\new_layer.png" />
     <AvaloniaResource Include="Views\pictures\layers\up.png" />
-    <AvaloniaResource Include="Views\pictures\settings\create.png" />
-    <AvaloniaResource Include="Views\pictures\settings\open3.png" />
-    <AvaloniaResource Include="Views\pictures\settings\save.png" />
-    <AvaloniaResource Include="Views\pictures\settings\save_as.png" />
-    <AvaloniaResource Include="Views\pictures\settings\settings.png" />
   </ItemGroup>
 
   <ItemGroup>

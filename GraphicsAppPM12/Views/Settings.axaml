@@ -8,40 +8,97 @@
     <Border BorderBrush="Black" BorderThickness="0,1,0,1">
         <StackPanel  Grid.Row="0" Orientation="Horizontal" Margin="10" Spacing="20">
             <!--Кнопка настроек-->
-            <Button Height="30" Width="30" Background="#ededed">
+            <Button Height="35" Width="35" Background="#ededed">
+                <Viewbox Width="25" Height="25">
+                    <Canvas Width="24" Height="24">
+                        <Path Data="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z" Stroke="#606060" StrokeThickness="2" StrokeLineCap="Round" StrokeJoin="Round" Fill="Transparent"/>
+                        <Ellipse Stroke="#606060" StrokeThickness="2" Fill="Transparent" Canvas.Left="9" Canvas.Top="9" Width="6" Height="6"/>
+                    </Canvas>
+                </Viewbox>
                 <ToolTip.Tip>
                     <TextBlock Text="Настройки"/>
                 </ToolTip.Tip>
-                 <Image Source="pictures/settings/settings.png" Height="25" Width="25" ></Image>   
-             </Button>
+            </Button>
+            
             <!--Кнопка создать-->
-            <Button Height="30" Width="30" Background="#ededed">
+            <Button Height="35" Width="35" Background="#ededed">
+                <Viewbox Width="25" Height="25">
+                    <Canvas Width="24" Height="24">
+                        <!-- Основной контур файла -->
+                        <Path Data="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"
+                              Stroke="#606060" StrokeThickness="2" StrokeLineCap="Round" StrokeJoin="Round" Fill="Transparent"/>
+                        <!-- Верхний загнутый угол файла -->
+                        <Polyline Points="14,2 14,8 20,8" 
+                                  Stroke="#606060" StrokeThickness="2" StrokeLineCap="Round" StrokeJoin="Round" Fill="Transparent"/>
+                    </Canvas>
+                </Viewbox>
                 <ToolTip.Tip>
                     <TextBlock Text="Создать файл"/>
                 </ToolTip.Tip>
-                 <Image Source="pictures/settings/create.png" Height="25" Width="25" ></Image>   
-             </Button>
+            </Button>
+
+            
             <!--Кнопка открыть-->
-            <Button Height="30" Width="30" Background="#ededed">
+            <Button Height="35" Width="35" Background="#ededed">
+                <Viewbox Width="25" Height="25">
+                    <Canvas Width="24" Height="24">
+                        <!-- Основной контур папки -->
+                        <Path Data="M6 14L7.45 11.1A2 2 0 0 1 9.24 10H20a2 2 0 0 1 1.94 2.5l-1.55 6a2 2 0 0 1-1.94 1.5H4a2 2 0 0 1-2-2V5c0-1.1.9-2 2-2h3.93a2 2 0 0 1 1.66.9l.82 1.2a2 2 0 0 0 1.66.9H18a2 2 0 0 1 2 2v2"
+                              Stroke="#606060" StrokeThickness="2" StrokeLineCap="Round" StrokeJoin="Round" Fill="Transparent"/>
+                    </Canvas>
+                </Viewbox>
                 <ToolTip.Tip>
                     <TextBlock Text="Открыть файл"/>
                 </ToolTip.Tip>
-                 <Image Source="pictures/settings/open3.png" Height="26" Width="26" ></Image>   
-             </Button>
+            </Button>
+
+            
             <!--Кнопка сохранить-->
-            <Button Height="30" Width="30" Background="#ededed">
+            <Button Height="35" Width="35" Background="#ededed">
+                <Viewbox Width="27" Height="27" Stretch="Uniform" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <Canvas Width="25" Height="25">
+                        <Path Data="M16.625 18.375H4.375C3.91087 18.375 3.46575 18.1906 3.13756 17.8624C2.80937 17.5342 2.625 17.0891 2.625 16.625V4.375C2.625 3.91087 2.80937 3.46575 3.13756 3.13756C3.46575 2.80937 3.91087 2.625 4.375 2.625H14L18.375 7V16.625C18.375 17.0891 18.1906 17.5342 17.8624 17.8624C17.5342 18.1906 17.0891 18.375 16.625 18.375Z"
+                              Stroke="#606060" StrokeThickness="2" StrokeLineCap="Round" StrokeJoin="Round" Fill="Transparent"/>
+                        <Path Data="M14.875 18.375V11.375H6.125V18.375"
+                              Stroke="#606060" StrokeThickness="2" StrokeLineCap="Round" StrokeJoin="Round" Fill="Transparent"/>
+                        <Path Data="M6.125 2.625V7H13.125"
+                              Stroke="#606060" StrokeThickness="2" StrokeLineCap="Round" StrokeJoin="Round" Fill="Transparent"/>
+                    </Canvas>
+                </Viewbox>
                 <ToolTip.Tip>
                     <TextBlock Text="Сохранить"/>
                 </ToolTip.Tip>
-                 <Image Source="pictures/settings/save.png" Height="25" Width="25" ></Image>   
-             </Button>
+            </Button>
+
+
+
+            
             <!--Кнопка "сохранить как"-->
-            <Button Height="30" Width="30" Background="#ededed">
+           <Button Height="35" Width="35" Background="#ededed"> 
+                <Viewbox Width="25" Height="25">
+                    <Canvas Width="24" Height="24">
+                        <!-- Основной контур нового сохранения -->
+                        <Path Data="M16.625 18.375H4.375C3.91087 18.375 3.46575 18.1906 3.13756 17.8624C2.80937 17.5342 2.625 17.0891 2.625 16.625V4.375C2.625 3.91087 2.80937 3.46575 3.13756 3.13756C3.46575 2.80937 3.91087 2.625 4.375 2.625H14L18.375 7V16.625C18.375 17.0891 18.1906 17.5342 17.8624 17.8624C17.5342 18.1906 17.0891 18.375 16.625 18.375Z"
+                              Stroke="#606060" StrokeThickness="2" StrokeLineCap="Round" StrokeJoin="Round" Fill="Transparent"/>
+                        <Path Data="M14.875 18.375V11.375H6.125V18.375"
+                              Stroke="#606060" StrokeThickness="2" StrokeLineCap="Round" StrokeJoin="Round" Fill="Transparent"/>
+                        <Path Data="M6.125 2.625V7H13.125"
+                              Stroke="#606060" StrokeThickness="2" StrokeLineCap="Round" StrokeJoin="Round" Fill="Transparent"/>
+                        <!-- Иконка редактирования (размер 8x9) -->
+                        <Path Data="M5.6665 1.12499C5.7514 1.01213 5.85641 0.920266 5.97484 0.85525C6.09328 0.790234 6.22254 0.753495 6.35439 0.747375C6.48623 0.741255 6.61778 0.765887 6.74063 0.819702C6.86349 0.873517 6.97496 0.955335 7.06794 1.05994C7.16092 1.16454 7.23338 1.28964 7.28068 1.42726C7.32799 1.56488 7.34911 1.712 7.34271 1.85924C7.3363 2.00648 7.3025 2.15061 7.24347 2.28246C7.18444 2.4143 7.10146 2.53096 6.99984 2.62499L2.49984 7.68749L0.666504 8.24999L1.1665 6.18749L5.6665 1.12499Z"
+                              Stroke="#606060" StrokeThickness="1" StrokeLineCap="Round" StrokeJoin="Round" Fill="Transparent"
+                              Canvas.Left="15" Canvas.Top="15"/>
+                        <Path Data="M5 1.875L6.33333 3.375"
+                              Stroke="#606060" StrokeThickness="1" StrokeLineCap="Round" StrokeJoin="Round" Fill="Transparent"
+                              Canvas.Left="15" Canvas.Top="15"/>
+                    </Canvas>
+                </Viewbox>
                 <ToolTip.Tip>
                     <TextBlock Text="Сохранить как"/>
                 </ToolTip.Tip>
-                 <Image Source="pictures/settings/save_as.png" Height="23" Width="23" ></Image>   
-             </Button>
+            </Button>
+
+
 
         </StackPanel>
     </Border>
