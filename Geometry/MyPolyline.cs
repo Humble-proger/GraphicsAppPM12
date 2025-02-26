@@ -1,8 +1,16 @@
+using System.Composition;
+
 using Avalonia.Controls;
 using Avalonia.Media;
 
+namespace Geometry;
+
+
+[Export(typeof(IShape))]
+[ExportMetadata("Name", nameof(MyPolyLine))]
 public class MyPolyLine : Avalonia.Controls.Shapes.Polyline, IShapeOfPoints
 {
+    public MyPolyLine() { }
     List<Avalonia.Point> IShapeOfPoints.Points
     {
         get { return (List<Avalonia.Point>)base.Points; }

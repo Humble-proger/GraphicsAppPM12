@@ -1,8 +1,19 @@
-﻿using Avalonia.Controls;
+﻿using System.Composition;
+
+using Avalonia.Controls;
 using Avalonia.Media;
 
+using Geometry;
+
+
+[Export(typeof(IShape))]
+[ExportMetadata("Name", nameof(MyRectangle))]
 public class MyRectangle : Avalonia.Controls.Shapes.Rectangle, IShapeNamed
 {
+    public MyRectangle()
+    {
+
+    }
     public MyRectangle(double x = 0, double y = 0)
     {
         Canvas.SetLeft(this, x);
