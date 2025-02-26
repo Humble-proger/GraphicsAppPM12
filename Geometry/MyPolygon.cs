@@ -1,8 +1,14 @@
+using System.Composition;
 using Avalonia.Controls;
 using Avalonia.Media;
 
+namespace Geometry;
+
+[Export(typeof(IShape))]
+[ExportMetadata("Name", nameof(MyPolygon))]
 public class MyPolygon : Avalonia.Controls.Shapes.Polygon, IShapeOfPoints
 {
+    public MyPolygon() { }
     List<Avalonia.Point> IShapeOfPoints.Points
     {
         get { return (List<Avalonia.Point>) base.Points; }
