@@ -72,6 +72,11 @@
     </PackageReference>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1" />
     <PackageReference Include="Svg" Version="3.4.7" />
+    <PackageReference Include="System.Composition" Version="9.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Geometry\Geometry.csproj" />
   </ItemGroup>
 
   <ItemGroup>

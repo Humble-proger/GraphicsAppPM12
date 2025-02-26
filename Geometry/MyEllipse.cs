@@ -1,8 +1,14 @@
-﻿using Avalonia.Controls;
+﻿using System.Composition;
+using Avalonia.Controls;
 using Avalonia.Media;
 
+namespace Geometry;
+
+[Export(typeof(IShape))]
+[ExportMetadata("Name", nameof(MyEllipse))]
 public class MyEllipse : Avalonia.Controls.Shapes.Ellipse, IShapeNamed
 {
+    public MyEllipse() { }
     public MyEllipse(double x = 0, double y = 0)
     {
         Canvas.SetLeft(this, x);

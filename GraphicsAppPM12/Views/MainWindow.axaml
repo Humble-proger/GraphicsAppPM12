@@ -27,7 +27,7 @@
 
             <StackPanel Grid.Column="0">
                 <!--Подключение холста-->
-                <local:Canvas/>
+                <local:OurCanvas/>
                 <!--Подключение панели редактирования-->
                 <!--<local:FigureEdit/>--> 
                 
