@@ -3,6 +3,8 @@
 // интерфейс всех фигур
 public interface IShape
 {
+    // название фигуры
+    string name { get; set; }
     // координата х центра фигуры
     double CenterX { get; set; }
     // координата y центра фигуры
