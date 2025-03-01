@@ -8,7 +8,9 @@
         x:Class="GraphicsApp.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
-        Title="GraphicsApp">
+        Title="GraphicsApp"
+        MinWidth="1075"
+        MinHeight="600">
 
     <!-- <Design.DataContext>
         
