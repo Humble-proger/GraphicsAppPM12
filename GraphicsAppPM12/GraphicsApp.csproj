@@ -11,6 +11,7 @@
   <ItemGroup>
     <Folder Include="Models\" />
     <AvaloniaResource Include="Assets\**" />
+    <Folder Include="Views\pictures\layers\" />
     <None Remove="Assets\layers.png" />
     <None Remove="Views\pictures\ToolBars\layers.png" />
     <None Remove="Views\pictures\ToolBars\triangle.png" />
@@ -29,10 +30,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Views\pictures\layers\del_layer.png" />
-    <None Remove="Views\pictures\layers\down.png" />
-    <None Remove="Views\pictures\layers\new_layer.png" />
-    <None Remove="Views\pictures\layers\up.png" />
     <None Remove="Views\pictures\settings\create.png" />
     <None Remove="Views\pictures\settings\open3.png" />
     <None Remove="Views\pictures\settings\save.png" />
@@ -44,13 +41,6 @@
     <None Remove="Views\pictures\ToolBars\highlight.png" />
     <None Remove="Views\pictures\ToolBars\stylus.png" />
     <None Remove="Views\pictures\ToolBars\thickness.png" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <AvaloniaResource Include="Views\pictures\layers\del_layer.png" />
-    <AvaloniaResource Include="Views\pictures\layers\down.png" />
-    <AvaloniaResource Include="Views\pictures\layers\new_layer.png" />
-    <AvaloniaResource Include="Views\pictures\layers\up.png" />
   </ItemGroup>
 
   <ItemGroup>
