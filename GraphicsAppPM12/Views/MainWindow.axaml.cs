@@ -1,4 +1,5 @@
 using Avalonia.Controls;
+using Avalonia.Interactivity;
 
 namespace GraphicsApp.Views
 {
@@ -8,5 +9,12 @@ namespace GraphicsApp.Views
         {
             InitializeComponent();
         }
+
+        private async void OpenSettings(object sender, RoutedEventArgs e)
+        {
+            var settingsWindow = new SettingsWindow(); // Создаем экземпляр SettingsWindow
+            await settingsWindow.ShowDialog(this);       // Открываем как диалоговое окно, this - родитель
+        }
+
     }
 }
