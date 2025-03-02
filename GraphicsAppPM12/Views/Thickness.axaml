@@ -4,7 +4,26 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="GraphicsApp.Views.Thickness">
-
-    <Canvas Height="40" Width="70" Background="White" Margin="15"/>
+    
+    <!--Создаем через Popup всплывающее окно при нажатии на кнопку с выбором толщины-->
+    <!--Говорим, что появится сразу после нажатия, а также имена куда будет ссылаться-->
+        <Popup Name="ThicknessPopup" PlacementTarget="{Binding RelativeSource={RelativeSource AncestorType=UserControl}}" PlacementMode="Bottom">
+            <!--То как выглядит наше всплывающее окошко-->
+            <Border Background="White" BorderBrush="Gray" BorderThickness="1">
+                <!--Расстояние между элементами 10 пикселей-->
+                <StackPanel Spacing="10">
+                    <Label>Выберите толщину:</Label>
+                    <!--Надпись с шириной окна-->
+                    <TextBlock Text="{Binding Value, ElementName=ThicknessSlider, StringFormat='Толщина: {0}'}"
+                           HorizontalAlignment="Center"
+                           FontSize="11" />
+                    
+                    <!--Имя элемента, чтобы на него можно было ссылаться, мин, мак значение и текущее значение-->
+                    <Slider Name="ThicknessSlider" Minimum="1" Maximum="10" IsSnapToTickEnabled="True" TickFrequency="1" />
+                    <!--Ссылка на метод-->
+                    <Button Content="Применить" Click="ApplyThickness" HorizontalAlignment="Center" />
+                </StackPanel>
+            </Border>
+        </Popup>
 </UserControl>
 <!--Добавляем снова на гитхаб-->
