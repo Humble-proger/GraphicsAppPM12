@@ -27,6 +27,7 @@
                         <TextBox Grid.Column="1" Grid.Row="1" Watermark="12" Classes="Options"/>
                         <TextBox Grid.Column="1" Grid.Row="2" Watermark="12" Classes="Options"/>
                         <ColorPicker Grid.Column="1" Grid.Row="3"/>
+                        <!--<ColorPicker Color="{Binding Color}" Grid.Row="3" Grid.Column="1" />-->
                         <TextBox Grid.Column="1" Grid.Row="4" Watermark="5" Classes="Options"/>
                         <TextBox Grid.Column="1" Grid.Row="5" Watermark="0" Classes="Options"/>
                     </Grid>

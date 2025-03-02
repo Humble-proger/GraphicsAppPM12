@@ -181,24 +181,16 @@
 
             
             <!-- Цвета -->
-               <!-- <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-                    <ColorPicker SelectedColor="#FF606060"
-                                 HexInputVisible="True"
-                                 HsvVisible="True"
-                                 RgbVisible="True"
-                                 IsAlphaEnabled="True"
-                                 PaletteColumnCount="5"
-                                 Palette="{x:Static ColorPicker.DefaultPalette}"/>
-        
-                    <TextBlock Text="Выбранный цвет:" Margin="0,20,0,0"/>
-                    <Border Background="{Binding SelectedColor, ElementName=colorPicker}"
-                            Width="100" Height="50" Margin="0,10,0,0"/>
-                </StackPanel>-->
-            
-            <StackPanel>
-                <Border Background="#ededed" Height="50" Width="250" Margin="10,-10,0,3" CornerRadius="2">
+            <StackPanel >
+                <Border Background="#ededed" Height="50" Width="50" Margin="10,-10,0,3" CornerRadius="2">
+                    <ColorPicker Color="" />
+                </Border>
+                <TextBlock Text="Цвет" HorizontalAlignment="Center" FontSize="11"  Foreground="#414141" Margin="10,0,0,0"/>
+            </StackPanel>
+                <!--
                     <StackPanel>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Spacing="12" Margin="10,10,0,0">
+                                
                             <Button Width="18" Height="18" CornerRadius="9" Background="Red"/>
                             <Button Width="18" Height="18" CornerRadius="9" Background="Orange"/>
                             <Button Width="18" Height="18" CornerRadius="9" Background="Yellow"/>
@@ -212,10 +204,7 @@
                         <Button Width="20" Height="20" Background="#ededed" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,10">
                             <Image Source="pictures/ToolBars/further.png" Width="16" Height="16"/>
                         </Button>
-                    </StackPanel>
-                </Border>
-                <TextBlock Text="Цвета" HorizontalAlignment="Center" FontSize="11"  Foreground="#414141"/>
-            </StackPanel>
+                    </StackPanel>-->
 
 
         </StackPanel>
