@@ -1,9 +1,10 @@
 using System;
-using System.Collections.Generic;
-
+using System.Globalization;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
+using GraphicsApp.ViewModels;
+using System.Collections.Generic;
 
 namespace GraphicsApp.Views
 {
@@ -12,22 +13,8 @@ namespace GraphicsApp.Views
         public ToolBars()
         {
             InitializeComponent();
-
-            // Создаем список фигур и сортируем его по имени
-            var shapes = new List<ShapeItem>
-            {
-                new ShapeItem("Линия", "pictures/ToolBars/line.png"),
-                new ShapeItem("Кривая", "pictures/ToolBars/polyline.png"),
-                new ShapeItem("Квадрат", "pictures/ToolBars/square.png"),
-                new ShapeItem("Треугольник", "pictures/ToolBars/triangle.png"),
-                new ShapeItem("Круг", "pictures/ToolBars/circle.png")
-            };
-
-            // Устанавливаем DataContext для UserControl
-            this.DataContext = this;
-
-            // Устанавливаем ItemsSource для ListBox
-            shapesList.ItemsSource = shapes;
+            DataContext = new ToolBarsViewModel(); 
+            
         }
 
         // Переключение видимости Popup
@@ -35,17 +22,28 @@ namespace GraphicsApp.Views
         {
             ThicknessPopupControl.OpenPopup();
         }
-    }
-
-    public class ShapeItem
-    {
-        public string Name { get; }
-        public string IconPath { get; set; }
-
-        public ShapeItem(string name, string iconPath)
+        
+        private void ScrollListUp(object sender, Avalonia.Interactivity.RoutedEventArgs e)
         {
-            Name = name;
-            IconPath = iconPath;
+            if (ShapeScroll != null)
+            {
+                ShapeScroll.Offset = new Avalonia.Vector(0, Math.Max(ShapeScroll.Offset.Y - 50, 0));
+            }
         }
+
+        private void ScrollListDown(object sender, Avalonia.Interactivity.RoutedEventArgs e)
+        {
+            if (ShapeScroll != null)
+            {
+                double maxOffset = ShapeScroll.Extent.Height - ShapeScroll.Viewport.Height;
+                ShapeScroll.Offset = new Avalonia.Vector(0, Math.Min(ShapeScroll.Offset.Y + 50, maxOffset));
+            }
+        }
+        
+        private void OnPointerWheelChanged(object? sender, PointerWheelEventArgs e)
+        {
+            e.Handled = true; // Блокируем событие прокрутки
+        }
+
     }
 }

@@ -8,27 +8,22 @@
     <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="Models\" />
-    <AvaloniaResource Include="Assets\**" />
-    <Folder Include="Views\pictures\layers\" />
-    <None Remove="Assets\layers.png" />
-    <None Remove="Views\pictures\ToolBars\layers.png" />
-    <None Remove="Views\pictures\ToolBars\triangle.png" />
-    <AvaloniaResource Include="Views\pictures\ToolBars\triangle.png" />
-    <None Remove="Views\pictures\ToolBars\square.png" />
-    <AvaloniaResource Include="Views\pictures\ToolBars\square.png" />
-    <None Remove="Views\pictures\ToolBars\polyline.png" />
-    <AvaloniaResource Include="Views\pictures\ToolBars\polyline.png" />
-    <None Remove="Views\pictures\ToolBars\line.png" />
-    <AvaloniaResource Include="Views\pictures\ToolBars\line.png" />
-    <None Remove="Views\pictures\ToolBars\circle.png" />
-    <AvaloniaResource Include="Views\pictures\ToolBars\circle.png" />
-    <None Remove="Views\pictures\ToolBars\further.png" />
-    <None Remove="Views\pictures\ToolBars\chevron-down.png" />
-    <AvaloniaResource Include="Views\pictures\ToolBars\further.png" />
-  </ItemGroup>
+   <ItemGroup>
+    <!-- Включаем папку Models -->
+    <Folder Include="Models/" />
 
+    <!-- Включаем все ресурсы из Assets -->
+    <AvaloniaResource Include="Assets/**" />
+
+    <!-- Включаем все изображения из папки ToolBars -->
+    <AvaloniaResource Include="Views/pictures/ToolBars/**" />
+
+    <!-- Удаляем ненужные файлы -->
+    <None Remove="Assets/layers.png" />
+    <None Remove="Views/pictures/layers/" />
+    <None Remove="Views/pictures/ToolBars/chevron-down.png" />
+  </ItemGroup>
+ 
   <ItemGroup>
     <None Remove="Views\pictures\settings\create.png" />
     <None Remove="Views\pictures\settings\open3.png" />
