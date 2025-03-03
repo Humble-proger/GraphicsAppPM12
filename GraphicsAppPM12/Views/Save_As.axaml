@@ -18,6 +18,8 @@
                     <Button.Styles>
                         <Style Selector="Button:pointerover /template/ ContentPresenter">
                             <Setter Property="Background" Value="#f0f0f0"/>
+                            <Setter Property="BorderBrush" Value="#8B8B8B"/>
+                            <Setter Property="BorderThickness" Value="0,0,0,1"/>
                         </Style>
                     </Button.Styles>
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
@@ -56,6 +58,8 @@
                     <Button.Styles>
                         <Style Selector="Button:pointerover /template/ ContentPresenter">
                             <Setter Property="Background" Value="#f0f0f0"/>
+                            <Setter Property="BorderBrush" Value="#8B8B8B"/>
+                            <Setter Property="BorderThickness" Value="0,0,0,1"/>
                         </Style>
                     </Button.Styles>
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">

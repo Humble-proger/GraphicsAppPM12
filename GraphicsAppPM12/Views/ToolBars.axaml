@@ -14,30 +14,45 @@
             
             <!--Кнопка курсора-->
             <StackPanel>
-                <Button Height="50" Width="50" Background="#ededed" Margin="0,-10,0,3">
-                    <Button.Styles>
-                        <Style Selector="Button:pointerover /template/ ContentPresenter">
-                            <Setter Property="Background" Value="#E1E1E1"></Setter>
+                <ToggleButton Name="CursorButton" Height="50" Width="50" Background="#ededed" Margin="0,-10,0,3" 
+                              Click="CursorButton_Click">
+                    <ToggleButton.Styles>
+                        <!-- Стиль для состояния наведения на кнопку -->
+                        <Style Selector="ToggleButton:pointerover /template/ ContentPresenter">
+                            <Setter Property="Background" Value="#E1E1E1"/>
                         </Style>
-                    </Button.Styles>
+
+                        <!-- Стиль для состояния нажатия кнопки -->
+                        <Style Selector="ToggleButton:checked /template/ ContentPresenter">
+                            <Setter Property="Background" Value="#C6C6C6"/>
+                        </Style>
+                    </ToggleButton.Styles>
+                    
                     <Viewbox Width="35" Height="35">
                         <Canvas Width="24" Height="24">
                             <Path Data="m4 4 7.07 17 2.51-7.39L21 11.07z"
                                   Stroke="#606060" StrokeThickness="1.5" StrokeLineCap="Round" StrokeJoin="Round"/>
                         </Canvas>
                     </Viewbox>
-                </Button>
+                </ToggleButton>
                 <TextBlock Text="Курсор" HorizontalAlignment="Center" FontSize="11" Foreground="#414141"/>
             </StackPanel>
             
             <!--Кнопка "Выделение"-->
             <StackPanel>
-                <Button Height="50" Width="50" Background="#ededed" Margin="0,-10,0,3">
-                    <Button.Styles>
-                        <Style Selector="Button:pointerover /template/ ContentPresenter">
-                            <Setter Property="Background" Value="#E1E1E1"></Setter>
+                <ToggleButton Name="SelectionButton" Height="50" Width="50" Background="#ededed" Margin="0,-10,0,3"
+                              Click="SelectionButton_Click">
+                    <ToggleButton.Styles>
+                        <!-- Стиль для состояния наведения на кнопку -->
+                        <Style Selector="ToggleButton:pointerover /template/ ContentPresenter">
+                            <Setter Property="Background" Value="#E1E1E1"/>
                         </Style>
-                    </Button.Styles>
+
+                        <!-- Стиль для состояния нажатия кнопки -->
+                        <Style Selector="ToggleButton:checked /template/ ContentPresenter">
+                            <Setter Property="Background" Value="#C6C6C6"/>
+                        </Style>
+                    </ToggleButton.Styles>
                     <Viewbox Width="35" Height="35">
                         <Canvas Width="24" Height="24">
                             <!-- Закругленные углы -->
@@ -59,18 +74,25 @@
                             <Path Data="M21 14V15" Stroke="#606060" StrokeThickness="2" StrokeLineCap="Round" StrokeJoin="Round"/>
                         </Canvas>
                     </Viewbox>
-                </Button>
+                </ToggleButton>
                 <TextBlock Text="Выделить" HorizontalAlignment="Center" FontSize="11" Foreground="#414141"/>
             </StackPanel>
             
             <!--Кнопка пера-->
             <StackPanel>
-                <Button Height="50" Width="50" Background="#ededed" Margin="0,-10,0,3">
-                    <Button.Styles>
-                        <Style Selector="Button:pointerover /template/ ContentPresenter">
-                            <Setter Property="Background" Value="#E1E1E1"></Setter>
+                <ToggleButton Name="PenButton" Height="50" Width="50" Background="#ededed" Margin="0,-10,0,3"
+                              Click="PenButton_Click">
+                    <ToggleButton.Styles>
+                        <!-- Стиль для состояния наведения на кнопку -->
+                        <Style Selector="ToggleButton:pointerover /template/ ContentPresenter">
+                            <Setter Property="Background" Value="#E1E1E1"/>
                         </Style>
-                    </Button.Styles>
+
+                        <!-- Стиль для состояния нажатия кнопки -->
+                        <Style Selector="ToggleButton:checked /template/ ContentPresenter">
+                            <Setter Property="Background" Value="#C6C6C6"/>
+                        </Style>
+                    </ToggleButton.Styles>
                     <Viewbox Width="35" Height="35">
                         <Canvas Width="24" Height="24">
                             <!-- Основной карандаш -->
@@ -90,18 +112,25 @@
                                      Stroke="#606060" StrokeThickness="2"/>
                         </Canvas>
                     </Viewbox>
-                </Button>
+                </ToggleButton>
                 <TextBlock Text="Перо" HorizontalAlignment="Center" FontSize="11" Foreground="#414141"/>
             </StackPanel>
 
             <!--Кнопка заливки-->
             <StackPanel>
-                <Button Height="50" Width="50" Background="#ededed" Margin="0,-10,0,3">
-                    <Button.Styles>
-                        <Style Selector="Button:pointerover /template/ ContentPresenter">
-                            <Setter Property="Background" Value="#E1E1E1"></Setter>
+                <ToggleButton Name="FillButton" Height="50" Width="50" Background="#ededed" Margin="0,-10,0,3"
+                              Click="FillButton_Click">
+                    <ToggleButton.Styles>
+                        <!-- Стиль для состояния наведения на кнопку -->
+                        <Style Selector="ToggleButton:pointerover /template/ ContentPresenter">
+                            <Setter Property="Background" Value="#E1E1E1"/>
                         </Style>
-                    </Button.Styles>
+
+                        <!-- Стиль для состояния нажатия кнопки -->
+                        <Style Selector="ToggleButton:checked /template/ ContentPresenter">
+                            <Setter Property="Background" Value="#C6C6C6"/>
+                        </Style>
+                    </ToggleButton.Styles>
                     <Viewbox Width="35" Height="35">
                         <Canvas Width="24" Height="24">
                             <!-- Основной контур ведра -->
@@ -121,18 +150,25 @@
                                   Stroke="#606060" StrokeThickness="1.5" StrokeLineCap="Round" StrokeJoin="Round"/>
                         </Canvas>
                     </Viewbox>
-                </Button>
+                </ToggleButton>
                 <TextBlock Text="Заливка" HorizontalAlignment="Center" FontSize="11" Foreground="#414141"/>
             </StackPanel>
 
             <!--Кнопка удаления-->
             <StackPanel>
-                <Button Height="50" Width="50" Background="#ededed" Margin="0,-10,0,3">
-                    <Button.Styles>
-                        <Style Selector="Button:pointerover /template/ ContentPresenter">
-                            <Setter Property="Background" Value="#E1E1E1"></Setter>
+                <ToggleButton Name="DeleteButton" Height="50" Width="50" Background="#ededed" Margin="0,-10,0,3"
+                              Click="DeleteButton_Click">
+                    <ToggleButton.Styles>
+                        <!-- Стиль для состояния наведения на кнопку -->
+                        <Style Selector="ToggleButton:pointerover /template/ ContentPresenter">
+                            <Setter Property="Background" Value="#E1E1E1"/>
                         </Style>
-                    </Button.Styles>
+
+                        <!-- Стиль для состояния нажатия кнопки -->
+                        <Style Selector="ToggleButton:checked /template/ ContentPresenter">
+                            <Setter Property="Background" Value="#C6C6C6"/>
+                        </Style>
+                    </ToggleButton.Styles>
                     <Viewbox Width="35" Height="35">
                         <Canvas Width="24" Height="24">
                             <!-- Первая диагональная линия -->
@@ -144,13 +180,14 @@
                                   Stroke="#606060" StrokeThickness="2" StrokeLineCap="Round" StrokeJoin="Round"/>
                         </Canvas>
                     </Viewbox> 
-                </Button>
+                </ToggleButton>
                 <TextBlock Text="Удалить" HorizontalAlignment="Center" FontSize="11" Foreground="#414141"/>
             </StackPanel>
 
             <!--Толщина-->
             <StackPanel>
-                <Button Height="50" Width="50" Background="#ededed" Margin="0,-10,0,3" Name="ThicknessButton" Click="TogglePopup">
+                <Button Name="ThicknessButton" Height="50" Width="50" Background="#ededed" Margin="0,-10,0,3" 
+                        Click="ThicknessButton_Click">
                     <Button.Styles>
                         <Style Selector="Button:pointerover /template/ ContentPresenter">
                             <Setter Property="Background" Value="#E1E1E1"></Setter>
@@ -187,10 +224,20 @@
            <StackPanel>
                 <Border Background="#ededed" Height="50" Width="250" Margin="10,-10,0,3" CornerRadius="2">
                     <Grid Background="#ededed">
-                        <ScrollViewer x:Name="ShapeScroll" Height="40" VerticalScrollBarVisibility="Hidden"
-                                      PointerWheelChanged="OnPointerWheelChanged">
+                        <ScrollViewer x:Name="ShapeScroll" Height="40" VerticalScrollBarVisibility="Hidden">
                             <ListBox x:Name="ShapeList" ItemsSource="{Binding Shapes}" SelectionMode="Single" 
-                                     BorderThickness="0" Background="Transparent">
+                                     BorderThickness="0" Background="Transparent" SelectionChanged="ShapeList_SelectionChanged">
+                                <ListBox.Styles>
+                                    <!-- Стиль для состояния наведения -->
+                                    <Style Selector="ListBoxItem:pointerover /template/ ContentPresenter">
+                                        <Setter Property="Background" Value="#E1E1E1"/>
+                                    </Style>
+                                    <!-- Стиль для выбранного элемента -->
+                                    <Style Selector="ListBoxItem:selected /template/ ContentPresenter">
+                                        <Setter Property="Background" Value="#C6C6C6"/>
+                                    </Style>
+                                </ListBox.Styles>
+                                
                                 <ListBox.ItemsPanel>
                                     <ItemsPanelTemplate>
                                         <WrapPanel Width="230" VerticalAlignment="Center" Margin="0,0,0,0" />

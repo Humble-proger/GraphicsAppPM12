@@ -27,5 +27,11 @@ namespace GraphicsApp.Views
         {
             ThicknessPopup.IsOpen = true;
         }
+        
+        // Метод для закрытия Popup
+        public void ClosePopup()
+        {
+            ThicknessPopup.IsOpen = false;
+        }
     }
 }

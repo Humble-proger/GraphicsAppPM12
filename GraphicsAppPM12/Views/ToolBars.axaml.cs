@@ -19,13 +19,106 @@ namespace GraphicsApp.Views
             
         }
         
-        // Переключение видимости Popup(относится к толщине)
-        private void TogglePopup(object sender, RoutedEventArgs e)
+        private bool _isClearingSelection = false;
+        
+        // Обработчик для кнопки "Курсор"
+        private void CursorButton_Click(object sender, RoutedEventArgs e)
         {
-            ThicknessPopupControl.OpenPopup();
+            CursorButton.IsChecked = true;
+            SelectionButton.IsChecked = false;
+            PenButton.IsChecked = false;
+            FillButton.IsChecked = false;
+            DeleteButton.IsChecked = false;
+            ThicknessPopupControl.ClosePopup();
+            _isClearingSelection = true;
+            ShapeList.SelectedItem = null;
+            _isClearingSelection = false;
+        }
+
+        // Обработчик для кнопки "Выделить"
+        private void SelectionButton_Click(object sender, RoutedEventArgs e)
+        {
+            SelectionButton.IsChecked = true;
+            CursorButton.IsChecked = false;
+            PenButton.IsChecked = false;
+            FillButton.IsChecked = false;
+            DeleteButton.IsChecked = false;
+            ThicknessPopupControl.ClosePopup();
+            _isClearingSelection = true;
+            ShapeList.SelectedItem = null;
+            _isClearingSelection = false;
         }
         
-        private void ScrollListUp(object sender, Avalonia.Interactivity.RoutedEventArgs e)
+        // Обработчик для кнопки "Перо"
+        private void PenButton_Click(object sender, RoutedEventArgs e)
+        {
+            PenButton.IsChecked = true;
+            CursorButton.IsChecked = false;
+            SelectionButton.IsChecked = false;
+            FillButton.IsChecked = false;
+            DeleteButton.IsChecked = false;
+            ThicknessPopupControl.ClosePopup();
+            _isClearingSelection = true;
+            ShapeList.SelectedItem = null;
+            _isClearingSelection = false;
+        }
+        
+        // Обработчик для кнопки "Заливка"
+        private void FillButton_Click(object sender, RoutedEventArgs e)
+        {
+            FillButton.IsChecked = true;
+            CursorButton.IsChecked = false;
+            SelectionButton.IsChecked = false;
+            PenButton.IsChecked = false;
+            DeleteButton.IsChecked = false;
+            ThicknessPopupControl.ClosePopup();
+            _isClearingSelection = true;
+            ShapeList.SelectedItem = null;
+            _isClearingSelection = false;
+        }
+        
+        // Обработчик для кнопки "Удалить"
+        private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        {
+            DeleteButton.IsChecked = true;
+            CursorButton.IsChecked = false;
+            SelectionButton.IsChecked = false;
+            PenButton.IsChecked = false;
+            FillButton.IsChecked = false;
+            ThicknessPopupControl.ClosePopup();
+            _isClearingSelection = true;
+            ShapeList.SelectedItem = null;
+            _isClearingSelection = false;
+        }
+        
+        // Обработчик для кнопки "Толщина"
+        private void ThicknessButton_Click(object sender, RoutedEventArgs e)
+        {
+            ThicknessPopupControl.OpenPopup();
+            
+            CursorButton.IsChecked = false;
+            SelectionButton.IsChecked = false;
+            FillButton.IsChecked = false;
+            DeleteButton.IsChecked = false;
+            
+        }
+        // Обработчик для областм "Фигуры"
+        private void ShapeList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (!_isClearingSelection)
+            {
+                CursorButton.IsChecked = false;
+                SelectionButton.IsChecked = false;
+                PenButton.IsChecked = false;
+                FillButton.IsChecked = false;
+                DeleteButton.IsChecked = false;
+                ThicknessPopupControl.ClosePopup();
+            }
+        }
+
+        
+        // Скролл для области "Фигуры"
+        void ScrollListUp(object sender, Avalonia.Interactivity.RoutedEventArgs e)
         {
             if (ShapeScroll != null)
             {
@@ -42,10 +135,5 @@ namespace GraphicsApp.Views
             }
         }
         
-        private void OnPointerWheelChanged(object? sender, PointerWheelEventArgs e)
-        {
-            e.Handled = true; // Блокируем событие прокрутки
-        }
-
     }
 }
