@@ -45,7 +45,13 @@
                     </Slider.Styles>
                 </Slider>
                 <!--Ссылка на метод-->
-                <Button Content="Применить" Click="ApplyThickness" HorizontalAlignment="Center" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="#414141" Background="#ededed" Width="90" Height="30" FontSize="12"/>
+                <Button Content="Применить" Click="ApplyThickness" HorizontalAlignment="Center" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="#414141" Background="#ededed" Width="90" Height="30" FontSize="12">
+                    <Button.Styles>
+                        <Style Selector="Button:pointerover /template/ ContentPresenter">
+                            <Setter Property="Background" Value="#f0f0f0"/>
+                        </Style>
+                    </Button.Styles>
+                </Button>
             </StackPanel>
         </Border>
     </Popup>

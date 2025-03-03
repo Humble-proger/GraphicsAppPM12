@@ -17,7 +17,7 @@ namespace GraphicsApp.Views
             
         }
 
-        // Переключение видимости Popup
+        // Переключение видимости Popup(относится к толщине)
         private void TogglePopup(object sender, RoutedEventArgs e)
         {
             ThicknessPopupControl.OpenPopup();
