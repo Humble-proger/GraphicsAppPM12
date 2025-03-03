@@ -8,20 +8,22 @@
         x:Class="GraphicsApp.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
-        Title="GraphicsApp">
+        Title="GraphicsApp"
+        MinWidth="1075"
+        MinHeight="600">
 
     <!-- <Design.DataContext>
         
         <vm:MainWindowViewModel/>
     </Design.DataContext> -->
 
-    <Grid RowDefinitions="Auto, Auto, *, Auto" Background="#FFFFFF">
+    <Grid RowDefinitions="Auto, Auto, *, Auto" Background="#F7F7F7">
         <!--Панель с кнопками сохранить\сохранит как и тд-->
-            <local:Settings/>
+        <local:Settings/>
        
 
         <!--Панель с инструментами-->
-            <local:ToolBars Grid.Row="1" />
+        <local:ToolBars Grid.Row="1" />
 
         <Grid Grid.Row="2" ColumnDefinitions="4*, *">
 
@@ -44,4 +46,3 @@
     </Grid>
 
 </Window>
-

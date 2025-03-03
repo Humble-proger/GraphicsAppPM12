@@ -24,7 +24,7 @@
                             </Path.RenderTransform>
                         </Path>
                     </Canvas>
-                    <TextBlock x:Name="CursorPositionText" Text="X: 0 мм, Y: 0 мм" Foreground="#414141" VerticalAlignment="Center">
+                    <TextBlock x:Name="CursorPositionText" Text="0, 0 пкс" Foreground="#414141" VerticalAlignment="Center" Width="130" TextAlignment="Center" TextWrapping="NoWrap">
                         <ToolTip.Tip>
                             <TextBlock Text="Курсор"/>
                         </ToolTip.Tip>
@@ -45,7 +45,7 @@
                         
                     </Canvas>
                     
-                    <TextBlock x:Name="CanvasSizeText" Text="0 × 0 мм" Foreground="#414141" VerticalAlignment="Center">
+                    <TextBlock x:Name="CanvasSizeText" Text="1420 × 720 пкс" Foreground="#414141" VerticalAlignment="Center" Width="130" TextAlignment="Center" TextWrapping="NoWrap">
                         <ToolTip.Tip>
                             <TextBlock Text="Размер полотна"/>
                         </ToolTip.Tip>
@@ -65,7 +65,7 @@
                         <TextBlock Text="Уменьшить"/>
                     </ToolTip.Tip>
                 </Button>
-                <TextBlock x:Name="ZoomText" Text="100%" Foreground="#414141" VerticalAlignment="Center"/>
+                <TextBlock x:Name="ZoomText" Text="100%" Foreground="#414141" VerticalAlignment="Center" HorizontalAlignment="Center" Width="37" TextAlignment="Center" TextWrapping="NoWrap"/>
                 <Button Height="25" Width="25" Background="#F6F6F6" Click="OnZoomInClicked">
                     <Viewbox Width="15" Height="15">
                         <Canvas Width="12" Height="12">

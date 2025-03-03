@@ -1,0 +1,69 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:GraphicsApp.ViewModels"
+        xmlns:local="clr-namespace:GraphicsApp.Views"
+        mc:Ignorable="d" d:DesignWidth="500" d:DesignHeight="600"
+        WindowStartupLocation="CenterOwner"
+        x:Class="GraphicsApp.Views.SettingsWindow"
+        x:DataType="vm:SettingsWindowViewModel"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="Настройки"
+        MinWidth="500"
+        MinHeight="600"
+        Background="#F0F0F0">
+
+    <Grid RowDefinitions="*, Auto">
+        
+        <ScrollViewer Grid.Row="0" Margin="5">
+            <StackPanel>
+
+                <!-- Автоматическое сохранение -->
+                <TextBlock Text="Автоматическое сохранение" FontWeight="Bold" Margin="5"/>
+                <CheckBox Content="Включение интервала автоматического сохранения документов" Margin="5"/>
+                <StackPanel Orientation="Horizontal" Margin="5">
+                    <TextBlock Text="Интервал:" VerticalAlignment="Center"/>
+                    <TextBox Width="50" Margin="5,0,5,0"/>
+                    <TextBlock Text="мин" VerticalAlignment="Center"/>
+                </StackPanel>
+                <Separator/>
+
+                <!-- Поведение при запуске -->
+                <TextBlock Text="Поведение при запуске" FontWeight="Bold" Margin="5"/>
+                <CheckBox Content="Стартовый экран" Margin="5"/>
+                <CheckBox Content="Последний файл" Margin="5"/>
+                <CheckBox Content="Новый файл" Margin="5"/>
+                <Separator/>
+
+                <!-- Начальный формат файла -->
+                <TextBlock Text="Начальный формат файла" FontWeight="Bold" Margin="5"/>
+                <CheckBox Content="SVG" Margin="5"/>
+                <CheckBox Content="PNG" Margin="5"/>
+                <Separator/>
+
+                <!-- Расположение файлов -->
+                <TextBlock Text="Расположение файлов" FontWeight="Bold" Margin="5"/>
+                <TextBlock Text="Расположение файлов по умолчанию" Margin="5"/>
+                <TextBox Watermark="C://" Margin="5"/>
+                <Separator/>
+                
+                <TextBlock Text="Размер холста" FontWeight="Bold" Margin="5"/>
+                <StackPanel Orientation="Horizontal" Margin="5">
+                    <TextBlock Text="X:" VerticalAlignment="Center"/>
+                    <TextBox Width="50" Margin="5,0,5,0"/>
+                    <TextBlock Text="Y:" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                    <TextBox Width="50" Margin="5,0,5,0"/>
+                </StackPanel>
+                
+            </StackPanel>
+        </ScrollViewer>
+
+        <!-- Кнопки OK и Отмена -->
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="5">
+            <Button Content="OK" Width="75" Margin="5" HorizontalContentAlignment="Center"/>
+            <Button Content="Отмена" Width="75" Margin="5" HorizontalContentAlignment="Center"/>
+        </StackPanel>
+    </Grid>
+    
+</Window>

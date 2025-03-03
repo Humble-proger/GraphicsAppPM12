@@ -3,6 +3,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             xmlns:vm="clr-namespace:GraphicsApp.ViewModels"
+             x:DataType="vm:ToolBarsViewModel"             
+             xmlns:local="clr-namespace:GraphicsApp.Views"             
              x:Class="GraphicsApp.Views.ToolBars">
 
     <Border BorderBrush="#8B8B8B" BorderThickness="0,0,0,1"> 
@@ -107,121 +110,103 @@
                 <Button Height="50" Width="50" Background="#ededed" Margin="0,-10,0,3">
                     <Viewbox Width="35" Height="35">
                         <Canvas Width="24" Height="24">
-                            <!-- Основной контур ластика -->
-                            <Path Data="M7 21L2.7 16.7C1.7 15.7 1.7 14.2 2.7 13.3L12.3 3.7C13.3 2.7 14.8 2.7 15.7 3.7L21.3 9.3C22.3 10.3 22.3 11.8 21.3 12.7L13 21"
-                                  Stroke="#606060" StrokeThickness="1.5" StrokeLineCap="Round" StrokeJoin="Round"/>
+                            <!-- Первая диагональная линия -->
+                            <Path Data="M18 6L6 18"
+                                  Stroke="#606060" StrokeThickness="2" StrokeLineCap="Round" StrokeJoin="Round"/>
 
-                            <!-- Нижняя горизонтальная линия -->
-                            <Path Data="M22 21H7"
-                                  Stroke="#606060" StrokeThickness="1.5" StrokeLineCap="Round" StrokeJoin="Round"/>
-
-                            <!-- Диагональная линия на ластике -->
-                            <Path Data="M5 11L14 20"
-                                  Stroke="#606060" StrokeThickness="1.5" StrokeLineCap="Round" StrokeJoin="Round"/>
+                            <!-- Вторая диагональная линия -->
+                            <Path Data="M6 6L18 18"
+                                  Stroke="#606060" StrokeThickness="2" StrokeLineCap="Round" StrokeJoin="Round"/>
                         </Canvas>
                     </Viewbox> 
                 </Button>
-                <TextBlock Text="Стереть" HorizontalAlignment="Center" FontSize="11" Foreground="#414141"/>
+                <TextBlock Text="Удалить" HorizontalAlignment="Center" FontSize="11" Foreground="#414141"/>
             </StackPanel>
 
             <!--Толщина-->
             <StackPanel>
-                <Button Height="50" Width="50" Background="#ededed" Margin="0,-10,0,3">
+                <Button Height="50" Width="50" Background="#ededed" Margin="0,-10,0,3" Name="ThicknessButton" Click="TogglePopup">
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,5 ">
                         <!-- Линия 1 (тонкая, 1.5) -->
                         <Canvas Width="30" Height="3">
-                            <Path Data="M1 1 H23.5"
+                            <Path Data="M1.75 1 H25"
                                   Stroke="#606060" StrokeThickness="1.5" StrokeLineCap="Round" StrokeJoin="Round" Canvas.Top="0" />
                         </Canvas>
 
                         <!-- Линия 2 (средняя, 2) -->
                         <Canvas Width="30" Height="4">
-                            <Path Data="M1.75 1 H24.25"
+                            <Path Data="M1.75 1 H24.75"
                                   Stroke="#606060" StrokeThickness="2" StrokeLineCap="Round" StrokeJoin="Round" Canvas.Top="4" />
                         </Canvas>
 
                         <!-- Линия 3 (толстая, 3) -->
                         <Canvas Width="30" Height="5">
-                            <Path Data="M1.75 1.5 H13 H24.25"
+                            <Path Data="M1.75 1 H13 H24.25"
                                   Stroke="#606060" StrokeThickness="3" StrokeLineCap="Round" StrokeJoin="Round" Canvas.Top="8" />
                         </Canvas>
                     </StackPanel>
      
-                </Button>
+                  </Button>
+                      <!-- Пользовательский контрол ThicknessPopup -->
+                          <local:Thickness Name="ThicknessPopupControl" />
+
                 <TextBlock Text="Толщина" HorizontalAlignment="Center" FontSize="11" Foreground="#414141"/>
             </StackPanel>
             
             <!--Фигуры-->
-            <StackPanel>
-                <!-- Область с кнопками фигур -->
-                <Border  Background="#ededed" Height="50" Width="250" Margin="10,-10,0,3" CornerRadius="2">
-                    <StackPanel>
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Spacing="10" Margin="10,10,0,0">
-                            <Button Width="20" Height="20" Background="White">
-                                <Image Source="pictures/ToolBars/line.png" Width="16" Height="16"/>
-                            </Button>
-                            <Button Width="20" Height="20" Background="White">
-                                <Image Source="pictures/ToolBars/polyline.png" Width="16" Height="16"/>
-                            </Button>
-                            <Button Width="20" Height="20" Background="White">
-                                <Image Source="pictures/ToolBars/square.png" Width="16" Height="16"/>
-                            </Button>
-                            <Button Width="20" Height="20" Background="White">
-                                <Image Source="pictures/ToolBars/triangle.png" Width="16" Height="16"/>
-                            </Button>
-                            <Button Width="20" Height="20" Background="White">
-                                <Image Source="pictures/ToolBars/circle.png" Width="16" Height="16"/>
-                            </Button>
-                        </StackPanel>
-                        <Button Width="20" Height="20" Background="#ededed" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,10">
+           <StackPanel>
+                <Border Background="#ededed" Height="50" Width="250" Margin="10,-10,0,3" CornerRadius="2">
+                    <Grid Background="#ededed">
+                        <ScrollViewer x:Name="ShapeScroll" Height="40" VerticalScrollBarVisibility="Hidden"
+                                      PointerWheelChanged="OnPointerWheelChanged">
+                            <ListBox x:Name="ShapeList" ItemsSource="{Binding Shapes}" SelectionMode="Single" 
+                                     BorderThickness="0" Background="Transparent">
+                                <ListBox.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <WrapPanel Width="230" VerticalAlignment="Center" Margin="0,0,0,0" />
+                                    </ItemsPanelTemplate>
+                                </ListBox.ItemsPanel>
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Left" Width="25">
+                                            <Image Source="{Binding Icon, Mode=OneWay}" Width="20" Height="20" 
+                                                   Stretch="Uniform" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </ScrollViewer>
+
+                        <!-- Кнопка вверх -->
+                        <Button Width="20" Height="20" Click="ScrollListUp" Background="#ededed" Margin="1"
+                                HorizontalAlignment="Right" VerticalAlignment="Top">
+                            <Image Source="pictures/ToolBars/further.png" Width="16" Height="16">
+                                <Image.RenderTransform>
+                                    <RotateTransform Angle="180"/>
+                                </Image.RenderTransform>
+                            </Image>
+                        </Button>
+
+                        <!-- Кнопка вниз -->
+                        <Button Width="20" Height="20" Click="ScrollListDown" Background="#ededed" Margin="1"
+                                HorizontalAlignment="Right" VerticalAlignment="Bottom">
                             <Image Source="pictures/ToolBars/further.png" Width="16" Height="16"/>
                         </Button>
-                    </StackPanel>
+                    </Grid>
                 </Border>
                 <TextBlock Text="Фигуры" HorizontalAlignment="Center" FontSize="11" Foreground="#414141"/>
             </StackPanel>
+
+
             
             <!-- Цвета -->
-            <StackPanel>
-                <Border Background="#ededed" Height="50" Width="250" Margin="10,-10,0,3" CornerRadius="2">
-                    <StackPanel>
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Spacing="12" Margin="10,10,0,0">
-                            <Button Width="18" Height="18" CornerRadius="9" Background="Red"/>
-                            <Button Width="18" Height="18" CornerRadius="9" Background="Orange"/>
-                            <Button Width="18" Height="18" CornerRadius="9" Background="Yellow"/>
-                            <Button Width="18" Height="18" CornerRadius="9" Background="Green"/>
-                            <Button Width="18" Height="18" CornerRadius="9" Background="Blue"/>
-                            <Button Width="18" Height="18" CornerRadius="9" Background="Purple"/>
-                            <Button Width="18" Height="18" CornerRadius="9" Background="Black"/>
-                            <Button Width="18" Height="18" CornerRadius="9" Background="White"/>
-                        </StackPanel>
-                    
-                        <Button Width="20" Height="20" Background="#ededed" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,10">
-                            <Image Source="pictures/ToolBars/further.png" Width="16" Height="16"/>
-                        </Button>
-                    </StackPanel>
+            <StackPanel >
+                <Border Background="#ededed" Height="50" Width="50" Margin="10,-10,0,3" CornerRadius="2">
+                    <ColorPicker Color="Red" />
                 </Border>
-                <TextBlock Text="Цвета" HorizontalAlignment="Center" FontSize="11"  Foreground="#414141"/>
+                <TextBlock Text="Цвет" HorizontalAlignment="Center" FontSize="11"  Foreground="#414141" Margin="10,0,0,0"/>
             </StackPanel>
             
-            <!--Слои-->
-            <StackPanel>
-                <Button Height="50" Width="50" Background="#ededed" Margin="0,-10,0,3">
-                    <Viewbox Width="35" Height="35">
-                        <Canvas Width="24" Height="24">
-                            <Path Data="M12 2L2 7L12 12L22 7L12 2Z" 
-                                  Stroke="#606060" StrokeThickness="1.5" StrokeLineCap="Round" StrokeJoin="Round"/>
-                            <Path Data="M2 17L12 22L22 17" 
-                                  Stroke="#606060" StrokeThickness="1.5" StrokeLineCap="Round" StrokeJoin="Round"/>
-                            <Path Data="M2 12L12 17L22 12" 
-                                  Stroke="#606060" StrokeThickness="1.5" StrokeLineCap="Round" StrokeJoin="Round"/>
-                        </Canvas>
-                    </Viewbox>
-                </Button>
-                <TextBlock Text="Слои" HorizontalAlignment="Center" FontSize="11" Foreground="#414141"/>
-            </StackPanel>
-
-
         </StackPanel>
     </Border>
 

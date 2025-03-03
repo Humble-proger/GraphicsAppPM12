@@ -1,0 +1,54 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Style Selector="TextBlock.OptionsNechet">
+        <Setter Property="Foreground" Value="#414141"/>
+        <Setter Property="FontSize" Value="11"/>
+        <Setter Property="Background" Value="#dbdbdb"/>
+        <Setter Property="Padding" Value="3"/>
+    </Style>
+
+    <Style Selector="TextBlock.OptionsChet">
+        <Setter Property="Foreground" Value="#414141"/>
+        <Setter Property="FontSize" Value="11"/>
+        <Setter Property="Padding" Value="3"/>
+    </Style>
+
+    <Style Selector="TextBox.Options">
+        <Setter Property="Foreground" Value="#414141"/>
+        <Setter Property="FontSize" Value="11"/>
+        <Setter Property="Background" Value="#dbdbdb"/>
+        <Setter Property="Padding" Value="2"/>
+        <Setter Property="Margin" Value="1"/>
+        <Setter Property="MinHeight" Value="20"/>
+    </Style>
+
+    <Style Selector="ListBoxItem.Editor">
+        <Setter Property="Background" Value="#dbdbdb"/>
+        <Setter Property="Foreground" Value="#414141"/>
+        <Setter Property="MaxHeight" Value="32"/>
+    </Style>
+
+    <Style Selector="Button.Layer4">
+        <Setter Property="Height" Value="35"/>
+        <Setter Property="Width" Value="35"/>
+        <Setter Property="Background" Value="#ededed"/>
+    </Style>
+
+    <Style Selector="Viewbox.Layer4VB">
+        <Setter Property="Height" Value="28"/>
+        <Setter Property="Width" Value="28"/>
+        <Setter Property="Stretch" Value="UniformToFill"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Margin" Value="0,2,0,0"/>
+    </Style>
+
+    <Style Selector="Button.Visability">
+        <Setter Property="Height" Value="24"/>
+        <Setter Property="Width" Value="24"/>
+        <Setter Property="Margin" Value="5"/>
+        <Setter Property="Background" Value="#FFFFFF"/>
+    </Style>
+    
+</Styles>
