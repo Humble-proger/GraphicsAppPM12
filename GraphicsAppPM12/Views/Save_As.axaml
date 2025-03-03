@@ -14,7 +14,7 @@
         <Border Background="White" BorderBrush="#8B8B8B" BorderThickness="1,1,1,1">
             <StackPanel>
                 <!-- Кнопка для сохранения в формате PNG -->
-                <Button Click="OnButtonClick" Background="#F7F7F7"  Height="40" Width="350" BorderBrush="Black" BorderThickness="0,0,0,1" CornerRadius="0">
+                <Button Click="OnButtonClick" Background="#F7F7F7"  Height="40" Width="350" BorderBrush="#8B8B8B" BorderThickness="0,0,0,1" CornerRadius="0">
                     <Button.Styles>
                         <Style Selector="Button:pointerover /template/ ContentPresenter">
                             <Setter Property="Background" Value="#f0f0f0"/>
@@ -23,8 +23,8 @@
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                         <!--Начало текста-->
                         <StackPanel Orientation="Vertical">
-                            <TextBlock Text="Изображение в формате PNG" FontSize="12" />
-                            <TextBlock Text="Сохранение фотографий или рисунков в формате высокого качества" FontSize="9" />
+                            <TextBlock Text="Изображение в формате PNG" FontSize="12" Foreground="#414141"/>
+                            <TextBlock Text="Сохранение фотографий или рисунков в формате высокого качества" FontSize="9" Foreground="#414141"/>
                         </StackPanel>
 
                         <!--Изображение-->
@@ -43,7 +43,7 @@
                             <Path Data="M 20.3125 17.5 L 4.6875 17.5 C 3.652344 17.5 2.8125 16.660156 2.8125 15.625 L 2.8125 10.824219 C 2.8125 9.789062 3.652344 8.949219 4.6875 8.949219 L 4.699219 8.949219 L 20.324219 9.050781 C 21.355469 9.0625 22.183594 9.898438 22.1875 10.925781 L 22.1875 15.625 C 22.1875 16.660156 21.347656 17.5 20.3125 17.5 Z M 4.6875 9.574219 C 3.996094 9.574219 3.4375 10.132812 3.4375 10.824219 L 3.4375 15.625 C 3.4375 16.316406 3.996094 16.875 4.6875 16.875 L 20.3125 16.875 C 21.003906 16.875 21.5625 16.316406 21.5625 15.625 L 21.5625 10.925781 C 21.558594 10.242188 21.007812 9.683594 20.320312 9.675781 L 4.695312 9.574219 Z"
                                   Fill="#606060"/>
 
-                            <TextBlock Text="png"  Canvas.Left="5" Canvas.Top="7" FontSize="8"/>
+                            <TextBlock Text="png"  Canvas.Left="5" Canvas.Top="7" FontSize="8" Foreground="#606060"/>
                         </Canvas>
 
 
@@ -52,7 +52,7 @@
 
 
                 <!-- Кнопка для сохранения в формате SVG -->
-                <Button Click="OnButtonClick" Background="#F7F7F7" Height="40" Width="350" BorderBrush="Black" BorderThickness="0,0,0,1" CornerRadius="0">
+                <Button Click="OnButtonClick" Background="#F7F7F7" Height="40" Width="350" BorderBrush="#8B8B8B" BorderThickness="0,0,0,1" CornerRadius="0">
                     <Button.Styles>
                         <Style Selector="Button:pointerover /template/ ContentPresenter">
                             <Setter Property="Background" Value="#f0f0f0"/>
@@ -60,8 +60,8 @@
                     </Button.Styles>
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                         <StackPanel Orientation="Vertical">
-                            <TextBlock Text="Изображение в формате SVG" FontSize="12" />
-                            <TextBlock Text="Сохранение фотографий или рисунков в формате высокого качества" FontSize="9" />
+                            <TextBlock Text="Изображение в формате SVG" FontSize="12" Foreground="#414141"/>
+                            <TextBlock Text="Сохранение фотографий или рисунков в формате высокого качества" FontSize="9" Foreground="#414141"/>
                         </StackPanel>
 
                         <Canvas Width="25" Height="25" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5,0,0,0">
@@ -101,8 +101,8 @@
                     </Button.Styles>
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                         <StackPanel Orientation="Vertical">
-                            <TextBlock Text="JSON-сериализация" FontSize="12" />
-                            <TextBlock Text="Представляем наш собственный формат, он самый клёвый!" FontSize="9" />
+                            <TextBlock Text="JSON-сериализация" FontSize="12" Foreground="#414141"/>
+                            <TextBlock Text="Представляем наш собственный формат, он самый клёвый!" FontSize="9" Foreground="#414141"/>
                         </StackPanel>
                         <Canvas Width="24" Height="24" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="45,0,0,0">
                             <!-- Вставка SVG-изображения -->
