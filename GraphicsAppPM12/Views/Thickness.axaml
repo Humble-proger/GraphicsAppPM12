@@ -19,7 +19,7 @@
                            FontSize="11"  Foreground="#414141"/>
                     
                 <!--Имя элемента, чтобы на него можно было ссылаться, мин, мак значение и текущее значение-->
-                <Slider Name="ThicknessSlider" Minimum="1" Maximum="10" IsSnapToTickEnabled="True" TickFrequency="1">
+                <Slider Name="ThicknessSlider" Minimum="1" Maximum="10" IsSnapToTickEnabled="True" TickFrequency="1" Padding="10">
                     <Slider.Styles>
                         <Style Selector="Slider:horizontal">
                             <Setter Property="MinWidth" Value="40" />
