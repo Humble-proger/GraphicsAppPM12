@@ -56,6 +56,11 @@
             <!-- Масштаб -->
             <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="5" HorizontalAlignment="Right" Margin="10,0,10,0">
                 <Button Height="25" Width="25" Background="#F6F6F6" Click="OnZoomOutClicked">
+                    <Button.Styles>
+                        <Style Selector="Button:pointerover /template/ ContentPresenter">
+                            <Setter Property="Background" Value="#E1E1E1"></Setter>
+                        </Style>
+                    </Button.Styles>
                     <Viewbox Width="15" Height="15">
                         <Canvas Width="12" Height="12">
                             <Path Data="M4 6H8" Stroke="#606060" StrokeThickness="1.5" StrokeLineCap="Round" StrokeJoin="Round"/>
@@ -67,6 +72,11 @@
                 </Button>
                 <TextBlock x:Name="ZoomText" Text="100%" Foreground="#414141" VerticalAlignment="Center" HorizontalAlignment="Center" Width="37" TextAlignment="Center" TextWrapping="NoWrap"/>
                 <Button Height="25" Width="25" Background="#F6F6F6" Click="OnZoomInClicked">
+                    <Button.Styles>
+                        <Style Selector="Button:pointerover /template/ ContentPresenter">
+                            <Setter Property="Background" Value="#E1E1E1"></Setter>
+                        </Style>
+                    </Button.Styles>
                     <Viewbox Width="15" Height="15">
                         <Canvas Width="12" Height="12">
                             <Path Data="M6 4V8" Stroke="#606060" StrokeThickness="1.5" StrokeLineCap="Round" StrokeJoin="Round"/>

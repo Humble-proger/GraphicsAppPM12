@@ -10,6 +10,11 @@
         <StackPanel  Grid.Row="0" Orientation="Horizontal" Margin="10" Spacing="20">
             <!--Кнопка настроек-->
             <Button Height="35" Width="35" Background="#ededed">
+                <Button.Styles>
+                    <Style Selector="Button:pointerover /template/ ContentPresenter">
+                        <Setter Property="Background" Value="#E1E1E1"></Setter>
+                    </Style>
+                </Button.Styles>
                 <Viewbox Width="28" Height="28" Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,2,0,0">
                     <Canvas Width="25" Height="25">
                         <Path Stroke="#606060" StrokeThickness="2.5" Data="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z" StrokeLineCap="Round" StrokeJoin="Round" Fill="Transparent"/>
@@ -23,6 +28,11 @@
             
             <!--Кнопка создать-->
             <Button Height="35" Width="35" Background="#ededed">
+                <Button.Styles>
+                    <Style Selector="Button:pointerover /template/ ContentPresenter">
+                        <Setter Property="Background" Value="#E1E1E1"></Setter>
+                    </Style>
+                </Button.Styles>
                 <Viewbox Width="24" Height="24">
                     <Canvas Width="24" Height="24">
                         <!-- Основной контур файла -->
@@ -40,6 +50,11 @@
             
             <!--Кнопка открыть-->
             <Button Height="35" Width="35" Background="#ededed">
+                <Button.Styles>
+                    <Style Selector="Button:pointerover /template/ ContentPresenter">
+                        <Setter Property="Background" Value="#E1E1E1"></Setter>
+                    </Style>
+                </Button.Styles>
                 <Viewbox Width="25" Height="25">
                     <Canvas Width="24" Height="24">
                         <!-- Основной контур папки -->
@@ -54,6 +69,11 @@
             
             <!--Кнопка сохранить-->
             <Button Height="35" Width="35" Background="#ededed">
+                <Button.Styles>
+                    <Style Selector="Button:pointerover /template/ ContentPresenter">
+                        <Setter Property="Background" Value="#E1E1E1"></Setter>
+                    </Style>
+                </Button.Styles>
                 <Viewbox  Width="21" Height="21" Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center">
                     <Canvas Width="512" Height="512">
                         <Path Fill="#606060" StrokeThickness="2"
@@ -67,6 +87,11 @@
             
                 <!-- Кнопка "Сохранить как" -->
             <Button Height="35" Width="35" Background="#ededed" Click="OnSaveAsButtonClick">
+                <Button.Styles>
+                    <Style Selector="Button:pointerover /template/ ContentPresenter">
+                        <Setter Property="Background" Value="#E1E1E1"></Setter>
+                    </Style>
+                </Button.Styles>
                 <Viewbox Width="28" Height="28" Margin="0,1,0,0">
                     <Canvas Width="512" Height="512">
                         <Path Fill="#606060" StrokeThickness="2" Data="M42.67 99.11V383.56V99.11V383.56Q43.56 396.89 56.89 397.78H240.89H240.89L230.22 440.44H56.89Q32.89 439.56 16.89 423.56Q0.89 407.56 0 383.56V99.11V99.11Q0.89 75.11 16.89 59.11Q32.89 43.11 56.89 42.22H275.56H275.56Q298.67 42.22 315.56 59.11L381.33 124.89L381.33 124.89L351.11 155.11L351.11 155.11L285.33 89.33L285.33 89.33Q284.44 88.44 284.44 88.44V177.33Q282.67 196.89 263.11 198.67H92.44Q72.89 196.89 71.11 177.33V84.89H56.89Q43.56 85.78 42.67 99.11ZM381.33 124.89Q398.22 141.78 398.22 165.78V223.56V223.56L355.56 266.22V165.78Q355.56 159.56 351.11 155.11L381.33 124.89ZM113.78 84.89V156V84.89V156H241.78V84.89H113.78ZM142.22 298.22Q143.11 266.22 170.67 249.33Q199.11 233.33 227.56 249.33Q255.11 266.22 256 298.22Q255.11 330.22 227.56 347.11Q199.11 363.11 170.67 347.11Q143.11 330.22 142.22 298.22ZM488.89 223.56L501.33 236L488.89 223.56L501.33 236Q512 247.56 512 260.89Q512 275.11 501.33 286.67L475.56 312.44L475.56 312.44L412.44 249.33L412.44 249.33L438.22 223.56Q449.78 212.89 463.11 212.89Q477.33 212.89 488.89 223.56ZM277.33 384.44L392 269.78L277.33 384.44L392 269.78L455.11 332.89L455.11 332.89L340.44 447.56L340.44 447.56Q335.11 452.89 327.11 455.56L273.78 468.89L273.78 468.89Q265.78 469.78 260.44 464.44Q255.11 459.11 256 451.11L269.33 397.78L269.33 397.78Q272 389.78 277.33 384.44Z"/>

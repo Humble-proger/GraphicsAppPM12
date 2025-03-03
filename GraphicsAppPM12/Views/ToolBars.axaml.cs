@@ -6,6 +6,8 @@ using Avalonia.Interactivity;
 using GraphicsApp.ViewModels;
 using System.Collections.Generic;
 
+using Avalonia.Media;
+
 namespace GraphicsApp.Views
 {
     public partial class ToolBars : UserControl
@@ -16,7 +18,7 @@ namespace GraphicsApp.Views
             DataContext = new ToolBarsViewModel(); 
             
         }
-
+        
         // Переключение видимости Popup(относится к толщине)
         private void TogglePopup(object sender, RoutedEventArgs e)
         {
@@ -27,7 +29,7 @@ namespace GraphicsApp.Views
         {
             if (ShapeScroll != null)
             {
-                ShapeScroll.Offset = new Avalonia.Vector(0, Math.Max(ShapeScroll.Offset.Y - 50, 0));
+                ShapeScroll.Offset = new Avalonia.Vector(0, Math.Max(ShapeScroll.Offset.Y - 41, 0));
             }
         }
 
@@ -36,7 +38,7 @@ namespace GraphicsApp.Views
             if (ShapeScroll != null)
             {
                 double maxOffset = ShapeScroll.Extent.Height - ShapeScroll.Viewport.Height;
-                ShapeScroll.Offset = new Avalonia.Vector(0, Math.Min(ShapeScroll.Offset.Y + 50, maxOffset));
+                ShapeScroll.Offset = new Avalonia.Vector(0, Math.Min(ShapeScroll.Offset.Y + 41, maxOffset));
             }
         }
         

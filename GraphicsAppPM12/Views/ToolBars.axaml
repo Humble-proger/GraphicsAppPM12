@@ -7,14 +7,19 @@
              x:DataType="vm:ToolBarsViewModel"             
              xmlns:local="clr-namespace:GraphicsApp.Views"             
              x:Class="GraphicsApp.Views.ToolBars">
-
+    
+    
     <Border BorderBrush="#8B8B8B" BorderThickness="0,0,0,1"> 
         <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="10,20,10,5" Spacing="30" >
-
             
             <!--Кнопка курсора-->
             <StackPanel>
                 <Button Height="50" Width="50" Background="#ededed" Margin="0,-10,0,3">
+                    <Button.Styles>
+                        <Style Selector="Button:pointerover /template/ ContentPresenter">
+                            <Setter Property="Background" Value="#E1E1E1"></Setter>
+                        </Style>
+                    </Button.Styles>
                     <Viewbox Width="35" Height="35">
                         <Canvas Width="24" Height="24">
                             <Path Data="m4 4 7.07 17 2.51-7.39L21 11.07z"
@@ -28,6 +33,11 @@
             <!--Кнопка "Выделение"-->
             <StackPanel>
                 <Button Height="50" Width="50" Background="#ededed" Margin="0,-10,0,3">
+                    <Button.Styles>
+                        <Style Selector="Button:pointerover /template/ ContentPresenter">
+                            <Setter Property="Background" Value="#E1E1E1"></Setter>
+                        </Style>
+                    </Button.Styles>
                     <Viewbox Width="35" Height="35">
                         <Canvas Width="24" Height="24">
                             <!-- Закругленные углы -->
@@ -56,6 +66,11 @@
             <!--Кнопка пера-->
             <StackPanel>
                 <Button Height="50" Width="50" Background="#ededed" Margin="0,-10,0,3">
+                    <Button.Styles>
+                        <Style Selector="Button:pointerover /template/ ContentPresenter">
+                            <Setter Property="Background" Value="#E1E1E1"></Setter>
+                        </Style>
+                    </Button.Styles>
                     <Viewbox Width="35" Height="35">
                         <Canvas Width="24" Height="24">
                             <!-- Основной карандаш -->
@@ -82,6 +97,11 @@
             <!--Кнопка заливки-->
             <StackPanel>
                 <Button Height="50" Width="50" Background="#ededed" Margin="0,-10,0,3">
+                    <Button.Styles>
+                        <Style Selector="Button:pointerover /template/ ContentPresenter">
+                            <Setter Property="Background" Value="#E1E1E1"></Setter>
+                        </Style>
+                    </Button.Styles>
                     <Viewbox Width="35" Height="35">
                         <Canvas Width="24" Height="24">
                             <!-- Основной контур ведра -->
@@ -108,6 +128,11 @@
             <!--Кнопка удаления-->
             <StackPanel>
                 <Button Height="50" Width="50" Background="#ededed" Margin="0,-10,0,3">
+                    <Button.Styles>
+                        <Style Selector="Button:pointerover /template/ ContentPresenter">
+                            <Setter Property="Background" Value="#E1E1E1"></Setter>
+                        </Style>
+                    </Button.Styles>
                     <Viewbox Width="35" Height="35">
                         <Canvas Width="24" Height="24">
                             <!-- Первая диагональная линия -->
@@ -126,6 +151,11 @@
             <!--Толщина-->
             <StackPanel>
                 <Button Height="50" Width="50" Background="#ededed" Margin="0,-10,0,3" Name="ThicknessButton" Click="TogglePopup">
+                    <Button.Styles>
+                        <Style Selector="Button:pointerover /template/ ContentPresenter">
+                            <Setter Property="Background" Value="#E1E1E1"></Setter>
+                        </Style>
+                    </Button.Styles>
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,5 ">
                         <!-- Линия 1 (тонкая, 1.5) -->
                         <Canvas Width="30" Height="3">
