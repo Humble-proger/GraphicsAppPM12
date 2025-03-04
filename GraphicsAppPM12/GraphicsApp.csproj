@@ -9,8 +9,6 @@
   </PropertyGroup>
 
    <ItemGroup>
-    <!-- Включаем папку Models -->
-    <Folder Include="Models/" />
 
     <!-- Включаем все ресурсы из Assets -->
     <AvaloniaResource Include="Assets/**" />
@@ -52,6 +50,11 @@
     </PackageReference>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1" />
     <PackageReference Include="Svg" Version="3.4.7" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Geometry\Geometry.csproj" />
+    <ProjectReference Include="..\IO\IO.csproj" />
   </ItemGroup>
 
   <ItemGroup>

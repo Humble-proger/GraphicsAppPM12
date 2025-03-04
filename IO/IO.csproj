@@ -6,8 +6,4 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\GraphicsAppPM12\GraphicsApp.csproj" />
-  </ItemGroup>
-
 </Project>
