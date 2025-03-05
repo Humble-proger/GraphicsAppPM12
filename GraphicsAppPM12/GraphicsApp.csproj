@@ -50,6 +50,9 @@
     </PackageReference>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1" />
     <PackageReference Include="Svg" Version="3.4.7" />
+    <PackageReference Include="System.ComponentModel.Composition" Version="9.0.2" />
+    <PackageReference Include="System.Composition.Hosting" Version="9.0.2" />
+    <PackageReference Include="System.Composition.TypedParts" Version="9.0.2" />
   </ItemGroup>
 
   <ItemGroup>
