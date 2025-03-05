@@ -116,3 +116,4 @@ public partial class RectangleModel : ObservableObject, IGeometryModel
         return a;
     }
 }
+
