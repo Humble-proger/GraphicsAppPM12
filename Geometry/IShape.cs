@@ -22,5 +22,6 @@ namespace Geometry
         void SetColor(Color color);
         // Метод для смены толщины контура
         void SetThickness(float thickness);
+        public string Geometry { get; }
     }
 }
