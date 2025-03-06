@@ -8,6 +8,9 @@
              xmlns:local="clr-namespace:GraphicsApp.Views"             
              x:Class="GraphicsApp.Views.ToolBars">
     
+    <UserControl.Styles>
+        <StyleInclude Source="ToolBarsStyles.axaml"/>
+    </UserControl.Styles>
     
     <Border BorderBrush="#8B8B8B" BorderThickness="0,0,0,1"> 
         <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="10,20,10,5" Spacing="30" >
@@ -15,208 +18,103 @@
             <!--Кнопка курсора-->
             <StackPanel>
                 <ToggleButton Name="CursorButton" Height="50" Width="50" Background="#ededed" Margin="0,-10,0,3" 
-                              Click="CursorButton_Click">
-                    <ToggleButton.Styles>
-                        <!-- Стиль для состояния наведения на кнопку -->
-                        <Style Selector="ToggleButton:pointerover /template/ ContentPresenter">
-                            <Setter Property="Background" Value="#E1E1E1"/>
-                        </Style>
-
-                        <!-- Стиль для состояния нажатия кнопки -->
-                        <Style Selector="ToggleButton:checked /template/ ContentPresenter">
-                            <Setter Property="Background" Value="#C6C6C6"/>
-                        </Style>
-                    </ToggleButton.Styles>
-                    
+                              Click="CursorButton_Click" IsChecked="True">
                     <Viewbox Width="35" Height="35">
                         <Canvas Width="24" Height="24">
-                            <Path Data="m4 4 7.07 17 2.51-7.39L21 11.07z"
-                                  Stroke="#606060" StrokeThickness="1.5" StrokeLineCap="Round" StrokeJoin="Round"/>
+                            <Path Data="m4 4 7.07 17 2.31-7.39L21 11.07z" />
                         </Canvas>
                     </Viewbox>
                 </ToggleButton>
-                <TextBlock Text="Курсор" HorizontalAlignment="Center" FontSize="11" Foreground="#414141"/>
+                <TextBlock Text="Курсор" />
             </StackPanel>
             
             <!--Кнопка "Выделение"-->
             <StackPanel>
                 <ToggleButton Name="SelectionButton" Height="50" Width="50" Background="#ededed" Margin="0,-10,0,3"
                               Click="SelectionButton_Click">
-                    <ToggleButton.Styles>
-                        <!-- Стиль для состояния наведения на кнопку -->
-                        <Style Selector="ToggleButton:pointerover /template/ ContentPresenter">
-                            <Setter Property="Background" Value="#E1E1E1"/>
-                        </Style>
-
-                        <!-- Стиль для состояния нажатия кнопки -->
-                        <Style Selector="ToggleButton:checked /template/ ContentPresenter">
-                            <Setter Property="Background" Value="#C6C6C6"/>
-                        </Style>
-                    </ToggleButton.Styles>
                     <Viewbox Width="35" Height="35">
                         <Canvas Width="24" Height="24">
-                            <!-- Закругленные углы -->
-                            <Path Data="M5 3A2 2 0 0 0 3 5" Stroke="#606060" StrokeThickness="2" StrokeLineCap="Round" StrokeJoin="Round"/>
-                            <Path Data="M19 3A2 2 0 0 1 21 5" Stroke="#606060" StrokeThickness="2" StrokeLineCap="Round" StrokeJoin="Round"/>
-                            <Path Data="M21 19A2 2 0 0 1 19 21" Stroke="#606060" StrokeThickness="2" StrokeLineCap="Round" StrokeJoin="Round"/>
-                            <Path Data="M5 21A2 2 0 0 1 3 19" Stroke="#606060" StrokeThickness="2" StrokeLineCap="Round" StrokeJoin="Round"/>
+                            <Path Data="M5 3A2 2 0 0 0 3 5" StrokeThickness = "2.3"/>
+                            <Path Data="M19 3A2 2 0 0 1 21 5" StrokeThickness = "2.3"/>
+                            <Path Data="M21 19A2 2 0 0 1 19 21" StrokeThickness = "2.3"/>
+                            <Path Data="M5 21A2 2 0 0 1 3 19" StrokeThickness = "2.3"/>
+                            
+                            <Path Data="M9 3H10" StrokeThickness = "2.3"/>
+                            <Path Data="M9 21H10" StrokeThickness = "2.3"/>
+                            <Path Data="M14 3H15" StrokeThickness = "2.3"/>
+                            <Path Data="M14 21H15" StrokeThickness = "2.3"/>
 
-                            <!-- Горизонтальные линии -->
-                            <Path Data="M9 3H10" Stroke="#606060" StrokeThickness="2" StrokeLineCap="Round" StrokeJoin="Round"/>
-                            <Path Data="M9 21H10" Stroke="#606060" StrokeThickness="2" StrokeLineCap="Round" StrokeJoin="Round"/>
-                            <Path Data="M14 3H15" Stroke="#606060" StrokeThickness="2" StrokeLineCap="Round" StrokeJoin="Round"/>
-                            <Path Data="M14 21H15" Stroke="#606060" StrokeThickness="2" StrokeLineCap="Round" StrokeJoin="Round"/>
-
-                            <!-- Вертикальные линии -->
-                            <Path Data="M3 9V10" Stroke="#606060" StrokeThickness="2" StrokeLineCap="Round" StrokeJoin="Round"/>
-                            <Path Data="M21 9V10" Stroke="#606060" StrokeThickness="2" StrokeLineCap="Round" StrokeJoin="Round"/>
-                            <Path Data="M3 14V15" Stroke="#606060" StrokeThickness="2" StrokeLineCap="Round" StrokeJoin="Round"/>
-                            <Path Data="M21 14V15" Stroke="#606060" StrokeThickness="2" StrokeLineCap="Round" StrokeJoin="Round"/>
+                            <Path Data="M3 9V10" StrokeThickness = "2.3"/>
+                            <Path Data="M21 9V10" StrokeThickness = "2.3"/>
+                            <Path Data="M3 14V15" StrokeThickness = "2.3"/>
+                            <Path Data="M21 14V15" StrokeThickness = "2.3"/>
                         </Canvas>
                     </Viewbox>
                 </ToggleButton>
-                <TextBlock Text="Выделить" HorizontalAlignment="Center" FontSize="11" Foreground="#414141"/>
+                <TextBlock Text="Выделить" />
             </StackPanel>
             
             <!--Кнопка пера-->
             <StackPanel>
                 <ToggleButton Name="PenButton" Height="50" Width="50" Background="#ededed" Margin="0,-10,0,3"
                               Click="PenButton_Click">
-                    <ToggleButton.Styles>
-                        <!-- Стиль для состояния наведения на кнопку -->
-                        <Style Selector="ToggleButton:pointerover /template/ ContentPresenter">
-                            <Setter Property="Background" Value="#E1E1E1"/>
-                        </Style>
-
-                        <!-- Стиль для состояния нажатия кнопки -->
-                        <Style Selector="ToggleButton:checked /template/ ContentPresenter">
-                            <Setter Property="Background" Value="#C6C6C6"/>
-                        </Style>
-                    </ToggleButton.Styles>
                     <Viewbox Width="35" Height="35">
                         <Canvas Width="24" Height="24">
-                            <!-- Основной карандаш -->
-                            <Path Data="M12 19L19 12L22 15L15 22L12 19Z" 
-                                  Stroke="#606060" StrokeThickness="1.5" StrokeLineCap="Round" StrokeJoin="Round"/>
-
-                            <!-- Верхняя часть карандаша -->
-                            <Path Data="M18 13L16.5 5.5L2 2L5.5 16.5L13 18L18 13Z" 
-                                  Stroke="#606060" StrokeThickness="1.5" StrokeLineCap="Round" StrokeJoin="Round"/>
-
-                            <!-- Линия от пера -->
-                            <Path Data="M2 2L9.586 9.586" 
-                                  Stroke="#606060" StrokeThickness="1.5" StrokeLineCap="Round" StrokeJoin="Round"/>
-
-                            <!-- Круг в центре -->
+                            <Path Data="M12 19L19 12L22 15L15 22L12 19Z" />
+                            <Path Data="M18 13L16.5 5.5L2 2L5.5 16.5L13 18L18 13Z" />
+                            <Path Data="M2 2L9.586 9.586" />
                             <Ellipse Width="4" Height="4" Canvas.Left="9" Canvas.Top="9"
                                      Stroke="#606060" StrokeThickness="2"/>
                         </Canvas>
                     </Viewbox>
                 </ToggleButton>
-                <TextBlock Text="Перо" HorizontalAlignment="Center" FontSize="11" Foreground="#414141"/>
+                <TextBlock Text="Перо" />
             </StackPanel>
 
             <!--Кнопка заливки-->
             <StackPanel>
                 <ToggleButton Name="FillButton" Height="50" Width="50" Background="#ededed" Margin="0,-10,0,3"
                               Click="FillButton_Click">
-                    <ToggleButton.Styles>
-                        <!-- Стиль для состояния наведения на кнопку -->
-                        <Style Selector="ToggleButton:pointerover /template/ ContentPresenter">
-                            <Setter Property="Background" Value="#E1E1E1"/>
-                        </Style>
-
-                        <!-- Стиль для состояния нажатия кнопки -->
-                        <Style Selector="ToggleButton:checked /template/ ContentPresenter">
-                            <Setter Property="Background" Value="#C6C6C6"/>
-                        </Style>
-                    </ToggleButton.Styles>
                     <Viewbox Width="35" Height="35">
                         <Canvas Width="24" Height="24">
-                            <!-- Основной контур ведра -->
-                            <Path Data="M19 11L11 3L2.4 11.6A2 2 0 0 0 2.4 14.4L7.6 19.6C8.4 20.4 9.6 20.4 10.4 19.6L19 11Z"
-                                  Stroke="#606060" StrokeThickness="1.5" StrokeLineCap="Round" StrokeJoin="Round"/>
-
-                            <!-- Косая линия на ведре -->
-                            <Path Data="M5 2L10 7" 
-                                  Stroke="#606060" StrokeThickness="1.5" StrokeLineCap="Round" StrokeJoin="Round"/>
-
-                            <!-- Горизонтальная линия -->
-                            <Path Data="M2 13H17"
-                                  Stroke="#606060" StrokeThickness="1.5" StrokeLineCap="Round" StrokeJoin="Round"/>
-
-                            <!-- Капля краски -->
-                            <Path Data="M22 20A2 2 0 1 1 18 20C18 18.4 19.7 17.6 20 16C20.3 17.6 22 18.4 22 20Z"
-                                  Stroke="#606060" StrokeThickness="1.5" StrokeLineCap="Round" StrokeJoin="Round"/>
+                            <Path Data="M19 11L11 3L2.4 11.6A2 2 0 0 0 2.4 14.4L7.6 19.6C8.4 20.4 9.6 20.4 10.4 19.6L19 11Z"/>
+                            <Path Data="M5 2L10 7" />
+                            <Path Data="M2 13H17"/>
+                            <Path Data="M22 20A2 2 0 1 1 18 20C18 18.4 19.7 17.6 20 16C20.3 17.6 22 18.4 22 20Z"/>
                         </Canvas>
                     </Viewbox>
                 </ToggleButton>
-                <TextBlock Text="Заливка" HorizontalAlignment="Center" FontSize="11" Foreground="#414141"/>
+                <TextBlock Text="Заливка" />
             </StackPanel>
 
             <!--Кнопка удаления-->
             <StackPanel>
                 <ToggleButton Name="DeleteButton" Height="50" Width="50" Background="#ededed" Margin="0,-10,0,3"
                               Click="DeleteButton_Click">
-                    <ToggleButton.Styles>
-                        <!-- Стиль для состояния наведения на кнопку -->
-                        <Style Selector="ToggleButton:pointerover /template/ ContentPresenter">
-                            <Setter Property="Background" Value="#E1E1E1"/>
-                        </Style>
-
-                        <!-- Стиль для состояния нажатия кнопки -->
-                        <Style Selector="ToggleButton:checked /template/ ContentPresenter">
-                            <Setter Property="Background" Value="#C6C6C6"/>
-                        </Style>
-                    </ToggleButton.Styles>
                     <Viewbox Width="35" Height="35">
                         <Canvas Width="24" Height="24">
-                            <!-- Основной путь, изображающий часть окружности -->
-                            <Path Data="M20 10C20 5.6 16.4 2 12 2S4 5.6 4 10s3.6 8 8 8h8"
-                                  Stroke="#606060" StrokeThickness="2" StrokeLineCap="Round" StrokeJoin="Round" />
-
-                            <!-- Стрелка, состоящая из двух отрезков -->
-                            <Path Data="M16 14L20 18L16 22"
-                                  Stroke="#606060" StrokeThickness="2" StrokeLineCap="Round" StrokeJoin="Round"/>
+                            <Path Data="M20 10C20 5.6 16.4 2 12 2S4 5.6 4 10s3.6 8 8 8h8"/>
+                            <Path Data="M16 14L20 18L16 22"/>
                         </Canvas>
 
                     </Viewbox> 
                 </ToggleButton>
-                <TextBlock Text="Поворот" HorizontalAlignment="Center" FontSize="11" Foreground="#414141"/>
+                <TextBlock Text="Поворот" />
             </StackPanel>
 
             <!--Толщина-->
             <StackPanel>
                 <ToggleButton Name="ThicknessButton" Height="50" Width="50" Background="#ededed" Margin="0,-10,0,3" 
                               Click="ThicknessButton_Click">
-                    <ToggleButton.Styles>
-                        <!-- Стиль для состояния наведения на кнопку -->
-                        <Style Selector="ToggleButton:pointerover /template/ ContentPresenter">
-                            <Setter Property="Background" Value="#E1E1E1"/>
-                        </Style>
-
-                        <!-- Стиль для состояния нажатия кнопки -->
-                        <Style Selector="ToggleButton:checked /template/ ContentPresenter">
-                            <Setter Property="Background" Value="#C6C6C6"/>
-                        </Style>
-                    </ToggleButton.Styles>
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,5 ">
-                        <!-- Линия 1 (тонкая, 1.5) -->
-                        <Canvas Width="30" Height="3">
-                            <Path Data="M1.75 1 H25"
-                                  Stroke="#606060" StrokeThickness="1.5" StrokeLineCap="Round" StrokeJoin="Round" Canvas.Top="0" />
+                        <Canvas Width="30" Height="3" HorizontalAlignment="Center">
+                            <Path Data="M1.75 1 H25" Canvas.Top="0" StrokeThickness = "2"/>
                         </Canvas>
-
-                        <!-- Линия 2 (средняя, 2) -->
-                        <Canvas Width="30" Height="4">
-                            <Path Data="M1.75 1 H24.75"
-                                  Stroke="#606060" StrokeThickness="2" StrokeLineCap="Round" StrokeJoin="Round" Canvas.Top="4" />
+                        <Canvas Width="30" Height="4" HorizontalAlignment="Center">
+                            <Path Data="M1.75 1 H24.85" Canvas.Top="4" StrokeThickness = "2.5"/>
                         </Canvas>
-
-                        <!-- Линия 3 (толстая, 3) -->
-                        <Canvas Width="30" Height="5">
-                            <Path Data="M1.75 1 H13 H24.25"
-                                  Stroke="#606060" StrokeThickness="3" StrokeLineCap="Round" StrokeJoin="Round" Canvas.Top="8" />
+                        <Canvas Width="30" Height="5" HorizontalAlignment="Center">
+                            <Path Data="M1.75 1 H13 H24.65" Canvas.Top="8" StrokeThickness = "3.3"/>
                         </Canvas>
                     </StackPanel>
      
@@ -224,7 +122,7 @@
                       <!-- Пользовательский контрол ThicknessPopup -->
                           <local:Thickness Name="ThicknessPopupControl" />
 
-                <TextBlock Text="Толщина" HorizontalAlignment="Center" FontSize="11" Foreground="#414141"/>
+                <TextBlock Text="Толщина" />
             </StackPanel>
             
             <!--Фигуры-->
@@ -234,17 +132,6 @@
                         <ScrollViewer x:Name="ShapeScroll" Height="40" VerticalScrollBarVisibility="Hidden">
                             <ListBox x:Name="ShapeList" ItemsSource="{Binding Shapes}" SelectionMode="Single" 
                                      BorderThickness="0" Background="Transparent" SelectionChanged="ShapeList_SelectionChanged">
-                                <ListBox.Styles>
-                                    <!-- Стиль для состояния наведения -->
-                                    <Style Selector="ListBoxItem:pointerover /template/ ContentPresenter">
-                                        <Setter Property="Background" Value="#E1E1E1"/>
-                                    </Style>
-                                    <!-- Стиль для выбранного элемента -->
-                                    <Style Selector="ListBoxItem:selected /template/ ContentPresenter">
-                                        <Setter Property="Background" Value="#C6C6C6"/>
-                                    </Style>
-                                </ListBox.Styles>
-                                
                                 <ListBox.ItemsPanel>
                                     <ItemsPanelTemplate>
                                         <WrapPanel Width="230" VerticalAlignment="Center" Margin="0,0,0,0" />
@@ -278,7 +165,7 @@
                         </Button>
                     </Grid>
                 </Border>
-                <TextBlock Text="Фигуры" HorizontalAlignment="Center" FontSize="11" Foreground="#414141"/>
+                <TextBlock Text="Фигуры" />
             </StackPanel>
 
 
@@ -288,7 +175,7 @@
                 <Border Background="#ededed" Height="50" Width="80" Margin="10,-10,0,3" CornerRadius="2">
                     <ColorPicker HorizontalAlignment="Center" VerticalAlignment="Center" Color="Black" />
                 </Border>
-                <TextBlock Text="Цвет" HorizontalAlignment="Center" FontSize="11"  Foreground="#414141" Margin="10,0,0,0"/>
+                <TextBlock Text="Цвет" Margin="10,0,0,0"/>
             </StackPanel>
             
         </StackPanel>

@@ -52,7 +52,7 @@
                     </Grid>
                 </StackPanel>
 
-                <StackPanel Grid.Row="2">
+                <!--<StackPanel Grid.Row="2">
                     <ListBox ScrollViewer.VerticalScrollBarVisibility="Visible" MaxHeight="55" Background="#dbdbdb">
 
                         <ListBoxItem Classes="Editor">
@@ -75,7 +75,7 @@
                             <TextBlock Text="Выравнивание Anchor Point" FontSize="10" />
                         </ListBoxItem>
                     </ListBox>
-                </StackPanel>
+                </StackPanel>-->
 
                 <!-- <Border BorderBrush="#8B8B8B" BorderThickness="0, 0, 1, 1"> -->
                 <StackPanel Orientation="Horizontal" Spacing="15" Grid.Row="3" Margin="10, 10, 10, 0">
@@ -150,19 +150,9 @@
 
                             <ToggleButton Name="VisibilityToggleButton" Background="#F0F0F0"
                                           IsChecked="{Binding IsVisibleIcon, Mode=TwoWay}">
-                                <ToggleButton.Styles>
-                                    <!-- Стиль для состояния наведения на кнопку -->
-                                    <Style Selector="ToggleButton:pointerover /template/ ContentPresenter">
-                                        <Setter Property="Background" Value="#F0F0F0"/>
-                                    </Style>
-                                    <!-- Стиль для состояния нажатия кнопки -->
-                                    <Style Selector="ToggleButton:checked /template/ ContentPresenter">
-                                        <Setter Property="Background" Value="#F0F0F0"/>
-                                    </Style>
-                                </ToggleButton.Styles>
                                 <Viewbox Width="15" Height="15" Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2">
                                     <Canvas Width="24" Height="24">
-                                        <!-- Глаз (виден, когда IsVisibleIcon = true) -->
+                                        <!-- Глаз -->
                                         <Path Data="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" Stroke="#606060"
                                               StrokeThickness="2" StrokeLineCap="Round" StrokeJoin="Round"
                                               IsVisible="{Binding !IsVisibleIcon}"/>
@@ -170,7 +160,7 @@
                                                  Stroke="#606060" StrokeThickness="2" Fill="Transparent"
                                                  IsVisible="{Binding !IsVisibleIcon}"/>
                                         
-                                        <!-- Перечеркнутый глаз (виден, когда IsVisibleIcon = false) -->
+                                        <!-- Перечеркнутый глаз -->
                                         <Path Data="M9.88 9.88a3 3 0 1 0 4.24 4.24" Stroke="#606060" 
                                               StrokeThickness="2" StrokeLineCap="Round" StrokeJoin="Round"
                                               IsVisible="{Binding IsVisibleIcon}"/>
