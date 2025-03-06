@@ -1,12 +1,10 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:vm="clr-namespace:GraphicsApp.ViewModels"
         xmlns:local="clr-namespace:GraphicsApp.Views"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="GraphicsApp.Views.MainWindow"
-        x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
         Title="GraphicsApp"
         MinWidth="1075"
@@ -29,7 +27,7 @@
 
             <StackPanel Grid.Column="0">
                 <!--Подключение холста-->
-                <local:Canvas/>
+                <local:MyCanvas DataContext=""/>
                 <!--Подключение панели редактирования-->
                 <!--<local:FigureEdit/>--> 
                 
@@ -41,7 +39,7 @@
 
         <StackPanel Grid.Row="3" Margin="0">
             <!--Подключение холста-->
-            <local:Footer/>
+                <local:Footer/>
         </StackPanel>
     </Grid>
 
