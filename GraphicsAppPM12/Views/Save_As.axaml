@@ -7,9 +7,7 @@
     <!-- Создаем через Popup всплывающее окно при нажатии на кнопку "Сохранить как" -->
     <Popup Name="Save_AsPopup"
            PlacementTarget="{Binding RelativeSource={RelativeSource AncestorType=UserControl}}"
-           PlacementMode="Right"
-           HorizontalOffset="-40"
-           VerticalOffset="100">
+           PlacementMode="Right" HorizontalOffset="-40" VerticalOffset="100" >
         <!-- То как выглядит наше всплывающее окошко -->
         <Border Background="White" BorderBrush="#8B8B8B" BorderThickness="1,1,1,1">
             <StackPanel>

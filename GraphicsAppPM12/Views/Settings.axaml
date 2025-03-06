@@ -86,7 +86,7 @@
             </Button>
             
                 <!-- Кнопка "Сохранить как" -->
-            <Button Height="35" Width="35" Background="#ededed" Click="OnSaveAsButtonClick">
+            <Button Name="OnSaveAsButtonButton" Height="35" Width="35" Background="#ededed" Click="OnSaveAsButtonClick">
                 <Button.Styles>
                     <Style Selector="Button:pointerover /template/ ContentPresenter">
                         <Setter Property="Background" Value="#E1E1E1"></Setter>

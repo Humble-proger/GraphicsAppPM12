@@ -29,6 +29,7 @@ namespace GraphicsApp.Views
             PenButton.IsChecked = false;
             FillButton.IsChecked = false;
             DeleteButton.IsChecked = false;
+            ThicknessButton.IsChecked = false;
             ThicknessPopupControl.ClosePopup();
             _isClearingSelection = true;
             ShapeList.SelectedItem = null;
@@ -43,6 +44,7 @@ namespace GraphicsApp.Views
             PenButton.IsChecked = false;
             FillButton.IsChecked = false;
             DeleteButton.IsChecked = false;
+            ThicknessButton.IsChecked = false;
             ThicknessPopupControl.ClosePopup();
             _isClearingSelection = true;
             ShapeList.SelectedItem = null;
@@ -57,6 +59,7 @@ namespace GraphicsApp.Views
             SelectionButton.IsChecked = false;
             FillButton.IsChecked = false;
             DeleteButton.IsChecked = false;
+            ThicknessButton.IsChecked = false;
             ThicknessPopupControl.ClosePopup();
             _isClearingSelection = true;
             ShapeList.SelectedItem = null;
@@ -71,6 +74,7 @@ namespace GraphicsApp.Views
             SelectionButton.IsChecked = false;
             PenButton.IsChecked = false;
             DeleteButton.IsChecked = false;
+            ThicknessButton.IsChecked = false;
             ThicknessPopupControl.ClosePopup();
             _isClearingSelection = true;
             ShapeList.SelectedItem = null;
@@ -85,6 +89,7 @@ namespace GraphicsApp.Views
             SelectionButton.IsChecked = false;
             PenButton.IsChecked = false;
             FillButton.IsChecked = false;
+            ThicknessButton.IsChecked = false;
             ThicknessPopupControl.ClosePopup();
             _isClearingSelection = true;
             ShapeList.SelectedItem = null;
@@ -94,14 +99,21 @@ namespace GraphicsApp.Views
         // Обработчик для кнопки "Толщина"
         private void ThicknessButton_Click(object sender, RoutedEventArgs e)
         {
-            ThicknessPopupControl.OpenPopup();
-            
-            CursorButton.IsChecked = false;
-            SelectionButton.IsChecked = false;
-            FillButton.IsChecked = false;
-            DeleteButton.IsChecked = false;
-            
+            if (ThicknessButton.IsChecked == true)
+            {
+                ThicknessPopupControl.OpenPopup();
+                // Сброс состояния других кнопок (если требуется)
+                CursorButton.IsChecked = false;
+                SelectionButton.IsChecked = false;
+                FillButton.IsChecked = false;
+                DeleteButton.IsChecked = false;
+            }
+            else
+            {
+                ThicknessPopupControl.ClosePopup();
+            }
         }
+
         // Обработчик для областм "Фигуры"
         private void ShapeList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -112,6 +124,7 @@ namespace GraphicsApp.Views
                 PenButton.IsChecked = false;
                 FillButton.IsChecked = false;
                 DeleteButton.IsChecked = false;
+                ThicknessButton.IsChecked = false;
                 ThicknessPopupControl.ClosePopup();
             }
         }

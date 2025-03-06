@@ -171,28 +171,35 @@
                     </ToggleButton.Styles>
                     <Viewbox Width="35" Height="35">
                         <Canvas Width="24" Height="24">
-                            <!-- Первая диагональная линия -->
-                            <Path Data="M18 6L6 18"
-                                  Stroke="#606060" StrokeThickness="2" StrokeLineCap="Round" StrokeJoin="Round"/>
+                            <!-- Основной путь, изображающий часть окружности -->
+                            <Path Data="M20 10C20 5.6 16.4 2 12 2S4 5.6 4 10s3.6 8 8 8h8"
+                                  Stroke="#606060" StrokeThickness="2" StrokeLineCap="Round" StrokeJoin="Round" />
 
-                            <!-- Вторая диагональная линия -->
-                            <Path Data="M6 6L18 18"
+                            <!-- Стрелка, состоящая из двух отрезков -->
+                            <Path Data="M16 14L20 18L16 22"
                                   Stroke="#606060" StrokeThickness="2" StrokeLineCap="Round" StrokeJoin="Round"/>
                         </Canvas>
+
                     </Viewbox> 
                 </ToggleButton>
-                <TextBlock Text="Удалить" HorizontalAlignment="Center" FontSize="11" Foreground="#414141"/>
+                <TextBlock Text="Поворот" HorizontalAlignment="Center" FontSize="11" Foreground="#414141"/>
             </StackPanel>
 
             <!--Толщина-->
             <StackPanel>
-                <Button Name="ThicknessButton" Height="50" Width="50" Background="#ededed" Margin="0,-10,0,3" 
-                        Click="ThicknessButton_Click">
-                    <Button.Styles>
-                        <Style Selector="Button:pointerover /template/ ContentPresenter">
-                            <Setter Property="Background" Value="#E1E1E1"></Setter>
+                <ToggleButton Name="ThicknessButton" Height="50" Width="50" Background="#ededed" Margin="0,-10,0,3" 
+                              Click="ThicknessButton_Click">
+                    <ToggleButton.Styles>
+                        <!-- Стиль для состояния наведения на кнопку -->
+                        <Style Selector="ToggleButton:pointerover /template/ ContentPresenter">
+                            <Setter Property="Background" Value="#E1E1E1"/>
                         </Style>
-                    </Button.Styles>
+
+                        <!-- Стиль для состояния нажатия кнопки -->
+                        <Style Selector="ToggleButton:checked /template/ ContentPresenter">
+                            <Setter Property="Background" Value="#C6C6C6"/>
+                        </Style>
+                    </ToggleButton.Styles>
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,5 ">
                         <!-- Линия 1 (тонкая, 1.5) -->
                         <Canvas Width="30" Height="3">
@@ -213,7 +220,7 @@
                         </Canvas>
                     </StackPanel>
      
-                  </Button>
+                  </ToggleButton>
                       <!-- Пользовательский контрол ThicknessPopup -->
                           <local:Thickness Name="ThicknessPopupControl" />
 

@@ -13,7 +13,7 @@ namespace GraphicsApp.Views
         // Обработчик события нажатия на кнопку "Сохранить как"
         private void OnSaveAsButtonClick(object sender, RoutedEventArgs e)
         {
-            Save_AsPopupControl.OpenPopup(); // Открываем Popup
+            Save_AsPopupControl.OpenPopup();
         }
     }
 }

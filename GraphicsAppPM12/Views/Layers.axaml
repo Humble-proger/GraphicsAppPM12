@@ -2,9 +2,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:GraphicsApp.Views"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="GraphicsApp.Views.Layers"
-             >
+             x:DataType="local:Layers">
 
     <UserControl.Styles>
         <StyleInclude Source="LayersStyles.axaml"/>
@@ -147,37 +148,45 @@
                     <Border BorderThickness="1" Background="#C0C0C0">
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="0">
 
-                            <Button Name="VisibilityButton" Classes="Visability">
-                                <Button.Styles>
-                                    <Style Selector="Button:pointerover /template/ ContentPresenter">
-                                        <Setter Property="Background" Value="#f0f0f0"/>
+                            <ToggleButton Name="VisibilityToggleButton" Background="#F0F0F0"
+                                          IsChecked="{Binding IsVisibleIcon, Mode=TwoWay}">
+                                <ToggleButton.Styles>
+                                    <!-- Стиль для состояния наведения на кнопку -->
+                                    <Style Selector="ToggleButton:pointerover /template/ ContentPresenter">
+                                        <Setter Property="Background" Value="#F0F0F0"/>
                                     </Style>
-                                </Button.Styles>
+                                    <!-- Стиль для состояния нажатия кнопки -->
+                                    <Style Selector="ToggleButton:checked /template/ ContentPresenter">
+                                        <Setter Property="Background" Value="#F0F0F0"/>
+                                    </Style>
+                                </ToggleButton.Styles>
                                 <Viewbox Width="15" Height="15" Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2">
                                     <Canvas Width="24" Height="24">
-                                        <Path Data="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" Stroke="#606060" StrokeThickness="2" StrokeLineCap="Round" StrokeJoin="Round"/>
-                                        <Ellipse Width="6" Height="6" Canvas.Left="9" Canvas.Top="9" Fill="#606060" StrokeThickness="0.5"/>
+                                        <!-- Глаз (виден, когда IsVisibleIcon = true) -->
+                                        <Path Data="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" Stroke="#606060"
+                                              StrokeThickness="2" StrokeLineCap="Round" StrokeJoin="Round"
+                                              IsVisible="{Binding !IsVisibleIcon}"/>
+                                        <Ellipse Width="6" Height="6" Canvas.Left="9" Canvas.Top="9"
+                                                 Stroke="#606060" StrokeThickness="2" Fill="Transparent"
+                                                 IsVisible="{Binding !IsVisibleIcon}"/>
+                                        
+                                        <!-- Перечеркнутый глаз (виден, когда IsVisibleIcon = false) -->
+                                        <Path Data="M9.88 9.88a3 3 0 1 0 4.24 4.24" Stroke="#606060" 
+                                              StrokeThickness="2" StrokeLineCap="Round" StrokeJoin="Round"
+                                              IsVisible="{Binding IsVisibleIcon}"/>
+                                        <Path Data="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68" 
+                                              Stroke="#606060" StrokeThickness="2" StrokeLineCap="Round" StrokeJoin="Round"
+                                              IsVisible="{Binding IsVisibleIcon}"/>
+                                        <Path Data="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61" 
+                                              Stroke="#606060" StrokeThickness="2" StrokeLineCap="Round" StrokeJoin="Round"
+                                              IsVisible="{Binding IsVisibleIcon}"/>
+                                        <Line StartPoint="2 2" EndPoint="22 22" Stroke="#606060" 
+                                              StrokeThickness="2" StrokeLineCap="Round" StrokeJoin="Round"
+                                              IsVisible="{Binding IsVisibleIcon}"/>
                                     </Canvas>
                                 </Viewbox>
-                            </Button>
-
-                            <!-- Кнопка невидимости, пока что не известно, как она будет реализована -->
-                            <Button Name="UnVisibilityButton" Classes="Visability">
-                                <Button.Styles>
-                                    <Style Selector="Button:pointerover /template/ ContentPresenter">
-                                        <Setter Property="Background" Value="#f0f0f0"/>
-                                    </Style>
-                                </Button.Styles>
-                                <Viewbox Width="15" Height="15" Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2">
-                                    <Canvas Width="24" Height="24">
-                                        <Path Data="M9.88 9.88a3 3 0 1 0 4.24 4.24" Stroke="#606060" StrokeThickness="2" StrokeLineCap="Round" StrokeJoin="Round"/>
-                                        <Path Data="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68" Stroke="#606060" StrokeThickness="2" StrokeLineCap="Round" StrokeJoin="Round"/>
-                                        <Path Data="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61" Stroke="#606060" StrokeThickness="2" StrokeLineCap="Round" StrokeJoin="Round"/>
-                                        <Line StartPoint="2 2" EndPoint="22 22" Stroke="#606060" StrokeThickness="2" StrokeLineCap="Round" StrokeJoin="Round"/>
-                                    </Canvas>
-                                </Viewbox>
-                            </Button>
-
+                            </ToggleButton>
+                            
                             <TextBlock Name="LayerNameTextBlock" Text="Слой1" VerticalAlignment="Center" FontSize="11" Foreground="#414141" Margin="5"/>
 
                         </StackPanel>
