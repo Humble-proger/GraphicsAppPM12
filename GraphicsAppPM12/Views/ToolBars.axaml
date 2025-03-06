@@ -285,8 +285,8 @@
             
             <!-- Цвета -->
             <StackPanel >
-                <Border Background="#ededed" Height="50" Width="50" Margin="10,-10,0,3" CornerRadius="2">
-                    <ColorPicker Color="Red" />
+                <Border Background="#ededed" Height="50" Width="80" Margin="10,-10,0,3" CornerRadius="2">
+                    <ColorPicker HorizontalAlignment="Center" VerticalAlignment="Center" Color="Black" />
                 </Border>
                 <TextBlock Text="Цвет" HorizontalAlignment="Center" FontSize="11"  Foreground="#414141" Margin="10,0,0,0"/>
             </StackPanel>
