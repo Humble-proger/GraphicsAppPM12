@@ -3,21 +3,22 @@ using System.Windows.Input;
 using System.Collections.ObjectModel;
 using System.Composition;
 using System.Composition.Hosting;
-using System.Windows.Input;
 
 using CommunityToolkit.Mvvm.Input;
-
-using IO;
 using Geometry;
 using System.Collections.Generic;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 
 namespace GraphicsApp.ViewModels;
 
 public partial class MainWindowViewModel : ViewModelBase
 {
-    private string _mouseCoord = "X: 0.0 Y: 0.0";
-    private string _canvasSize = "0 × 0";
+    [ObservableProperty]
+    private string _mouseCoords = "X: 0.0 Y: 0.0";
+
+    [ObservableProperty]
+    private string _canvasSize = "0 × 0 мм";
     
     public ObservableCollection<ShapeViewModel> Figures { get; } = [];
 
@@ -29,20 +30,6 @@ public partial class MainWindowViewModel : ViewModelBase
     [ImportMany]
     private IEnumerable<ExportFactory<IShape>> ModelFactories { get; set; } = [];
     
-    public string MouseCoords {
-        get => _mouseCoord;
-        set {
-            _mouseCoord = value;
-            OnPropertyChanged(nameof(MouseCoords));
-        }
-    }
-    public string CanvasSize {
-        get => _canvasSize;
-        set {
-            _canvasSize = value;
-            OnPropertyChanged(nameof(CanvasSize));
-        }
-    }
     public ICommand ChangeMouseCoord { get; }
     public ICommand ChangeSizeCanvas { get; }
 
@@ -57,8 +44,8 @@ public partial class MainWindowViewModel : ViewModelBase
         {
             Factories.Add(new() { Factory = factory, Main = this });
         }
-        ChangeMouseCoord = new RelayCommand(OnMouseMove);
-        ChangeSizeCanvas = new RelayCommand(OnResizeCanvas);
+        ChangeMouseCoord = new RelayCommand<Avalonia.Point>(OnMouseMove);
+        ChangeSizeCanvas = new RelayCommand<Vector2>(OnResizeCanvas);
     }
 
     private void LoadFigures(IEnumerable<ShapeViewModel>? figures)
@@ -73,15 +60,11 @@ public partial class MainWindowViewModel : ViewModelBase
             Figures.Add(fig);
         }
     }
-    private void OnMouseMove(object point) {
-        if (point is Avalonia.Point _point) {
-            MouseCoords = $"X: {_point.X} Y: {_point.Y}";
-        }
+    private void OnMouseMove(Avalonia.Point point) {
+        MouseCoords = $"X: {point.X} Y: {point.Y}";
     }
-    private void OnResizeCanvas(object size) 
+    private void OnResizeCanvas(Vector2 size) 
     {
-        if (size is Vector2 _size) {
-            CanvasSize = $"{_size.X} × {_size.Y} мм";
-        }
+        CanvasSize = $"{size.X} × {size.Y} мм";
     }
 }

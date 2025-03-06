@@ -4,116 +4,118 @@ using Avalonia.Media;
 
 using CommunityToolkit.Mvvm.ComponentModel;
 
-public partial class RectangleModel : ObservableObject, IGeometryModel
+namespace Geometry
 {
-    [ObservableProperty]
-    private float _strokeThickness = 1;
-
-    [ObservableProperty]
-    private IBrush _stroke = new SolidColorBrush(Colors.Black);
-
-    [ObservableProperty]
-    private IBrush _fill = new SolidColorBrush(Colors.Black);
-
-    [ObservableProperty]
-    [NotifyPropertyChangedFor(nameof(ListOfPoints))]
-    [NotifyPropertyChangedFor(nameof(Geometry))]
-    private float _centerX = 10;
-
-    [ObservableProperty]
-    [NotifyPropertyChangedFor(nameof(ListOfPoints))]
-    [NotifyPropertyChangedFor(nameof(Geometry))]
-    private float _centerY = 10;
-
-    [ObservableProperty]
-    [NotifyPropertyChangedFor(nameof(ListOfPoints))]
-    [NotifyPropertyChangedFor(nameof(Geometry))]
-    private float _width = 10;
-
-    [ObservableProperty]
-    [NotifyPropertyChangedFor(nameof(ListOfPoints))]
-    [NotifyPropertyChangedFor(nameof(Geometry))]
-    private float _height = 10;
-
-    [ObservableProperty]
-    [NotifyPropertyChangedFor(nameof(ListOfPoints))]
-    [NotifyPropertyChangedFor(nameof(Geometry))]
-    private float _angle = 0;
-
-    [JsonIgnore]
-    private List<Avalonia.Point> ListOfPoints => getPoints();
-
-    [JsonIgnore]
-    public string Geometry => getGeometry();
-
-    public void Scale(float ratioX, float ratioY)
+    public partial class RectangleModel : ObservableObject, IShape
     {
-        Width *= ratioX;
-        Height *= ratioY;
-    }
+        [ObservableProperty]
+        private float _strokeThickness = 1;
 
-    public void Move(float deltaX, float deltaY)
-    {
-        CenterX += deltaX;
-        CenterY += deltaY;
-    }
+        [ObservableProperty]
+        private IBrush _stroke = new SolidColorBrush(Colors.Black);
 
-    public void Rotate(float angle)
-    {
-        Angle += angle;
-        Angle %= 360;
-    }
+        [ObservableProperty]
+        private IBrush _fill = new SolidColorBrush(Colors.Black);
 
-    public void SetColor(Color color)
-    {
-        Fill = new SolidColorBrush(color);
-    }
+        [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(ListOfPoints))]
+        [NotifyPropertyChangedFor(nameof(Geometry))]
+        private float _centerX = 10;
 
-    public void SetStroke(Color color)
-    {
-        Stroke = new SolidColorBrush(color);
-    }
+        [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(ListOfPoints))]
+        [NotifyPropertyChangedFor(nameof(Geometry))]
+        private float _centerY = 10;
 
-    public void SetThickness(float thickness)
-    {
-        StrokeThickness = thickness;
-    }
+        [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(ListOfPoints))]
+        [NotifyPropertyChangedFor(nameof(Geometry))]
+        private float _width = 10;
 
-    public List<Avalonia.Point> getPoints()
-    {
-        List<Avalonia.Point> list = [
-            new Avalonia.Point(CenterX - Width / 2, CenterY - Height / 2),
+        [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(ListOfPoints))]
+        [NotifyPropertyChangedFor(nameof(Geometry))]
+        private float _height = 10;
+
+        [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(ListOfPoints))]
+        [NotifyPropertyChangedFor(nameof(Geometry))]
+        private float _angle = 0;
+
+        [JsonIgnore]
+        private List<Avalonia.Point> ListOfPoints => GetPoints();
+
+        [JsonIgnore]
+        public string Geometry => GetGeometry();
+
+        public void Scale(float ratioX, float ratioY)
+        {
+            Width *= ratioX;
+            Height *= ratioY;
+        }
+
+        public void Move(float deltaX, float deltaY)
+        {
+            CenterX += deltaX;
+            CenterY += deltaY;
+        }
+
+        public void Rotate(float angle)
+        {
+            Angle += angle;
+            Angle %= 360;
+        }
+
+        public void SetColor(Color color)
+        {
+            Fill = new SolidColorBrush(color);
+        }
+
+        public void SetStroke(Color color)
+        {
+            Stroke = new SolidColorBrush(color);
+        }
+
+        public void SetThickness(float thickness)
+        {
+            StrokeThickness = thickness;
+        }
+
+        public List<Avalonia.Point> GetPoints()
+        {
+            List<Avalonia.Point> list = [
+                new Avalonia.Point(CenterX - Width / 2, CenterY - Height / 2),
             new Avalonia.Point(CenterX + Width / 2, CenterY - Height / 2),
             new Avalonia.Point(CenterX + Width / 2, CenterY + Height / 2),
             new Avalonia.Point(CenterX - Width / 2, CenterY + Height / 2)
-            ];
+                ];
 
-        var angleRad = Angle * Math.PI / 180.0;
+            var angleRad = Angle * Math.PI / 180.0;
 
-        for (int i = 0; i < 4; i++)
-        {
-            list[i] = new Avalonia.Point((CenterX + (list[i].X - CenterX) * Math.Cos(angleRad) - (list[i].Y - CenterY) * Math.Sin(angleRad)),
-                (CenterY + (list[i].X - CenterX) * Math.Sin(angleRad) + (list[i].Y - CenterY) * Math.Cos(angleRad)));
+            for (int i = 0; i < 4; i++)
+            {
+                list[i] = new Avalonia.Point((CenterX + (list[i].X - CenterX) * Math.Cos(angleRad) - (list[i].Y - CenterY) * Math.Sin(angleRad)),
+                    (CenterY + (list[i].X - CenterX) * Math.Sin(angleRad) + (list[i].Y - CenterY) * Math.Cos(angleRad)));
+            }
+
+            return list;
         }
 
-        return list;
-    }
-
-    private string getGeometry()
-    {
-        var a = "";
-        if (ListOfPoints.Count > 0)
+        private string GetGeometry()
         {
-            a = FormattableString.Invariant($"M{ListOfPoints[0].X},{ListOfPoints[0].Y} ");
-        }
+            var a = "";
+            if (ListOfPoints.Count > 0)
+            {
+                a = FormattableString.Invariant($"M{ListOfPoints[0].X},{ListOfPoints[0].Y} ");
+            }
 
-        for (int i = 1; i < ListOfPoints.Count; i++)
-        {
-            a += FormattableString.Invariant($"L{ListOfPoints[i].X},{ListOfPoints[i].Y} ");
-        }
+            for (int i = 1; i < ListOfPoints.Count; i++)
+            {
+                a += FormattableString.Invariant($"L{ListOfPoints[i].X},{ListOfPoints[i].Y} ");
+            }
 
-        a += "z";
-        return a;
+            a += "z";
+            return a;
+        }
     }
 }
-

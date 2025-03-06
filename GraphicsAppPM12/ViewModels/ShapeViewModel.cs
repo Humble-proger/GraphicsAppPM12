@@ -6,8 +6,7 @@ using Avalonia.Media;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
-using CommunityToolkit.Mvvm.ComponentModel;
-using System.Reflection;
+using Geometry;
 
 namespace GraphicsApp.ViewModels
 {
