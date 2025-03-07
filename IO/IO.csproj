@@ -8,8 +8,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Svg" Version="3.4.7" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Geometry\Geometry.csproj" />
-    <ProjectReference Include="..\GraphicsAppPM12\GraphicsApp.csproj" />
   </ItemGroup>
 
   <ItemGroup>

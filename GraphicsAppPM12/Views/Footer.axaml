@@ -1,8 +1,11 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:GraphicsApp.ViewModels"
              x:Class="GraphicsApp.Views.Footer"
+             x:DataType="vm:MainWindowViewModel"
              Background="White"
              Height="35">
+
     <Border BorderBrush="#8B8B8B" BorderThickness="0,1,0,1">
         <Grid>
             <Grid.ColumnDefinitions>
@@ -20,11 +23,12 @@
                         <Path Stroke="#606060" StrokeThickness="1.5" StrokeLineCap="Round" StrokeJoin="Round"
                               Data="M0 0L4 9L5 5L9 4L0 0Z">
                             <Path.RenderTransform>
-                                <TranslateTransform X="7" Y="7" />
+                                <TranslateTransform X="7" Y="7"/>
                             </Path.RenderTransform>
                         </Path>
                     </Canvas>
-                    <TextBlock x:Name="CursorPositionText" Text="0, 0 пкс" Foreground="#414141" VerticalAlignment="Center" Width="130" TextAlignment="Center" TextWrapping="NoWrap">
+                    
+                    <TextBlock x:Name="CursorPositionText" Text="{Binding MouseCoords}" Foreground="#414141" VerticalAlignment="Center" Width="130" TextAlignment="Center" TextWrapping="NoWrap">
                         <ToolTip.Tip>
                             <TextBlock Text="Курсор"/>
                         </ToolTip.Tip>
@@ -45,7 +49,7 @@
                         
                     </Canvas>
                     
-                    <TextBlock x:Name="CanvasSizeText" Text="1420 × 720 пкс" Foreground="#414141" VerticalAlignment="Center" Width="130" TextAlignment="Center" TextWrapping="NoWrap">
+                    <TextBlock x:Name="CanvasSizeText" Text="{Binding CanvasSize}" Foreground="#414141" VerticalAlignment="Center" Width="130" TextAlignment="Center" TextWrapping="NoWrap">
                         <ToolTip.Tip>
                             <TextBlock Text="Размер полотна"/>
                         </ToolTip.Tip>

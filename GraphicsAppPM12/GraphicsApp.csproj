@@ -6,11 +6,10 @@
     <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+    <UserSecretsId>60c726f8-8072-42be-a301-cf292fdec702</UserSecretsId>
   </PropertyGroup>
 
    <ItemGroup>
-    <!-- Включаем папку Models -->
-    <Folder Include="Models/" />
 
     <!-- Включаем все ресурсы из Assets -->
     <AvaloniaResource Include="Assets/**" />
@@ -41,8 +40,6 @@
   <ItemGroup>
     <PackageReference Include="Avalonia" Version="11.2.1" />
     <PackageReference Include="Avalonia.Desktop" Version="11.2.1" />
-    <PackageReference Include="Avalonia.Svg" Version="11.2.0.2" />
-    <PackageReference Include="Avalonia.Svg.Skia" Version="11.2.0.2" />
     <PackageReference Include="Avalonia.Themes.Fluent" Version="11.2.1" />
     <PackageReference Include="Avalonia.Fonts.Inter" Version="11.2.1" />
     <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
@@ -50,8 +47,15 @@
       <IncludeAssets Condition="'$(Configuration)' != 'Debug'">None</IncludeAssets>
       <PrivateAssets Condition="'$(Configuration)' != 'Debug'">All</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1" />
-    <PackageReference Include="Svg" Version="3.4.7" />
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+    <PackageReference Include="System.ComponentModel.Composition" Version="9.0.2" />
+    <PackageReference Include="System.Composition.Hosting" Version="9.0.2" />
+    <PackageReference Include="System.Composition.TypedParts" Version="9.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Geometry\Geometry.csproj" />
+    <ProjectReference Include="..\IO\IO.csproj" />
   </ItemGroup>
 
   <ItemGroup>
