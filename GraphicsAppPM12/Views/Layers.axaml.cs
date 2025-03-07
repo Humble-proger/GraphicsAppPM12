@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.ObjectModel;
+using System.ComponentModel;
 using Avalonia.Controls;
 
 namespace GraphicsApp.Views
@@ -20,10 +21,23 @@ namespace GraphicsApp.Views
             }
         }
 
+        // Коллекция слоев
+        public ObservableCollection<Layer> LayersList { get; set; }
+
         public Layers()
         {
             InitializeComponent();
+
+            // Инициализация коллекции слоев
+            LayersList = new ObservableCollection<Layer>
+            {
+                new Layer { LayerName = "Слой 1", IsVisibleIcon = true },
+                new Layer { LayerName = "Слой 2", IsVisibleIcon = false },
+                new Layer { LayerName = "Слой 3", IsVisibleIcon = true }
+            };
+
             DataContext = this; // Устанавливаем контекст данных
+
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
@@ -31,5 +45,14 @@ namespace GraphicsApp.Views
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        // Модель для слоя
+        public class Layer
+        {
+            public string LayerName { get; set; }
+            public bool IsVisibleIcon { get; set; }
+        }
     }
+
+    
 }

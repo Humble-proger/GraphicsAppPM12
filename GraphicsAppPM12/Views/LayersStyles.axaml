@@ -6,12 +6,14 @@
         <Setter Property="FontSize" Value="11"/>
         <Setter Property="Background" Value="#dbdbdb"/>
         <Setter Property="Padding" Value="3"/>
+        
     </Style>
 
     <Style Selector="TextBlock.OptionsChet">
         <Setter Property="Foreground" Value="#414141"/>
         <Setter Property="FontSize" Value="11"/>
         <Setter Property="Padding" Value="3"/>
+        
     </Style>
 
     <Style Selector="TextBox.Options">
@@ -19,7 +21,7 @@
         <Setter Property="FontSize" Value="11"/>
         <Setter Property="Background" Value="#dbdbdb"/>
         <Setter Property="Padding" Value="2"/>
-        <Setter Property="Margin" Value="1"/>
+        <Setter Property="Margin" Value="3"/>
         <Setter Property="MinHeight" Value="20"/>
         <Setter Property="BorderBrush" Value="#D8D8D8"/> 
         <Setter Property="BorderThickness" Value="1"/> 

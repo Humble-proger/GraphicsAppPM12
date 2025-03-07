@@ -13,7 +13,7 @@
     <Border BorderBrush="#8B8B8B" BorderThickness="0,1,0,1">
         <StackPanel  Grid.Row="0" Orientation="Horizontal" Margin="10" Spacing="20">
             <!--Кнопка настроек-->
-            <Button Height="35" Width="35" Background="#ededed">
+            <Button Height="35" Width="35" Background="#ededed" Name="OpenSettingsWindowButton" Click="OpenSettingsWindowButton_Click">
                 <Viewbox Width="28" Height="28" Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,2,0,0">
                     <Canvas Width="25" Height="25">
                         <Path Stroke="#606060" StrokeThickness="2.5" Data="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z" StrokeLineCap="Round" StrokeJoin="Round" Fill="Transparent"/>

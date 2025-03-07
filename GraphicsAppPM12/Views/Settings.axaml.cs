@@ -15,5 +15,11 @@ namespace GraphicsApp.Views
         {
             Save_AsPopupControl.OpenPopup();
         }
+
+        private void OpenSettingsWindowButton_Click(object sender, RoutedEventArgs e)
+        {
+            SettingsWindow settingsWindow = new SettingsWindow();
+            settingsWindow.Show();
+        }
     }
 }

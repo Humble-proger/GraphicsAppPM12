@@ -10,8 +10,8 @@
         x:DataType="vm:SettingsWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
         Title="Настройки"
-        MinWidth="500"
-        MinHeight="600"
+        Width="400"
+        Height="400"
         Background="#F0F0F0">
 
     <Grid RowDefinitions="*, Auto">
