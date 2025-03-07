@@ -3,7 +3,6 @@
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
-    <OutputType>Exe</OutputType>
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
@@ -13,10 +12,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Geometry\Geometry.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="importers\" />
   </ItemGroup>
 
 </Project>

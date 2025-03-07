@@ -1,4 +1,6 @@
-﻿namespace IO.importers;
+﻿using Geometry;
+
+namespace IO.importers;
 
 public class ImportResult
 {
