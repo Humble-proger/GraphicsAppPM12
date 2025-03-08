@@ -29,5 +29,6 @@ namespace GraphicsApp.Views
                 viewModel.ChangeSizeCanvas.Execute(newSize);
             }
         }
+
     }
 }

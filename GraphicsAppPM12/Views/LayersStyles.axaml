@@ -6,12 +6,14 @@
         <Setter Property="FontSize" Value="11"/>
         <Setter Property="Background" Value="#dbdbdb"/>
         <Setter Property="Padding" Value="3"/>
+        
     </Style>
 
     <Style Selector="TextBlock.OptionsChet">
         <Setter Property="Foreground" Value="#414141"/>
         <Setter Property="FontSize" Value="11"/>
         <Setter Property="Padding" Value="3"/>
+        
     </Style>
 
     <Style Selector="TextBox.Options">
@@ -19,8 +21,10 @@
         <Setter Property="FontSize" Value="11"/>
         <Setter Property="Background" Value="#dbdbdb"/>
         <Setter Property="Padding" Value="2"/>
-        <Setter Property="Margin" Value="1"/>
+        <Setter Property="Margin" Value="3"/>
         <Setter Property="MinHeight" Value="20"/>
+        <Setter Property="BorderBrush" Value="#D8D8D8"/> 
+        <Setter Property="BorderThickness" Value="1"/> 
     </Style>
 
     <Style Selector="ListBoxItem.Editor">
@@ -49,6 +53,20 @@
         <Setter Property="Width" Value="24"/>
         <Setter Property="Margin" Value="5"/>
         <Setter Property="Background" Value="#FFFFFF"/>
+    </Style>
+
+    <Style Selector="Button:pointerover /template/ ContentPresenter">
+        <Setter Property="Background" Value="#E1E1E1"/>
+    </Style>
+    <Style Selector="Button:pressed /template/ ContentPresenter">
+        <Setter Property="Background" Value="#C6C6C6"/>
+    </Style>
+    
+    <Style Selector="ToggleButton:pointerover /template/ ContentPresenter">
+        <Setter Property="Background" Value="#F0F0F0"/>
+    </Style>
+    <Style Selector="ToggleButton:checked /template/ ContentPresenter">
+        <Setter Property="Background" Value="#F0F0F0"/>
     </Style>
     
 </Styles>

@@ -5,6 +5,10 @@
              x:DataType="vm:MainWindowViewModel"
              Background="White"
              Height="35">
+    
+    <UserControl.Styles>
+        <StyleInclude Source="FooterStyles.axaml"/>
+    </UserControl.Styles>
 
     <Border BorderBrush="#8B8B8B" BorderThickness="0,1,0,1">
         <Grid>
@@ -28,7 +32,7 @@
                         </Path>
                     </Canvas>
                     
-                    <TextBlock x:Name="CursorPositionText" Text="{Binding MouseCoords}" Foreground="#414141" VerticalAlignment="Center" Width="130" TextAlignment="Center" TextWrapping="NoWrap">
+                    <TextBlock x:Name="CursorPositionText" Text="{Binding MouseCoords}" Width="130" TextWrapping="NoWrap">
                         <ToolTip.Tip>
                             <TextBlock Text="Курсор"/>
                         </ToolTip.Tip>
@@ -49,7 +53,7 @@
                         
                     </Canvas>
                     
-                    <TextBlock x:Name="CanvasSizeText" Text="{Binding CanvasSize}" Foreground="#414141" VerticalAlignment="Center" Width="130" TextAlignment="Center" TextWrapping="NoWrap">
+                    <TextBlock x:Name="CanvasSizeText" Text="{Binding CanvasSize}" TextWrapping="NoWrap">
                         <ToolTip.Tip>
                             <TextBlock Text="Размер полотна"/>
                         </ToolTip.Tip>
@@ -69,7 +73,7 @@
                         <TextBlock Text="Уменьшить"/>
                     </ToolTip.Tip>
                 </Button>
-                <TextBlock x:Name="ZoomText" Text="100%" Foreground="#414141" VerticalAlignment="Center" HorizontalAlignment="Center" Width="37" TextAlignment="Center" TextWrapping="NoWrap"/>
+                <TextBlock x:Name="ZoomText" Text="100%"  VerticalAlignment="Center" HorizontalAlignment="Center" Width="37" TextAlignment="Center" TextWrapping="NoWrap"/>
                 <Button Height="25" Width="25" Background="#F6F6F6" Click="OnZoomInClicked">
                     <Viewbox Width="15" Height="15">
                         <Canvas Width="12" Height="12">

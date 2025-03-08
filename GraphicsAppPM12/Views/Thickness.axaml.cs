@@ -1,5 +1,4 @@
 ﻿using System;
-
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 
@@ -26,6 +25,12 @@ namespace GraphicsApp.Views
         public void OpenPopup()
         {
             ThicknessPopup.IsOpen = true;
+        }
+        
+        // Метод для закрытия Popup
+        public void ClosePopup()
+        {
+            ThicknessPopup.IsOpen = false;
         }
     }
 }
