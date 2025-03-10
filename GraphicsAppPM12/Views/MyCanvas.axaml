@@ -11,12 +11,11 @@
     </UserControl.DataContext>-->
 
     <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-        <Canvas Background="White" Margin="15" PointerMoved="MouseMoved" SizeChanged="CanvasResize" Height="10000" Width="2000">
+        <Canvas Background="White" Margin="15" PointerMoved="MouseMoved" SizeChanged="CanvasResize" Height="500" Width="1000">
             <Canvas.RenderTransform>
                 <ScaleTransform ScaleX="{Binding CanvasViewModel.ZoomFactor}" ScaleY="{Binding CanvasViewModel.ZoomFactor}" />
             </Canvas.RenderTransform>
         </Canvas>
     </ScrollViewer>
-    <!--<Canvas Height="380" Width="700" Background="White" Margin="15" HorizontalAlignment="Center" VerticalAlignment="Center" PointerMoved="MouseMoved" SizeChanged="CanvasResize"/>-->
 
 </UserControl>

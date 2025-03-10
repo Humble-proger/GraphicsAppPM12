@@ -61,8 +61,8 @@
 
         <!-- Кнопки OK и Отмена -->
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="5">
-            <Button Content="OK" Width="75" Margin="5" HorizontalContentAlignment="Center"/>
-            <Button Content="Отмена" Width="75" Margin="5" HorizontalContentAlignment="Center"/>
+            <Button Content="OK" Width="75" Margin="5" HorizontalContentAlignment="Center" Click="OnOkClick"/>
+            <Button Content="Отмена" Width="75" Margin="5" HorizontalContentAlignment="Center" Click="OnCancelClick"/>
         </StackPanel>
     </Grid>
     

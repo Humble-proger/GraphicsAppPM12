@@ -21,6 +21,7 @@ namespace GraphicsApp.Views
             }
         }
 
+        
         // Коллекция слоев
         public ObservableCollection<Layer> LayersList { get; set; }
 

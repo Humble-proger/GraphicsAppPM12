@@ -25,13 +25,13 @@
 
         <Grid Grid.Row="2" ColumnDefinitions="4*, *">
 
-            <StackPanel Grid.Column="0">
+            <Grid Grid.Column="0">
                 <!--Подключение холста-->
                 <local:MyCanvas/>
                 <!--Подключение панели редактирования-->
                 <!--<local:FigureEdit/>--> 
                 
-            </StackPanel>
+            </Grid>
             
             <local:Layers Grid.Column="1"/>
 

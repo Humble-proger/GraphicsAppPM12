@@ -13,9 +13,9 @@
     
     <Border BorderBrush="#8B8B8B" BorderThickness="1, 0, 0, 0">
         <ScrollViewer>
-            <Grid RowDefinitions="6*, 18*, 17*, 8*, 8*, 47*">
+            <Grid RowDefinitions="5*, 18*, 17*, 5*, 8*, 47*">
                 
-                <TextBlock Grid.Row="0" Text="Свойства фигуры" FontSize="14" FontWeight="Bold" Margin="5, 5, 5, 5"/>
+                <TextBlock Grid.Row="0" Text="Свойства фигуры" Foreground = "#414141" FontSize="14" FontWeight="Bold" Margin="5, 5, 5, 5"/>
 
                 <Border Grid.Row="1" Grid.RowSpan="2"  BorderThickness="0,1,0,1" BorderBrush="#8B8B8B">
                     <ScrollViewer MaxHeight="150">
@@ -64,9 +64,13 @@
 
                 <!-- <Border BorderBrush="#8B8B8B" BorderThickness="0, 0, 1, 1"> -->
 
-                <TextBlock Grid.Row="3" Text="Слои" FontSize="14" FontWeight="Bold" Margin="5"/>
+                <!--<TextBlock Grid.Row="3" Text="Слои" Foreground = "#414141" FontSize="14" FontWeight="Bold" Margin="5"/>-->
                 
-                <StackPanel Orientation="Horizontal" Spacing="15" Grid.Row="4" Margin="10, 0, 0, 0">
+                <Border Grid.Row="3" BorderBrush="#8B8B8B" BorderThickness="0, 0, 0,1" >
+                    <TextBlock Text="Слои" Foreground="#414141" FontSize="14" FontWeight="Bold"  Margin="5"/>
+                </Border>
+                
+                <StackPanel Orientation="Horizontal" Spacing="15" Grid.Row="4" Margin="10, 5, 0, 0">
 
                     <Button Classes="Layer4">
                         <Viewbox Classes="Layer4VB">

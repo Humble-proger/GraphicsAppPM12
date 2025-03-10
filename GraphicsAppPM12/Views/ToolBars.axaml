@@ -173,7 +173,7 @@
             <!-- Цвета -->
             <StackPanel >
                 <Border Background="#ededed" Height="50" Width="80" Margin="10,-10,0,3" CornerRadius="2">
-                    <ColorPicker HorizontalAlignment="Center" VerticalAlignment="Center" Color="Black" />
+                    <ColorPicker HorizontalAlignment="Center" VerticalAlignment="Center" Color="Black"  />
                 </Border>
                 <TextBlock Text="Цвет" Margin="10,0,0,0"/>
             </StackPanel>

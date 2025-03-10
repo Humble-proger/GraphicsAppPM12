@@ -30,6 +30,10 @@
             <Setter Property="StrokeLineCap" Value="Round"/>
             <Setter Property="StrokeJoin" Value="Round"/>
         </Style>
+        
+        <Style Selector="ColorPicker Path">
+            <Setter Property="StrokeThickness" Value="0.5"/>
+        </Style>
 
     </Styles>
     
