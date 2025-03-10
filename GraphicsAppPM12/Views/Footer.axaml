@@ -2,7 +2,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:vm="using:GraphicsApp.ViewModels"
              x:Class="GraphicsApp.Views.Footer"
-             x:DataType="vm:MainWindowViewModel"
              Background="White"
              Height="35">
 
@@ -28,7 +27,7 @@
                         </Path>
                     </Canvas>
                     
-                    <TextBlock x:Name="CursorPositionText" Text="{Binding MouseCoords}" Foreground="#414141" VerticalAlignment="Center" Width="130" TextAlignment="Center" TextWrapping="NoWrap">
+                    <TextBlock x:Name="CursorPositionText" x:DataType="vm:FooterViewModel" Text="{Binding MouseCoords}" Foreground="#414141" VerticalAlignment="Center" Width="130" TextAlignment="Center" TextWrapping="NoWrap">
                         <ToolTip.Tip>
                             <TextBlock Text="Курсор"/>
                         </ToolTip.Tip>
@@ -49,7 +48,7 @@
                         
                     </Canvas>
                     
-                    <TextBlock x:Name="CanvasSizeText" Text="{Binding CanvasSize}" Foreground="#414141" VerticalAlignment="Center" Width="130" TextAlignment="Center" TextWrapping="NoWrap">
+                    <TextBlock x:Name="CanvasSizeText"  x:DataType="vm:FooterViewModel" Text="{Binding CanvasSize}" Foreground="#414141" VerticalAlignment="Center" Width="130" TextAlignment="Center" TextWrapping="NoWrap">
                         <ToolTip.Tip>
                             <TextBlock Text="Размер полотна"/>
                         </ToolTip.Tip>

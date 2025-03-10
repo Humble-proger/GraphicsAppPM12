@@ -15,11 +15,11 @@ namespace GraphicsApp.ViewModels;
 public partial class MainWindowViewModel : ViewModelBase
 {
     [ObservableProperty]
-    private string _mouseCoords = "X: 0.0 Y: 0.0";
+    private FooterViewModel _footerview;
 
     [ObservableProperty]
-    private string _canvasSize = "0 × 0 мм";
-    
+    private CanvasViewModel _canvasview;
+
     public ObservableCollection<ShapeViewModel> Figures { get; } = [];
 
     public ObservableCollection<ModelFactoryViewModel> Factories { get; } = [];
@@ -30,8 +30,6 @@ public partial class MainWindowViewModel : ViewModelBase
     [ImportMany]
     private IEnumerable<ExportFactory<IShape>> ModelFactories { get; set; } = [];
     
-    public ICommand ChangeMouseCoord { get; }
-    public ICommand ChangeSizeCanvas { get; }
 
     public MainWindowViewModel()
     {
@@ -44,8 +42,8 @@ public partial class MainWindowViewModel : ViewModelBase
         {
             Factories.Add(new() { Factory = factory, Main = this });
         }
-        ChangeMouseCoord = new RelayCommand<Avalonia.Point>(OnMouseMove);
-        ChangeSizeCanvas = new RelayCommand<Vector2>(OnResizeCanvas);
+        Footerview = new(this);
+        Canvasview = new(this);
     }
 
     private void LoadFigures(IEnumerable<ShapeViewModel>? figures)
@@ -59,12 +57,5 @@ public partial class MainWindowViewModel : ViewModelBase
             fig.Main = this;
             Figures.Add(fig);
         }
-    }
-    private void OnMouseMove(Avalonia.Point point) {
-        MouseCoords = $"X: {point.X} Y: {point.Y}";
-    }
-    private void OnResizeCanvas(Vector2 size) 
-    {
-        CanvasSize = $"{size.X} × {size.Y} мм";
     }
 }
