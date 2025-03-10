@@ -104,25 +104,25 @@
 
             <!--Толщина-->
             <StackPanel>
-                <ToggleButton Name="ThicknessButton" Height="50" Width="50" Background="#ededed" Margin="0,-10,0,3" 
-                              Click="ThicknessButton_Click">
+                <ToggleButton Name="ThicknessButton" Height="50" Width="50" Background="#ededed" Margin="0,-10,0,3">
+                    <ToggleButton.Flyout>
+                        <Flyout Placement="Bottom">
+                            <local:Thickness x:Name="ThicknessFlyoutControl" ThicknessChanged="ThicknessFlyoutControl_ThicknessChanged" CloseFlyoutRequested="ThicknessFlyoutControl_CloseFlyoutRequested"/>
+                        </Flyout>
+                    </ToggleButton.Flyout>
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,5 ">
                         <Canvas Width="30" Height="3" HorizontalAlignment="Center">
-                            <Path Data="M1.75 1 H25" Canvas.Top="0" StrokeThickness = "2"/>
+                            <Path Data="M1.75 1 H25" Canvas.Top="0" StrokeThickness="2"/>
                         </Canvas>
                         <Canvas Width="30" Height="4" HorizontalAlignment="Center">
-                            <Path Data="M1.75 1 H24.85" Canvas.Top="4" StrokeThickness = "2.5"/>
+                            <Path Data="M1.75 1 H24.85" Canvas.Top="4" StrokeThickness="2.5"/>
                         </Canvas>
                         <Canvas Width="30" Height="5" HorizontalAlignment="Center">
-                            <Path Data="M1.75 1 H13 H24.65" Canvas.Top="8" StrokeThickness = "3.3"/>
+                            <Path Data="M1.75 1 H13 H24.65" Canvas.Top="8" StrokeThickness="3.3"/>
                         </Canvas>
                     </StackPanel>
-     
-                  </ToggleButton>
-                      <!-- Пользовательский контрол ThicknessPopup -->
-                          <local:Thickness Name="ThicknessPopupControl" />
-
-                <TextBlock Text="Толщина" />
+                </ToggleButton>
+                <TextBlock Text="Толщина"/>
             </StackPanel>
             
             <!--Фигуры-->
