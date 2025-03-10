@@ -68,5 +68,5 @@ public partial class MainWindowViewModel : ViewModelBase
         CanvasSize = $"{size.X} × {size.Y} мм";
     }
 
-    //public CanvasViewModel CanvasViewModel { get; } = new CanvasViewModel();
+    public CanvasViewModel CanvasViewModel { get; } = new CanvasViewModel();
 }

@@ -6,15 +6,17 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="GraphicsApp.Views.MyCanvas"
              x:DataType="vm:MainWindowViewModel">
+    <!--<UserControl.DataContext>
+        <vm:MainWindowViewModel />
+    </UserControl.DataContext>-->
 
-    <!--<ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-        <Canvas Background="White" Margin="15" HorizontalAlignment="Center" VerticalAlignment="Center">
+    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <Canvas Background="White" Margin="15" PointerMoved="MouseMoved" SizeChanged="CanvasResize" Height="10000" Width="2000">
             <Canvas.RenderTransform>
-                <ScaleTransform ScaleX="{Binding ZoomFactor}" ScaleY="{Binding ZoomFactor}" />
+                <ScaleTransform ScaleX="{Binding CanvasViewModel.ZoomFactor}" ScaleY="{Binding CanvasViewModel.ZoomFactor}" />
             </Canvas.RenderTransform>
         </Canvas>
-    </ScrollViewer>-->
+    </ScrollViewer>
+    <!--<Canvas Height="380" Width="700" Background="White" Margin="15" HorizontalAlignment="Center" VerticalAlignment="Center" PointerMoved="MouseMoved" SizeChanged="CanvasResize"/>-->
 
-    <Canvas Height="380" Width="700" Background="White" Margin="15" HorizontalAlignment="Center" VerticalAlignment="Center" PointerMoved="MouseMoved" SizeChanged="CanvasResize"/>
-        
 </UserControl>
