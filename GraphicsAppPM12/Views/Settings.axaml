@@ -43,7 +43,7 @@
             </Button>
             
             <!--Кнопка открыть-->
-            <Button Height="35" Width="35" Background="#ededed">
+            <Button Height="35" Width="35" Background="#ededed" Click="OnOpenFileButtonClick">
                 <Viewbox Width="25" Height="25">
                     <Canvas Width="24" Height="24">
                         <!-- Основной контур папки -->
@@ -80,9 +80,6 @@
                     <TextBlock Text="Сохранить как"/>
                 </ToolTip.Tip>
             </Button>
-
-            <!-- Пользовательский контрол Save_AsPopup -->
-            <local:Save_As Name="Save_AsPopupControl" />
 
         </StackPanel>
     </Border>
