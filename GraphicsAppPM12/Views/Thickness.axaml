@@ -34,7 +34,11 @@
             <Button Content="Применить" Click="ApplyThickness" HorizontalAlignment="Center" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="#414141" Background="#ededed" Width="90" Height="30" FontSize="12">
                 <Button.Styles>
                     <Style Selector="Button:pointerover /template/ ContentPresenter">
-                        <Setter Property="Background" Value="#E1E1E1"></Setter>
+                        <Setter Property="Background" Value="#E1E1E1"/>
+                        <Setter Property="Foreground" Value="#414141"/>
+                    </Style>
+                    <Style Selector="Button:pressed /template/ ContentPresenter">
+                        <Setter Property="Background" Value="#C6C6C6"/>
                         <Setter Property="Foreground" Value="#414141"/>
                     </Style>
                 </Button.Styles>

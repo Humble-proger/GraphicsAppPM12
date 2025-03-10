@@ -104,9 +104,9 @@
 
             <!--Толщина-->
             <StackPanel>
-                <ToggleButton Name="ThicknessButton" Height="50" Width="50" Background="#ededed" Margin="0,-10,0,3">
+                <ToggleButton Name="ThicknessButton" Height="50" Width="50" Background="#ededed" Margin="0,-10,0,3" Click="ThicknessButton_Click">
                     <ToggleButton.Flyout>
-                        <Flyout Placement="Bottom">
+                        <Flyout Placement="Bottom" VerticalOffset="20">
                             <local:Thickness x:Name="ThicknessFlyoutControl" ThicknessChanged="ThicknessFlyoutControl_ThicknessChanged" CloseFlyoutRequested="ThicknessFlyoutControl_CloseFlyoutRequested"/>
                         </Flyout>
                     </ToggleButton.Flyout>
@@ -173,9 +173,17 @@
             <!-- Цвета -->
             <StackPanel >
                 <Border Background="#ededed" Height="50" Width="80" Margin="10,-10,0,3" CornerRadius="2">
-                    <ColorPicker HorizontalAlignment="Center" VerticalAlignment="Center" Color="Black"  />
+                    <ColorPicker HorizontalAlignment="Center" VerticalAlignment="Center" Color="CornflowerBlue"  />
                 </Border>
                 <TextBlock Text="Цвет" Margin="10,0,0,0"/>
+            </StackPanel>
+            
+            <!-- Цвет контура -->
+            <StackPanel >
+                <Border Background="#ededed" Height="50" Width="80" Margin="10,-10,0,3" CornerRadius="2">
+                    <ColorPicker HorizontalAlignment="Center" VerticalAlignment="Center" Color="Black"  />
+                </Border>
+                <TextBlock Text="Цвет контура" Margin="10,0,0,0"/>
             </StackPanel>
             
         </StackPanel>

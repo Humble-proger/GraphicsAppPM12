@@ -1,0 +1,61 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Styles>
+
+        <!-- TextBlock по умолчанию -->
+        <Style Selector="TextBlock">
+            <Setter Property="Foreground" Value="#323232"/>
+        </Style>
+        
+        <!-- TextBox по умолчанию -->
+        <Style Selector="TextBox">
+            <Setter Property="Foreground" Value="#323232"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderBrush" Value="#8B8B8B"/>
+        </Style>
+
+        <!-- TextBox при отключении -->
+        <Style Selector="TextBox:disabled">
+            <Setter Property="Foreground" Value="#888888"/>
+            <Setter Property="Background" Value="#ECECEC"/>
+            <Setter Property="BorderBrush" Value="#C6C6C6"/>
+        </Style>
+
+        <!-- CheckBox по умолчанию -->
+        <Style Selector="CheckBox">
+            <Setter Property="Foreground" Value="#323232"/>
+        </Style>
+        
+        <!-- RadioButton по умолчанию -->
+        <Style Selector="RadioButton">
+            <Setter Property="Foreground" Value="#323232"/>
+        </Style>
+        
+        <!-- Separator -->
+        <Style Selector="Separator">
+            <Setter Property="Background" Value="#8B8B8B"/>
+            <Setter Property="Height" Value="1"/>
+            <Setter Property="Margin" Value="5"/>
+        </Style>
+
+        <!-- Кнопка по умолчанию -->
+        <Style Selector="Button">
+            <Setter Property="Background" Value="#E1E1E1"/>
+            <Setter Property="Foreground" Value="#414141"/>
+            <Setter Property="BorderBrush" Value="#C6C6C6"/>
+            <Setter Property="CornerRadius" Value="5"/>
+            <Setter Property="Padding" Value="5"/>
+        </Style>
+
+        <!-- Изменение кнопки при наведении и нажатии -->
+        <Style Selector="Button:pointerover /template/ ContentPresenter">
+            <Setter Property="Background" Value="#C6C6C6"/>
+        </Style>
+        <Style Selector="Button:pressed /template/ ContentPresenter">
+            <Setter Property="Background" Value="#adadad"/>
+        </Style>
+
+    </Styles>
+
+</Styles>

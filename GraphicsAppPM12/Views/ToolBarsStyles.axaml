@@ -8,6 +8,13 @@
         <Style Selector="ToggleButton:checked /template/ ContentPresenter">
             <Setter Property="Background" Value="#C6C6C6"/>
         </Style>
+        
+        <Style Selector="Button:pointerover /template/ ContentPresenter">
+            <Setter Property="Background" Value="#E1E1E1"/>
+        </Style>
+        <Style Selector="Button:pressed /template/ ContentPresenter">
+            <Setter Property="Background" Value="#C6C6C6"/>
+        </Style>
     
         <Style Selector="ListBoxItem:pointerover /template/ ContentPresenter">
             <Setter Property="Background" Value="#E1E1E1"/>
@@ -34,7 +41,13 @@
         <Style Selector="ColorPicker Path">
             <Setter Property="StrokeThickness" Value="0.5"/>
         </Style>
-
+        
+        <Style Selector="FlyoutPresenter">
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="#8B8B8B"/>
+            <Setter Property="Background" Value="White"/>
+        </Style>
+        
     </Styles>
     
 </Styles>

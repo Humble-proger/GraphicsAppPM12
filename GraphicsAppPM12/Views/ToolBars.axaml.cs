@@ -68,17 +68,12 @@ namespace GraphicsApp.Views
                 SelectionButton.IsChecked = false;
                 FillButton.IsChecked = false;
                 DeleteButton.IsChecked = false;
-                PenButton.IsChecked = false;
-
             }
             else
             {
                 ThicknessButton.Flyout.Hide();
             }
         }
-
-
-
 
         // Обработчик для областм "Фигуры"
         private void ShapeList_SelectionChanged(object sender, SelectionChangedEventArgs e)
