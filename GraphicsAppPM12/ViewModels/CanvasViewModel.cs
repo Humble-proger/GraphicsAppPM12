@@ -29,7 +29,7 @@ public partial class CanvasViewModel : ViewModelBase
     private void OnMouseMove(Avalonia.Point Point)
     {
         if (Main is not null)
-            Main.Footerview.MouseCoords = $"X: {Point.X}, Y {Point.Y}";
+            Main.Footerview.MouseCoords = $"X: {Point.X,5:F1}, Y {Point.Y, 5:F1}";
     }
 
     private void OnMouseLeave()
