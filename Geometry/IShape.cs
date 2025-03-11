@@ -21,6 +21,9 @@ namespace Geometry
         IBrush Stroke { get; set; }
         // цвет заливки
         IBrush Fill { get; set; }
+        public void Move(float deltaX, float deltaY);
+        public void Scale(float ratioX, float ratioY);
+        public void Rotate(float angle);
         public string Geometry { get; }
     }
 }

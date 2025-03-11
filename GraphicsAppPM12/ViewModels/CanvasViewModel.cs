@@ -43,8 +43,8 @@ public partial class CanvasViewModel : ViewModelBase
     private void OnResizeCanvas(Vector2 size)
     {
         if (Main is not null)
-            Main.Footerview.CanvasSize = $"{size.X} x {size.Y} ��";
-
+            Main.Footerview.CanvasSize = $"{size.X} x {size.Y}";
+    }
     private double _zoomFactor = 1.0;
 
     public double ZoomFactor

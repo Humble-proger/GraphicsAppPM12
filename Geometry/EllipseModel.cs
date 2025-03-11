@@ -51,6 +51,7 @@ namespace Geometry {
 
         [JsonIgnore]
         public string Geometry => GetGeometry();
+
         public void Scale(float ratioX, float ratioY)
         {
             RadiusX *= ratioX;

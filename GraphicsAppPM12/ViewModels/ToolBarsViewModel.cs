@@ -1,55 +1,24 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 
 using Avalonia.Media.Imaging;
 using Avalonia.Platform;
-using System.IO;
-using System.Runtime.CompilerServices;
 
 using Avalonia.Media;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace GraphicsApp.ViewModels
 {
-    public class ToolBarsViewModel : ViewModelBase
+    public partial class ToolBarsViewModel : ViewModelBase
     {
+        [ObservableProperty]
         private Color _selectedColor = Colors.Red;
-        private double _lineThickness = 1.0;
+        
+        [ObservableProperty]
+        private double _lineThickness = 0.0;
         
         public ObservableCollection<ShapeItem> Shapes { get; set; }
 
-        public Color SelectedColor
-        {
-            get => _selectedColor;
-            set
-            {
-                if (_selectedColor != value)
-                {
-                   Console.WriteLine(_selectedColor);
-                    _selectedColor = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-        public double LineThickness
-        {
-            get => _lineThickness;
-            set
-            {
-                if (_lineThickness != value)
-                {
-                    Console.WriteLine(value);
-                    _lineThickness = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-        
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
         
         public ToolBarsViewModel()
         {
