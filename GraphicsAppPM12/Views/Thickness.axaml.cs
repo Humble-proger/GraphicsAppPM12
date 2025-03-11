@@ -10,22 +10,26 @@ namespace GraphicsApp.Views
         public Thickness()
         {
             InitializeComponent();
+            DataContext = this;
         }
-        // Событие для уведомления об изменении толщины
+
         public event EventHandler<int> ThicknessChanged;
 
-        // Метод для применения толщины(вызыввется при нажатии на кнопку "применить")
         private void ApplyThickness(object sender, RoutedEventArgs e)
         {
             int thickness = (int) ThicknessSlider.Value;
-            ThicknessChanged?.Invoke(this, thickness); // Вызов события
-            ThicknessPopup.IsOpen = false; // Закрыть Popup
+            ThicknessChanged?.Invoke(this, thickness);
+            // ThicknessFlyout.Hide(); // Теперь это должно быть удалено
+            // Теперь надо закрыть Flyout через ThicknessButton из ToolBars
+            // Например, можно вызвать событие, которое обработает ToolBars
+            OnCloseFlyoutRequested();
         }
 
-        // Метод для открытия Popup
-        public void OpenPopup()
+        public event EventHandler CloseFlyoutRequested;
+
+        protected virtual void OnCloseFlyoutRequested()
         {
-            ThicknessPopup.IsOpen = true;
+            CloseFlyoutRequested?.Invoke(this, EventArgs.Empty);
         }
     }
 }

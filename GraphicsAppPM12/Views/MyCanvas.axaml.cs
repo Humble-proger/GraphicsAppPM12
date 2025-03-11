@@ -11,23 +11,24 @@ namespace GraphicsApp.Views
         {
             InitializeComponent();
         }
-        
-        private void MouseMoved(object sender, PointerEventArgs args) 
+
+        private void MouseMoved(object sender, PointerEventArgs args)
         {
-            if (DataContext is MainWindowViewModel viewModel) {
+            if (DataContext is MainWindowViewModel viewModel)
+            {
                 var point = args.GetPosition((Canvas) sender);
                 viewModel.ChangeMouseCoord.Execute(point);
             }
         }
-        
-        private void CanvasResize(object sender, SizeChangedEventArgs e) 
+
+        private void CanvasResize(object sender, SizeChangedEventArgs e)
         {
             if (DataContext is MainWindowViewModel viewModel)
             {
-                Vector2 newSize = new Vector2() { X = (float)e.NewSize.Width, Y = (float)e.NewSize.Height };
-
+                Vector2 newSize = new Vector2() { X = (float) e.NewSize.Width, Y = (float) e.NewSize.Height };
                 viewModel.ChangeSizeCanvas.Execute(newSize);
             }
         }
+
     }
 }

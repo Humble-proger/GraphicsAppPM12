@@ -4,55 +4,46 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="GraphicsApp.Views.Thickness">
-    
-    <!--Создаем через Popup всплывающее окно при нажатии на кнопку с выбором толщины-->
-    <!--Говорим, что появится сразу после нажатия, а также имена куда будет ссылаться-->
-    <Popup Name="ThicknessPopup" PlacementTarget="{Binding RelativeSource={RelativeSource AncestorType=UserControl}}" PlacementMode="Bottom" >
-        <!--То как выглядит наше всплывающее окошко-->
-        <Border Background="White" BorderBrush="#8B8B8B" BorderThickness="1">
-            <!--Расстояние между элементами 10 пикселей-->
-            <StackPanel Spacing="10">
-                <Label Foreground="#414141">Выберите толщину:</Label>
-                <!--Надпись с шириной окна-->
-                <TextBlock Text="{Binding Value, ElementName=ThicknessSlider, StringFormat='Толщина: {0}'}"
-                           HorizontalAlignment="Center"
-                           FontSize="11"  Foreground="#414141"/>
-                    
-                <!--Имя элемента, чтобы на него можно было ссылаться, мин, мак значение и текущее значение-->
-                <Slider Name="ThicknessSlider" Minimum="1" Maximum="10" IsSnapToTickEnabled="True" TickFrequency="1" Padding="10">
-                    <Slider.Styles>
-                        <Style Selector="Slider:horizontal">
-                            <Setter Property="MinWidth" Value="40" />
-                            <Setter Property="MinHeight" Value="20" />
-                            <Setter Property="Background" Value="#8B8B8B"/>
-                            <Setter Property="Foreground" Value="#4C4C4C"/>
 
-                            <Style Selector="^ Track">
-                                <Style Selector="^ RepeatButton Border">
-                                    <Setter Property="CornerRadius" Value="0"/>
-                                    <Setter Property="Height" Value="3"/>
-                                </Style>
-                        
-                                <Style Selector="^ Thumb">
-                                    <Setter Property="Height" Value="15"/>
-                                    <Setter Property="Width" Value="15"/>
-                                    <Setter Property="BorderThickness" Value="3"/>
-                                    <Setter Property="Background" Value="#414141"/>
-                                </Style>
+    <Border Background="White" >
+        <StackPanel Spacing="10">
+            <Label Foreground="#414141">Выберите толщину:</Label>
+            <TextBlock Text="{Binding Value, ElementName=ThicknessSlider, StringFormat='Толщина: {0}'}"
+                       HorizontalAlignment="Center"
+                       FontSize="11"  Foreground="#414141"/>
+
+            <Slider Name="ThicknessSlider" Minimum="0" Maximum="10" IsSnapToTickEnabled="True" TickFrequency="1" Padding="10">
+                <Slider.Styles>
+                    <Style Selector="Slider:horizontal">
+                        <Style Selector="^ Track">
+                            <Style Selector="^ RepeatButton Border">
+                                <Setter Property="CornerRadius" Value="2"/>
+                                <Setter Property="Height" Value="3"/>
+                                <Setter Property="Background" Value="#8B8B8B"/>
                             </Style>
 
+                            <Style Selector="^ Thumb">
+                                <Setter Property="Height" Value="14"/>
+                                <Setter Property="Width" Value="14"/>
+                                <Setter Property="Background" Value="#414141"/>
+                            </Style>
                         </Style>
-                    </Slider.Styles>
-                </Slider>
-                <!--Ссылка на метод-->
-                <Button Content="Применить" Click="ApplyThickness" HorizontalAlignment="Center" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="#414141" Background="#ededed" Width="90" Height="30" FontSize="12">
-                    <Button.Styles>
-                        <Style Selector="Button:pointerover /template/ ContentPresenter">
-                            <Setter Property="Background" Value="#f0f0f0"/>
-                        </Style>
-                    </Button.Styles>
-                </Button>
-            </StackPanel>
-        </Border>
-    </Popup>
-</UserControl> 
+                    </Style>
+                </Slider.Styles>
+            </Slider>
+            <Button Content="Применить" Click="ApplyThickness" HorizontalAlignment="Center" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="#414141" Background="#ededed" Width="90" Height="30" FontSize="12">
+                <Button.Styles>
+                    <Style Selector="Button:pointerover /template/ ContentPresenter">
+                        <Setter Property="Background" Value="#E1E1E1"/>
+                        <Setter Property="Foreground" Value="#414141"/>
+                    </Style>
+                    <Style Selector="Button:pressed /template/ ContentPresenter">
+                        <Setter Property="Background" Value="#C6C6C6"/>
+                        <Setter Property="Foreground" Value="#414141"/>
+                    </Style>
+                </Button.Styles>
+            </Button>
+        </StackPanel>
+    </Border>
+</UserControl>
+
