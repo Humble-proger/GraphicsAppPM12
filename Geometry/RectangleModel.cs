@@ -1,11 +1,14 @@
 ﻿using System.Text.Json.Serialization;
-
+using System.Composition;
 using Avalonia.Media;
 
 using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace Geometry
 {
+    [Export(typeof(IShape))]
+    [ExportMetadata("LogoButton", "triangle.png")]
+    [ExportMetadata("Name", "Rectangle")]
     public partial class RectangleModel : ObservableObject, IShape
     {
         [ObservableProperty]

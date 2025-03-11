@@ -1,10 +1,13 @@
 ﻿using System.Text.Json.Serialization;
-
+using System.Composition;
 using Avalonia.Media;
 
 using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace Geometry {
+    [Export(typeof(IShape))]
+    [ExportMetadata("LogoButton", ".png")]
+    [ExportMetadata("Name", "Ellipse")]
     public partial class EllipseModel : ObservableObject, IShape
     {
         [ObservableProperty]

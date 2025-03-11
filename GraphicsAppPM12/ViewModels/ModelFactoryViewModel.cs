@@ -12,7 +12,7 @@ namespace GraphicsApp.ViewModels
     {
         [ObservableProperty]
         private MainWindowViewModel? _main;
-        public required ExportFactory<IShape> Factory { get; init; }
+        public required ExportFactory<IShape, ModelMetadata> Factory { get; init; }
         public ICommand CreateCommand { get; }
 
         public ModelFactoryViewModel()

@@ -18,7 +18,7 @@ namespace GraphicsApp.ViewModels
         private double _lineThickness = 0.0;
         
         public ObservableCollection<ShapeItem> Shapes { get; set; }
-
+    
         
         public ToolBarsViewModel()
         {

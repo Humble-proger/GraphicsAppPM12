@@ -28,7 +28,7 @@ public partial class MainWindowViewModel : ViewModelBase
     public RelayCommand LoadJsonCommand { get; }
 
     [ImportMany]
-    private IEnumerable<ExportFactory<IShape>> ModelFactories { get; set; } = [];
+    private IEnumerable<ExportFactory<IShape, ModelMetadata>> ModelFactories { get; set; } = [];
     
 
     public MainWindowViewModel()
