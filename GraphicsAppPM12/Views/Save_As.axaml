@@ -7,9 +7,7 @@
     <!-- Создаем через Popup всплывающее окно при нажатии на кнопку "Сохранить как" -->
     <Popup Name="Save_AsPopup"
            PlacementTarget="{Binding RelativeSource={RelativeSource AncestorType=UserControl}}"
-           PlacementMode="Right"
-           HorizontalOffset="-40"
-           VerticalOffset="100">
+           PlacementMode="Right" HorizontalOffset="-40" VerticalOffset="100" >
         <!-- То как выглядит наше всплывающее окошко -->
         <Border Background="White" BorderBrush="#8B8B8B" BorderThickness="1,1,1,1">
             <StackPanel>
@@ -18,6 +16,8 @@
                     <Button.Styles>
                         <Style Selector="Button:pointerover /template/ ContentPresenter">
                             <Setter Property="Background" Value="#f0f0f0"/>
+                            <Setter Property="BorderBrush" Value="#8B8B8B"/>
+                            <Setter Property="BorderThickness" Value="0,0,0,1"/>
                         </Style>
                     </Button.Styles>
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
@@ -56,6 +56,8 @@
                     <Button.Styles>
                         <Style Selector="Button:pointerover /template/ ContentPresenter">
                             <Setter Property="Background" Value="#f0f0f0"/>
+                            <Setter Property="BorderBrush" Value="#8B8B8B"/>
+                            <Setter Property="BorderThickness" Value="0,0,0,1"/>
                         </Style>
                     </Button.Styles>
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">

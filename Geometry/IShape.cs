@@ -6,22 +6,21 @@ namespace Geometry
     // интерфейс всех фигур
     public interface IShape
     {
+        // ширина описанного прямоугольника
+        float BoxWidth { get; }
+        // высота описанного прямоугольника
+        float BoxHeight { get; }
+
         // координата х центра фигуры
-        float CenterX { get; set; }
+        float CenterX { get; }
         // координата y центра фигуры
-        float CenterY { get; set; }
+        float CenterY { get; }
         // толщина обводки)
         float StrokeThickness { get; set; }
         // цвет обводки
         IBrush Stroke { get; set; }
         // цвет заливки
         IBrush Fill { get; set; }
-        // Метод для смены цвета обводки
-        void SetStroke(Color color);
-        // Метод для смены цвета
-        void SetColor(Color color);
-        // Метод для смены толщины контура
-        void SetThickness(float thickness);
         public string Geometry { get; }
     }
 }

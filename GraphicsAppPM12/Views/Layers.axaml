@@ -2,9 +2,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:GraphicsApp.Views"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="GraphicsApp.Views.Layers"
-             >
+             x:DataType="local:Layers">
 
     <UserControl.Styles>
         <StyleInclude Source="LayersStyles.axaml"/>
@@ -12,87 +13,64 @@
     
     <Border BorderBrush="#8B8B8B" BorderThickness="1, 0, 0, 0">
         <ScrollViewer>
-            <Grid RowDefinitions="Auto, Auto, Auto, Auto, *">
+            <Grid RowDefinitions="5*, 18*, 17*, 5*, 8*, 47*">
+                
+                <TextBlock Grid.Row="0" Text="Свойства фигуры" Foreground = "#414141" FontSize="14" FontWeight="Bold" Margin="5, 5, 5, 5"/>
 
-                <StackPanel Grid.Row="0">
-                    <Grid RowDefinitions="*,*,*,Auto,*,*" ColumnDefinitions="113, *" Margin="5" >
-                        <TextBlock Grid.Column="0" Grid.Row="0" Text="Имя фигуры" Classes="OptionsNechet"/>
-                        <TextBlock Grid.Column="0" Grid.Row="1" Text="Положение по X" Classes="OptionsChet"/>
-                        <TextBlock Grid.Column="0" Grid.Row="2" Text="Положение по Y" Classes="OptionsNechet"/>
-                        <TextBlock Grid.Column="0" Grid.Row="3" Text="Цвет" Classes="OptionsChet"/>
-                        <TextBlock Grid.Column="0" Grid.Row="4" Text="Толщина линии" Classes="OptionsNechet"/>
-                        <TextBlock Grid.Column="0" Grid.Row="5" Text="Угол поворота" Classes="OptionsChet"/>
+                <Border Grid.Row="1" Grid.RowSpan="2"  BorderThickness="0,1,0,1" BorderBrush="#8B8B8B">
+                    <ScrollViewer MaxHeight="150">
+                        <Grid RowDefinitions="Auto, Auto">
+                            <StackPanel Grid.Row="0">
+                                <Grid RowDefinitions="*,*,*,Auto,*,*,*" ColumnDefinitions="113, *" Margin="5" >
+                                    <TextBlock Grid.Column="0" Grid.Row="0" Text="Имя фигуры" Classes="OptionsNechet"/>
+                                    <TextBlock Grid.Column="0" Grid.Row="1" Text="Положение по X" Classes="OptionsChet"/>
+                                    <TextBlock Grid.Column="0" Grid.Row="2" Text="Положение по Y" Classes="OptionsNechet"/>
+                                    <TextBlock Grid.Column="0" Grid.Row="3" Text="Цвет" Classes="OptionsChet"/>
+                                    <TextBlock Grid.Column="0" Grid.Row="4" Text="Толщина линии" Classes="OptionsNechet"/>
+                                    <TextBlock Grid.Column="0" Grid.Row="5" Text="Угол поворота" Classes="OptionsChet"/>
 
-                        <TextBox Grid.Column="1" Grid.Row="0" Watermark="Квадратик" Classes="Options"/>
-                        <TextBox Grid.Column="1" Grid.Row="1" Watermark="12" Classes="Options"/>
-                        <TextBox Grid.Column="1" Grid.Row="2" Watermark="12" Classes="Options"/>
-                        <ColorPicker Grid.Column="1" Grid.Row="3"/>
-                        <!--<ColorPicker Color="{Binding Color}" Grid.Row="3" Grid.Column="1" />-->
-                        <TextBox Grid.Column="1" Grid.Row="4" Watermark="5" Classes="Options"/>
-                        <TextBox Grid.Column="1" Grid.Row="5" Watermark="0" Classes="Options"/>
-                    </Grid>
-                </StackPanel>
+                                    <TextBox Grid.Column="1" Grid.Row="0" Watermark="Квадратик" Classes="Options"/>
+                                    <TextBox Grid.Column="1" Grid.Row="1" Watermark="12" Classes="Options"/>
+                                    <TextBox Grid.Column="1" Grid.Row="2" Watermark="12" Classes="Options"/>
+                                    <ColorPicker Grid.Column="1" Grid.Row="3" HorizontalAlignment="Left" Margin="1"/>
+                                    <!--<ColorPicker Color="{Binding Color}" Grid.Row="3" Grid.Column="1" />-->
+                                    <TextBox Grid.Column="1" Grid.Row="4" Watermark="5" Classes="Options"/>
+                                    <TextBox Grid.Column="1" Grid.Row="5" Watermark="0" Classes="Options"/>
+                                </Grid>
+                            </StackPanel>
 
-                <StackPanel Grid.Row="1">
-                    <Grid RowDefinitions="*,*,*,*,*,*" ColumnDefinitions="113, *" Margin="5">
-                        <TextBlock Grid.Column="0" Grid.Row="0" Text="Радиус" Classes="OptionsNechet"/>
-                        <TextBlock Grid.Column="0" Grid.Row="1" Text="Малая полуось" Classes="OptionsChet"/>
-                        <TextBlock Grid.Column="0" Grid.Row="2" Text="Большая полуось" Classes="OptionsNechet"/>
-                        <TextBlock Grid.Column="0" Grid.Row="3" Text="Количество сторон" Classes="OptionsChet"/>
-                        <TextBlock Grid.Column="0" Grid.Row="4" Text="Длина стороны a" Classes="OptionsNechet"/>
-                        <TextBlock Grid.Column="0" Grid.Row="5" Text="Длина стороны b" Classes="OptionsChet"/>
+                            <StackPanel Grid.Row="1">
+                                <Grid RowDefinitions="*,*,*,*,*,*" ColumnDefinitions="113, *" Margin="5">
+                                    <TextBlock Grid.Column="0" Grid.Row="0" Text="Радиус" Classes="OptionsNechet"/>
+                                    <TextBlock Grid.Column="0" Grid.Row="1" Text="Малая полуось" Classes="OptionsChet"/>
+                                    <TextBlock Grid.Column="0" Grid.Row="2" Text="Большая полуось" Classes="OptionsNechet"/>
+                                    <TextBlock Grid.Column="0" Grid.Row="3" Text="Количество сторон" Classes="OptionsChet"/>
+                                    <TextBlock Grid.Column="0" Grid.Row="4" Text="Длина стороны a" Classes="OptionsNechet"/>
+                                    <TextBlock Grid.Column="0" Grid.Row="5" Text="Длина стороны b" Classes="OptionsChet"/>
 
-                        <TextBox Grid.Column="1" Grid.Row="0" Watermark="9" Classes="Options"/>
-                        <TextBox Grid.Column="1" Grid.Row="1" Watermark="12" Classes="Options"/>
-                        <TextBox Grid.Column="1" Grid.Row="2" Watermark="12" Classes="Options"/>
-                        <TextBlock Grid.Column="1" Grid.Row="3" Text="6" Classes="OptionsNechet"/>
-                        <TextBox Grid.Column="1" Grid.Row="4" Watermark="5" Classes="Options"/>
-                        <TextBox Grid.Column="1" Grid.Row="5" Watermark="0" Classes="Options"/>
-                    </Grid>
-                </StackPanel>
-
-                <StackPanel Grid.Row="2">
-                    <ListBox ScrollViewer.VerticalScrollBarVisibility="Visible" MaxHeight="55" Background="#dbdbdb">
-
-                        <ListBoxItem Classes="Editor">
-                            <TextBlock Text="Отмена" FontSize="10"/>
-                        </ListBoxItem>
-                        <ListBoxItem Classes="Editor">
-                            <TextBlock Text="Выравнивание" FontSize="10"/>
-                            <ListBoxItem.ContextMenu>
-                                <ContextMenu>
-                                    <MenuItem FontSize="10" Header="По центру" />
-                                    <MenuItem FontSize="10" Header="По левой границе" />
-                                    <MenuItem FontSize="10" Header="По правой границе"/>
-                                </ContextMenu>
-                            </ListBoxItem.ContextMenu>
-                        </ListBoxItem>
-                        <ListBoxItem Classes="Editor">
-                            <TextBlock Text="Дублировать" FontSize="10" />
-                        </ListBoxItem>
-                        <ListBoxItem Classes="Editor">
-                            <TextBlock Text="Выравнивание Anchor Point" FontSize="10" />
-                        </ListBoxItem>
-                    </ListBox>
-                </StackPanel>
+                                    <TextBox Grid.Column="1" Grid.Row="0" Watermark="9" Classes="Options"/>
+                                    <TextBox Grid.Column="1" Grid.Row="1" Watermark="12" Classes="Options"/>
+                                    <TextBox Grid.Column="1" Grid.Row="2" Watermark="12" Classes="Options"/>
+                                    <TextBlock Grid.Column="1" Grid.Row="3" Text="6" Classes="OptionsNechet"/>
+                                    <TextBox Grid.Column="1" Grid.Row="4" Watermark="5" Classes="Options"/>
+                                    <TextBox Grid.Column="1" Grid.Row="5" Watermark="0" Classes="Options"/>
+                                </Grid>
+                            </StackPanel>
+                        </Grid>
+                    </ScrollViewer>
+                </Border>
+                
+                
 
                 <!-- <Border BorderBrush="#8B8B8B" BorderThickness="0, 0, 1, 1"> -->
-                <StackPanel Orientation="Horizontal" Spacing="15" Grid.Row="3" Margin="10, 10, 10, 0">
 
-                    <Button Classes="Layer4">
-                        <Viewbox Classes="Layer4VB">
-                            <Canvas Width="25" Height="25">
-                                <Path Data="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"
-                                        Stroke="#606060" StrokeThickness="2" StrokeLineCap="Round" StrokeJoin="Round"/>
-                                <Polyline Points="14 2, 14 8, 20 8" Stroke="#606060" StrokeThickness="2" StrokeLineCap="Round" StrokeJoin="Round"/>
-                                <Line StartPoint="12 18" EndPoint="12 12" Stroke="#606060" StrokeThickness="2" StrokeLineCap="Round" StrokeJoin="Round"/>
-                                <Line StartPoint="9 15" EndPoint="15 15" Stroke="#606060" StrokeThickness="2" StrokeLineCap="Round" StrokeJoin="Round"/>
-                            </Canvas>
-                        </Viewbox>
-                        <ToolTip.Tip>
-                            <TextBlock Text="Новый слой"/>
-                        </ToolTip.Tip>
-                    </Button>
+                <!--<TextBlock Grid.Row="3" Text="Слои" Foreground = "#414141" FontSize="14" FontWeight="Bold" Margin="5"/>-->
+                
+                <Border Grid.Row="3" BorderBrush="#8B8B8B" BorderThickness="0, 0, 0,1" >
+                    <TextBlock Text="Слои" Foreground="#414141" FontSize="14" FontWeight="Bold"  Margin="5"/>
+                </Border>
+                
+                <StackPanel Orientation="Horizontal" Spacing="15" Grid.Row="4" Margin="10, 5, 0, 0">
 
                     <Button Classes="Layer4">
                         <Viewbox Classes="Layer4VB">
@@ -141,89 +119,90 @@
                 </StackPanel>
                 <!--</Border>-->
 
+                <!-- <ItemsControl Grid.Row="5" Margin="10" Items="{Binding LayersList}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            
+                            <Border BorderThickness="1" Background="#C0C0C0" Margin="0,0,0,15">
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="0">
+                                    <ToggleButton Name="VisibilityToggleButton" Background="#F0F0F0"
+                                                  IsChecked="{Binding IsVisibleIcon, Mode=TwoWay}">
+                                        <Viewbox Width="15" Height="15" Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2">
+                                            <Canvas Width="24" Height="24">
+                                                
+                                                <Path Data="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" Stroke="#606060"
+                                                      StrokeThickness="2" StrokeLineCap="Round" StrokeJoin="Round"
+                                                      IsVisible="{Binding !IsVisibleIcon}"/>
+                                                <Ellipse Width="6" Height="6" Canvas.Left="9" Canvas.Top="9"
+                                                         Stroke="#606060" StrokeThickness="2" Fill="Transparent"
+                                                         IsVisible="{Binding !IsVisibleIcon}"/>
 
-                <StackPanel Orientation="Vertical" Spacing="15" Grid.Row="4" Margin="10">
-                    <!-- Это лишь пример панели. Ниже какая-то штука интерактивная, если прописать код в cs, то, надеюсь, этот список будет виден-->
+                                                
+                                                <Path Data="M9.88 9.88a3 3 0 1 0 4.24 4.24" Stroke="#606060"
+                                                      StrokeThickness="2" StrokeLineCap="Round" StrokeJoin="Round"
+                                                      IsVisible="{Binding IsVisibleIcon}"/>
+                                                <Path Data="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"
+                                                      Stroke="#606060" StrokeThickness="2" StrokeLineCap="Round" StrokeJoin="Round"
+                                                      IsVisible="{Binding IsVisibleIcon}"/>
+                                                <Path Data="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61"
+                                                      Stroke="#606060" StrokeThickness="2" StrokeLineCap="Round" StrokeJoin="Round"
+                                                      IsVisible="{Binding IsVisibleIcon}"/>
+                                                <Line StartPoint="2 2" EndPoint="22 22" Stroke="#606060"
+                                                      StrokeThickness="2" StrokeLineCap="Round" StrokeJoin="Round"
+                                                      IsVisible="{Binding IsVisibleIcon}"/>
+                                            </Canvas>
+                                        </Viewbox>
+                                    </ToggleButton>
+
+                                    <TextBlock Name="LayerNameTextBlock" Text="{Binding LayerName}" VerticalAlignment="Center" FontSize="11" Foreground="#414141" Margin="5"/>
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl> -->
+                
+                
+                <!--<StackPanel Orientation="Vertical" Spacing="15" Grid.Row="5" Margin="10">
+                    
                     <Border BorderThickness="1" Background="#C0C0C0">
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="0">
 
-                            <Button Name="VisibilityButton" Classes="Visability">
-                                <Button.Styles>
-                                    <Style Selector="Button:pointerover /template/ ContentPresenter">
-                                        <Setter Property="Background" Value="#f0f0f0"/>
-                                    </Style>
-                                </Button.Styles>
+                            <ToggleButton Name="VisibilityToggleButton" Background="#F0F0F0"
+                                          IsChecked="{Binding IsVisibleIcon, Mode=TwoWay}">
                                 <Viewbox Width="15" Height="15" Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2">
                                     <Canvas Width="24" Height="24">
-                                        <Path Data="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" Stroke="#606060" StrokeThickness="2" StrokeLineCap="Round" StrokeJoin="Round"/>
-                                        <Ellipse Width="6" Height="6" Canvas.Left="9" Canvas.Top="9" Fill="#606060" StrokeThickness="0.5"/>
+                                       
+                                        <Path Data="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" Stroke="#606060"
+                                              StrokeThickness="2" StrokeLineCap="Round" StrokeJoin="Round"
+                                              IsVisible="{Binding !IsVisibleIcon}"/>
+                                        <Ellipse Width="6" Height="6" Canvas.Left="9" Canvas.Top="9"
+                                                 Stroke="#606060" StrokeThickness="2" Fill="Transparent"
+                                                 IsVisible="{Binding !IsVisibleIcon}"/>
+                                        
+                                        
+                                        <Path Data="M9.88 9.88a3 3 0 1 0 4.24 4.24" Stroke="#606060" 
+                                              StrokeThickness="2" StrokeLineCap="Round" StrokeJoin="Round"
+                                              IsVisible="{Binding IsVisibleIcon}"/>
+                                        <Path Data="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68" 
+                                              Stroke="#606060" StrokeThickness="2" StrokeLineCap="Round" StrokeJoin="Round"
+                                              IsVisible="{Binding IsVisibleIcon}"/>
+                                        <Path Data="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61" 
+                                              Stroke="#606060" StrokeThickness="2" StrokeLineCap="Round" StrokeJoin="Round"
+                                              IsVisible="{Binding IsVisibleIcon}"/>
+                                        <Line StartPoint="2 2" EndPoint="22 22" Stroke="#606060" 
+                                              StrokeThickness="2" StrokeLineCap="Round" StrokeJoin="Round"
+                                              IsVisible="{Binding IsVisibleIcon}"/>
                                     </Canvas>
                                 </Viewbox>
-                            </Button>
-
-                            <!-- Кнопка невидимости, пока что не известно, как она будет реализована -->
-                            <Button Name="UnVisibilityButton" Classes="Visability">
-                                <Button.Styles>
-                                    <Style Selector="Button:pointerover /template/ ContentPresenter">
-                                        <Setter Property="Background" Value="#f0f0f0"/>
-                                    </Style>
-                                </Button.Styles>
-                                <Viewbox Width="15" Height="15" Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2">
-                                    <Canvas Width="24" Height="24">
-                                        <Path Data="M9.88 9.88a3 3 0 1 0 4.24 4.24" Stroke="#606060" StrokeThickness="2" StrokeLineCap="Round" StrokeJoin="Round"/>
-                                        <Path Data="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68" Stroke="#606060" StrokeThickness="2" StrokeLineCap="Round" StrokeJoin="Round"/>
-                                        <Path Data="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61" Stroke="#606060" StrokeThickness="2" StrokeLineCap="Round" StrokeJoin="Round"/>
-                                        <Line StartPoint="2 2" EndPoint="22 22" Stroke="#606060" StrokeThickness="2" StrokeLineCap="Round" StrokeJoin="Round"/>
-                                    </Canvas>
-                                </Viewbox>
-                            </Button>
-
+                            </ToggleButton>
+                            
                             <TextBlock Name="LayerNameTextBlock" Text="Слой1" VerticalAlignment="Center" FontSize="11" Foreground="#414141" Margin="5"/>
 
                         </StackPanel>
 
+                    </Border>                
 
-                    </Border>
-
-
-
-
-                    <!-- Вот эта штука скорее всего понадобится, а не та, что выше -->
-                    <!-- <ListBox ItemsSource="{Binding Layers}">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <Border BorderThickness="1" Background="#C0C0C0">
-                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="5">
-                            <Button Name="VisibilityButton" Width="24" Height="24" Margin="5" Background="#FFFFFF">
-                                <Viewbox Width="15" Height="15" Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2">
-                                    <Canvas Width="24" Height="24">
-                                        <Path Data="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" Stroke="#606060" StrokeThickness="2" StrokeLineCap="Round" StrokeJoin="Round"/>
-                                        <Ellipse Width="6" Height="6" Canvas.Left="9" Canvas.Top="9" Fill="#606060" StrokeThickness="0.5"/>
-                                    </Canvas>
-                                </Viewbox>
-                            </Button>
-
-                            <Button Name="UnVisibilityButton" Width="24" Height="24" Margin="5" Background="#FFFFFF">
-                                <Viewbox Width="15" Height="15" Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2">
-                                    <Canvas Width="24" Height="24">
-                                        <Path Data="M9.88 9.88a3 3 0 1 0 4.24 4.24" Stroke="#606060" StrokeThickness="2" StrokeLineCap="Round" StrokeJoin="Round"/>
-                                        <Path Data="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68" Stroke="#606060" StrokeThickness="2" StrokeLineCap="Round" StrokeJoin="Round"/>
-                                        <Path Data="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61" Stroke="#606060" StrokeThickness="2" StrokeLineCap="Round" StrokeJoin="Round"/>
-                                        <Line StartPoint="2 2" EndPoint="22 22" Stroke="#606060" StrokeThickness="2" StrokeLineCap="Round" StrokeJoin="Round"/>
-                                    </Canvas>
-                                </Viewbox>
-                            </Button>
-
-                            <TextBlock Name="LayerNameTextBlock" Text="{Binding LayerName}" VerticalAlignment="Center" FontSize="11" Foreground="#414141" Margin="5"/>
-
-                        </StackPanel>
-                    </Border>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox> -->
-
-
-                </StackPanel>
+                </StackPanel>-->
 
             </Grid>
         </ScrollViewer>

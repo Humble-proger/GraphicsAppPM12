@@ -10,9 +10,13 @@
         x:DataType="vm:SettingsWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
         Title="Настройки"
-        MinWidth="500"
-        MinHeight="600"
+        Width="400"
+        Height="400"
         Background="#F0F0F0">
+    
+    <Window.Styles>
+        <StyleInclude Source="SettingsWindowStyles.axaml"/>
+    </Window.Styles>
 
     <Grid RowDefinitions="*, Auto">
         
@@ -21,26 +25,31 @@
 
                 <!-- Автоматическое сохранение -->
                 <TextBlock Text="Автоматическое сохранение" FontWeight="Bold" Margin="5"/>
-                <CheckBox Content="Включение интервала автоматического сохранения документов" Margin="5"/>
+                <CheckBox x:Name="AutoSaveCheckBox"
+                          Content="Включение интервала автоматического сохранения документов"
+                          Margin="5"/>
                 <StackPanel Orientation="Horizontal" Margin="5">
                     <TextBlock Text="Интервал:" VerticalAlignment="Center"/>
-                    <TextBox Width="50" Margin="5,0,5,0"/>
+                    <TextBox Width="50" Margin="5,0,5,0"
+                             IsEnabled="{Binding IsChecked, ElementName=AutoSaveCheckBox}"/>
                     <TextBlock Text="мин" VerticalAlignment="Center"/>
                 </StackPanel>
                 <Separator/>
 
+
                 <!-- Поведение при запуске -->
                 <TextBlock Text="Поведение при запуске" FontWeight="Bold" Margin="5"/>
-                <CheckBox Content="Стартовый экран" Margin="5"/>
-                <CheckBox Content="Последний файл" Margin="5"/>
-                <CheckBox Content="Новый файл" Margin="5"/>
+                <RadioButton Content="Стартовый экран" Margin="5" GroupName="StartupBehavior"/>
+                <RadioButton Content="Последний файл" Margin="5" GroupName="StartupBehavior"/>
+                <RadioButton Content="Новый файл" Margin="5" GroupName="StartupBehavior"/>
                 <Separator/>
 
                 <!-- Начальный формат файла -->
                 <TextBlock Text="Начальный формат файла" FontWeight="Bold" Margin="5"/>
-                <CheckBox Content="SVG" Margin="5"/>
-                <CheckBox Content="PNG" Margin="5"/>
+                <RadioButton Content="SVG" Margin="5" GroupName="InitialFileFormat"/>
+                <RadioButton Content="PNG" Margin="5" GroupName="InitialFileFormat"/>
                 <Separator/>
+
 
                 <!-- Расположение файлов -->
                 <TextBlock Text="Расположение файлов" FontWeight="Bold" Margin="5"/>
@@ -61,8 +70,8 @@
 
         <!-- Кнопки OK и Отмена -->
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="5">
-            <Button Content="OK" Width="75" Margin="5" HorizontalContentAlignment="Center"/>
-            <Button Content="Отмена" Width="75" Margin="5" HorizontalContentAlignment="Center"/>
+            <Button Content="OK" Width="75" Margin="5" HorizontalContentAlignment="Center" Click="OnOkClick"/>
+            <Button Content="Отмена" Width="75" Margin="5" HorizontalContentAlignment="Center" Click="OnCancelClick"/>
         </StackPanel>
     </Grid>
     

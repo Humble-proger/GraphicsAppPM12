@@ -1,3 +1,4 @@
+
 using System.Numerics;
 using System.Windows.Input;
 
@@ -10,6 +11,7 @@ namespace GraphicsApp.ViewModels;
 
 public partial class CanvasViewModel : ViewModelBase
 {
+
     [ObservableProperty]
     private MainWindowViewModel? _main;
 
@@ -41,6 +43,20 @@ public partial class CanvasViewModel : ViewModelBase
     private void OnResizeCanvas(Vector2 size)
     {
         if (Main is not null)
-            Main.Footerview.CanvasSize = $"{size.X} x {size.Y} ìì";
+            Main.Footerview.CanvasSize = $"{size.X} x {size.Y} ï¿½ï¿½";
+
+    private double _zoomFactor = 1.0;
+
+    public double ZoomFactor
+    {
+        get => _zoomFactor;
+        set => SetProperty(ref _zoomFactor, value);
+    }
+
+    public void Zoom(double delta)
+    {
+        ZoomFactor += delta;
+        if (ZoomFactor < 0.1) ZoomFactor = 0.1;
+
     }
 }

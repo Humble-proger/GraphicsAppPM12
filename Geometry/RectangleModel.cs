@@ -20,27 +20,41 @@ namespace Geometry
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(ListOfPoints))]
         [NotifyPropertyChangedFor(nameof(Geometry))]
+        [NotifyPropertyChangedFor(nameof(BoxWidth))]
+        [NotifyPropertyChangedFor(nameof(BoxHeight))]
         private float _centerX = 10;
 
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(ListOfPoints))]
         [NotifyPropertyChangedFor(nameof(Geometry))]
+        [NotifyPropertyChangedFor(nameof(BoxWidth))]
+        [NotifyPropertyChangedFor(nameof(BoxHeight))]
         private float _centerY = 10;
 
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(ListOfPoints))]
         [NotifyPropertyChangedFor(nameof(Geometry))]
+        [NotifyPropertyChangedFor(nameof(BoxWidth))]
+        [NotifyPropertyChangedFor(nameof(BoxHeight))]
         private float _width = 10;
 
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(ListOfPoints))]
         [NotifyPropertyChangedFor(nameof(Geometry))]
+        [NotifyPropertyChangedFor(nameof(BoxWidth))]
+        [NotifyPropertyChangedFor(nameof(BoxHeight))]
         private float _height = 10;
 
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(ListOfPoints))]
         [NotifyPropertyChangedFor(nameof(Geometry))]
+        [NotifyPropertyChangedFor(nameof(BoxWidth))]
+        [NotifyPropertyChangedFor(nameof(BoxHeight))]
         private float _angle = 0;
+
+        public float BoxHeight => getBoxHeight();
+        public float BoxWidth => getBoxWidth();
+
 
         [JsonIgnore]
         private List<Avalonia.Point> ListOfPoints => GetPoints();
@@ -64,21 +78,6 @@ namespace Geometry
         {
             Angle += angle;
             Angle %= 360;
-        }
-
-        public void SetColor(Color color)
-        {
-            Fill = new SolidColorBrush(color);
-        }
-
-        public void SetStroke(Color color)
-        {
-            Stroke = new SolidColorBrush(color);
-        }
-
-        public void SetThickness(float thickness)
-        {
-            StrokeThickness = thickness;
         }
 
         public List<Avalonia.Point> GetPoints()
@@ -116,6 +115,45 @@ namespace Geometry
 
             a += "z";
             return a;
+        }
+
+
+        private float getBoxWidth()
+        {
+            float maxCoord = float.MinValue;
+            float minCoord = float.MaxValue;
+            for (int i = 0; i < ListOfPoints.Count; i++)
+            {
+                if (ListOfPoints[i].X > maxCoord)
+                {
+                    maxCoord = (float) ListOfPoints[i].X;
+                }
+
+                if (ListOfPoints[i].X < minCoord)
+                {
+                    minCoord = (float) ListOfPoints[i].X;
+                }
+            }
+            return maxCoord - minCoord;
+        }
+
+        private float getBoxHeight()
+        {
+            float maxCoord = float.MinValue;
+            float minCoord = float.MaxValue;
+            for (int i = 0; i < ListOfPoints.Count; i++)
+            {
+                if (ListOfPoints[i].Y > maxCoord)
+                {
+                    maxCoord = (float) ListOfPoints[i].Y;
+                }
+
+                if (ListOfPoints[i].Y < minCoord)
+                {
+                    minCoord = (float) ListOfPoints[i].Y;
+                }
+            }
+            return maxCoord - minCoord;
         }
     }
 }

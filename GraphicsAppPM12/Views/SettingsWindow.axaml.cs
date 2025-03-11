@@ -1,4 +1,5 @@
 ﻿using Avalonia.Controls;
+using Avalonia.Interactivity;
 
 namespace GraphicsApp.Views
 {
@@ -7,6 +8,19 @@ namespace GraphicsApp.Views
         public SettingsWindow()
         {
             InitializeComponent();
+        }
+        
+        // Обработчик для кнопки OK
+        private void OnOkClick(object sender, RoutedEventArgs e)
+        {
+            // Здесь можно выполнить логику для сохранения изменений
+            this.Close(); 
+        }
+        
+        // Обработчик для кнопки Отмена
+        private void OnCancelClick(object sender, RoutedEventArgs e)
+        {
+            this.Close(); 
         }
     }
 }
