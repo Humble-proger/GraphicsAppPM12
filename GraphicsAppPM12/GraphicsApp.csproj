@@ -22,7 +22,9 @@
     <None Remove="Views/pictures/layers/" />
     <None Remove="Views/pictures/ToolBars/chevron-down.png" />
   </ItemGroup>
- 
+
+
+
   <ItemGroup>
     <None Remove="Views\pictures\settings\create.png" />
     <None Remove="Views\pictures\settings\open3.png" />

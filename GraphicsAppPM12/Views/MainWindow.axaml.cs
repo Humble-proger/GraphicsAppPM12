@@ -1,5 +1,6 @@
 using Avalonia.Controls;
 using Avalonia.Interactivity;
+using GraphicsApp.ViewModels;
 
 namespace GraphicsApp.Views
 {
@@ -8,12 +9,13 @@ namespace GraphicsApp.Views
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = new MainWindowViewModel(); // РЈСЃС‚Р°РЅР°РІР»РёРІР°РµРј DataContext
         }
 
         private async void OpenSettings(object sender, RoutedEventArgs e)
         {
-            var settingsWindow = new SettingsWindow(); // Создаем экземпляр SettingsWindow
-            await settingsWindow.ShowDialog(this);       // Открываем как диалоговое окно, this - родитель
+            var settingsWindow = new SettingsWindow(); // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ SettingsWindow
+            await settingsWindow.ShowDialog(this);       // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ, this - пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         }
 
     }

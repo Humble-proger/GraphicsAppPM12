@@ -11,11 +11,27 @@
         Title="GraphicsApp"
         MinWidth="1075"
         MinHeight="600">
+    
+    <Window.Resources>
+        <!-- DataTemplate для отображения фигур -->
+        <DataTemplate x:Key="ShapeTemplate">
+            <StackPanel Orientation="Horizontal" Margin="5">
+                <TextBlock Text="{Binding Name}" Margin="5"/>
+                <Rectangle Width="20" Height="20" Fill="{Binding Color}" Margin="5"/>
+            </StackPanel>
+        </DataTemplate>
+    </Window.Resources>
+
+    <Grid>
+        <!-- ItemsControl для отображения списка фигур -->
+        <ItemsControl ItemsSource="{Binding Figures}" ItemTemplate="{StaticResource ShapeTemplate}"/>
+    </Grid>
+</Window>
 
     <!-- <Design.DataContext>
         
         <vm:MainWindowViewModel/>
-    </Design.DataContext> -->
+    </Design.DataContext> 
 
     <Grid RowDefinitions="Auto, Auto, *, Auto" Background="#F7F7F7">
         <!--Панель с кнопками сохранить\сохранит как и тд-->
@@ -45,4 +61,4 @@
         </StackPanel>
     </Grid>
 
-</Window>
+</Window> -->
