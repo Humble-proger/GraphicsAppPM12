@@ -2,7 +2,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:GraphicsApp.ViewModels"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:DataType="vm:ToolBarsViewModel"  
              x:Class="GraphicsApp.Views.Thickness">
     
     <!--Создаем через Popup всплывающее окно при нажатии на кнопку с выбором толщины-->
@@ -19,7 +21,8 @@
                            FontSize="11"  Foreground="#414141"/>
                     
                 <!--Имя элемента, чтобы на него можно было ссылаться, мин, мак значение и текущее значение-->
-                <Slider Name="ThicknessSlider" Minimum="1" Maximum="10" IsSnapToTickEnabled="True" TickFrequency="1" Padding="10">
+                <Slider Name="ThicknessSlider" Minimum="1" Maximum="10" IsSnapToTickEnabled="True"
+                        TickFrequency="1" Padding="10"  Value="{Binding LineThickness, Mode=TwoWay}" >
                     <Slider.Styles>
                         <Style Selector="Slider:horizontal">
                             <Setter Property="MinWidth" Value="40" />
