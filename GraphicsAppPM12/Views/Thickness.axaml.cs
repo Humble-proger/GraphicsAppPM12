@@ -3,6 +3,8 @@
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 
+using GraphicsApp.ViewModels;
+
 namespace GraphicsApp.Views
 {
     public partial class Thickness : UserControl
@@ -10,7 +12,8 @@ namespace GraphicsApp.Views
         public Thickness()
         {
             InitializeComponent();
-            DataContext = this;
+            DataContext = new ToolBarsViewModel();
+
         }
 
         public event EventHandler<int> ThicknessChanged;
