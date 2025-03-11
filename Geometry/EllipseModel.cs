@@ -18,23 +18,36 @@ namespace Geometry {
 
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(Geometry))]
+        [NotifyPropertyChangedFor(nameof(BoxWidth))]
+        [NotifyPropertyChangedFor(nameof(BoxHeight))]
         private float _centerX;
 
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(Geometry))]
+        [NotifyPropertyChangedFor(nameof(BoxWidth))]
+        [NotifyPropertyChangedFor(nameof(BoxHeight))]
         private float _centerY;
 
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(Geometry))]
+        [NotifyPropertyChangedFor(nameof(BoxWidth))]
+        [NotifyPropertyChangedFor(nameof(BoxHeight))]
         private float _radiusX = 10;
 
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(Geometry))]
+        [NotifyPropertyChangedFor(nameof(BoxWidth))]
+        [NotifyPropertyChangedFor(nameof(BoxHeight))]
         private float _radiusY = 10;
 
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(Geometry))]
+        [NotifyPropertyChangedFor(nameof(BoxWidth))]
+        [NotifyPropertyChangedFor(nameof(BoxHeight))]
         private float _angle = 0;
+
+        public float BoxHeight => getBoxHeight();
+        public float BoxWidth => getBoxWidth();
 
         [JsonIgnore]
         public string Geometry => GetGeometry();
@@ -55,21 +68,6 @@ namespace Geometry {
             Angle = (Angle + angle) % 360;
         }
 
-        public void SetColor(Color color)
-        {
-            Fill = new SolidColorBrush(color);
-        }
-
-        public void SetStroke(Color color)
-        {
-            Stroke = new SolidColorBrush(color);
-        }
-
-        public void SetThickness(float thickness)
-        {
-            StrokeThickness = thickness;
-        }
-
         public string GetGeometry()
         {
             var firstX = CenterX + RadiusX;
@@ -85,6 +83,16 @@ namespace Geometry {
             var secondPointY = (float) (CenterY + (secondX - CenterX) * Math.Sin(angleRad) + (secondY - CenterY) * Math.Cos(angleRad));
 
             return FormattableString.Invariant($"M{firstPointX},{firstPointY} A{RadiusX},{RadiusY},{Angle},1,1,{secondPointX},{secondPointY} A{RadiusX},{RadiusY},{Angle},1,1,{firstPointX},{firstPointY} z");
+        }
+
+        private float getBoxWidth()
+        {
+            return (float) (2.0 * Math.Sqrt(Math.Pow(RadiusX * Math.Cos(Angle * Math.PI / 180.0), 2) + Math.Pow(RadiusY * Math.Sin(Angle * Math.PI / 180.0), 2)));
+        }
+
+        private float getBoxHeight()
+        {
+            return (float) (2.0 * Math.Sqrt(Math.Pow(RadiusX * Math.Sin(Angle * Math.PI / 180.0), 2) + Math.Pow(RadiusY * Math.Cos(Angle * Math.PI / 180.0), 2)));
         }
     }
 }

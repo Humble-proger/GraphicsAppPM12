@@ -1,12 +1,13 @@
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 
 using Avalonia.Media;
 
 using CommunityToolkit.Mvvm.ComponentModel;
 
+namespace Geometry
+{
 
-namespace Geometry {
-    public partial class PolygonModel : ObservableObject, IShape
+    public partial class BezierCurveModel : ObservableObject, IShape
     {
         [ObservableProperty]
         private float _strokeThickness = 1;
@@ -30,7 +31,7 @@ namespace Geometry {
         [NotifyPropertyChangedFor(nameof(BoxWidth))]
         [NotifyPropertyChangedFor(nameof(BoxHeight))]
         private List<Avalonia.Point> _listOfPoints = [];
-        public PolygonModel(List<Avalonia.Point> initialPoints)
+        public BezierCurveModel(List<Avalonia.Point> initialPoints)
         {
             _listOfPoints = initialPoints;
             CalculateCenter();
@@ -86,12 +87,11 @@ namespace Geometry {
                 a = FormattableString.Invariant($"M{ListOfPoints[0].X},{ListOfPoints[0].Y} ");
             }
 
-            for (int i = 1; i < ListOfPoints.Count; i++)
+            for (int i = 1; i < ListOfPoints.Count - 1; i += 2)
             {
-                a += FormattableString.Invariant($"L{ListOfPoints[i].X},{ListOfPoints[i].Y} ");
+                a += FormattableString.Invariant($"Q {ListOfPoints[i].X},{ListOfPoints[i].Y} {ListOfPoints[i + 1].X},{ListOfPoints[i + 1].Y}");
             }
 
-            a += "z";
             return a;
         }
 
@@ -194,5 +194,4 @@ namespace Geometry {
             return (float) (minCoord + (maxCoord - minCoord) / 2.0);
         }
     }
-
 }
