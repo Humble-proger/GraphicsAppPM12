@@ -145,3 +145,5 @@ public partial class SquareModel : ObservableObject, IShape
         return maxCoord - minCoord;
     }
 }
+
+
