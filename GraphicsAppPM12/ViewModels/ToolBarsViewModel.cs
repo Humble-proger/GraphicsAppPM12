@@ -9,33 +9,34 @@ using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace GraphicsApp.ViewModels
 {
-    public partial class ToolBarsViewModel : ViewModelBase
+public partial class ToolBarsViewModel : ViewModelBase
+{
+    [ObservableProperty]
+    private Color _selectedColor = Colors.Red;
+
+    [ObservableProperty]
+    private Color _outlineColor = Colors.Black; // Новое свойство для цвета контура
+
+    [ObservableProperty]
+    private double _lineThickness = 0.0;
+
+    public ObservableCollection<ShapeItem> Shapes { get; set; }
+
+    public ToolBarsViewModel()
     {
-        [ObservableProperty]
-        private Color _selectedColor = Colors.Red;
-        
-        [ObservableProperty]
-        private double _lineThickness = 0.0;
-        
-        public ObservableCollection<ShapeItem> Shapes { get; set; }
-
-        
-        public ToolBarsViewModel()
+        Shapes = new ObservableCollection<ShapeItem>
         {
-            Shapes = new ObservableCollection<ShapeItem>
-            {
-                new ShapeItem("Линия", "line2.png"),
-                new ShapeItem("Ломаная", "polyline2.png"),
-                new ShapeItem("Квадрат", "square.png"),
-                new ShapeItem("Треугольник", "triangle.png"),
-                new ShapeItem("Круг", "circle.png"),
-                new ShapeItem("Круг2", "circle.png"),
-                new ShapeItem("Круг3", "circle.png"),
-                new ShapeItem("Круг4", "circle.png")
-            };
-        }
+            new ShapeItem("Линия", "line2.png"),
+            new ShapeItem("Ломаная", "polyline2.png"),
+            new ShapeItem("Квадрат", "square.png"),
+            new ShapeItem("Треугольник", "triangle.png"),
+            new ShapeItem("Круг", "circle.png"),
+            new ShapeItem("Круг2", "circle.png"),
+            new ShapeItem("Круг3", "circle.png"),
+            new ShapeItem("Круг4", "circle.png")
+        };
     }
-
+}
     public class ShapeItem
     {
         public string Name { get; }
