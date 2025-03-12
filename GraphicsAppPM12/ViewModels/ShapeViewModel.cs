@@ -20,6 +20,7 @@ namespace GraphicsApp.ViewModels
         private string _name = "Name";
         
         [ObservableProperty]
+        [property: JsonIgnore]
         private Avalonia.Media.Color _selectedColor;
         
         [ObservableProperty]

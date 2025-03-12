@@ -3,6 +3,8 @@ using Avalonia.Input;
 using System.Numerics;
 using GraphicsApp.ViewModels;
 using Avalonia.Interactivity;
+using Avalonia.Media;
+using Avalonia;
 
 namespace GraphicsApp.Views
 {
@@ -35,15 +37,26 @@ namespace GraphicsApp.Views
             {
                 Vector2 newSize = new Vector2() { X = (float) e.NewSize.Width, Y = (float) e.NewSize.Height };
                 viewModel.ChangeSizeCanvas.Execute(newSize);
+                if (viewModel.OriginalHeight > 0 && viewModel.OriginalWidth > 0 && sender is Canvas canvas) {
+                    canvas.Clip = new RectangleGeometry(new Rect(0, 0, viewModel.OriginalWidth, viewModel.OriginalHeight));
+                }
             }
         }
 
         private void CreateFigure(object sender, PointerPressedEventArgs e)
         {
+            if (sender is Canvas _canvas && e.GetCurrentPoint(_canvas).Properties.IsLeftButtonPressed)
             if (DataContext is CanvasViewModel viewModel)
             {
-                var position = e.GetPosition(null);
-                viewModel.Main.SelectedButtonFigure.CreateCommand.Execute(position);
+                var position = e.GetCurrentPoint(_canvas).Position;
+                viewModel.Main?.SelectedButtonFigure?.CreateCommand.Execute(position);
+            }
+        }
+        private void Canvas_Loaded(object sender, RoutedEventArgs e) {
+            if (sender is Canvas canvas && DataContext is CanvasViewModel viewModel && viewModel.OriginalHeight > 0 && viewModel.OriginalWidth > 0)
+            {
+                // Устанавливаем Clip по размерам Canvas
+                canvas.Clip = new RectangleGeometry(new Rect(0, 0, viewModel.OriginalWidth, viewModel.OriginalHeight));
             }
         }
     }

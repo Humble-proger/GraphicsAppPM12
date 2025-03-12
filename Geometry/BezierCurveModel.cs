@@ -13,14 +13,15 @@ namespace Geometry
         private float _strokeThickness = 1;
 
         [ObservableProperty]
-        private IBrush _stroke = new SolidColorBrush(Colors.Black);
+        private Color _stroke = Colors.Black;
 
         [ObservableProperty]
-        private IBrush _fill = new SolidColorBrush(Colors.Black);
+        private Color _fill = Colors.Black;
 
         // центр, нужный для вычисления поворота и масштабирования
+        [JsonIgnore]
         private float CX;
-
+        [JsonIgnore]
         private float CY;
 
         public float CenterX => getCenterX();
@@ -43,7 +44,9 @@ namespace Geometry
         [NotifyPropertyChangedFor(nameof(BoxHeight))]
         private float _angle = 0;
 
+        [JsonIgnore]
         public float BoxHeight => getBoxHeight();
+        [JsonIgnore]
         public float BoxWidth => getBoxWidth();
 
         [JsonIgnore]
