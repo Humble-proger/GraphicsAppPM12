@@ -132,5 +132,13 @@ namespace GraphicsApp.Views
             ThicknessButton.Flyout.Hide();
         }
 
+
+        private void OnColorChanged(object? sender, ColorChangedEventArgs e)
+        {
+            if (DataContext is ToolBarsViewModel viewModel)
+            {
+                viewModel.SelectedColor = e.NewColor;
+            }
+        }
     }
 }

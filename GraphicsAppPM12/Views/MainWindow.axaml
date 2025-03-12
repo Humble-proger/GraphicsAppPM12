@@ -23,13 +23,13 @@
        
 
         <!--Панель с инструментами-->
-        <local:ToolBars Grid.Row="1" />
+        <local:ToolBars Grid.Row="1" DataContext="{Binding Toolbarsview}"/>
 
         <Grid Grid.Row="2" ColumnDefinitions="4*, *">
 
             <Grid Grid.Column="0">
                 <!--Подключение холста-->
-                <local:MyCanvas DataContext= "{Binding Canvasview}"/>
+                <local:MyCanvas DataContext="{Binding Canvasview}"/>
                 <!--Подключение панели редактирования-->
                 <!--<local:FigureEdit/>--> 
                 

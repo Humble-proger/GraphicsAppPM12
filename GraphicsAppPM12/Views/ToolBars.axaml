@@ -126,12 +126,12 @@
             </StackPanel>
             
             <!--Фигуры-->
-           <StackPanel x:DataType="vm:MainWindowViewModel">
+           <StackPanel>
                 <Border Background="#ededed" Height="50" Width="250" Margin="10,-10,0,3" CornerRadius="2">
                     <Grid Background="#ededed">
                         <ScrollViewer x:Name="ShapeScroll" Height="40" VerticalScrollBarVisibility="Hidden">
-                            <ListBox x:Name="ShapeList" ItemsSource="{Binding Factories}" SelectionMode="Single" 
-                                     BorderThickness="0" Background="Transparent" SelectionChanged="ShapeList_SelectionChanged" SelectedItem="{Binding SelectedButtonFigure}">
+                            <ListBox x:Name="ShapeList" ItemsSource="{Binding Main.Factories}" SelectionMode="Single" 
+                                     BorderThickness="0" Background="Transparent" SelectionChanged="ShapeList_SelectionChanged" SelectedItem="{Binding Main.SelectedButtonFigure}">
                                 <ListBox.ItemTemplate>
                                     <DataTemplate>
                                         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Left" Width="25">
@@ -173,7 +173,7 @@
             <!-- Цвета -->
             <StackPanel >
                 <Border Background="#ededed" Height="50" Width="80" Margin="10,-10,0,3" CornerRadius="2">
-                    <ColorPicker HorizontalAlignment="Center" VerticalAlignment="Center" Color="{Binding SelectedColor, Mode=TwoWay}"  />
+                    <ColorPicker HorizontalAlignment="Center" VerticalAlignment="Center" ColorChanged="OnColorChanged" Color="{Binding SelectedColor, Mode=TwoWay}"  />
                 </Border>
                 <TextBlock Text="Цвет" Margin="10,0,0,0"/>
             </StackPanel>

@@ -42,7 +42,7 @@ namespace GraphicsApp.Views
         {
             if (DataContext is CanvasViewModel viewModel)
             {
-                var position = e.GetPosition(null);
+                var position = e.GetPosition((Canvas) sender);
                 viewModel.Main.SelectedButtonFigure.CreateCommand.Execute(position);
             }
         }
