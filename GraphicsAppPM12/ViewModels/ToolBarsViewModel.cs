@@ -18,6 +18,9 @@ namespace GraphicsApp.ViewModels
         private Color _selectedColor = Colors.Red;
         
         [ObservableProperty]
+        private Color _outlineColor = Colors.Black; // Новое свойство для цвета контура
+        
+        [ObservableProperty]
         private double _lineThickness = 0.0;
         
         public ObservableCollection<ShapeItem> Shapes { get; set; }
@@ -28,7 +31,7 @@ namespace GraphicsApp.ViewModels
             Main = main;
         }
     }
-
+}
     public class ShapeItem
     {
         public string Name { get; }
