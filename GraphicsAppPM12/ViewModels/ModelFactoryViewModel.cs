@@ -22,14 +22,16 @@ namespace GraphicsApp.ViewModels
 
         private ShapeViewModel Create(Avalonia.Point point)
         {
-            var color = Main.Toolbarsview.SelectedColor;
+            var colorFill = Main.Toolbarsview.SelectedColor;
+            var tickness = Main.Toolbarsview.LineThickness;
+            var colorBorder = Main.Toolbarsview.OutlineColor;
             var name = $"{Factory} {Random.Shared.Next(100)}";
             var model = Factory.CreateExport().Value;
 
             model.Move((float) point.X, (float) point.Y);
             model.StrokeThickness = (float)Main.Toolbarsview.LineThickness;
 
-            return new() { Name = name, Model = model, SelectedColor = color, Main = Main };
+            return new() { Name = name, Model = model, SelectedColor = colorFill, OutlineColor = colorBorder, Thickness = (float)tickness, Main = Main };
         }
     }
 }

@@ -122,7 +122,10 @@ namespace GraphicsApp.Views
         }
         private void ThicknessFlyoutControl_ThicknessChanged(object sender, int thickness)
         {
-            // Обработка изменения толщины, если необходимо
+            if (DataContext is ToolBarsViewModel viewModel)
+            {
+                viewModel.LineThickness = thickness;
+            }
             Console.WriteLine($"Толщина изменена на: {thickness}");
         }
 
@@ -133,11 +136,19 @@ namespace GraphicsApp.Views
         }
 
 
-        private void OnColorChanged(object? sender, ColorChangedEventArgs e)
+        private void OnColorChangedFill(object? sender, ColorChangedEventArgs e)
         {
             if (DataContext is ToolBarsViewModel viewModel)
             {
                 viewModel.SelectedColor = e.NewColor;
+            }
+        }
+        
+        private void OnColorChangedBorder(object? sender, ColorChangedEventArgs e)
+        {
+            if (DataContext is ToolBarsViewModel viewModel)
+            {
+                viewModel.OutlineColor = e.NewColor;
             }
         }
     }

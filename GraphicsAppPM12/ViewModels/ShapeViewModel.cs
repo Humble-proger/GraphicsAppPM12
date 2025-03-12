@@ -23,13 +23,10 @@ namespace GraphicsApp.ViewModels
         private Avalonia.Media.Color _selectedColor;
         
         [ObservableProperty]
-        [NotifyPropertyChangedFor(nameof(Thickness))]
-        [property: JsonIgnore]
-        private bool _isSelected;
+        private Avalonia.Media.Color _outlineColor;
         
-
-        [JsonIgnore]
-        public float Thickness => IsSelected ? 2 : 1;
+        [ObservableProperty]
+        private float _thickness;
 
         public required IShape Model { get; init; }
         
