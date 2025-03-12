@@ -1,6 +1,8 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Interactivity;
 
+using GraphicsApp.ViewModels;
+
 namespace GraphicsApp.Views
 {
     public partial class SettingsWindow : Window
@@ -9,7 +11,7 @@ namespace GraphicsApp.Views
         {
             InitializeComponent();
         }
-        
+
         // Обработчик для кнопки OK
         private void OnOkClick(object sender, RoutedEventArgs e)
         {

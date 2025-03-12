@@ -26,14 +26,14 @@ namespace Geometry
         [NotifyPropertyChangedFor(nameof(Geometry))]
         [NotifyPropertyChangedFor(nameof(BoxWidth))]
         [NotifyPropertyChangedFor(nameof(BoxHeight))]
-        private float _centerX = 10;
+        private float _centerX = 0;
 
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(ListOfPoints))]
         [NotifyPropertyChangedFor(nameof(Geometry))]
         [NotifyPropertyChangedFor(nameof(BoxWidth))]
         [NotifyPropertyChangedFor(nameof(BoxHeight))]
-        private float _centerY = 10;
+        private float _centerY = 0;
 
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(ListOfPoints))]
@@ -48,8 +48,10 @@ namespace Geometry
         [NotifyPropertyChangedFor(nameof(BoxWidth))]
         [NotifyPropertyChangedFor(nameof(BoxHeight))]
         private float _angle = 0;
-
+        
+        [JsonIgnore]
         public float BoxHeight => getBoxHeight();
+        [JsonIgnore] 
         public float BoxWidth => getBoxWidth();
 
         [JsonIgnore]

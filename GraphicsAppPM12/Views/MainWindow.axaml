@@ -19,20 +19,22 @@
 
     <Grid RowDefinitions="Auto, Auto, *, Auto" Background="#F7F7F7">
         <!--Панель с кнопками сохранить\сохранит как и тд-->
-        <local:Settings/>
+        <local:Settings DataContext="{Binding Settings}"/>
        
 
         <!--Панель с инструментами-->
-        <local:ToolBars Grid.Row="1" DataContext="{Binding Toolbarsview }"/>
+        <local:ToolBars Grid.Row="1" DataContext="{Binding Toolbarsview}"/>
+
 
         <Grid Grid.Row="2" ColumnDefinitions="4*, *">
 
             <Grid Grid.Column="0">
                 <!--Подключение холста-->
-                <local:MyCanvas DataContext="{Binding Canvasview}"/>
-                <!--Подключение панели редактирования-->
-                <!--<local:FigureEdit/>--> 
                 
+                    <local:MyCanvas DataContext= "{Binding Canvasview}"/>
+                    <!--Подключение панели редактирования-->
+                    <!--<local:FigureEdit/>-->
+               
             </Grid>
             
             <local:Layers Grid.Column="1" DataContext="{Binding Layersview}"/>

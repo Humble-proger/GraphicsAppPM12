@@ -18,8 +18,10 @@ namespace Geometry {
         private Color _fill = Colors.Black;
 
         // центр, нужный для вычисления поворота и масштабирования
+        [JsonIgnore]
         private float CX;
-
+        
+        [JsonIgnore]
         private float CY;
 
         public float CenterX => getCenterX();
@@ -41,8 +43,10 @@ namespace Geometry {
         [NotifyPropertyChangedFor(nameof(BoxWidth))]
         [NotifyPropertyChangedFor(nameof(BoxHeight))]
         private float _angle = 0;
-
+        
+        [JsonIgnore]
         public float BoxHeight => getBoxHeight();
+        [JsonIgnore]
         public float BoxWidth => getBoxWidth();
 
         [JsonIgnore]

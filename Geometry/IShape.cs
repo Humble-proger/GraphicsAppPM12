@@ -1,9 +1,15 @@
-﻿using Avalonia.Media;
+﻿using System.Text.Json.Serialization;
+
+using Avalonia.Media;
 
 namespace Geometry
 {
 
     // интерфейс всех фигур
+    [JsonDerivedType(typeof(CircleModel), typeDiscriminator: "circle")]
+    [JsonDerivedType(typeof(RectangleModel), typeDiscriminator: "rectangle")]
+    [JsonDerivedType(typeof(SquareModel), typeDiscriminator: "square")]
+    [JsonDerivedType(typeof(EllipseModel), typeDiscriminator: "ellipse")]
     public interface IShape
     {
         // ширина описанного прямоугольника
