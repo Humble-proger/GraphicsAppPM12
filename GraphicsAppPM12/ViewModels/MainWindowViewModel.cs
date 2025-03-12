@@ -24,9 +24,13 @@ public partial class MainWindowViewModel : ViewModelBase
     private ToolBarsViewModel _toolbarsview;
 
     public ObservableCollection<ShapeViewModel> Figures { get; } = [];
+    
 
     public ObservableCollection<ModelFactoryViewModel> Factories { get; } = [];
-
+    
+    [ObservableProperty]
+    private ModelFactoryViewModel? _selectedButtonFigure;
+    
     public ICommand SaveJsonCommand { get; }
     public RelayCommand LoadJsonCommand { get; }
 

@@ -38,5 +38,13 @@ namespace GraphicsApp.Views
             }
         }
 
+        private void CreateFigure(object sender, PointerPressedEventArgs e)
+        {
+            if (DataContext is CanvasViewModel viewModel)
+            {
+                var position = e.GetPosition(null);
+                viewModel.Main.SelectedButtonFigure.CreateCommand.Execute(position);
+            }
+        }
     }
 }

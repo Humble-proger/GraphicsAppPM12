@@ -18,6 +18,7 @@ public partial class CanvasViewModel : ViewModelBase
     public ICommand ChangeMouseCoord { get; }
     public ICommand MouseLeaveCanvas { get; }
     public ICommand ChangeSizeCanvas { get; }
+    
 
     public CanvasViewModel(MainWindowViewModel? main)
     {
@@ -25,9 +26,8 @@ public partial class CanvasViewModel : ViewModelBase
         ChangeMouseCoord = new RelayCommand<Avalonia.Point>(OnMouseMove);
         MouseLeaveCanvas = new RelayCommand(OnMouseLeave);
         ChangeSizeCanvas = new RelayCommand<Vector2>(OnResizeCanvas);
-
     }
-
+    
     private void OnMouseMove(Avalonia.Point Point)
     {
         if (Main is not null)

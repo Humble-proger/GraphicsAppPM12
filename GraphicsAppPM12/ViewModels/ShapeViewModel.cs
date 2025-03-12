@@ -18,27 +18,22 @@ namespace GraphicsApp.ViewModels
 
         [ObservableProperty]
         private string _name = "Name";
-
+        
         [ObservableProperty]
-        [property: JsonIgnore]
-        private Color _color;
-
-        [JsonPropertyName("Color")]
-        public string ColorStr
-        {
-            get => Color.ToString();
-            set => Color = Color.Parse(value);
-        }
-
+        private Avalonia.Media.Color _selectedColor;
+        
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(Thickness))]
         [property: JsonIgnore]
         private bool _isSelected;
+        
 
         [JsonIgnore]
         public float Thickness => IsSelected ? 2 : 1;
 
         public required IShape Model { get; init; }
+        
+        
 
         [JsonIgnore]
         public ICommand Remove { get; }
