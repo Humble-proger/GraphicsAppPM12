@@ -1,9 +1,13 @@
 ﻿using System.Text.Json.Serialization;
 using Avalonia.Media;
 using CommunityToolkit.Mvvm.ComponentModel;
+using System.Composition;
 
 namespace Geometry
 {
+    [Export(typeof(IShape))]
+    [ExportMetadata("LogoButton", "circle.png")]
+    [ExportMetadata("Name", "Circle")]
     public partial class CircleModel : ObservableObject, IShape
     {
         [ObservableProperty]

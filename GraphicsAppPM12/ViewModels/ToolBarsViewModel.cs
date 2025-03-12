@@ -12,27 +12,20 @@ namespace GraphicsApp.ViewModels
     public partial class ToolBarsViewModel : ViewModelBase
     {
         [ObservableProperty]
+        private MainWindowViewModel? _main;
+        
+        [ObservableProperty]
         private Color _selectedColor = Colors.Red;
         
         [ObservableProperty]
         private double _lineThickness = 0.0;
         
         public ObservableCollection<ShapeItem> Shapes { get; set; }
-
+    
         
-        public ToolBarsViewModel()
+        public ToolBarsViewModel(MainWindowViewModel? main)
         {
-            Shapes = new ObservableCollection<ShapeItem>
-            {
-                new ShapeItem("Линия", "line2.png"),
-                new ShapeItem("Ломаная", "polyline2.png"),
-                new ShapeItem("Квадрат", "square.png"),
-                new ShapeItem("Треугольник", "triangle.png"),
-                new ShapeItem("Круг", "circle.png"),
-                new ShapeItem("Круг2", "circle.png"),
-                new ShapeItem("Круг3", "circle.png"),
-                new ShapeItem("Круг4", "circle.png")
-            };
+            Main = main;
         }
     }
 

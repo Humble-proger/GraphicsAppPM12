@@ -15,7 +15,6 @@ namespace GraphicsApp.Views
         public ToolBars()
         {
             InitializeComponent();
-            DataContext = new ToolBarsViewModel();
         }
 
         private bool _isClearingSelection = false;

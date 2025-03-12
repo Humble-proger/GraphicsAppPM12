@@ -12,8 +12,6 @@ namespace GraphicsApp.Views
         public Thickness()
         {
             InitializeComponent();
-            DataContext = new ToolBarsViewModel();
-
         }
 
         public event EventHandler<int> ThicknessChanged;

@@ -19,6 +19,9 @@ public partial class MainWindowViewModel : ViewModelBase
 
     [ObservableProperty]
     private CanvasViewModel _canvasview;
+    
+    [ObservableProperty]
+    private ToolBarsViewModel _toolbarsview;
 
     public ObservableCollection<ShapeViewModel> Figures { get; } = [];
 
@@ -28,7 +31,7 @@ public partial class MainWindowViewModel : ViewModelBase
     public RelayCommand LoadJsonCommand { get; }
 
     [ImportMany]
-    private IEnumerable<ExportFactory<IShape>> ModelFactories { get; set; } = [];
+    private IEnumerable<ExportFactory<IShape, ModelMetadata>> ModelFactories { get; set; } = [];
     
 
     public MainWindowViewModel()
@@ -44,6 +47,7 @@ public partial class MainWindowViewModel : ViewModelBase
         }
         Footerview = new(this);
         Canvasview = new(this);
+        Toolbarsview = new ToolBarsViewModel(this);
     }
 
     private void LoadFigures(IEnumerable<ShapeViewModel>? figures)

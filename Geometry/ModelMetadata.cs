@@ -1,13 +1,14 @@
 ﻿using Avalonia.Platform;
 using Avalonia.Media.Imaging;
+using System;
 
 namespace Geometry
 {
-    class ModelMetadata
+    public class ModelMetadata
     {
         public required string Name { get; init; }  
         public required string LogoButton { get; init; }
-        public Bitmap? Logo
+        public Bitmap Logo
         {
             get => LoadBitmap($"avares://GraphicsApp/Views/pictures/ToolBars/{LogoButton}");
         }
