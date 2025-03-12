@@ -15,9 +15,8 @@ namespace GraphicsApp.ViewModels
         private MainWindowViewModel? _main;
 
         [ObservableProperty]
-
         private Color _selectedColor = Colors.Red;
-
+        
         [ObservableProperty]
         private Color _outlineColor; // Новое свойство для цвета контура
 
@@ -28,7 +27,7 @@ namespace GraphicsApp.ViewModels
         public ToolBarsViewModel(MainWindowViewModel? main)
         {
             Main = main;
-            SelectedColor = Colors.Red;
+            SelectedColor = Colors.White;
             OutlineColor = Colors.Black;
         }
     }

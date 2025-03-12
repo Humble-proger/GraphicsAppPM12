@@ -2,10 +2,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:local="clr-namespace:GraphicsApp.Views"
+             xmlns:vm="clr-namespace:GraphicsApp.ViewModels"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="GraphicsApp.Views.Layers"
-             x:DataType="local:Layers">
+             x:DataType="vm:LayersViewModel">
 
     <UserControl.Styles>
         <StyleInclude Source="LayersStyles.axaml"/>
@@ -20,7 +20,7 @@
                 <Border Grid.Row="1" Grid.RowSpan="2"  BorderThickness="0,1,0,1" BorderBrush="#8B8B8B">
                     <ScrollViewer MaxHeight="150">
                         <Grid RowDefinitions="Auto, Auto">
-                            <StackPanel Grid.Row="0">
+                            <StackPanel IsVisible="{Binding Main.SelectedFigure}">
                                 <Grid RowDefinitions="*,*,*,Auto,*,*,*" ColumnDefinitions="113, *" Margin="5" >
                                     <TextBlock Grid.Column="0" Grid.Row="0" Text="Имя фигуры" Classes="OptionsNechet"/>
                                     <TextBlock Grid.Column="0" Grid.Row="1" Text="Положение по X" Classes="OptionsChet"/>
@@ -29,12 +29,12 @@
                                     <TextBlock Grid.Column="0" Grid.Row="4" Text="Толщина линии" Classes="OptionsNechet"/>
                                     <TextBlock Grid.Column="0" Grid.Row="5" Text="Угол поворота" Classes="OptionsChet"/>
 
-                                    <TextBox Grid.Column="1" Grid.Row="0" Watermark="Квадратик" Classes="Options"/>
+                                    <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding Main.SelectedFigure.Name}" Classes="Options"/>
                                     <TextBox Grid.Column="1" Grid.Row="1" Watermark="12" Classes="Options"/>
                                     <TextBox Grid.Column="1" Grid.Row="2" Watermark="12" Classes="Options"/>
-                                    <ColorPicker Grid.Column="1" Grid.Row="3" HorizontalAlignment="Left" Margin="1"/>
+                                    <ColorPicker Grid.Column="1" Grid.Row="3" Color="{Binding Main.SelectedFigure.Model.Fill}" HorizontalAlignment="Left" Margin="1"/>
                                     <!--<ColorPicker Color="{Binding Color}" Grid.Row="3" Grid.Column="1" />-->
-                                    <TextBox Grid.Column="1" Grid.Row="4" Watermark="5" Classes="Options"/>
+                                    <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding Main.SelectedFigure.Model.StrokeThickness}" Classes="Options"/>
                                     <TextBox Grid.Column="1" Grid.Row="5" Watermark="0" Classes="Options"/>
                                 </Grid>
                             </StackPanel>

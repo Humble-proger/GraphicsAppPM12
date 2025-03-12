@@ -22,7 +22,7 @@ namespace IO
                 throw new InvalidOperationException("Canvas dimensions must be positive.");
             }
 
-            // Собираем все SVG строки через foreach
+            // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ SVG пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ foreach
             var svgBuilder = new StringBuilder();
             svgBuilder.AppendLine($"<svg width=\"{size.X}\" height=\"{size.Y}\" xmlns=\"http://www.w3.org/2000/svg\">");
 
@@ -34,13 +34,13 @@ namespace IO
 
             svgBuilder.AppendLine("</svg>");
 
-            // Создаем SVG документ с помощью SVG.NET
+            // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ SVG пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ SVG.NET
             string svgContent = svgBuilder.ToString();
             var svgDocument = SvgDocument.FromSvg<SvgDocument>(svgContent);
             svgDocument.Width = size.X;
             svgDocument.Height = size.Y;
 
-            // Сохраняем в файл
+            // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅ
             using var stream = File.OpenWrite(filepath);
             svgDocument.Write(stream);
         }

@@ -18,6 +18,7 @@ namespace Geometry
         [ObservableProperty]
         private Color _fill = Colors.Black;
 
+
         // центр, нужный для вычисления поворота и масштабирования
         [JsonIgnore]
         private float CX;

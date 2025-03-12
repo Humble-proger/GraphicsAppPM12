@@ -1,10 +1,15 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Input;
 using System.Numerics;
+
+using Avalonia.Controls.Shapes;
+
 using GraphicsApp.ViewModels;
 using Avalonia.Interactivity;
 using Avalonia.Media;
 using Avalonia;
+
+using Geometry;
 
 namespace GraphicsApp.Views
 {
@@ -45,11 +50,26 @@ namespace GraphicsApp.Views
 
         private void CreateFigure(object sender, PointerPressedEventArgs e)
         {
-            if (sender is Canvas _canvas && e.GetCurrentPoint(_canvas).Properties.IsLeftButtonPressed)
-            if (DataContext is CanvasViewModel viewModel)
+            if (DataContext is CanvasViewModel viewModel && sender is Canvas _canvas && e.GetCurrentPoint(_canvas).Properties.IsLeftButtonPressed)
             {
                 var position = e.GetCurrentPoint(_canvas).Position;
                 viewModel.Main?.SelectedButtonFigure?.CreateCommand.Execute(position);
+            }
+        }
+
+        private void FigureEdit(object? sender, PointerPressedEventArgs e)
+        {
+            if (sender is Path path)
+            {
+                // Получаем объект фигуры из DataContext
+                if (path.DataContext is ShapeViewModel figure)
+                {
+                    // Устанавливаем выбранную фигуру в ViewModel
+                    if (DataContext is CanvasViewModel viewmodel)
+                    {
+                        viewmodel.Main.SelectedFigure = figure;
+                    }
+                }
             }
         }
         private void Canvas_Loaded(object sender, RoutedEventArgs e) {
@@ -57,6 +77,7 @@ namespace GraphicsApp.Views
             {
                 // Устанавливаем Clip по размерам Canvas
                 canvas.Clip = new RectangleGeometry(new Rect(0, 0, viewModel.OriginalWidth, viewModel.OriginalHeight));
+
             }
         }
     }

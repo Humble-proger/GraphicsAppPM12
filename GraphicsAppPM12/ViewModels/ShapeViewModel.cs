@@ -27,10 +27,8 @@ namespace GraphicsApp.ViewModels
         [NotifyPropertyChangedFor(nameof(Thickness))]
         [property: JsonIgnore]
         private bool _isSelected;
-        
 
-        [JsonIgnore]
-        public float Thickness => IsSelected ? 2 : 1;
+        
 
         public required IShape Model { get; init; }
         

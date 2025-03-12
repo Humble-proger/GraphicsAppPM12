@@ -25,6 +25,7 @@
         <!--Панель с инструментами-->
         <local:ToolBars Grid.Row="1" DataContext="{Binding Toolbarsview}"/>
 
+
         <Grid Grid.Row="2" ColumnDefinitions="4*, *">
 
             <Grid Grid.Column="0">
@@ -36,7 +37,7 @@
                
             </Grid>
             
-            <local:Layers Grid.Column="1"/>
+            <local:Layers Grid.Column="1" DataContext="{Binding Layersview}"/>
 
         </Grid>
 

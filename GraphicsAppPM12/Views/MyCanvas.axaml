@@ -10,6 +10,7 @@
     <!--<UserControl.DataContext>
         <vm:MainWindowViewModel />
     </UserControl.DataContext>-->
+
     <ScrollViewer HorizontalScrollBarVisibility="Auto"
                   VerticalScrollBarVisibility="Auto"
                   HorizontalAlignment="Stretch"
@@ -21,10 +22,13 @@
             <ItemsControl ItemsSource="{Binding Main.Figures}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Path Stroke="Black" StrokeThickness="{Binding Thickness}" Data="{Binding Model.Geometry}">
+                        <Path Stroke="Black" StrokeThickness="{Binding Model.StrokeThickness}" Data="{Binding Model.Geometry}" PointerPressed="FigureEdit">
                             <Path.Fill>
-                                <SolidColorBrush Color="{Binding SelectedColor}"/>
+                              <SolidColorBrush Color="{Binding Model.Fill}"/>
                             </Path.Fill>
+                            <Path.Stroke>
+                                <SolidColorBrush Color="{Binding Model.Stroke}"/>
+                            </Path.Stroke>
                         </Path>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>

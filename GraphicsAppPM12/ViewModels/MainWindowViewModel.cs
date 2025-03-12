@@ -25,6 +25,10 @@ public partial class MainWindowViewModel : ViewModelBase
     
     [ObservableProperty]
     private ToolBarsViewModel _toolbarsview;
+    
+    [ObservableProperty]
+    private LayersViewModel _layersview;
+    
 
     [ObservableProperty]
     private SettingsWindowViewModel _settingswindow;
@@ -39,6 +43,9 @@ public partial class MainWindowViewModel : ViewModelBase
     
     [ObservableProperty]
     private ModelFactoryViewModel? _selectedButtonFigure;
+    
+    [ObservableProperty]
+    private ShapeViewModel? _selectedFigure;
     
     public ICommand SaveJsonCommand { get; }
     public ICommand LoadJsonCommand { get; }
@@ -60,6 +67,8 @@ public partial class MainWindowViewModel : ViewModelBase
         }
         Footerview = new(this);
         Canvasview = new(this);
+        Layersview = new(this);
+
         Toolbarsview = new(this);
         Settingswindow = new(this);
         Settings = new(this);
@@ -69,6 +78,7 @@ public partial class MainWindowViewModel : ViewModelBase
             (filePath) => { _geometryJsonSerializer.SaveJson(filename: filePath, Figures); });
         
         LoadJsonCommand = new RelayCommand<string>( (FilePath) => LoadFigures(_geometryJsonSerializer.LoadJson(FilePath)) );
+
     }
 
     private void LoadFigures(IEnumerable<ShapeViewModel>? figures)
