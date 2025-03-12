@@ -1,5 +1,6 @@
-﻿using System.Text.Json.Serialization;
-using System.Composition;
+﻿using System.Composition;
+using System.Text.Json.Serialization;
+
 using Avalonia.Media;
 
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -7,9 +8,9 @@ using CommunityToolkit.Mvvm.ComponentModel;
 namespace Geometry
 {
     [Export(typeof(IShape))]
-    [ExportMetadata("LogoButton", "triangle.png")]
-    [ExportMetadata("Name", "Rectangle")]
-    public partial class RectangleModel : ObservableObject, IShape
+    [ExportMetadata("LogoButton", "square.png")]
+    [ExportMetadata("Name", "Square")]
+    public partial class SquareModel : ObservableObject, IShape
     {
         [ObservableProperty]
         private float _strokeThickness = 1;
@@ -46,29 +47,20 @@ namespace Geometry
         [NotifyPropertyChangedFor(nameof(Geometry))]
         [NotifyPropertyChangedFor(nameof(BoxWidth))]
         [NotifyPropertyChangedFor(nameof(BoxHeight))]
-        private float _height = 10;
-
-        [ObservableProperty]
-        [NotifyPropertyChangedFor(nameof(ListOfPoints))]
-        [NotifyPropertyChangedFor(nameof(Geometry))]
-        [NotifyPropertyChangedFor(nameof(BoxWidth))]
-        [NotifyPropertyChangedFor(nameof(BoxHeight))]
         private float _angle = 0;
 
         public float BoxHeight => getBoxHeight();
         public float BoxWidth => getBoxWidth();
 
+        [JsonIgnore]
+        private List<Avalonia.Point> ListOfPoints => getPoints();
 
         [JsonIgnore]
-        private List<Avalonia.Point> ListOfPoints => GetPoints();
-
-        [JsonIgnore]
-        public string Geometry => GetGeometry();
+        public string Geometry => getGeometry();
 
         public void Scale(float ratioX, float ratioY)
         {
-            Width *= ratioX;
-            Height *= ratioY;
+            Width *= ratioX >= ratioY ? ratioX : ratioY;
         }
 
         public void Move(float deltaX, float deltaY)
@@ -83,13 +75,13 @@ namespace Geometry
             Angle %= 360;
         }
 
-        public List<Avalonia.Point> GetPoints()
+        public List<Avalonia.Point> getPoints()
         {
             List<Avalonia.Point> list = [
-                new Avalonia.Point(CenterX - Width / 2, CenterY - Height / 2),
-            new Avalonia.Point(CenterX + Width / 2, CenterY - Height / 2),
-            new Avalonia.Point(CenterX + Width / 2, CenterY + Height / 2),
-            new Avalonia.Point(CenterX - Width / 2, CenterY + Height / 2)
+                new Avalonia.Point(CenterX - Width / 2, CenterY - Width / 2),
+            new Avalonia.Point(CenterX + Width / 2, CenterY - Width / 2),
+            new Avalonia.Point(CenterX + Width / 2, CenterY + Width / 2),
+            new Avalonia.Point(CenterX - Width / 2, CenterY + Width / 2)
                 ];
 
             var angleRad = Angle * Math.PI / 180.0;
@@ -103,7 +95,7 @@ namespace Geometry
             return list;
         }
 
-        private string GetGeometry()
+        private string getGeometry()
         {
             var a = "";
             if (ListOfPoints.Count > 0)
@@ -119,8 +111,6 @@ namespace Geometry
             a += "z";
             return a;
         }
-
-
         private float getBoxWidth()
         {
             float maxCoord = float.MinValue;
@@ -159,4 +149,5 @@ namespace Geometry
             return maxCoord - minCoord;
         }
     }
+
 }

@@ -126,25 +126,25 @@
             </StackPanel>
             
             <!--Фигуры-->
-           <StackPanel>
+           <StackPanel x:DataType="vm:MainWindowViewModel">
                 <Border Background="#ededed" Height="50" Width="250" Margin="10,-10,0,3" CornerRadius="2">
                     <Grid Background="#ededed">
                         <ScrollViewer x:Name="ShapeScroll" Height="40" VerticalScrollBarVisibility="Hidden">
-                            <ListBox x:Name="ShapeList" ItemsSource="{Binding Shapes}" SelectionMode="Single" 
+                            <ListBox x:Name="ShapeList" ItemsSource="{Binding Factories}" SelectionMode="Single" 
                                      BorderThickness="0" Background="Transparent" SelectionChanged="ShapeList_SelectionChanged">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Left" Width="25">
+                                            <Image Source="{Binding Factory.Metadata.Logo, Mode=OneWay}" Width="20" Height="20"
+                                                   Stretch="Uniform" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
                                 <ListBox.ItemsPanel>
                                     <ItemsPanelTemplate>
                                         <WrapPanel Width="230" VerticalAlignment="Center" Margin="0,0,0,0" />
                                     </ItemsPanelTemplate>
                                 </ListBox.ItemsPanel>
-                                <ListBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Left" Width="25">
-                                            <Image Source="{Binding Icon, Mode=OneWay}" Width="20" Height="20" 
-                                                   Stretch="Uniform" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                                        </StackPanel>
-                                    </DataTemplate>
-                                </ListBox.ItemTemplate>
                             </ListBox>
                         </ScrollViewer>
 
