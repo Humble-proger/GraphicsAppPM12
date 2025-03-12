@@ -10,28 +10,39 @@
     <!--<UserControl.DataContext>
         <vm:MainWindowViewModel />
     </UserControl.DataContext>-->
-    
-    
-    <ItemsControl  ItemsSource="{Binding Main.Figures}">
-        <ItemsControl.ItemTemplate>
-            <DataTemplate>
-                <Path Stroke="Black" StrokeThickness="{Binding Thickness}" Data="{Binding Model.Geometry}">
-                    <Path.Fill>
-                        <SolidColorBrush Color="{Binding SelectedColor}"/>
-                    </Path.Fill>
-                </Path>
-            </DataTemplate>
-        </ItemsControl.ItemTemplate>
-			
-        <ItemsControl.ItemsPanel>
-            <ItemsPanelTemplate>
-                    <Canvas Background="White" Margin="15" x:DataType="vm:CanvasViewModel" PointerMoved="MouseMoved" SizeChanged="CanvasResize" PointerExited="MouseLeave" PointerPressed="CreateFigure" Height="500" Width="1000">
-                        <Canvas.RenderTransform>
-                            <ScaleTransform ScaleX="{Binding ZoomFactor}" ScaleY="{Binding ZoomFactor}" />
-                        </Canvas.RenderTransform>
-                    </Canvas>
-            </ItemsPanelTemplate>
-        </ItemsControl.ItemsPanel>
-    </ItemsControl>
-    
+    <ScrollViewer HorizontalScrollBarVisibility="Auto"
+                  VerticalScrollBarVisibility="Auto"
+                  HorizontalAlignment="Stretch"
+                  VerticalAlignment="Stretch">
+
+        <Border Background="Transparent"
+            Width="{Binding ScaledWidth}"
+            Height="{Binding ScaledHeight}">
+            <ItemsControl ItemsSource="{Binding Main.Figures}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Path Stroke="Black" StrokeThickness="{Binding Thickness}" Data="{Binding Model.Geometry}">
+                            <Path.Fill>
+                                <SolidColorBrush Color="{Binding SelectedColor}"/>
+                            </Path.Fill>
+                        </Path>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <!-- Canvas остается внутри ItemsPanelTemplate -->
+                        <Canvas Background="White" Margin="15" x:DataType="vm:CanvasViewModel"
+                                PointerMoved="MouseMoved" SizeChanged="CanvasResize" Loaded="Canvas_Loaded"
+                                PointerExited="MouseLeave" PointerPressed="CreateFigure"
+                                Height="{Binding OriginalHeight}" Width="{Binding OriginalWidth}">
+                            <Canvas.RenderTransform>
+                                <ScaleTransform ScaleX="{Binding ZoomFactor}" ScaleY="{Binding ZoomFactor}" />
+                            </Canvas.RenderTransform>
+                        </Canvas>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+        </Border>
+    </ScrollViewer>
 </UserControl>

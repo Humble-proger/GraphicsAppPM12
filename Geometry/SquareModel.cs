@@ -16,24 +16,24 @@ namespace Geometry
         private float _strokeThickness = 1;
 
         [ObservableProperty]
-        private IBrush _stroke = new SolidColorBrush(Colors.Black);
+        private Color _stroke = Colors.Black;
 
         [ObservableProperty]
-        private IBrush _fill = new SolidColorBrush(Colors.Black);
-
-        [ObservableProperty]
-        [NotifyPropertyChangedFor(nameof(ListOfPoints))]
-        [NotifyPropertyChangedFor(nameof(Geometry))]
-        [NotifyPropertyChangedFor(nameof(BoxWidth))]
-        [NotifyPropertyChangedFor(nameof(BoxHeight))]
-        private float _centerX = 10;
+        private Color _fill = Colors.Black;
 
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(ListOfPoints))]
         [NotifyPropertyChangedFor(nameof(Geometry))]
         [NotifyPropertyChangedFor(nameof(BoxWidth))]
         [NotifyPropertyChangedFor(nameof(BoxHeight))]
-        private float _centerY = 10;
+        private float _centerX = 0;
+
+        [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(ListOfPoints))]
+        [NotifyPropertyChangedFor(nameof(Geometry))]
+        [NotifyPropertyChangedFor(nameof(BoxWidth))]
+        [NotifyPropertyChangedFor(nameof(BoxHeight))]
+        private float _centerY = 0;
 
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(ListOfPoints))]
@@ -48,8 +48,10 @@ namespace Geometry
         [NotifyPropertyChangedFor(nameof(BoxWidth))]
         [NotifyPropertyChangedFor(nameof(BoxHeight))]
         private float _angle = 0;
-
+        
+        [JsonIgnore]
         public float BoxHeight => getBoxHeight();
+        [JsonIgnore] 
         public float BoxWidth => getBoxWidth();
 
         [JsonIgnore]

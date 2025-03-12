@@ -9,14 +9,9 @@ namespace IO
 {
     public class SvgExporter
     {
-        private static string ConvertBrushToHex(IBrush brush)
+        private static string ConvertColorToHex(Color color)
         {
-            if (brush is SolidColorBrush solidBrush)
-            {
-                var color = solidBrush.Color;
-                return $"#{color.R:X2}{color.G:X2}{color.B:X2}";
-            }
-            return "#000000"; // Черный по умолчанию
+            return $"#{color.R:X2}{color.G:X2}{color.B:X2}";
         }
 
 
@@ -33,7 +28,7 @@ namespace IO
 
             foreach (var shape in figures)
             {
-                string svgString = $"<path d=\"{shape.Geometry}\" fill=\"{ConvertBrushToHex(shape.Fill)}\" stroke=\"{shape.Stroke}\" stroke-width=\"{shape.StrokeThickness}\" />";
+                string svgString = $"<path d=\"{shape.Geometry}\" fill=\"{ConvertColorToHex(shape.Fill)}\" stroke=\"{shape.Stroke}\" stroke-width=\"{shape.StrokeThickness}\" />";
                 svgBuilder.AppendLine(svgString);
             }
 
