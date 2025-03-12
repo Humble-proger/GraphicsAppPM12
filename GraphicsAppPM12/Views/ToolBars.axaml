@@ -131,7 +131,7 @@
                     <Grid Background="#ededed">
                         <ScrollViewer x:Name="ShapeScroll" Height="40" VerticalScrollBarVisibility="Hidden">
                             <ListBox x:Name="ShapeList" ItemsSource="{Binding Factories}" SelectionMode="Single" 
-                                     BorderThickness="0" Background="Transparent" SelectionChanged="ShapeList_SelectionChanged">
+                                     BorderThickness="0" Background="Transparent" SelectionChanged="ShapeList_SelectionChanged" SelectedItem="{Binding SelectedButtonFigure}">
                                 <ListBox.ItemTemplate>
                                     <DataTemplate>
                                         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Left" Width="25">

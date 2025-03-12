@@ -5,18 +5,33 @@
              xmlns:vm="clr-namespace:GraphicsApp.ViewModels"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="GraphicsApp.Views.MyCanvas"
-             x:DataType="vm:MainWindowViewModel">
+             x:DataType="vm:CanvasViewModel">
 
     <!--<UserControl.DataContext>
         <vm:MainWindowViewModel />
     </UserControl.DataContext>-->
-
-    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-        <Canvas Background="White" Margin="15" x:DataType="vm:CanvasViewModel" PointerMoved="MouseMoved" SizeChanged="CanvasResize" PointerExited="MouseLeave" Height="500" Width="1000">
-            <Canvas.RenderTransform>
-                <ScaleTransform ScaleX="{Binding ZoomFactor}" ScaleY="{Binding ZoomFactor}" />
-            </Canvas.RenderTransform>
-        </Canvas>
-    </ScrollViewer>
-
+    
+    
+    <ItemsControl  ItemsSource="{Binding Main.Figures}">
+        <ItemsControl.ItemTemplate>
+            <DataTemplate>
+                <Path Stroke="Black" StrokeThickness="{Binding Thickness}" Data="{Binding Model.Geometry}">
+                    <Path.Fill>
+                        <SolidColorBrush Color="{Binding SelectedColor}"/>
+                    </Path.Fill>
+                </Path>
+            </DataTemplate>
+        </ItemsControl.ItemTemplate>
+			
+        <ItemsControl.ItemsPanel>
+            <ItemsPanelTemplate>
+                    <Canvas Background="White" Margin="15" x:DataType="vm:CanvasViewModel" PointerMoved="MouseMoved" SizeChanged="CanvasResize" PointerExited="MouseLeave" PointerPressed="CreateFigure" Height="500" Width="1000">
+                        <Canvas.RenderTransform>
+                            <ScaleTransform ScaleX="{Binding ZoomFactor}" ScaleY="{Binding ZoomFactor}" />
+                        </Canvas.RenderTransform>
+                    </Canvas>
+            </ItemsPanelTemplate>
+        </ItemsControl.ItemsPanel>
+    </ItemsControl>
+    
 </UserControl>

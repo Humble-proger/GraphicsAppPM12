@@ -17,16 +17,19 @@ namespace GraphicsApp.ViewModels
 
         public ModelFactoryViewModel()
         {
-            CreateCommand = new RelayCommand(() => Main?.Figures.Add(Create()));
+            CreateCommand = new RelayCommand<Avalonia.Point>((Avalonia.Point point) => Main?.Figures.Add(Create(point)));
         }
 
-        private ShapeViewModel Create()
+        private ShapeViewModel Create(Avalonia.Point point)
         {
-            var color = Color.FromRgb((byte) Random.Shared.Next(256), (byte) Random.Shared.Next(256), (byte) Random.Shared.Next(256));
+            // var color = Main.Toolbarsview.SelectedColor;
             var name = $"{Factory} {Random.Shared.Next(100)}";
             var model = Factory.CreateExport().Value;
-            model.Move(Random.Shared.Next(256), Random.Shared.Next(256));
-            return new() { Name = name, Color = color, Model = model, Main = Main };
+
+            model.Move((float) point.X, (float) point.Y);
+            model.StrokeThickness = (float)Main.Toolbarsview.LineThickness;
+
+            return new() { Name = name, Model = model, SelectedColor = Avalonia.Media.Color.FromRgb(0, 0, 234), Main = Main };
         }
     }
 }
