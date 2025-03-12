@@ -15,12 +15,12 @@
     <ItemsControl  ItemsSource="{Binding Main.Figures}">
         <ItemsControl.ItemTemplate>
             <DataTemplate>
-                <Path StrokeThickness="{Binding Thickness}" Data="{Binding Model.Geometry}" PointerPressed="FigureEdit">
+                <Path StrokeThickness="{Binding Model.StrokeThickness}" Data="{Binding Model.Geometry}" PointerPressed="FigureEdit">
                     <Path.Fill>
-                        <SolidColorBrush Color="{Binding SelectedColor}"/>
+                        <SolidColorBrush Color="{Binding Model.Fill}"/>
                     </Path.Fill>
                     <Path.Stroke>
-                        <SolidColorBrush Color="{Binding OutlineColor}"/>
+                        <SolidColorBrush Color="{Binding Model.Stroke}"/>
                     </Path.Stroke>
                 </Path>
             </DataTemplate>

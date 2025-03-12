@@ -16,10 +16,10 @@ namespace Geometry
         private float _strokeThickness = 1;
 
         [ObservableProperty]
-        private IBrush _stroke = new SolidColorBrush(Colors.Black);
+        private Color _stroke = Colors.Black;
 
         [ObservableProperty]
-        private IBrush _fill = new SolidColorBrush(Colors.Black);
+        private Color _fill = Colors.Black;
 
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(ListOfPoints))]

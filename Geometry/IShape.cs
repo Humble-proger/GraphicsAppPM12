@@ -18,9 +18,9 @@ namespace Geometry
         // толщина обводки)
         float StrokeThickness { get; set; }
         // цвет обводки
-        IBrush Stroke { get; set; }
+        Color Stroke { get; set; }
         // цвет заливки
-        IBrush Fill { get; set; }
+        Color Fill { get; set; }
         public void Move(float deltaX, float deltaY);
         public void Scale(float ratioX, float ratioY);
         public void Rotate(float angle);

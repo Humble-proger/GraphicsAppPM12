@@ -19,14 +19,7 @@ namespace GraphicsApp.ViewModels
         [ObservableProperty]
         private string _name = "Name";
         
-        [ObservableProperty]
-        private Avalonia.Media.Color _selectedColor;
         
-        [ObservableProperty]
-        private Avalonia.Media.Color _outlineColor;
-        
-        [ObservableProperty]
-        private float _thickness;
 
         public required IShape Model { get; init; }
         

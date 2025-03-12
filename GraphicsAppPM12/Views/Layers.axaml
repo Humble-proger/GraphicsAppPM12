@@ -29,12 +29,12 @@
                                     <TextBlock Grid.Column="0" Grid.Row="4" Text="Толщина линии" Classes="OptionsNechet"/>
                                     <TextBlock Grid.Column="0" Grid.Row="5" Text="Угол поворота" Classes="OptionsChet"/>
 
-                                    <TextBox Grid.Column="1" Grid.Row="0" Watermark="" Classes="Options"/>
+                                    <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding Main.SelectedFigure.Name}" Classes="Options"/>
                                     <TextBox Grid.Column="1" Grid.Row="1" Watermark="12" Classes="Options"/>
                                     <TextBox Grid.Column="1" Grid.Row="2" Watermark="12" Classes="Options"/>
-                                    <ColorPicker Grid.Column="1" Grid.Row="3" Color="{Binding Main.SelectedFigure.SelectedColor}" HorizontalAlignment="Left" Margin="1"/>
+                                    <ColorPicker Grid.Column="1" Grid.Row="3" Color="{Binding Main.SelectedFigure.Model.Fill}" HorizontalAlignment="Left" Margin="1"/>
                                     <!--<ColorPicker Color="{Binding Color}" Grid.Row="3" Grid.Column="1" />-->
-                                    <TextBox Grid.Column="1" Grid.Row="4" Watermark="5" Classes="Options"/>
+                                    <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding Main.SelectedFigure.Model.StrokeThickness}" Classes="Options"/>
                                     <TextBox Grid.Column="1" Grid.Row="5" Watermark="0" Classes="Options"/>
                                 </Grid>
                             </StackPanel>
