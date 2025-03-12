@@ -59,6 +59,7 @@ public partial class MainWindowViewModel : ViewModelBase
         Footerview = new(this);
         Canvasview = new(this);
         Toolbarsview = new (this);
+        Layersview = new(this);
     }
 
     private void LoadFigures(IEnumerable<ShapeViewModel>? figures)

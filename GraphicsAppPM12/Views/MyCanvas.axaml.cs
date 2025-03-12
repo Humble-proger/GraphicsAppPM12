@@ -48,7 +48,8 @@ namespace GraphicsApp.Views
             if (DataContext is CanvasViewModel viewModel)
             {
                 var position = e.GetPosition((Canvas) sender);
-                viewModel.Main.SelectedButtonFigure.CreateCommand.Execute(position);
+                if (viewModel.Main.SelectedButtonFigure != null)
+                    viewModel.Main.SelectedButtonFigure.CreateCommand.Execute(position);
             }
         }
 
@@ -60,9 +61,9 @@ namespace GraphicsApp.Views
                 if (path.DataContext is ShapeViewModel figure)
                 {
                     // Устанавливаем выбранную фигуру в ViewModel
-                    if (DataContext is MainWindowViewModel viewmodel)
+                    if (DataContext is CanvasViewModel viewmodel)
                     {
-                        viewmodel.SelectedFigure = figure;
+                        viewmodel.Main.SelectedFigure = figure;
                     }
                 }
             }
