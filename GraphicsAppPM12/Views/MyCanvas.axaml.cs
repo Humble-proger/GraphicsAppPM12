@@ -1,8 +1,13 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Input;
 using System.Numerics;
+
+using Avalonia.Controls.Shapes;
+
 using GraphicsApp.ViewModels;
 using Avalonia.Interactivity;
+
+using Geometry;
 
 namespace GraphicsApp.Views
 {
@@ -44,6 +49,22 @@ namespace GraphicsApp.Views
             {
                 var position = e.GetPosition((Canvas) sender);
                 viewModel.Main.SelectedButtonFigure.CreateCommand.Execute(position);
+            }
+        }
+
+        private void FigureEdit(object? sender, PointerPressedEventArgs e)
+        {
+            if (sender is Path path)
+            {
+                // Получаем объект фигуры из DataContext
+                if (path.DataContext is ShapeViewModel figure)
+                {
+                    // Устанавливаем выбранную фигуру в ViewModel
+                    if (DataContext is MainWindowViewModel viewmodel)
+                    {
+                        viewmodel.SelectedFigure = figure;
+                    }
+                }
             }
         }
     }

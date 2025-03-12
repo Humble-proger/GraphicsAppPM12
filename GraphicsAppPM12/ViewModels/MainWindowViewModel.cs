@@ -22,6 +22,10 @@ public partial class MainWindowViewModel : ViewModelBase
     
     [ObservableProperty]
     private ToolBarsViewModel _toolbarsview;
+    
+    [ObservableProperty]
+    private LayersViewModel _layersview;
+    
 
     public ObservableCollection<ShapeViewModel> Figures { get; } = [];
     
@@ -31,12 +35,15 @@ public partial class MainWindowViewModel : ViewModelBase
     [ObservableProperty]
     private ModelFactoryViewModel? _selectedButtonFigure;
     
+    [ObservableProperty]
+    private ShapeViewModel? _selectedFigure;
+    
     public ICommand SaveJsonCommand { get; }
     public RelayCommand LoadJsonCommand { get; }
 
     [ImportMany]
     private IEnumerable<ExportFactory<IShape, ModelMetadata>> ModelFactories { get; set; } = [];
-    
+
 
     public MainWindowViewModel()
     {
