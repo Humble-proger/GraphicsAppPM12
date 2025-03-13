@@ -7,6 +7,7 @@
              x:Class="GraphicsApp.Views.Layers"
              x:DataType="vm:LayersViewModel">
 
+    <!--xmlns:vm="clr-namespace:GraphicsApp.ViewModels"-->
     <UserControl.Styles>
         <StyleInclude Source="LayersStyles.axaml"/>
     </UserControl.Styles>
@@ -119,25 +120,21 @@
                 </StackPanel>
                 <!--</Border>-->
 
-                <!-- <ItemsControl Grid.Row="5" Margin="10" Items="{Binding LayersList}">
+                <ItemsControl ItemsSource="{Binding LayersList}" Grid.Row="5" Margin="5" Padding="5">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            
                             <Border BorderThickness="1" Background="#C0C0C0" Margin="0,0,0,15">
-                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="0">
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="5">
                                     <ToggleButton Name="VisibilityToggleButton" Background="#F0F0F0"
                                                   IsChecked="{Binding IsVisibleIcon, Mode=TwoWay}">
                                         <Viewbox Width="15" Height="15" Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2">
                                             <Canvas Width="24" Height="24">
-                                                
                                                 <Path Data="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" Stroke="#606060"
                                                       StrokeThickness="2" StrokeLineCap="Round" StrokeJoin="Round"
                                                       IsVisible="{Binding !IsVisibleIcon}"/>
                                                 <Ellipse Width="6" Height="6" Canvas.Left="9" Canvas.Top="9"
                                                          Stroke="#606060" StrokeThickness="2" Fill="Transparent"
                                                          IsVisible="{Binding !IsVisibleIcon}"/>
-
-                                                
                                                 <Path Data="M9.88 9.88a3 3 0 1 0 4.24 4.24" Stroke="#606060"
                                                       StrokeThickness="2" StrokeLineCap="Round" StrokeJoin="Round"
                                                       IsVisible="{Binding IsVisibleIcon}"/>
@@ -153,13 +150,12 @@
                                             </Canvas>
                                         </Viewbox>
                                     </ToggleButton>
-
                                     <TextBlock Name="LayerNameTextBlock" Text="{Binding LayerName}" VerticalAlignment="Center" FontSize="11" Foreground="#414141" Margin="5"/>
                                 </StackPanel>
                             </Border>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
-                </ItemsControl> -->
+                </ItemsControl>
                 
                 
                 <!--<StackPanel Orientation="Vertical" Spacing="15" Grid.Row="5" Margin="10">
