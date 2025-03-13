@@ -1,3 +1,6 @@
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+
 using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace GraphicsApp.ViewModels;
@@ -7,9 +10,26 @@ public partial class LayersViewModel : ViewModelBase
     [ObservableProperty]
     private MainWindowViewModel? _main;
 
+    public ObservableCollection<Layer> LayersList { get; set; }
+
     public LayersViewModel(MainWindowViewModel? main)
     {
         Main = main;
+        LayersList = new ObservableCollection<Layer>() {
+            new() { LayerName = "Слой 1", IsVisibleIcon=true },
+            new() { LayerName = "Слой 2", IsVisibleIcon=true },
+            new() { LayerName = "Слой 3", IsVisibleIcon=true }
+        };
     }
-    
+
+}
+
+public partial class Layer : ObservableObject
+{
+    [ObservableProperty]
+    private string _layerName;
+
+    [ObservableProperty]
+    private bool _isVisibleIcon;
+
 }
