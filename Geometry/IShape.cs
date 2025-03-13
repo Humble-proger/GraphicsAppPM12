@@ -16,7 +16,9 @@ namespace Geometry
         float BoxWidth { get; }
         // высота описанного прямоугольника
         float BoxHeight { get; }
-
+        // координаты центра описанного прямоугольника
+        float BoxCenterX { get; }
+        float BoxCenterY { get; }
         // координата х центра фигуры
         float CenterX { get; }
         // координата y центра фигуры
