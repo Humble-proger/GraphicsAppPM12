@@ -53,6 +53,10 @@ namespace Geometry {
         public float BoxHeight => getBoxHeight();
         [JsonIgnore]
         public float BoxWidth => getBoxWidth();
+        [JsonIgnore]
+        public float BoxCenterX => CenterX;
+        [JsonIgnore]
+        public float BoxCenterY => CenterY;
 
         [JsonIgnore]
         public string Geometry => GetGeometry();
