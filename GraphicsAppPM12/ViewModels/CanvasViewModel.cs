@@ -1,6 +1,10 @@
 
+using System.Globalization;
+using System;
 using System.Numerics;
 using System.Windows.Input;
+
+using Avalonia.Data.Converters;
 
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -101,5 +105,26 @@ public partial class CanvasViewModel : ViewModelBase
         ZoomFactor += delta;
         if (ZoomFactor < 0.1) ZoomFactor = 0.1;
 
+    }
+}
+
+public class NegativeValueConverter : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        if (value is double numericValue)
+        {
+            return -numericValue; // ”множаем на -1
+        }
+        return value; // ¬озвращаем исходное значение, если оно не числовое
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        if (value is double numericValue)
+        {
+            return -numericValue; // ”множаем на -1 при обратном преобразовании
+        }
+        return value; // ¬озвращаем исходное значение, если оно не числовое
     }
 }
