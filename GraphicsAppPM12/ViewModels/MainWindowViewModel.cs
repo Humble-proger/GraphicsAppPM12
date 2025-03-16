@@ -8,6 +8,9 @@ using CommunityToolkit.Mvvm.Input;
 using Geometry;
 using System.Collections.Generic;
 using CommunityToolkit.Mvvm.ComponentModel;
+using Avalonia.Controls.Templates;
+using VecEditor.IO;
+using System.IO;
 
 
 namespace GraphicsApp.ViewModels;
@@ -27,6 +30,12 @@ public partial class MainWindowViewModel : ViewModelBase
     private LayersViewModel _layersview;
     
 
+    [ObservableProperty]
+    private SettingsWindowViewModel _settingswindow;
+
+    [ObservableProperty]
+    private SettingsViewModel _settings;
+
     public ObservableCollection<ShapeViewModel> Figures { get; } = [];
     
 
@@ -39,12 +48,12 @@ public partial class MainWindowViewModel : ViewModelBase
     private ShapeViewModel? _selectedFigure;
     
     public ICommand SaveJsonCommand { get; }
-    public RelayCommand LoadJsonCommand { get; }
+    public ICommand LoadJsonCommand { get; }
 
     [ImportMany]
     private IEnumerable<ExportFactory<IShape, ModelMetadata>> ModelFactories { get; set; } = [];
 
-
+    private readonly GeometryJsonSerializer<ShapeViewModel> _geometryJsonSerializer;
     public MainWindowViewModel()
     {
         var configuration = new ContainerConfiguration()
@@ -58,8 +67,18 @@ public partial class MainWindowViewModel : ViewModelBase
         }
         Footerview = new(this);
         Canvasview = new(this);
-        Toolbarsview = new (this);
         Layersview = new(this);
+
+        Toolbarsview = new(this);
+        Settingswindow = new(this);
+        Settings = new(this);
+        _geometryJsonSerializer = new();
+
+        SaveJsonCommand = new RelayCommand<string>(
+            (filePath) => { _geometryJsonSerializer.SaveJson(filename: filePath, Figures); });
+        
+        LoadJsonCommand = new RelayCommand<string>( (FilePath) => LoadFigures(_geometryJsonSerializer.LoadJson(FilePath)) );
+
     }
 
     private void LoadFigures(IEnumerable<ShapeViewModel>? figures)

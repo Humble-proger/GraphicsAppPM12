@@ -19,11 +19,15 @@ namespace GraphicsApp.ViewModels
         [ObservableProperty]
         private string _name = "Name";
         
-        
+        [ObservableProperty]
+        [property: JsonIgnore]
+        private Avalonia.Media.Color _selectedColor;
 
         public required IShape Model { get; init; }
-        
-        
+
+        [ObservableProperty]
+        [property: JsonIgnore]
+        private bool _active = false;
 
         [JsonIgnore]
         public ICommand Remove { get; }

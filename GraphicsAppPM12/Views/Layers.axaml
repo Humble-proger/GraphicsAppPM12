@@ -3,10 +3,12 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:GraphicsApp.ViewModels"
+             xmlns:m="using:Geometry"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="GraphicsApp.Views.Layers"
              x:DataType="vm:LayersViewModel">
 
+    <!--xmlns:vm="clr-namespace:GraphicsApp.ViewModels"-->
     <UserControl.Styles>
         <StyleInclude Source="LayersStyles.axaml"/>
     </UserControl.Styles>
@@ -20,41 +22,94 @@
                 <Border Grid.Row="1" Grid.RowSpan="2"  BorderThickness="0,1,0,1" BorderBrush="#8B8B8B">
                     <ScrollViewer MaxHeight="150">
                         <Grid RowDefinitions="Auto, Auto">
-                            <StackPanel IsVisible="{Binding Main.SelectedFigure}">
-                                <Grid RowDefinitions="*,*,*,Auto,*,*,*" ColumnDefinitions="113, *" Margin="5" >
-                                    <TextBlock Grid.Column="0" Grid.Row="0" Text="Имя фигуры" Classes="OptionsNechet"/>
-                                    <TextBlock Grid.Column="0" Grid.Row="1" Text="Положение по X" Classes="OptionsChet"/>
-                                    <TextBlock Grid.Column="0" Grid.Row="2" Text="Положение по Y" Classes="OptionsNechet"/>
-                                    <TextBlock Grid.Column="0" Grid.Row="3" Text="Цвет" Classes="OptionsChet"/>
-                                    <TextBlock Grid.Column="0" Grid.Row="4" Text="Толщина линии" Classes="OptionsNechet"/>
-                                    <TextBlock Grid.Column="0" Grid.Row="5" Text="Угол поворота" Classes="OptionsChet"/>
+                            <StackPanel>
+                                <ContentControl Content="{Binding Main.SelectedFigure}" >
+                                    <ContentControl.DataTemplates>
+                                        <DataTemplate x:DataType="vm:ShapeViewModel">
+                                            <StackPanel>
+                                                <Grid RowDefinitions="*,*,*,Auto,Auto,*,*" ColumnDefinitions="113, *" Margin="5" >
+                                                    <TextBlock Grid.Column="0" Grid.Row="0" Text="Имя фигуры" Classes="OptionsNechet"/>
+                                                    <TextBlock Grid.Column="0" Grid.Row="1" Text="Положение по X" Classes="OptionsChet"/>
+                                                    <TextBlock Grid.Column="0" Grid.Row="2" Text="Положение по Y" Classes="OptionsNechet"/>
+                                                    <TextBlock Grid.Column="0" Grid.Row="3" Text="Цвет" Classes="OptionsChet"/>
+                                                    <TextBlock Grid.Column="0" Grid.Row="4" Text="Цвет контура" Classes="OptionsNechet"/>
+                                                    <TextBlock Grid.Column="0" Grid.Row="5" Text="Толщина линии" Classes="OptionsChet"/>
+                                                    <TextBlock Grid.Column="0" Grid.Row="6" Text="Угол поворота" Classes="OptionsNechet"/>
 
-                                    <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding Main.SelectedFigure.Name}" Classes="Options"/>
-                                    <TextBox Grid.Column="1" Grid.Row="1" Watermark="12" Classes="Options"/>
-                                    <TextBox Grid.Column="1" Grid.Row="2" Watermark="12" Classes="Options"/>
-                                    <ColorPicker Grid.Column="1" Grid.Row="3" Color="{Binding Main.SelectedFigure.Model.Fill}" HorizontalAlignment="Left" Margin="1"/>
-                                    <!--<ColorPicker Color="{Binding Color}" Grid.Row="3" Grid.Column="1" />-->
-                                    <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding Main.SelectedFigure.Model.StrokeThickness}" Classes="Options"/>
-                                    <TextBox Grid.Column="1" Grid.Row="5" Watermark="0" Classes="Options"/>
-                                </Grid>
-                            </StackPanel>
-
-                            <StackPanel Grid.Row="1">
-                                <Grid RowDefinitions="*,*,*,*,*,*" ColumnDefinitions="113, *" Margin="5">
-                                    <TextBlock Grid.Column="0" Grid.Row="0" Text="Радиус" Classes="OptionsNechet"/>
-                                    <TextBlock Grid.Column="0" Grid.Row="1" Text="Малая полуось" Classes="OptionsChet"/>
-                                    <TextBlock Grid.Column="0" Grid.Row="2" Text="Большая полуось" Classes="OptionsNechet"/>
-                                    <TextBlock Grid.Column="0" Grid.Row="3" Text="Количество сторон" Classes="OptionsChet"/>
-                                    <TextBlock Grid.Column="0" Grid.Row="4" Text="Длина стороны a" Classes="OptionsNechet"/>
-                                    <TextBlock Grid.Column="0" Grid.Row="5" Text="Длина стороны b" Classes="OptionsChet"/>
-
-                                    <TextBox Grid.Column="1" Grid.Row="0" Watermark="9" Classes="Options"/>
-                                    <TextBox Grid.Column="1" Grid.Row="1" Watermark="12" Classes="Options"/>
-                                    <TextBox Grid.Column="1" Grid.Row="2" Watermark="12" Classes="Options"/>
-                                    <TextBlock Grid.Column="1" Grid.Row="3" Text="6" Classes="OptionsNechet"/>
-                                    <TextBox Grid.Column="1" Grid.Row="4" Watermark="5" Classes="Options"/>
-                                    <TextBox Grid.Column="1" Grid.Row="5" Watermark="0" Classes="Options"/>
-                                </Grid>
+                                                    <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding Name, Mode=TwoWay}" Classes="Options"/>
+                                                    <TextBox Grid.Column="1" Grid.Row="1" Watermark="12" Classes="Options" Text="{Binding Model.CenterX}"/>
+                                                    <TextBox Grid.Column="1" Grid.Row="2" Watermark="12" Classes="Options" Text="{Binding Model.CenterY}"/>
+                                                    <ColorPicker Grid.Column="1" Grid.Row="3" Color="{Binding Model.Fill}" HorizontalAlignment="Left" Margin="1"/>
+                                                    <ColorPicker Grid.Column="1" Grid.Row="4" Color="{Binding Model.Stroke}" HorizontalAlignment="Left" Margin="1"/>
+                                                    <TextBox Grid.Column="1" Grid.Row="5" Text="{Binding Model.StrokeThickness}" Classes="Options"/>
+                                                    <TextBox Grid.Column="1" Grid.Row="6" Watermark="0" Classes="Options" Text="{Binding Model.Angle}"/>
+                                                </Grid>
+                                                <ContentControl Content="{Binding Model}">
+                                                    <ContentControl.DataTemplates>
+                                                        <DataTemplate x:DataType="m:CircleModel">
+                                                            <Grid RowDefinitions="*" ColumnDefinitions="113, *" Margin="5" >
+                                                                <TextBlock Grid.Column="0" Grid.Row="0" Text="Радиус" Classes="OptionsNechet"/>
+                                                                <TextBox Grid.Column="1" Grid.Row="0" Watermark="9" Classes="Options" Text="{Binding Radius}"/>
+                                                            </Grid>
+                                                        </DataTemplate>
+                                                        <DataTemplate x:DataType="m:EllipseModel">
+                                                            <Grid RowDefinitions="*, *" ColumnDefinitions="113, *" Margin="5" >
+                                                                <TextBlock Grid.Column="0" Grid.Row="0" Text="Радиус по X" Classes="OptionsNechet"/>
+                                                                <TextBlock Grid.Column="0" Grid.Row="1" Text="Радиус по Y" Classes="OptionsNechet"/>
+                                                                <TextBox Grid.Column="1" Grid.Row="0" Watermark="9" Classes="Options" Text="{Binding RadiusX}"/>
+                                                                <TextBox Grid.Column="1" Grid.Row="1" Watermark="9" Classes="Options" Text="{Binding RadiusY}"/>
+                                                            </Grid>
+                                                        </DataTemplate>
+                                                        <DataTemplate x:DataType="m:RectangleModel">
+                                                            <Grid RowDefinitions="*, *, *, *" ColumnDefinitions="113, *" Margin="5" >
+                                                                <TextBlock Grid.Column="0" Grid.Row="0" Text="Ширина" Classes="OptionsNechet"/>
+                                                                <TextBlock Grid.Column="0" Grid.Row="1" Text="Высота" Classes="OptionsNechet"/>
+                                                                <!--<TextBlock Grid.Column="0" Grid.Row="2" Text="Растяжение по X" Classes="OptionsNechet"/>
+                                                                <TextBlock Grid.Column="0" Grid.Row="3" Text="Растяжение по Y" Classes="OptionsNechet"/>-->
+                                                                <TextBox Grid.Column="1" Grid.Row="0" Watermark="9" Classes="Options" Text="{Binding Width}"/>
+                                                                <TextBox Grid.Column="1" Grid.Row="1" Watermark="9" Classes="Options" Text="{Binding Height}"/>
+                                                                <!--<TextBox Grid.Column="1" Grid.Row="2" Watermark="9" Classes="Options" Text="{Binding ScaleX}"/>
+                                                                <TextBox Grid.Column="1" Grid.Row="3" Watermark="9" Classes="Options" Text="{Binding ScaleY}"/>-->
+                                                            </Grid>
+                                                        </DataTemplate>
+                                                        <DataTemplate x:DataType="m:SquareModel">
+                                                            <Grid RowDefinitions="*, *" ColumnDefinitions="113, *" Margin="5" >
+                                                                <TextBlock Grid.Column="0" Grid.Row="0" Text="Ширина" Classes="OptionsNechet"/>
+                                                                <!--<TextBlock Grid.Column="0" Grid.Row="1" Text="Растяжение" Classes="OptionsNechet"/>-->
+                                                                <TextBox Grid.Column="1" Grid.Row="0" Watermark="9" Classes="Options" Text="{Binding Width}"/>
+                                                                <!--<TextBox Grid.Column="1" Grid.Row="1" Watermark="9" Classes="Options" Text="{Binding ScaleW}"/>-->
+                                                            </Grid>
+                                                        </DataTemplate>
+                                                        <DataTemplate x:DataType="m:HexagonModel">
+                                                            <Grid RowDefinitions="*, *, *, *" ColumnDefinitions="113, *" Margin="5" >
+                                                                <TextBlock Grid.Column="0" Grid.Row="0" Text="Ширина" Classes="OptionsNechet"/>
+                                                                <TextBlock Grid.Column="0" Grid.Row="1" Text="Высота" Classes="OptionsNechet"/>
+                                                                <!--<TextBlock Grid.Column="0" Grid.Row="2" Text="Растяжение по X" Classes="OptionsNechet"/>
+                                                                <TextBlock Grid.Column="0" Grid.Row="3" Text="Растяжение по Y" Classes="OptionsNechet"/>-->
+                                                                <TextBox Grid.Column="1" Grid.Row="0" Watermark="9" Classes="Options" Text="{Binding Width}"/>
+                                                                <TextBox Grid.Column="1" Grid.Row="1" Watermark="9" Classes="Options" Text="{Binding Height}"/>
+                                                                <!--<TextBox Grid.Column="1" Grid.Row="2" Watermark="9" Classes="Options" Text="{Binding ScaleX}"/>
+                                                                <TextBox Grid.Column="1" Grid.Row="3" Watermark="9" Classes="Options" Text="{Binding ScaleY}"/>-->
+                                                            </Grid>
+                                                        </DataTemplate>
+                                                        <DataTemplate x:DataType="m:TriangleModel">
+                                                            <Grid RowDefinitions="*, *, *, *" ColumnDefinitions="113, *" Margin="5" >
+                                                                <TextBlock Grid.Column="0" Grid.Row="0" Text="Ширина" Classes="OptionsNechet"/>
+                                                                <TextBlock Grid.Column="0" Grid.Row="1" Text="Высота" Classes="OptionsNechet"/>
+                                                                <!--<TextBlock Grid.Column="0" Grid.Row="2" Text="Растяжение по X" Classes="OptionsNechet"/>
+                                                                <TextBlock Grid.Column="0" Grid.Row="3" Text="Растяжение по Y" Classes="OptionsNechet"/>-->
+                                                                <TextBox Grid.Column="1" Grid.Row="0" Watermark="9" Classes="Options" Text="{Binding Width}"/>
+                                                                <TextBox Grid.Column="1" Grid.Row="1" Watermark="9" Classes="Options" Text="{Binding Height}"/>
+                                                                <!--<TextBox Grid.Column="1" Grid.Row="2" Watermark="9" Classes="Options" Text="{Binding ScaleX}"/>
+                                                                <TextBox Grid.Column="1" Grid.Row="3" Watermark="9" Classes="Options" Text="{Binding ScaleY}"/>-->
+                                                            </Grid>
+                                                        </DataTemplate>
+                                                    </ContentControl.DataTemplates>
+                                                </ContentControl>
+                                            </StackPanel> 
+                                        </DataTemplate>
+                                    </ContentControl.DataTemplates>
+                                </ContentControl>
                             </StackPanel>
                         </Grid>
                     </ScrollViewer>
@@ -119,25 +174,21 @@
                 </StackPanel>
                 <!--</Border>-->
 
-                <!-- <ItemsControl Grid.Row="5" Margin="10" Items="{Binding LayersList}">
+                <ItemsControl ItemsSource="{Binding LayersList}" Grid.Row="5" Margin="5" Padding="5">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            
                             <Border BorderThickness="1" Background="#C0C0C0" Margin="0,0,0,15">
-                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="0">
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="5">
                                     <ToggleButton Name="VisibilityToggleButton" Background="#F0F0F0"
                                                   IsChecked="{Binding IsVisibleIcon, Mode=TwoWay}">
                                         <Viewbox Width="15" Height="15" Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2">
                                             <Canvas Width="24" Height="24">
-                                                
                                                 <Path Data="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" Stroke="#606060"
                                                       StrokeThickness="2" StrokeLineCap="Round" StrokeJoin="Round"
                                                       IsVisible="{Binding !IsVisibleIcon}"/>
                                                 <Ellipse Width="6" Height="6" Canvas.Left="9" Canvas.Top="9"
                                                          Stroke="#606060" StrokeThickness="2" Fill="Transparent"
                                                          IsVisible="{Binding !IsVisibleIcon}"/>
-
-                                                
                                                 <Path Data="M9.88 9.88a3 3 0 1 0 4.24 4.24" Stroke="#606060"
                                                       StrokeThickness="2" StrokeLineCap="Round" StrokeJoin="Round"
                                                       IsVisible="{Binding IsVisibleIcon}"/>
@@ -153,13 +204,12 @@
                                             </Canvas>
                                         </Viewbox>
                                     </ToggleButton>
-
                                     <TextBlock Name="LayerNameTextBlock" Text="{Binding LayerName}" VerticalAlignment="Center" FontSize="11" Foreground="#414141" Margin="5"/>
                                 </StackPanel>
                             </Border>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
-                </ItemsControl> -->
+                </ItemsControl>
                 
                 
                 <!--<StackPanel Orientation="Vertical" Spacing="15" Grid.Row="5" Margin="10">

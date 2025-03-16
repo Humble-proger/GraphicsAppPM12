@@ -11,6 +11,10 @@ namespace Geometry
     public partial class CircleModel : ObservableObject, IShape
     {
         [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(BoxHeight))]
+        [NotifyPropertyChangedFor(nameof(BoxWidth))]
+        [NotifyPropertyChangedFor(nameof(BoxCenterX))]
+        [NotifyPropertyChangedFor(nameof(BoxCenterY))]
         private float _strokeThickness = 1;
 
         [ObservableProperty]
@@ -23,31 +27,51 @@ namespace Geometry
         [NotifyPropertyChangedFor(nameof(Geometry))]
         [NotifyPropertyChangedFor(nameof(BoxWidth))]
         [NotifyPropertyChangedFor(nameof(BoxHeight))]
+        [NotifyPropertyChangedFor(nameof(BoxCenterX))]
+        [NotifyPropertyChangedFor(nameof(BoxCenterY))]
         private float _centerX;
 
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(Geometry))]
         [NotifyPropertyChangedFor(nameof(BoxWidth))]
         [NotifyPropertyChangedFor(nameof(BoxHeight))]
+        [NotifyPropertyChangedFor(nameof(BoxCenterX))]
+        [NotifyPropertyChangedFor(nameof(BoxCenterY))]
         private float _centerY;
 
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(Geometry))]
         [NotifyPropertyChangedFor(nameof(BoxWidth))]
         [NotifyPropertyChangedFor(nameof(BoxHeight))]
-        private float _radius = 10;
+        [NotifyPropertyChangedFor(nameof(BoxCenterX))]
+        [NotifyPropertyChangedFor(nameof(BoxCenterY))]
+        private float _radius = 50;
 
         [ObservableProperty]
         private float _angle = 0;
 
-        public float BoxHeight => getBoxHeight();
-        public float BoxWidth => getBoxWidth();
+        [JsonIgnore]
+        public float BoxHeight => float.Abs(2 * Radius) + StrokeThickness + 6;
+        [JsonIgnore]
+        public float BoxWidth => float.Abs(2 * Radius) + StrokeThickness + 6;
+        [JsonIgnore]
+        public float BoxCenterX => CenterX - BoxWidth / 2;
+        [JsonIgnore]
+        public float BoxCenterY => CenterY - BoxHeight / 2;
         [JsonIgnore]
         public string Geometry => getGeometry();
 
         public void Scale(float ratioX, float ratioY)
         {
-            Radius *= ratioX >= ratioY ? ratioX : ratioY;
+            if (ratioX == 1.0)
+                Radius *= ratioY;
+            else if (ratioY == 1.0)
+                Radius *= ratioX;
+            else
+            {
+                ratioX = ratioX >= ratioY ? ratioX : ratioY;
+                Radius *= ratioX;
+            }
         }
 
         public void Move(float deltaX, float deltaY)
@@ -76,16 +100,6 @@ namespace Geometry
             var secondPointY = (float) (CenterY + (secondX - CenterX) * Math.Sin(angleRad) + (secondY - CenterY) * Math.Cos(angleRad));
 
             return FormattableString.Invariant($"M{firstPointX},{firstPointY} A{Radius},{Radius},{Angle},1,1,{secondPointX},{secondPointY} A{Radius},{Radius},{Angle},1,1,{firstPointX},{firstPointY} z");
-        }
-
-        private float getBoxWidth()
-        {
-            return (float) (2.0 * Math.Sqrt(Math.Pow(Radius * Math.Cos(Angle * Math.PI / 180.0), 2) + Math.Pow(Radius * Math.Sin(Angle * Math.PI / 180.0), 2)));
-        }
-
-        private float getBoxHeight()
-        {
-            return (float) (2.0 * Math.Sqrt(Math.Pow(Radius * Math.Sin(Angle * Math.PI / 180.0), 2) + Math.Pow(Radius * Math.Cos(Angle * Math.PI / 180.0), 2)));
         }
     }
 }

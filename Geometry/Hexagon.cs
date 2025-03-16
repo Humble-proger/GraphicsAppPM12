@@ -8,9 +8,9 @@ using CommunityToolkit.Mvvm.ComponentModel;
 namespace Geometry
 {
     [Export(typeof(IShape))]
-    [ExportMetadata("LogoButton", "square.png")]
-    [ExportMetadata("Name", "Square")]
-    public partial class SquareModel : ObservableObject, IShape
+    [ExportMetadata("LogoButton", "hexagon.png")]
+    [ExportMetadata("Name", "Hexagon")]
+    public partial class HexagonModel : ObservableObject, IShape
     {
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(BoxWidth))]
@@ -50,7 +50,16 @@ namespace Geometry
         [NotifyPropertyChangedFor(nameof(BoxHeight))]
         [NotifyPropertyChangedFor(nameof(BoxCenterX))]
         [NotifyPropertyChangedFor(nameof(BoxCenterY))]
-        private float _width = 100;
+        private float _width = 40;
+
+        [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(ListOfPoints))]
+        [NotifyPropertyChangedFor(nameof(Geometry))]
+        [NotifyPropertyChangedFor(nameof(BoxWidth))]
+        [NotifyPropertyChangedFor(nameof(BoxHeight))]
+        [NotifyPropertyChangedFor(nameof(BoxCenterX))]
+        [NotifyPropertyChangedFor(nameof(BoxCenterY))]
+        private float _height = 40;
 
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(ListOfPoints))]
@@ -68,15 +77,20 @@ namespace Geometry
         [NotifyPropertyChangedFor(nameof(BoxHeight))]
         [NotifyPropertyChangedFor(nameof(BoxCenterX))]
         [NotifyPropertyChangedFor(nameof(BoxCenterY))]
-        private float _scaleW = 1;
+        private float _scaleX = 1;
 
-        [JsonIgnore]
-        public float BoxHeight => getBoxHeight() * StrokeThickness + 6;
-        [JsonIgnore] 
-        public float BoxWidth => getBoxWidth() * StrokeThickness + 6;
-        [JsonIgnore]
+        [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(ListOfPoints))]
+        [NotifyPropertyChangedFor(nameof(Geometry))]
+        [NotifyPropertyChangedFor(nameof(BoxWidth))]
+        [NotifyPropertyChangedFor(nameof(BoxHeight))]
+        [NotifyPropertyChangedFor(nameof(BoxCenterX))]
+        [NotifyPropertyChangedFor(nameof(BoxCenterY))]
+        private float _scaleY = 1;
+
+        public float BoxHeight => getBoxHeight() + StrokeThickness + 6;
+        public float BoxWidth => getBoxWidth() + StrokeThickness + 6;
         public float BoxCenterX => CenterX - BoxWidth / 2;
-        [JsonIgnore]
         public float BoxCenterY => CenterY - BoxHeight / 2;
 
         [JsonIgnore]
@@ -87,13 +101,8 @@ namespace Geometry
 
         public void Scale(float ratioX, float ratioY)
         {
-            if (ratioX == 1.0)
-                ScaleW *= ratioY;
-            else if (ratioY == 1.0)
-                ScaleW *= ratioX;
-            else
-                ratioX = ratioX >= ratioY ? ratioX : ratioY;
-                ScaleW *= ratioX;
+            ScaleX *= ratioX;
+            ScaleY *= ratioY;
         }
 
         public void Move(float deltaX, float deltaY)
@@ -111,18 +120,20 @@ namespace Geometry
         public List<Avalonia.Point> getPoints()
         {
             List<Avalonia.Point> list = [
-                new Avalonia.Point(CenterX - Width / 2, CenterY - Width / 2),
-            new Avalonia.Point(CenterX + Width / 2, CenterY - Width / 2),
-            new Avalonia.Point(CenterX + Width / 2, CenterY + Width / 2),
-            new Avalonia.Point(CenterX - Width / 2, CenterY + Width / 2)
-                ];
+                new Avalonia.Point(CenterX, CenterY - Height / 2.0),
+            new Avalonia.Point(CenterX + Width / 2.0, CenterY - Height / 4.0),
+            new Avalonia.Point(CenterX + Width / 2.0, CenterY + Height / 4.0),
+            new Avalonia.Point(CenterX, CenterY + Height / 2.0),
+            new Avalonia.Point(CenterX - Width / 2.0, CenterY + Height / 4.0),
+            new Avalonia.Point(CenterX - Width / 2.0, CenterY - Height / 4.0)
+            ];
 
             var angleRad = Angle * Math.PI / 180.0;
 
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < 6; i++)
             {
-                list[i] = new Avalonia.Point((CenterX + ScaleW * ((list[i].X - CenterX) * Math.Cos(angleRad) - (list[i].Y - CenterY) * Math.Sin(angleRad))),
-                    (CenterY + ScaleW * ((list[i].X - CenterX) * Math.Sin(angleRad) + (list[i].Y - CenterY) * Math.Cos(angleRad))));
+                list[i] = new Avalonia.Point((CenterX + ScaleX * ((list[i].X - CenterX) * Math.Cos(angleRad) - (list[i].Y - CenterY) * Math.Sin(angleRad))),
+                    (CenterY + ScaleY * ((list[i].X - CenterX) * Math.Sin(angleRad) + (list[i].Y - CenterY) * Math.Cos(angleRad))));
             }
 
             return list;
@@ -143,6 +154,45 @@ namespace Geometry
 
             a += "z";
             return a;
+        }
+
+        public float getCenterBoxX()
+        {
+
+            float maxCoord = float.MinValue;
+            float minCoord = float.MaxValue;
+            for (int i = 0; i < ListOfPoints.Count; i++)
+            {
+                if (ListOfPoints[i].X > maxCoord)
+                {
+                    maxCoord = (float) ListOfPoints[i].X;
+                }
+
+                if (ListOfPoints[i].X < minCoord)
+                {
+                    minCoord = (float) ListOfPoints[i].X;
+                }
+            }
+            return (float) (minCoord + (maxCoord - minCoord) / 2.0);
+        }
+        public float getCenterBoxY()
+        {
+
+            float maxCoord = float.MinValue;
+            float minCoord = float.MaxValue;
+            for (int i = 0; i < ListOfPoints.Count; i++)
+            {
+                if (ListOfPoints[i].Y > maxCoord)
+                {
+                    maxCoord = (float) ListOfPoints[i].Y;
+                }
+
+                if (ListOfPoints[i].Y < minCoord)
+                {
+                    minCoord = (float) ListOfPoints[i].Y;
+                }
+            }
+            return (float) (minCoord + (maxCoord - minCoord) / 2.0);
         }
         private float getBoxWidth()
         {
