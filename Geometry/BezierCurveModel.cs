@@ -9,6 +9,10 @@ namespace Geometry
     public partial class BezierCurveModel : ObservableObject, IShape
     {
         [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(BoxHeight))]
+        [NotifyPropertyChangedFor(nameof(BoxWidth))]
+        [NotifyPropertyChangedFor(nameof(BoxCenterX))]
+        [NotifyPropertyChangedFor(nameof(BoxCenterY))]
         private float _strokeThickness = 1;
 
         [ObservableProperty]
@@ -18,15 +22,27 @@ namespace Geometry
         private Color _fill = Colors.Black;
 
         [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(Geometry))]
+        [NotifyPropertyChangedFor(nameof(BoxWidth))]
+        [NotifyPropertyChangedFor(nameof(BoxHeight))]
+        [NotifyPropertyChangedFor(nameof(BoxCenterX))]
+        [NotifyPropertyChangedFor(nameof(BoxCenterY))]
         private float _centerX;
 
         [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(Geometry))]
+        [NotifyPropertyChangedFor(nameof(BoxWidth))]
+        [NotifyPropertyChangedFor(nameof(BoxHeight))]
+        [NotifyPropertyChangedFor(nameof(BoxCenterX))]
+        [NotifyPropertyChangedFor(nameof(BoxCenterY))]
         private float _centerY;
 
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(Geometry))]
         [NotifyPropertyChangedFor(nameof(BoxWidth))]
         [NotifyPropertyChangedFor(nameof(BoxHeight))]
+        [NotifyPropertyChangedFor(nameof(BoxCenterX))]
+        [NotifyPropertyChangedFor(nameof(BoxCenterY))]
         private List<Avalonia.Point> _listOfPoints = [];
         public BezierCurveModel(List<Avalonia.Point> initialPoints)
         {
@@ -38,13 +54,15 @@ namespace Geometry
         [NotifyPropertyChangedFor(nameof(Geometry))]
         [NotifyPropertyChangedFor(nameof(BoxWidth))]
         [NotifyPropertyChangedFor(nameof(BoxHeight))]
+        [NotifyPropertyChangedFor(nameof(BoxCenterX))]
+        [NotifyPropertyChangedFor(nameof(BoxCenterY))]
         private float _angle = 0;
 
-        public float BoxHeight => getBoxHeight();
-        public float BoxWidth => getBoxWidth();
+        public float BoxHeight => getBoxHeight() + StrokeThickness + 6;
+        public float BoxWidth => getBoxWidth() + StrokeThickness + 6;
 
-        public float BoxCenterX => getCenterBoxX();
-        public float BoxCenterY => getCenterBoxY();
+        public float BoxCenterX => getCenterBoxX() - BoxWidth / 2;
+        public float BoxCenterY => getCenterBoxY() - BoxWidth / 2;
 
 
         [JsonIgnore]

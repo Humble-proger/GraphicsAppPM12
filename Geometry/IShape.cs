@@ -10,6 +10,8 @@ namespace Geometry
     [JsonDerivedType(typeof(RectangleModel), typeDiscriminator: "rectangle")]
     [JsonDerivedType(typeof(SquareModel), typeDiscriminator: "square")]
     [JsonDerivedType(typeof(EllipseModel), typeDiscriminator: "ellipse")]
+    [JsonDerivedType(typeof(TriangleModel), typeDiscriminator: "triangle")]
+    [JsonDerivedType(typeof(HexagonModel), typeDiscriminator: "hexagon")]
     public interface IShape
     {
         // ширина описанного прямоугольника
@@ -23,6 +25,8 @@ namespace Geometry
         float CenterX { get; }
         // координата y центра фигуры
         float CenterY { get; }
+
+        float Angle { get; }
         // толщина обводки)
         float StrokeThickness { get; set; }
         // цвет обводки
