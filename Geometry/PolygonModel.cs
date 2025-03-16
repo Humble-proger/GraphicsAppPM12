@@ -5,10 +5,15 @@ using Avalonia.Media;
 using CommunityToolkit.Mvvm.ComponentModel;
 
 
-namespace Geometry {
+namespace Geometry
+{
     public partial class PolygonModel : ObservableObject, IShape
     {
         [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(BoxHeight))]
+        [NotifyPropertyChangedFor(nameof(BoxWidth))]
+        [NotifyPropertyChangedFor(nameof(BoxCenterX))]
+        [NotifyPropertyChangedFor(nameof(BoxCenterY))]
         private float _strokeThickness = 1;
 
         [ObservableProperty]
@@ -18,15 +23,27 @@ namespace Geometry {
         private Color _fill = Colors.Black;
 
         [ObservableProperty]
-        private float _centerX = 10;
-
-        [ObservableProperty]
-        private float _centerY = 10;
+        [NotifyPropertyChangedFor(nameof(Geometry))]
+        [NotifyPropertyChangedFor(nameof(BoxWidth))]
+        [NotifyPropertyChangedFor(nameof(BoxHeight))]
+        [NotifyPropertyChangedFor(nameof(BoxCenterX))]
+        [NotifyPropertyChangedFor(nameof(BoxCenterY))]
+        private float _centerX = 0;
 
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(Geometry))]
         [NotifyPropertyChangedFor(nameof(BoxWidth))]
         [NotifyPropertyChangedFor(nameof(BoxHeight))]
+        [NotifyPropertyChangedFor(nameof(BoxCenterX))]
+        [NotifyPropertyChangedFor(nameof(BoxCenterY))]
+        private float _centerY = 0;
+
+        [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(Geometry))]
+        [NotifyPropertyChangedFor(nameof(BoxWidth))]
+        [NotifyPropertyChangedFor(nameof(BoxHeight))]
+        [NotifyPropertyChangedFor(nameof(BoxCenterX))]
+        [NotifyPropertyChangedFor(nameof(BoxCenterY))]
         private List<Avalonia.Point> _listOfPoints = [];
         public PolygonModel(List<Avalonia.Point> initialPoints)
         {
@@ -38,13 +55,18 @@ namespace Geometry {
         [NotifyPropertyChangedFor(nameof(Geometry))]
         [NotifyPropertyChangedFor(nameof(BoxWidth))]
         [NotifyPropertyChangedFor(nameof(BoxHeight))]
+        [NotifyPropertyChangedFor(nameof(BoxCenterX))]
+        [NotifyPropertyChangedFor(nameof(BoxCenterY))]
         private float _angle = 0;
 
-        public float BoxHeight => getBoxHeight();
-        public float BoxWidth => getBoxWidth();
-
-        public float BoxCenterX => getCenterBoxX();
-        public float BoxCenterY => getCenterBoxY();
+        [JsonIgnore]
+        public float BoxHeight => getBoxHeight() + StrokeThickness + 6;
+        [JsonIgnore]
+        public float BoxWidth => getBoxWidth() + StrokeThickness + 6;
+        [JsonIgnore]
+        public float BoxCenterX => getCenterBoxX() - BoxWidth / 2;
+        [JsonIgnore]
+        public float BoxCenterY => getCenterBoxY() - BoxHeight / 2;
 
         [JsonIgnore]
         public string Geometry => getGeometry();

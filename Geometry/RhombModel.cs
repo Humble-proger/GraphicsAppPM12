@@ -6,7 +6,7 @@ using Avalonia.Media;
 
 using CommunityToolkit.Mvvm.ComponentModel;
 
-using Geometry;
+namespace Geometry;
 
 public partial class RhombModel : ObservableObject, IShape
 {

@@ -13,6 +13,10 @@ namespace Geometry
     public partial class SquareModel : ObservableObject, IShape
     {
         [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(BoxWidth))]
+        [NotifyPropertyChangedFor(nameof(BoxHeight))]
+        [NotifyPropertyChangedFor(nameof(BoxCenterX))]
+        [NotifyPropertyChangedFor(nameof(BoxCenterY))]
         private float _strokeThickness = 1;
 
         [ObservableProperty]
@@ -26,6 +30,8 @@ namespace Geometry
         [NotifyPropertyChangedFor(nameof(Geometry))]
         [NotifyPropertyChangedFor(nameof(BoxWidth))]
         [NotifyPropertyChangedFor(nameof(BoxHeight))]
+        [NotifyPropertyChangedFor(nameof(BoxCenterX))]
+        [NotifyPropertyChangedFor(nameof(BoxCenterY))]
         private float _centerX = 0;
 
         [ObservableProperty]
@@ -33,6 +39,8 @@ namespace Geometry
         [NotifyPropertyChangedFor(nameof(Geometry))]
         [NotifyPropertyChangedFor(nameof(BoxWidth))]
         [NotifyPropertyChangedFor(nameof(BoxHeight))]
+        [NotifyPropertyChangedFor(nameof(BoxCenterX))]
+        [NotifyPropertyChangedFor(nameof(BoxCenterY))]
         private float _centerY = 0;
 
         [ObservableProperty]
@@ -40,23 +48,36 @@ namespace Geometry
         [NotifyPropertyChangedFor(nameof(Geometry))]
         [NotifyPropertyChangedFor(nameof(BoxWidth))]
         [NotifyPropertyChangedFor(nameof(BoxHeight))]
-        private float _width = 10;
+        [NotifyPropertyChangedFor(nameof(BoxCenterX))]
+        [NotifyPropertyChangedFor(nameof(BoxCenterY))]
+        private float _width = 100;
 
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(ListOfPoints))]
         [NotifyPropertyChangedFor(nameof(Geometry))]
         [NotifyPropertyChangedFor(nameof(BoxWidth))]
         [NotifyPropertyChangedFor(nameof(BoxHeight))]
+        [NotifyPropertyChangedFor(nameof(BoxCenterX))]
+        [NotifyPropertyChangedFor(nameof(BoxCenterY))]
         private float _angle = 0;
-        
+
+        [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(ListOfPoints))]
+        [NotifyPropertyChangedFor(nameof(Geometry))]
+        [NotifyPropertyChangedFor(nameof(BoxWidth))]
+        [NotifyPropertyChangedFor(nameof(BoxHeight))]
+        [NotifyPropertyChangedFor(nameof(BoxCenterX))]
+        [NotifyPropertyChangedFor(nameof(BoxCenterY))]
+        private float _scaleW = 1;
+
         [JsonIgnore]
-        public float BoxHeight => getBoxHeight();
+        public float BoxHeight => getBoxHeight() * StrokeThickness + 6;
         [JsonIgnore] 
-        public float BoxWidth => getBoxWidth();
+        public float BoxWidth => getBoxWidth() * StrokeThickness + 6;
         [JsonIgnore]
-        public float BoxCenterX => CenterX;
+        public float BoxCenterX => CenterX - BoxWidth / 2;
         [JsonIgnore]
-        public float BoxCenterY => CenterY;
+        public float BoxCenterY => CenterY - BoxHeight / 2;
 
         [JsonIgnore]
         private List<Avalonia.Point> ListOfPoints => getPoints();
@@ -66,7 +87,13 @@ namespace Geometry
 
         public void Scale(float ratioX, float ratioY)
         {
-            Width *= ratioX >= ratioY ? ratioX : ratioY;
+            if (ratioX == 1.0)
+                ScaleW *= ratioY;
+            else if (ratioY == 1.0)
+                ScaleW *= ratioX;
+            else
+                ratioX = ratioX >= ratioY ? ratioX : ratioY;
+                ScaleW *= ratioX;
         }
 
         public void Move(float deltaX, float deltaY)
@@ -94,8 +121,8 @@ namespace Geometry
 
             for (int i = 0; i < 4; i++)
             {
-                list[i] = new Avalonia.Point((CenterX + (list[i].X - CenterX) * Math.Cos(angleRad) - (list[i].Y - CenterY) * Math.Sin(angleRad)),
-                    (CenterY + (list[i].X - CenterX) * Math.Sin(angleRad) + (list[i].Y - CenterY) * Math.Cos(angleRad)));
+                list[i] = new Avalonia.Point((CenterX + ScaleW * ((list[i].X - CenterX) * Math.Cos(angleRad) - (list[i].Y - CenterY) * Math.Sin(angleRad))),
+                    (CenterY + ScaleW * ((list[i].X - CenterX) * Math.Sin(angleRad) + (list[i].Y - CenterY) * Math.Cos(angleRad))));
             }
 
             return list;
