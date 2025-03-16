@@ -98,11 +98,8 @@ namespace GraphicsApp.Views
                         viewModel.Main.SelectedFigure.Active = false;
                         viewModel.Main.SelectedFigure = null;
                     }
-                }
 
-                if (viewModel.Main is not null) {
-                    if (viewModel.Main.SelectedButtonFigure is not null)
-                    {
+                    if (viewModel.Main.SelectedButtonFigure is not null) {
                         var position = e.GetCurrentPoint(_canvas).Position;
                         viewModel.Main.SelectedButtonFigure.CreateCommand.Execute(position);
                     }

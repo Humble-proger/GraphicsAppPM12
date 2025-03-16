@@ -1,6 +1,8 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 using Avalonia.Controls;
+using Avalonia.Interactivity;
+using Avalonia.Metadata;
 
 namespace GraphicsApp.Views
 {
@@ -15,6 +17,5 @@ namespace GraphicsApp.Views
             DataContext = this; // Устанавливаем контекст данных
 
         }
-
     }
 }
