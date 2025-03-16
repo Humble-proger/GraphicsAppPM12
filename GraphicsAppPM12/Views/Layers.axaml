@@ -64,44 +64,44 @@
                                                             <Grid RowDefinitions="*, *, *, *" ColumnDefinitions="113, *" Margin="5" >
                                                                 <TextBlock Grid.Column="0" Grid.Row="0" Text="Ширина" Classes="OptionsNechet"/>
                                                                 <TextBlock Grid.Column="0" Grid.Row="1" Text="Высота" Classes="OptionsNechet"/>
-                                                                <TextBlock Grid.Column="0" Grid.Row="2" Text="Растяжение по X" Classes="OptionsNechet"/>
-                                                                <TextBlock Grid.Column="0" Grid.Row="3" Text="Растяжение по Y" Classes="OptionsNechet"/>
+                                                                <!--<TextBlock Grid.Column="0" Grid.Row="2" Text="Растяжение по X" Classes="OptionsNechet"/>
+                                                                <TextBlock Grid.Column="0" Grid.Row="3" Text="Растяжение по Y" Classes="OptionsNechet"/>-->
                                                                 <TextBox Grid.Column="1" Grid.Row="0" Watermark="9" Classes="Options" Text="{Binding Width}"/>
                                                                 <TextBox Grid.Column="1" Grid.Row="1" Watermark="9" Classes="Options" Text="{Binding Height}"/>
-                                                                <TextBox Grid.Column="1" Grid.Row="2" Watermark="9" Classes="Options" Text="{Binding ScaleX}"/>
-                                                                <TextBox Grid.Column="1" Grid.Row="3" Watermark="9" Classes="Options" Text="{Binding ScaleY}"/>
+                                                                <!--<TextBox Grid.Column="1" Grid.Row="2" Watermark="9" Classes="Options" Text="{Binding ScaleX}"/>
+                                                                <TextBox Grid.Column="1" Grid.Row="3" Watermark="9" Classes="Options" Text="{Binding ScaleY}"/>-->
                                                             </Grid>
                                                         </DataTemplate>
                                                         <DataTemplate x:DataType="m:SquareModel">
                                                             <Grid RowDefinitions="*, *" ColumnDefinitions="113, *" Margin="5" >
                                                                 <TextBlock Grid.Column="0" Grid.Row="0" Text="Ширина" Classes="OptionsNechet"/>
-                                                                <TextBlock Grid.Column="0" Grid.Row="1" Text="Растяжение" Classes="OptionsNechet"/>
+                                                                <!--<TextBlock Grid.Column="0" Grid.Row="1" Text="Растяжение" Classes="OptionsNechet"/>-->
                                                                 <TextBox Grid.Column="1" Grid.Row="0" Watermark="9" Classes="Options" Text="{Binding Width}"/>
-                                                                <TextBox Grid.Column="1" Grid.Row="1" Watermark="9" Classes="Options" Text="{Binding ScaleW}"/>
+                                                                <!--<TextBox Grid.Column="1" Grid.Row="1" Watermark="9" Classes="Options" Text="{Binding ScaleW}"/>-->
                                                             </Grid>
                                                         </DataTemplate>
                                                         <DataTemplate x:DataType="m:HexagonModel">
                                                             <Grid RowDefinitions="*, *, *, *" ColumnDefinitions="113, *" Margin="5" >
                                                                 <TextBlock Grid.Column="0" Grid.Row="0" Text="Ширина" Classes="OptionsNechet"/>
                                                                 <TextBlock Grid.Column="0" Grid.Row="1" Text="Высота" Classes="OptionsNechet"/>
-                                                                <TextBlock Grid.Column="0" Grid.Row="2" Text="Растяжение по X" Classes="OptionsNechet"/>
-                                                                <TextBlock Grid.Column="0" Grid.Row="3" Text="Растяжение по Y" Classes="OptionsNechet"/>
+                                                                <!--<TextBlock Grid.Column="0" Grid.Row="2" Text="Растяжение по X" Classes="OptionsNechet"/>
+                                                                <TextBlock Grid.Column="0" Grid.Row="3" Text="Растяжение по Y" Classes="OptionsNechet"/>-->
                                                                 <TextBox Grid.Column="1" Grid.Row="0" Watermark="9" Classes="Options" Text="{Binding Width}"/>
                                                                 <TextBox Grid.Column="1" Grid.Row="1" Watermark="9" Classes="Options" Text="{Binding Height}"/>
-                                                                <TextBox Grid.Column="1" Grid.Row="2" Watermark="9" Classes="Options" Text="{Binding ScaleX}"/>
-                                                                <TextBox Grid.Column="1" Grid.Row="3" Watermark="9" Classes="Options" Text="{Binding ScaleY}"/>
+                                                                <!--<TextBox Grid.Column="1" Grid.Row="2" Watermark="9" Classes="Options" Text="{Binding ScaleX}"/>
+                                                                <TextBox Grid.Column="1" Grid.Row="3" Watermark="9" Classes="Options" Text="{Binding ScaleY}"/>-->
                                                             </Grid>
                                                         </DataTemplate>
                                                         <DataTemplate x:DataType="m:TriangleModel">
                                                             <Grid RowDefinitions="*, *, *, *" ColumnDefinitions="113, *" Margin="5" >
                                                                 <TextBlock Grid.Column="0" Grid.Row="0" Text="Ширина" Classes="OptionsNechet"/>
                                                                 <TextBlock Grid.Column="0" Grid.Row="1" Text="Высота" Classes="OptionsNechet"/>
-                                                                <TextBlock Grid.Column="0" Grid.Row="2" Text="Растяжение по X" Classes="OptionsNechet"/>
-                                                                <TextBlock Grid.Column="0" Grid.Row="3" Text="Растяжение по Y" Classes="OptionsNechet"/>
+                                                                <!--<TextBlock Grid.Column="0" Grid.Row="2" Text="Растяжение по X" Classes="OptionsNechet"/>
+                                                                <TextBlock Grid.Column="0" Grid.Row="3" Text="Растяжение по Y" Classes="OptionsNechet"/>-->
                                                                 <TextBox Grid.Column="1" Grid.Row="0" Watermark="9" Classes="Options" Text="{Binding Width}"/>
                                                                 <TextBox Grid.Column="1" Grid.Row="1" Watermark="9" Classes="Options" Text="{Binding Height}"/>
-                                                                <TextBox Grid.Column="1" Grid.Row="2" Watermark="9" Classes="Options" Text="{Binding ScaleX}"/>
-                                                                <TextBox Grid.Column="1" Grid.Row="3" Watermark="9" Classes="Options" Text="{Binding ScaleY}"/>
+                                                                <!--<TextBox Grid.Column="1" Grid.Row="2" Watermark="9" Classes="Options" Text="{Binding ScaleX}"/>
+                                                                <TextBox Grid.Column="1" Grid.Row="3" Watermark="9" Classes="Options" Text="{Binding ScaleY}"/>-->
                                                             </Grid>
                                                         </DataTemplate>
                                                     </ContentControl.DataTemplates>

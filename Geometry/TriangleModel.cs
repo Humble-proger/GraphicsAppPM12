@@ -2,6 +2,7 @@
 using Avalonia.Media;
 using CommunityToolkit.Mvvm.ComponentModel;
 
+namespace Geometry;
 public partial class TriangleModel : ObservableObject, IShape
 {
     [ObservableProperty]
