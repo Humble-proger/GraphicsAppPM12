@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.Composition;
+using System.Text.Json.Serialization;
 
 using Avalonia.Media;
 
@@ -6,9 +7,16 @@ using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace Geometry
 {
+    [Export(typeof(IShape))]
+    [ExportMetadata("LogoButton", "hexagon.png")]
+    [ExportMetadata("Name", "Hexagon")]
     public partial class HexagonModel : ObservableObject, IShape
     {
         [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(BoxWidth))]
+        [NotifyPropertyChangedFor(nameof(BoxHeight))]
+        [NotifyPropertyChangedFor(nameof(BoxCenterX))]
+        [NotifyPropertyChangedFor(nameof(BoxCenterY))]
         private float _strokeThickness = 1;
 
         [ObservableProperty]
@@ -22,40 +30,68 @@ namespace Geometry
         [NotifyPropertyChangedFor(nameof(Geometry))]
         [NotifyPropertyChangedFor(nameof(BoxWidth))]
         [NotifyPropertyChangedFor(nameof(BoxHeight))]
-        private float _centerX = 10;
+        [NotifyPropertyChangedFor(nameof(BoxCenterX))]
+        [NotifyPropertyChangedFor(nameof(BoxCenterY))]
+        private float _centerX = 0;
 
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(ListOfPoints))]
         [NotifyPropertyChangedFor(nameof(Geometry))]
         [NotifyPropertyChangedFor(nameof(BoxWidth))]
         [NotifyPropertyChangedFor(nameof(BoxHeight))]
-        private float _centerY = 10;
+        [NotifyPropertyChangedFor(nameof(BoxCenterX))]
+        [NotifyPropertyChangedFor(nameof(BoxCenterY))]
+        private float _centerY = 0;
 
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(ListOfPoints))]
         [NotifyPropertyChangedFor(nameof(Geometry))]
         [NotifyPropertyChangedFor(nameof(BoxWidth))]
         [NotifyPropertyChangedFor(nameof(BoxHeight))]
-        private float _width = 10;
+        [NotifyPropertyChangedFor(nameof(BoxCenterX))]
+        [NotifyPropertyChangedFor(nameof(BoxCenterY))]
+        private float _width = 40;
 
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(ListOfPoints))]
         [NotifyPropertyChangedFor(nameof(Geometry))]
         [NotifyPropertyChangedFor(nameof(BoxWidth))]
         [NotifyPropertyChangedFor(nameof(BoxHeight))]
-        private float _height = 10;
+        [NotifyPropertyChangedFor(nameof(BoxCenterX))]
+        [NotifyPropertyChangedFor(nameof(BoxCenterY))]
+        private float _height = 40;
 
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(ListOfPoints))]
         [NotifyPropertyChangedFor(nameof(Geometry))]
         [NotifyPropertyChangedFor(nameof(BoxWidth))]
         [NotifyPropertyChangedFor(nameof(BoxHeight))]
+        [NotifyPropertyChangedFor(nameof(BoxCenterX))]
+        [NotifyPropertyChangedFor(nameof(BoxCenterY))]
         private float _angle = 0;
 
-        public float BoxHeight => getBoxHeight();
-        public float BoxWidth => getBoxWidth();
-        public float BoxCenterX => CenterX;
-        public float BoxCenterY => CenterY;
+        [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(ListOfPoints))]
+        [NotifyPropertyChangedFor(nameof(Geometry))]
+        [NotifyPropertyChangedFor(nameof(BoxWidth))]
+        [NotifyPropertyChangedFor(nameof(BoxHeight))]
+        [NotifyPropertyChangedFor(nameof(BoxCenterX))]
+        [NotifyPropertyChangedFor(nameof(BoxCenterY))]
+        private float _scaleX = 1;
+
+        [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(ListOfPoints))]
+        [NotifyPropertyChangedFor(nameof(Geometry))]
+        [NotifyPropertyChangedFor(nameof(BoxWidth))]
+        [NotifyPropertyChangedFor(nameof(BoxHeight))]
+        [NotifyPropertyChangedFor(nameof(BoxCenterX))]
+        [NotifyPropertyChangedFor(nameof(BoxCenterY))]
+        private float _scaleY = 1;
+
+        public float BoxHeight => getBoxHeight() + StrokeThickness + 6;
+        public float BoxWidth => getBoxWidth() + StrokeThickness + 6;
+        public float BoxCenterX => CenterX - BoxWidth / 2;
+        public float BoxCenterY => CenterY - BoxHeight / 2;
 
         [JsonIgnore]
         private List<Avalonia.Point> ListOfPoints => getPoints();
@@ -65,8 +101,8 @@ namespace Geometry
 
         public void Scale(float ratioX, float ratioY)
         {
-            Width *= ratioX;
-            Height *= ratioY;
+            ScaleX *= ratioX;
+            ScaleY *= ratioY;
         }
 
         public void Move(float deltaX, float deltaY)
@@ -96,8 +132,8 @@ namespace Geometry
 
             for (int i = 0; i < 6; i++)
             {
-                list[i] = new Avalonia.Point((CenterX + (list[i].X - CenterX) * Math.Cos(angleRad) - (list[i].Y - CenterY) * Math.Sin(angleRad)),
-                    (CenterY + (list[i].X - CenterX) * Math.Sin(angleRad) + (list[i].Y - CenterY) * Math.Cos(angleRad)));
+                list[i] = new Avalonia.Point((CenterX + ScaleX * ((list[i].X - CenterX) * Math.Cos(angleRad) - (list[i].Y - CenterY) * Math.Sin(angleRad))),
+                    (CenterY + ScaleY * ((list[i].X - CenterX) * Math.Sin(angleRad) + (list[i].Y - CenterY) * Math.Cos(angleRad))));
             }
 
             return list;

@@ -4,13 +4,18 @@ using Avalonia.Media;
 
 using CommunityToolkit.Mvvm.ComponentModel;
 
-namespace Geometry {
+namespace Geometry
+{
     [Export(typeof(IShape))]
-    [ExportMetadata("LogoButton", ".png")]
+    [ExportMetadata("LogoButton", "ellipse.png")]
     [ExportMetadata("Name", "Ellipse")]
     public partial class EllipseModel : ObservableObject, IShape
     {
         [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(BoxHeight))]
+        [NotifyPropertyChangedFor(nameof(BoxWidth))]
+        [NotifyPropertyChangedFor(nameof(BoxCenterX))]
+        [NotifyPropertyChangedFor(nameof(BoxCenterY))]
         private float _strokeThickness = 1;
 
         [ObservableProperty]
@@ -23,48 +28,63 @@ namespace Geometry {
         [NotifyPropertyChangedFor(nameof(Geometry))]
         [NotifyPropertyChangedFor(nameof(BoxWidth))]
         [NotifyPropertyChangedFor(nameof(BoxHeight))]
+        [NotifyPropertyChangedFor(nameof(BoxCenterX))]
+        [NotifyPropertyChangedFor(nameof(BoxCenterY))]
         private float _centerX;
 
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(Geometry))]
         [NotifyPropertyChangedFor(nameof(BoxWidth))]
         [NotifyPropertyChangedFor(nameof(BoxHeight))]
+        [NotifyPropertyChangedFor(nameof(BoxCenterX))]
+        [NotifyPropertyChangedFor(nameof(BoxCenterY))]
         private float _centerY;
 
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(Geometry))]
         [NotifyPropertyChangedFor(nameof(BoxWidth))]
         [NotifyPropertyChangedFor(nameof(BoxHeight))]
-        private float _radiusX = 10;
+        [NotifyPropertyChangedFor(nameof(BoxCenterX))]
+        [NotifyPropertyChangedFor(nameof(BoxCenterY))]
+        private float _radiusX = 50;
 
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(Geometry))]
         [NotifyPropertyChangedFor(nameof(BoxWidth))]
         [NotifyPropertyChangedFor(nameof(BoxHeight))]
-        private float _radiusY = 10;
+        [NotifyPropertyChangedFor(nameof(BoxCenterX))]
+        [NotifyPropertyChangedFor(nameof(BoxCenterY))]
+        private float _radiusY = 100;
 
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(Geometry))]
         [NotifyPropertyChangedFor(nameof(BoxWidth))]
         [NotifyPropertyChangedFor(nameof(BoxHeight))]
+        [NotifyPropertyChangedFor(nameof(BoxCenterX))]
+        [NotifyPropertyChangedFor(nameof(BoxCenterY))]
         private float _angle = 0;
-        
+
+
         [JsonIgnore]
-        public float BoxHeight => getBoxHeight();
+        public float BoxHeight => getBoxHeight() + StrokeThickness + 6;
         [JsonIgnore]
-        public float BoxWidth => getBoxWidth();
+        public float BoxWidth => getBoxWidth() + StrokeThickness + 6;
         [JsonIgnore]
-        public float BoxCenterX => CenterX;
+        public float BoxCenterX => CenterX - BoxWidth / 2;
         [JsonIgnore]
-        public float BoxCenterY => CenterY;
+        public float BoxCenterY => CenterY - BoxHeight / 2;
 
         [JsonIgnore]
         public string Geometry => GetGeometry();
 
         public void Scale(float ratioX, float ratioY)
         {
-            RadiusX *= ratioX;
-            RadiusY *= ratioY;
+            RadiusX *= float.Abs(ratioX);
+            RadiusY *= float.Abs(ratioY);
+            if (RadiusX <= 0.001)
+                RadiusX = (float) 0.001;
+            if (RadiusY <= 0.001)
+                RadiusY = (float) 0.001;
         }
 
         public void Move(float deltaX, float deltaY)
@@ -86,11 +106,11 @@ namespace Geometry {
             var secondY = CenterY;
 
             var angleRad = Angle * Math.PI / 180.0;
-            var firstPointX = (float) (CenterX + (firstX - CenterX) * Math.Cos(angleRad) - (firstY - CenterY) * Math.Sin(angleRad));
-            var firstPointY = (float) (CenterY + (firstX - CenterX) * Math.Sin(angleRad) + (firstY - CenterY) * Math.Cos(angleRad));
+            var firstPointX = (float) (CenterX + ((firstX - CenterX) * Math.Cos(angleRad) - (firstY - CenterY) * Math.Sin(angleRad)));
+            var firstPointY = (float) (CenterY + ((firstX - CenterX) * Math.Sin(angleRad) + (firstY - CenterY) * Math.Cos(angleRad)));
 
-            var secondPointX = (float) (CenterX + (secondX - CenterX) * Math.Cos(angleRad) - (secondY - CenterY) * Math.Sin(angleRad));
-            var secondPointY = (float) (CenterY + (secondX - CenterX) * Math.Sin(angleRad) + (secondY - CenterY) * Math.Cos(angleRad));
+            var secondPointX = (float) (CenterX + ((secondX - CenterX) * Math.Cos(angleRad) - (secondY - CenterY) * Math.Sin(angleRad)));
+            var secondPointY = (float) (CenterY + ((secondX - CenterX) * Math.Sin(angleRad) + (secondY - CenterY) * Math.Cos(angleRad)));
 
             return FormattableString.Invariant($"M{firstPointX},{firstPointY} A{RadiusX},{RadiusY},{Angle},1,1,{secondPointX},{secondPointY} A{RadiusX},{RadiusY},{Angle},1,1,{firstPointX},{firstPointY} z");
         }
