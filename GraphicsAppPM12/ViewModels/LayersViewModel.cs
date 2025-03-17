@@ -1,7 +1,12 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Windows.Input;
+
+using Avalonia.Controls;
+
 
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 
 namespace GraphicsApp.ViewModels;
 
@@ -10,26 +15,20 @@ public partial class LayersViewModel : ViewModelBase
     [ObservableProperty]
     private MainWindowViewModel? _main;
 
-    public ObservableCollection<Layer> LayersList { get; set; }
+    public ICommand SelectFigure { get; }
 
     public LayersViewModel(MainWindowViewModel? main)
     {
         Main = main;
-        LayersList = new ObservableCollection<Layer>() {
-            new() { LayerName = "Слой 1", IsVisibleIcon=true },
-            new() { LayerName = "Слой 2", IsVisibleIcon=true },
-            new() { LayerName = "Слой 3", IsVisibleIcon=true }
-        };
+        SelectFigure = new RelayCommand<ShapeViewModel>((figure) => {
+            if (Main is not null && figure is not null) {
+                if (Main.SelectedFigure is not null)
+                    Main.SelectedFigure.Active = false;
+                Main.SelectedFigure = figure;
+                figure.Active = true;
+            }
+
+        });
     }
-
-}
-
-public partial class Layer : ObservableObject
-{
-    [ObservableProperty]
-    private string _layerName;
-
-    [ObservableProperty]
-    private bool _isVisibleIcon;
 
 }

@@ -44,8 +44,19 @@ public partial class MainWindowViewModel : ViewModelBase
     [ObservableProperty]
     private ModelFactoryViewModel? _selectedButtonFigure;
     
-    [ObservableProperty]
     private ShapeViewModel? _selectedFigure;
+
+    public ShapeViewModel? SelectedFigure {
+        get => _selectedFigure;
+        set {
+            if (_selectedFigure is not null)
+                _selectedFigure.Active = false;
+            if (value is not null)
+                value.Active = true;
+            _selectedFigure = value;
+            OnPropertyChanged(nameof(SelectedFigure));
+        }
+    }
     
     public ICommand SaveJsonCommand { get; }
     public ICommand LoadJsonCommand { get; }

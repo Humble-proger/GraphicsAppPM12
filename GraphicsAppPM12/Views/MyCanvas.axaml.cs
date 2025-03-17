@@ -95,14 +95,10 @@ namespace GraphicsApp.Views
                 if (viewModel.Main is not null)
                 {
                     if (viewModel.Main.SelectedFigure is not null) {
-                        viewModel.Main.SelectedFigure.Active = false;
                         viewModel.Main.SelectedFigure = null;
                     }
-                }
 
-                if (viewModel.Main is not null) {
-                    if (viewModel.Main.SelectedButtonFigure is not null)
-                    {
+                    if (viewModel.Main.SelectedButtonFigure is not null) {
                         var position = e.GetCurrentPoint(_canvas).Position;
                         viewModel.Main.SelectedButtonFigure.CreateCommand.Execute(position);
                     }
@@ -130,12 +126,10 @@ namespace GraphicsApp.Views
                             if (viewmodel.Main.SelectedFigure is null)
                             {
                                 viewmodel.Main.SelectedFigure = figure;
-                                figure.Active = true;
                             }
                             else if (viewmodel.Main.SelectedFigure != figure) {
                                 viewmodel.Main.SelectedFigure.Active = false;
                                 viewmodel.Main.SelectedFigure = figure;
-                                figure.Active = true;
                             }
                             else {
                                 var position = e.GetPosition(rect);
