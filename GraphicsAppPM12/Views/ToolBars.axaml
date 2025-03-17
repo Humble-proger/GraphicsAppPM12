@@ -28,32 +28,6 @@
                 <TextBlock Text="Курсор" />
             </StackPanel>
             
-            <!--Кнопка "Выделение"-->
-            <StackPanel>
-                <ToggleButton Name="SelectionButton" Height="50" Width="50" Background="#ededed" Margin="0,-10,0,3"
-                              Click="SelectionButton_Click">
-                    <Viewbox Width="35" Height="35">
-                        <Canvas Width="24" Height="24">
-                            <Path Data="M5 3A2 2 0 0 0 3 5" StrokeThickness = "2.3"/>
-                            <Path Data="M19 3A2 2 0 0 1 21 5" StrokeThickness = "2.3"/>
-                            <Path Data="M21 19A2 2 0 0 1 19 21" StrokeThickness = "2.3"/>
-                            <Path Data="M5 21A2 2 0 0 1 3 19" StrokeThickness = "2.3"/>
-                            
-                            <Path Data="M9 3H10" StrokeThickness = "2.3"/>
-                            <Path Data="M9 21H10" StrokeThickness = "2.3"/>
-                            <Path Data="M14 3H15" StrokeThickness = "2.3"/>
-                            <Path Data="M14 21H15" StrokeThickness = "2.3"/>
-
-                            <Path Data="M3 9V10" StrokeThickness = "2.3"/>
-                            <Path Data="M21 9V10" StrokeThickness = "2.3"/>
-                            <Path Data="M3 14V15" StrokeThickness = "2.3"/>
-                            <Path Data="M21 14V15" StrokeThickness = "2.3"/>
-                        </Canvas>
-                    </Viewbox>
-                </ToggleButton>
-                <TextBlock Text="Выделить" />
-            </StackPanel>
-            
             <!--Кнопка пера-->
             <StackPanel>
                 <ToggleButton Name="PenButton" Height="50" Width="50" Background="#ededed" Margin="0,-10,0,3"
