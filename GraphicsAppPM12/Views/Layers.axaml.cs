@@ -27,5 +27,23 @@ namespace GraphicsApp.Views
             }
 
         }
+
+        private void MoveUpButtonClick(object sender, RoutedEventArgs e)
+        {
+            if (DataContext is LayersViewModel viewmodel && viewmodel.Main is not null)
+            {
+                if (viewmodel.Main.SelectedFigure is not null)
+                    viewmodel.MoveUpFigure.Execute(viewmodel.Main.SelectedFigure);
+            }
+        }
+
+        private void MoveDownButtonClick(object sender, RoutedEventArgs e)
+        {
+            if (DataContext is LayersViewModel viewmodel && viewmodel.Main is not null)
+            {
+                if (viewmodel.Main.SelectedFigure is not null)
+                    viewmodel.MoveDownFigure.Execute(viewmodel.Main.SelectedFigure);
+            }
+        }
     }
 }
