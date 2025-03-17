@@ -1,13 +1,12 @@
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 
 using Avalonia.Media;
 
 using CommunityToolkit.Mvvm.ComponentModel;
 
-
 namespace Geometry
 {
-    public partial class PolygonModel : ObservableObject, IShape
+    public partial class BezierCurveModel : ObservableObject, IShape
     {
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(BoxHeight))]
@@ -28,7 +27,7 @@ namespace Geometry
         [NotifyPropertyChangedFor(nameof(BoxHeight))]
         [NotifyPropertyChangedFor(nameof(BoxCenterX))]
         [NotifyPropertyChangedFor(nameof(BoxCenterY))]
-        private float _centerX = 0;
+        private float _centerX;
 
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(Geometry))]
@@ -36,7 +35,7 @@ namespace Geometry
         [NotifyPropertyChangedFor(nameof(BoxHeight))]
         [NotifyPropertyChangedFor(nameof(BoxCenterX))]
         [NotifyPropertyChangedFor(nameof(BoxCenterY))]
-        private float _centerY = 0;
+        private float _centerY;
 
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(Geometry))]
@@ -45,7 +44,7 @@ namespace Geometry
         [NotifyPropertyChangedFor(nameof(BoxCenterX))]
         [NotifyPropertyChangedFor(nameof(BoxCenterY))]
         private List<Avalonia.Point> _listOfPoints = [];
-        public PolygonModel(List<Avalonia.Point> initialPoints)
+        public BezierCurveModel(List<Avalonia.Point> initialPoints)
         {
             _listOfPoints = initialPoints;
             CalculateCenter();
@@ -59,14 +58,12 @@ namespace Geometry
         [NotifyPropertyChangedFor(nameof(BoxCenterY))]
         private float _angle = 0;
 
-        [JsonIgnore]
         public float BoxHeight => getBoxHeight() + StrokeThickness + 6;
-        [JsonIgnore]
         public float BoxWidth => getBoxWidth() + StrokeThickness + 6;
-        [JsonIgnore]
+
         public float BoxCenterX => getCenterBoxX() - BoxWidth / 2;
-        [JsonIgnore]
-        public float BoxCenterY => getCenterBoxY() - BoxHeight / 2;
+        public float BoxCenterY => getCenterBoxY() - BoxWidth / 2;
+
 
         [JsonIgnore]
         public string Geometry => getGeometry();
@@ -109,12 +106,11 @@ namespace Geometry
                 a = FormattableString.Invariant($"M{ListOfPoints[0].X},{ListOfPoints[0].Y} ");
             }
 
-            for (int i = 1; i < ListOfPoints.Count; i++)
+            for (int i = 1; i < ListOfPoints.Count - 1; i += 2)
             {
-                a += FormattableString.Invariant($"L{ListOfPoints[i].X},{ListOfPoints[i].Y} ");
+                a += FormattableString.Invariant($"Q {ListOfPoints[i].X},{ListOfPoints[i].Y} {ListOfPoints[i + 1].X},{ListOfPoints[i + 1].Y}");
             }
 
-            a += "z";
             return a;
         }
 
@@ -217,6 +213,5 @@ namespace Geometry
             return (float) (minCoord + (maxCoord - minCoord) / 2.0);
         }
     }
-
 
 }

@@ -8,6 +8,9 @@ using CommunityToolkit.Mvvm.Input;
 using Geometry;
 using System.Collections.Generic;
 using CommunityToolkit.Mvvm.ComponentModel;
+using Avalonia.Controls.Templates;
+using VecEditor.IO;
+using System.IO;
 
 
 namespace GraphicsApp.ViewModels;
@@ -15,24 +18,53 @@ namespace GraphicsApp.ViewModels;
 public partial class MainWindowViewModel : ViewModelBase
 {
     [ObservableProperty]
-    private string _mouseCoords = "X: 0.0 Y: 0.0";
+    private FooterViewModel _footerview;
 
     [ObservableProperty]
-    private string _canvasSize = "0 × 0 мм";
+    private CanvasViewModel _canvasview;
     
+    [ObservableProperty]
+    private ToolBarsViewModel _toolbarsview;
+    
+    [ObservableProperty]
+    private LayersViewModel _layersview;
+    
+
+    [ObservableProperty]
+    private SettingsWindowViewModel _settingswindow;
+
+    [ObservableProperty]
+    private SettingsViewModel _settings;
+
     public ObservableCollection<ShapeViewModel> Figures { get; } = [];
+    
 
     public ObservableCollection<ModelFactoryViewModel> Factories { get; } = [];
+    
+    [ObservableProperty]
+    private ModelFactoryViewModel? _selectedButtonFigure;
+    
+    private ShapeViewModel? _selectedFigure;
 
+    public ShapeViewModel? SelectedFigure {
+        get => _selectedFigure;
+        set {
+            if (_selectedFigure is not null)
+                _selectedFigure.Active = false;
+            if (value is not null)
+                value.Active = true;
+            _selectedFigure = value;
+            OnPropertyChanged(nameof(SelectedFigure));
+        }
+    }
+    
     public ICommand SaveJsonCommand { get; }
-    public RelayCommand LoadJsonCommand { get; }
+    public ICommand LoadJsonCommand { get; }
 
     [ImportMany]
-    private IEnumerable<ExportFactory<IShape>> ModelFactories { get; set; } = [];
-    
-    public ICommand ChangeMouseCoord { get; }
-    public ICommand ChangeSizeCanvas { get; }
+    private IEnumerable<ExportFactory<IShape, ModelMetadata>> ModelFactories { get; set; } = [];
 
+    private readonly GeometryJsonSerializer<ShapeViewModel> _geometryJsonSerializer;
     public MainWindowViewModel()
     {
         var configuration = new ContainerConfiguration()
@@ -44,8 +76,20 @@ public partial class MainWindowViewModel : ViewModelBase
         {
             Factories.Add(new() { Factory = factory, Main = this });
         }
-        ChangeMouseCoord = new RelayCommand<Avalonia.Point>(OnMouseMove);
-        ChangeSizeCanvas = new RelayCommand<Vector2>(OnResizeCanvas);
+        Footerview = new(this);
+        Canvasview = new(this);
+        Layersview = new(this);
+
+        Toolbarsview = new(this);
+        Settingswindow = new(this);
+        Settings = new(this);
+        _geometryJsonSerializer = new();
+
+        SaveJsonCommand = new RelayCommand<string>(
+            (filePath) => { _geometryJsonSerializer.SaveJson(filename: filePath, Figures); });
+        
+        LoadJsonCommand = new RelayCommand<string>( (FilePath) => LoadFigures(_geometryJsonSerializer.LoadJson(FilePath)) );
+
     }
 
     private void LoadFigures(IEnumerable<ShapeViewModel>? figures)
@@ -60,13 +104,4 @@ public partial class MainWindowViewModel : ViewModelBase
             Figures.Add(fig);
         }
     }
-    private void OnMouseMove(Avalonia.Point point) {
-        MouseCoords = $"X: {point.X} Y: {point.Y}";
-    }
-    private void OnResizeCanvas(Vector2 size) 
-    {
-        CanvasSize = $"{size.X} × {size.Y} мм";
-    }
-
-    public CanvasViewModel CanvasViewModel { get; } = new CanvasViewModel();
 }

@@ -1,6 +1,5 @@
-﻿namespace IO
+namespace IO
 {
-
     public class IO
     {
         

@@ -2,9 +2,11 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:GraphicsApp.Views"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:vm="using:GraphicsApp.ViewModels"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="GraphicsApp.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
         Title="GraphicsApp"
         MinWidth="1075"
@@ -17,29 +19,31 @@
 
     <Grid RowDefinitions="Auto, Auto, *, Auto" Background="#F7F7F7">
         <!--Панель с кнопками сохранить\сохранит как и тд-->
-        <local:Settings/>
+        <local:Settings DataContext="{Binding Settings}"/>
        
 
         <!--Панель с инструментами-->
-        <local:ToolBars Grid.Row="1" />
+        <local:ToolBars Grid.Row="1" DataContext="{Binding Toolbarsview}"/>
+
 
         <Grid Grid.Row="2" ColumnDefinitions="4*, *">
 
             <Grid Grid.Column="0">
                 <!--Подключение холста-->
-                <local:MyCanvas/>
-                <!--Подключение панели редактирования-->
-                <!--<local:FigureEdit/>--> 
                 
+                    <local:MyCanvas DataContext= "{Binding Canvasview}"/>
+                    <!--Подключение панели редактирования-->
+                    <!--<local:FigureEdit/>-->
+               
             </Grid>
             
-            <local:Layers Grid.Column="1"/>
+            <local:Layers Grid.Column="1" DataContext="{Binding Layersview}"/>
 
         </Grid>
 
         <StackPanel Grid.Row="3" Margin="0">
             <!--Подключение холста-->
-                <local:Footer/>
+                <local:Footer DataContext="{Binding Footerview}"/>
         </StackPanel>
     </Grid>
 

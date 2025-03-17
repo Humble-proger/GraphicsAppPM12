@@ -130,21 +130,21 @@
                 <Border Background="#ededed" Height="50" Width="250" Margin="10,-10,0,3" CornerRadius="2">
                     <Grid Background="#ededed">
                         <ScrollViewer x:Name="ShapeScroll" Height="40" VerticalScrollBarVisibility="Hidden">
-                            <ListBox x:Name="ShapeList" ItemsSource="{Binding Shapes}" SelectionMode="Single" 
-                                     BorderThickness="0" Background="Transparent" SelectionChanged="ShapeList_SelectionChanged">
+                            <ListBox x:Name="ShapeList" ItemsSource="{Binding Main.Factories}" SelectionMode="Single" 
+                                     BorderThickness="0" Background="Transparent" SelectionChanged="ShapeList_SelectionChanged" SelectedItem="{Binding Main.SelectedButtonFigure}">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Left" Width="25">
+                                            <Image Source="{Binding Factory.Metadata.Logo, Mode=OneWay}" Width="20" Height="20"
+                                                   Stretch="Uniform" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
                                 <ListBox.ItemsPanel>
                                     <ItemsPanelTemplate>
                                         <WrapPanel Width="230" VerticalAlignment="Center" Margin="0,0,0,0" />
                                     </ItemsPanelTemplate>
                                 </ListBox.ItemsPanel>
-                                <ListBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Left" Width="25">
-                                            <Image Source="{Binding Icon, Mode=OneWay}" Width="20" Height="20" 
-                                                   Stretch="Uniform" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                                        </StackPanel>
-                                    </DataTemplate>
-                                </ListBox.ItemTemplate>
                             </ListBox>
                         </ScrollViewer>
 
@@ -173,7 +173,7 @@
             <!-- Цвета -->
             <StackPanel >
                 <Border Background="#ededed" Height="50" Width="80" Margin="10,-10,0,3" CornerRadius="2">
-                    <ColorPicker HorizontalAlignment="Center" VerticalAlignment="Center" Color="CornflowerBlue"  />
+                    <ColorPicker HorizontalAlignment="Center" VerticalAlignment="Center" ColorChanged="OnColorChangedFill" Color="{Binding SelectedColor, Mode=TwoWay}"  />
                 </Border>
                 <TextBlock Text="Цвет" Margin="10,0,0,0"/>
             </StackPanel>
@@ -181,9 +181,10 @@
             <!-- Цвет контура -->
             <StackPanel >
                 <Border Background="#ededed" Height="50" Width="80" Margin="10,-10,0,3" CornerRadius="2">
-                    <ColorPicker HorizontalAlignment="Center" VerticalAlignment="Center" Color="Black"  />
+                    <ColorPicker HorizontalAlignment="Center" VerticalAlignment="Center" ColorChanged="OnColorChangedBorder" Color="{Binding OutlineColor, Mode=TwoWay}"  />
                 </Border>
                 <TextBlock Text="Цвет контура" Margin="10,0,0,0"/>
+
             </StackPanel>
             
         </StackPanel>

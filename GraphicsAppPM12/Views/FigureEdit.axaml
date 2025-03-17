@@ -14,7 +14,7 @@
     </Border> -->
 
     <StackPanel>
-        <ListBox  Width="180" Height="200" ScrollViewer.VerticalScrollBarVisibility="Visible">
+        <ListBox Width="180" Height="200" ScrollViewer.VerticalScrollBarVisibility="Visible">
             
             <ListBoxItem>
                 <TextBlock Text="Отмена" FontSize="10"/>

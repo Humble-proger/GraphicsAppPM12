@@ -1,16 +1,11 @@
 ﻿using System;
 using System.Windows.Input;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Avalonia.Media;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Composition;
 using Geometry;
-
-using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace GraphicsApp.ViewModels
 {
@@ -18,22 +13,30 @@ namespace GraphicsApp.ViewModels
     {
         [ObservableProperty]
         private MainWindowViewModel? _main;
-        public required ExportFactory<IShape> Factory { get; init; }
+        public required ExportFactory<IShape, ModelMetadata> Factory { get; init; }
         public ICommand CreateCommand { get; }
 
         public ModelFactoryViewModel()
         {
-            CreateCommand = new RelayCommand(() => Main?.Figures.Add(Create()));
+            CreateCommand = new RelayCommand<Avalonia.Point>((Avalonia.Point point) => Main?.Figures.Add(Create(point)));
         }
 
-        private ShapeViewModel Create()
+        private ShapeViewModel Create(Avalonia.Point point)
         {
-            var color = Color.FromRgb((byte) Random.Shared.Next(256), (byte) Random.Shared.Next(256), (byte) Random.Shared.Next(256));
-            var name = $"{Factory} {Random.Shared.Next(100)}";
+            var colorFill = Main.Toolbarsview.SelectedColor;
+            var tickness = Main.Toolbarsview.LineThickness;
+            var colorBorder = Main.Toolbarsview.OutlineColor;
+            
             var model = Factory.CreateExport().Value;
-            model.CenterX = Random.Shared.Next(256);
-            model.CenterY = Random.Shared.Next(256);
-            return new() { Name = name, Color = color, Model = model, Main = Main };
+            var countFigures = Main.Figures.Count(elem => elem.Name.Split()[0] == Factory.Metadata.Name);
+            var name = $"{Factory.Metadata.Name} {countFigures + 1}";
+            model.Fill = colorFill;
+            model.Stroke = colorBorder;
+            model.StrokeThickness = (float)tickness;
+            model.Move((float) point.X, (float) point.Y);
+            model.StrokeThickness = (float)Main.Toolbarsview.LineThickness;
+
+            return new() { Name = name, Model = model, Main = Main };
         }
     }
 }

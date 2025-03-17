@@ -1,6 +1,9 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.VisualTree;
+
+using GraphicsApp.ViewModels;
+
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -13,7 +16,8 @@ namespace GraphicsApp.Views
         {
             InitializeComponent();
         }
-        
+
+        [Obsolete]
         private async void OnOpenFileButtonClick(object sender, RoutedEventArgs e)
         {
             // Ищем родительское окно, чтобы передать в диалог
@@ -88,16 +92,30 @@ namespace GraphicsApp.Views
             // Показываем диалог, передавая ему найденное окно
             var result = await saveFileDialog.ShowAsync(parentWindow);
 
-            if (result != null)
+            if (result != null && DataContext is SettingsViewModel viewModel)
             {
-                // Здесь логика сохранения
+                var TypeFile = Path.GetExtension(result);
+                var NameFile = Path.GetFileName(result);
+                if (TypeFile != null && NameFile != null)
+                {
+                    var Type = TypeFile.ToLower();
+                    switch (Type) {
+                        case ".json":
+                            viewModel.Main.SaveJsonCommand.Execute(result);
+                            break;
+                        default:
+                            break;
+                    }
+                }
             }
         }
 
         private void OpenSettingsWindowButton_Click(object sender, RoutedEventArgs e)
         {
-            SettingsWindow settingsWindow = new SettingsWindow();
-            settingsWindow.Show();
+            if (DataContext is SettingsViewModel viewModel) {
+                SettingsWindow settings = new SettingsWindow { DataContext = viewModel.Main.Settingswindow };
+                settings.Show();
+            }
         }
     }
 }

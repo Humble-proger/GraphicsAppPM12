@@ -5,17 +5,83 @@
              xmlns:vm="clr-namespace:GraphicsApp.ViewModels"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="GraphicsApp.Views.MyCanvas"
-             x:DataType="vm:MainWindowViewModel">
+             x:DataType="vm:CanvasViewModel">
+
     <!--<UserControl.DataContext>
         <vm:MainWindowViewModel />
     </UserControl.DataContext>-->
+    <UserControl.Resources>
+        <vm:NegativeValueConverter x:Key="NegativeValueConverter"/>
+    </UserControl.Resources>
 
-    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-        <Canvas Background="White" Margin="15" PointerMoved="MouseMoved" SizeChanged="CanvasResize" Height="500" Width="1000">
-            <Canvas.RenderTransform>
-                <ScaleTransform ScaleX="{Binding CanvasViewModel.ZoomFactor}" ScaleY="{Binding CanvasViewModel.ZoomFactor}" />
-            </Canvas.RenderTransform>
-        </Canvas>
+    <ScrollViewer HorizontalScrollBarVisibility="Auto"
+                  VerticalScrollBarVisibility="Auto"
+                  HorizontalAlignment="Stretch"
+                  VerticalAlignment="Stretch">
+
+        <Border Background="Transparent"
+            Width="{Binding ScaledWidth}"
+            Height="{Binding ScaledHeight}">
+            <ItemsControl ItemsSource="{Binding Main.Figures}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Canvas PointerPressed="MarkingPressed" PointerReleased="MarkingReleased" PointerMoved="MarkingMoved">
+                            <Path Stroke="Black" StrokeThickness="{Binding Model.StrokeThickness}" Data="{Binding Model.Geometry}" IsVisible="{Binding IsVisibleIcon}">
+                                <Path.Fill>
+                                    <SolidColorBrush Color="{Binding Model.Fill}"/>
+                                </Path.Fill>
+                                <Path.Stroke>
+                                    <SolidColorBrush Color="{Binding Model.Stroke}"/>
+                                </Path.Stroke>
+                            </Path>
+                            <Rectangle Name="ResizeRectangle" Width="{Binding Model.BoxWidth}" Height="{Binding Model.BoxHeight}" Fill="Transparent" Stroke="#800080FF" StrokeThickness="3" StrokeDashArray="4,2" IsVisible="{Binding Active}" PointerMoved="MarkingCursor">
+                                <Rectangle.RenderTransform>
+
+                                    <TranslateTransform X="{Binding Model.BoxCenterX}" Y="{Binding Model.BoxCenterY}"/>                                    <!-- Смещение на половину ширины и высоты в отрицательном направлении -->
+                                </Rectangle.RenderTransform>
+                                <Rectangle.Effect>
+                                    <DropShadowEffect BlurRadius="10" Color="Blue" Opacity="0.5"/>
+                                </Rectangle.Effect>
+                                <Rectangle.Styles>
+                                    <Style Selector="Rectangle">
+                                        <Setter Property="Opacity" Value="1"/>
+                                        <Style.Animations>
+                                            <Animation Duration="0:0:1" IterationCount="Infinite">
+                                                <KeyFrame Cue="0%">
+                                                    <Setter Property="Opacity" Value="1"/>
+                                                </KeyFrame>
+                                                <KeyFrame Cue="50%">
+                                                    <Setter Property="Opacity" Value="0.5"/>
+                                                </KeyFrame>
+                                                <KeyFrame Cue="100%">
+                                                    <Setter Property="Opacity" Value="1"/>
+                                                </KeyFrame>
+                                            </Animation>
+                                        </Style.Animations>
+                                    </Style>
+                                </Rectangle.Styles>
+                            </Rectangle>
+                        </Canvas>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <!-- Canvas остается внутри ItemsPanelTemplate -->
+                        <Canvas Background="White" Margin="15" x:DataType="vm:CanvasViewModel"
+                                PointerMoved="MouseMoved" SizeChanged="CanvasResize" Loaded="Canvas_Loaded"
+                                PointerExited="MouseLeave" PointerPressed="CreateFigure"
+                                Height="{Binding OriginalHeight}" Width="{Binding OriginalWidth}" x:Name="MainCanvas">
+                            <Canvas.RenderTransform>
+                                <ScaleTransform ScaleX="{Binding ZoomFactor}" ScaleY="{Binding ZoomFactor}" />
+                            </Canvas.RenderTransform>
+                        </Canvas>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.Items>
+                    
+                </ItemsControl.Items>
+            </ItemsControl>
+        </Border>
     </ScrollViewer>
-
 </UserControl>

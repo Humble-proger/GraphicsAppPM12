@@ -20,25 +20,13 @@ namespace GraphicsApp.ViewModels
         private string _name = "Name";
 
         [ObservableProperty]
-        [property: JsonIgnore]
-        private Color _color;
-
-        [JsonPropertyName("Color")]
-        public string ColorStr
-        {
-            get => Color.ToString();
-            set => Color = Color.Parse(value);
-        }
-
-        [ObservableProperty]
-        [NotifyPropertyChangedFor(nameof(Thickness))]
-        [property: JsonIgnore]
-        private bool _isSelected;
-
-        [JsonIgnore]
-        public float Thickness => IsSelected ? 2 : 1;
+        private bool _isVisibleIcon = true;
 
         public required IShape Model { get; init; }
+
+        [ObservableProperty]
+        [property: JsonIgnore]
+        private bool _active = false;
 
         [JsonIgnore]
         public ICommand Remove { get; }

@@ -3,6 +3,8 @@
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 
+using GraphicsApp.ViewModels;
+
 namespace GraphicsApp.Views
 {
     public partial class Thickness : UserControl

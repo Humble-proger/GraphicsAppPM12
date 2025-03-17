@@ -1,59 +1,31 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 using Avalonia.Controls;
+using Avalonia.Interactivity;
+using Avalonia.Metadata;
+
+using GraphicsApp.ViewModels;
 
 namespace GraphicsApp.Views
 {
-    public partial class Layers : UserControl, INotifyPropertyChanged
+    public partial class Layers : UserControl
     {
-        private bool _isVisibleIcon = true;
 
-        public bool IsVisibleIcon
-        {
-            get => _isVisibleIcon;
-            set
-            {
-                if (_isVisibleIcon != value)
-                {
-                    _isVisibleIcon = value;
-                    OnPropertyChanged(nameof(IsVisibleIcon));
-                }
-            }
-        }
-
-        
-        // Коллекция слоев
-        public ObservableCollection<Layer> LayersList { get; set; }
 
         public Layers()
         {
             InitializeComponent();
 
-            // Инициализация коллекции слоев
-            LayersList = new ObservableCollection<Layer>
-            {
-                new Layer { LayerName = "Слой 1", IsVisibleIcon = true },
-                new Layer { LayerName = "Слой 2", IsVisibleIcon = false },
-                new Layer { LayerName = "Слой 3", IsVisibleIcon = true }
-            };
-
             DataContext = this; // Устанавливаем контекст данных
 
         }
+        private void OnDeleteButtonClick(object sender, RoutedEventArgs e) {
+            if (DataContext is LayersViewModel viewmodel && viewmodel.Main is not null) {
+                if (viewmodel.Main.SelectedFigure is not null)
+                    viewmodel.Main.SelectedFigure.Remove.Execute(null);
+                    viewmodel.Main.SelectedFigure = null;
+            }
 
-        public event PropertyChangedEventHandler? PropertyChanged;
-        protected void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        // Модель для слоя
-        public class Layer
-        {
-            public string LayerName { get; set; }
-            public bool IsVisibleIcon { get; set; }
         }
     }
-
-    
 }
