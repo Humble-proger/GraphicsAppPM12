@@ -26,7 +26,7 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Canvas PointerPressed="MarkingPressed" PointerReleased="MarkingReleased" PointerMoved="MarkingMoved">
-                            <Path Stroke="Black" StrokeThickness="{Binding Model.StrokeThickness}" Data="{Binding Model.Geometry}">
+                            <Path Stroke="Black" StrokeThickness="{Binding Model.StrokeThickness}" Data="{Binding Model.Geometry}" IsVisible="{Binding IsVisibleIcon}">
                                 <Path.Fill>
                                     <SolidColorBrush Color="{Binding Model.Fill}"/>
                                 </Path.Fill>

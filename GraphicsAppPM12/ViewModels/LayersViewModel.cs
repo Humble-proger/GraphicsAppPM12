@@ -15,9 +15,6 @@ public partial class LayersViewModel : ViewModelBase
     [ObservableProperty]
     private MainWindowViewModel? _main;
 
-    [ObservableProperty]
-    private bool _isVisibleIcon;
-
     public ICommand SelectFigure { get; }
 
     public LayersViewModel(MainWindowViewModel? main)

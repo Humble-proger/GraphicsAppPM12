@@ -69,4 +69,10 @@
         <Setter Property="Background" Value="#F0F0F0"/>
     </Style>
     
+    <Style Selector="ListBoxItem:pointerover /template/ ContentPresenter">
+        <Setter Property="Background" Value="#E1E1E1"/>
+    </Style>
+    <Style Selector="ListBoxItem:selected /template/ ContentPresenter">
+        <Setter Property="Background" Value="#C6C6C6"/>
+    </Style>
 </Styles>
