@@ -1,0 +1,20 @@
+<Window xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:GraphicsApp.ViewModels"     
+             mc:Ignorable="d" d:DesignWidth="250" d:DesignHeight="100"
+             x:Class="GraphicsApp.Views.MessageBox"
+             Title="Подтверждение"
+             Width="250"
+             Height="100">
+
+    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+        <TextBlock x:Name="TextMessage" Text="Вы уверены, что хотите выполнить это действие?" TextWrapping="Wrap" TextAlignment="Center" Margin="10,0"/>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,0">
+            <Button Content="Да" Click="OnYesClicked" Margin="0,0,10,0" />
+            <Button Content="Нет" Click="OnNoClicked" />
+        </StackPanel>
+    </StackPanel>
+    
+</Window>
