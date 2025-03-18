@@ -140,7 +140,7 @@
                             <TextBlock Text="Удалить слой"/>
                         </ToolTip.Tip>
                     </Button>
-                    <Button Classes="Layer4">
+                    <Button Classes="Layer4" Click="MoveUpButtonClick">
                         <Viewbox Classes="Layer4VB">
                             <Canvas Width="24" Height="24">
                                 <Path Data="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" Stroke="#606060" StrokeThickness="2" StrokeLineCap="Round" StrokeJoin="Round"/>
@@ -154,7 +154,7 @@
                         </ToolTip.Tip>
                     </Button>
 
-                    <Button Classes="Layer4">
+                    <Button Classes="Layer4" Click="MoveDownButtonClick">
                         <Viewbox Classes="Layer4VB">
                             <Canvas Width="25" Height="25">
                                 <Path Data="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" Stroke="#606060" StrokeThickness="2" StrokeLineCap="Round" StrokeJoin="Round"/>

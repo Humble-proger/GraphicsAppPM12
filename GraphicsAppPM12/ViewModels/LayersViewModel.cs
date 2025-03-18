@@ -1,3 +1,4 @@
+using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Input;
@@ -16,6 +17,8 @@ public partial class LayersViewModel : ViewModelBase
     private MainWindowViewModel? _main;
 
     public ICommand SelectFigure { get; }
+    public ICommand MoveUpFigure { get; }
+    public ICommand MoveDownFigure { get; }
 
     public LayersViewModel(MainWindowViewModel? main)
     {
@@ -29,6 +32,38 @@ public partial class LayersViewModel : ViewModelBase
             }
 
         });
+        MoveUpFigure = new RelayCommand<ShapeViewModel>(OnMoveUpButtonClick);
+        MoveDownFigure = new RelayCommand<ShapeViewModel>(OnMoveDownButtonClick);
+    }
+
+    private void OnMoveUpButtonClick(ShapeViewModel figure)
+    { 
+        var indexEl = Main.Figures.IndexOf(figure);
+        if (indexEl > 0)
+        {
+            // Свап
+            (Main.Figures[indexEl], Main.Figures[indexEl - 1]) = (Main.Figures[indexEl - 1], Main.Figures[indexEl]);
+
+            // После свапа меняем выделенную фигуру
+            Main.Figures[indexEl].Active = false;
+            Main.SelectedFigure = Main.Figures[indexEl - 1];
+            Main.Figures[indexEl - 1].Active = true;
+        }
+    }
+
+    private void OnMoveDownButtonClick(ShapeViewModel figure)
+    {
+        var indexEl = Main.Figures.IndexOf(figure);
+        if (indexEl < Main.Figures.Count - 1)
+        {
+            // Свап
+            (Main.Figures[indexEl], Main.Figures[indexEl + 1]) = (Main.Figures[indexEl + 1], Main.Figures[indexEl]);
+
+            // После свапа меняем выделенную фигуру
+            Main.Figures[indexEl].Active = false;
+            Main.SelectedFigure = Main.Figures[indexEl + 1];
+            Main.Figures[indexEl + 1].Active = true;
+        }
     }
 
 }
