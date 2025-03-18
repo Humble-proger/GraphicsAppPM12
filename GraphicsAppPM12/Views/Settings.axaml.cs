@@ -1,4 +1,7 @@
-﻿using Avalonia.Controls;
+﻿using Avalonia;
+using Avalonia.Controls;
+using Avalonia.Controls.ApplicationLifetimes;
+using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.VisualTree;
 
@@ -7,6 +10,10 @@ using GraphicsApp.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Runtime.InteropServices;
+using System.Threading.Tasks;
+
+//using Tmds.DBus.Protocol;
 
 namespace GraphicsApp.Views
 {
@@ -34,13 +41,8 @@ namespace GraphicsApp.Views
                 {
                     new FileDialogFilter
                     {
-                        Name = "PNG, SVG, JSON",
-                        Extensions = new List<string> { "png", "svg", "json" }
-                    },
-                    new FileDialogFilter
-                    {
-                        Name = "Все файлы",
-                        Extensions = new List<string> { "*" }
+                        Name = "JSON",
+                        Extensions = new List<string> { "json" }
                     }
                 }
             };
@@ -49,10 +51,20 @@ namespace GraphicsApp.Views
             var result = await openFileDialog.ShowAsync(parentWindow);
 
             // Проверяем, выбрал ли пользователь хотя бы один файл
-            if (result != null && result.Length > 0)
+            if (result != null && result.Length > 0 && DataContext is SettingsViewModel viewModel)
             {
                 string filePath = result[0];
-                // Логика открытия/чтения файла\
+                if (File.Exists(filePath)) {
+                    bool flag = true;
+                    if (viewModel.Main.Figures.Count > 0)
+                    {
+                        var mainWindow = (Application.Current?.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime)?.MainWindow;
+                        if (mainWindow is not null)
+                            flag = await ShowMassageConfirmationDialog("Вы действительно хотите удалить текущие изменения?", mainWindow);
+                    }
+                    if (flag)
+                        viewModel.Main.LoadJsonCommand.Execute(filePath);
+                }
             }
         }
 
@@ -103,6 +115,12 @@ namespace GraphicsApp.Views
                         case ".json":
                             viewModel.Main.SaveJsonCommand.Execute(result);
                             break;
+                        case ".svg":
+                            viewModel.Main.SaveSvgCommand.Execute(result);
+                            break;
+                        case ".png":
+                            viewModel.Main.SavePngCommand.Execute(result);
+                            break;
                         default:
                             break;
                     }
@@ -115,6 +133,52 @@ namespace GraphicsApp.Views
             if (DataContext is SettingsViewModel viewModel) {
                 SettingsWindow settings = new SettingsWindow { DataContext = viewModel.Main.Settingswindow };
                 settings.Show();
+            }
+        }
+        public async Task<bool> ShowMassageConfirmationDialog(string text, Window currwindow)
+        {
+            var dialog = new MessageBox();
+            dialog.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            await dialog.ShowDialog(currwindow); // MainWindow - ссылка на главное окно
+            return dialog.Result;
+        }
+        private async void CreateButton_Pressed(object sender, RoutedEventArgs e) {
+            if (DataContext is SettingsViewModel viewModel && viewModel.Main is not null) {
+                bool flag = true;
+                if (viewModel.Main.Figures.Count > 0) {
+                    var mainWindow = (Application.Current?.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime)?.MainWindow;
+                    if (mainWindow is not null)
+                        flag = await ShowMassageConfirmationDialog("Вы действительно хотите удалить текущие изменения?", mainWindow);
+                }
+                if (flag)
+                    viewModel.Main.ToDefaultSettingsAndClearCanvas.Execute(null);
+            }
+        }
+        private void OnSaveButtonClick(object sender, RoutedEventArgs e)
+        {
+            if (DataContext is SettingsViewModel viewModel && viewModel.Main is not null)
+            {
+                var result = viewModel.Main.Settingswindow.SaveLocation;
+                var TypeFile = Path.GetExtension(result);
+                var NameFile = Path.GetFileName(result);
+                if (TypeFile != null && NameFile != null)
+                {
+                    var Type = TypeFile.ToLower();
+                    switch (Type)
+                    {
+                        case ".json":
+                            viewModel.Main.SaveJsonCommand.Execute(result);
+                            break;
+                        case ".svg":
+                            viewModel.Main.SaveSvgCommand.Execute(result);
+                            break;
+                        case ".png":
+                            viewModel.Main.SavePngCommand.Execute(result);
+                            break;
+                        default:
+                            break;
+                    }
+                }
             }
         }
     }
