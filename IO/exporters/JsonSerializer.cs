@@ -1,11 +1,14 @@
 using System.Text.Json;
 
+using Geometry;
+
 namespace VecEditor.IO;
 
 public class GeometryJsonSerializer<T>
 {
     private readonly JsonSerializerOptions _jsonSerializerOptions = new()
     {
+        Converters = { new ColorConverter() },
         WriteIndented = true,
     };
 
