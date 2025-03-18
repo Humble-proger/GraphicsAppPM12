@@ -19,9 +19,11 @@ namespace Geometry
         private float _strokeThickness = 1;
 
         [ObservableProperty]
+        [JsonConverter(typeof(ColorConverter))]
         private Color _stroke = Colors.Black;
 
         [ObservableProperty]
+        [JsonConverter(typeof(ColorConverter))]
         private Color _fill = Colors.Black;
 
         [ObservableProperty]
