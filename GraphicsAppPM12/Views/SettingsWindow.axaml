@@ -36,24 +36,29 @@
                 <Separator/>
 
 
-                <!-- Поведение при запуске -->
+                <!-- Поведение при запуске 
                 <TextBlock Text="Поведение при запуске" FontWeight="Bold" Margin="5"/>
                 <RadioButton Content="Стартовый экран" Margin="5" GroupName="StartupBehavior"/>
                 <RadioButton Content="Последний файл" Margin="5" GroupName="StartupBehavior"/>
                 <RadioButton Content="Новый файл" Margin="5" GroupName="StartupBehavior"/>
                 <Separator/>
-
-                <!-- Начальный формат файла -->
+                -->
+                <!-- Начальный формат файла 
                 <TextBlock Text="Начальный формат файла" FontWeight="Bold" Margin="5"/>
                 <RadioButton Content="SVG" Margin="5" GroupName="InitialFileFormat"/>
                 <RadioButton Content="PNG" Margin="5" GroupName="InitialFileFormat"/>
                 <Separator/>
-
-
+                   -->
                 <!-- Расположение файлов -->
                 <TextBlock Text="Расположение файлов" FontWeight="Bold" Margin="5"/>
                 <TextBlock Text="Расположение файлов по умолчанию" Margin="5"/>
-                <TextBox Watermark="C://" Margin="5"/>
+
+                <!-- Поле для ввода пути и кнопка выбора папки -->
+                <StackPanel Orientation="Horizontal" Margin="5" x:DataType="vm:SettingsWindowViewModel">
+                    <TextBox Watermark="C://" Text="{Binding SaveLocation}" Margin="0,0,5,0" Width="250"/>
+                    <Button Content="Выбрать путь" Click="OnSelectFolderButtonClick"/>
+                </StackPanel>
+
                 <Separator/>
                 
                 <TextBlock Text="Размер холста" FontWeight="Bold" Margin="5"/>
