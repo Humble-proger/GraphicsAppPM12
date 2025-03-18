@@ -12,6 +12,7 @@ namespace GraphicsApp.Views
         public Thickness()
         {
             InitializeComponent();
+            DataContext = this;
         }
 
         public event EventHandler<int> ThicknessChanged;

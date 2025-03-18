@@ -114,17 +114,17 @@ public class NegativeValueConverter : IValueConverter
     {
         if (value is double numericValue)
         {
-            return -numericValue; // Умножаем на -1
+            return -numericValue; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ -1
         }
-        return value; // Возвращаем исходное значение, если оно не числовое
+        return value; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
     {
         if (value is double numericValue)
         {
-            return -numericValue; // Умножаем на -1 при обратном преобразовании
+            return -numericValue; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ -1 пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         }
-        return value; // Возвращаем исходное значение, если оно не числовое
+        return value; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     }
 }
