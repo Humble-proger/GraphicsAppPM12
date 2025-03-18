@@ -11,6 +11,11 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using Avalonia.Controls.Templates;
 using VecEditor.IO;
 using System.IO;
+using Tmds.DBus.Protocol;
+using IO;
+using System.Diagnostics;
+using IO.exporters;
+using Avalonia.Media;
 
 
 namespace GraphicsApp.ViewModels;
@@ -37,29 +42,20 @@ public partial class MainWindowViewModel : ViewModelBase
     private SettingsViewModel _settings;
 
     public ObservableCollection<ShapeViewModel> Figures { get; } = [];
-    
-
+   
     public ObservableCollection<ModelFactoryViewModel> Factories { get; } = [];
     
     [ObservableProperty]
     private ModelFactoryViewModel? _selectedButtonFigure;
     
+    [ObservableProperty]
     private ShapeViewModel? _selectedFigure;
-
-    public ShapeViewModel? SelectedFigure {
-        get => _selectedFigure;
-        set {
-            if (_selectedFigure is not null)
-                _selectedFigure.Active = false;
-            if (value is not null)
-                value.Active = true;
-            _selectedFigure = value;
-            OnPropertyChanged(nameof(SelectedFigure));
-        }
-    }
     
     public ICommand SaveJsonCommand { get; }
     public ICommand LoadJsonCommand { get; }
+    public ICommand SaveSvgCommand { get; }
+    public ICommand SavePngCommand { get; }
+    public ICommand ToDefaultSettingsAndClearCanvas { get; }
 
     [ImportMany]
     private IEnumerable<ExportFactory<IShape, ModelMetadata>> ModelFactories { get; set; } = [];
@@ -86,9 +82,13 @@ public partial class MainWindowViewModel : ViewModelBase
         _geometryJsonSerializer = new();
 
         SaveJsonCommand = new RelayCommand<string>(
-            (filePath) => { _geometryJsonSerializer.SaveJson(filename: filePath, Figures); });
+            (filePath) => { if (filePath != null) _geometryJsonSerializer.SaveJson(filePath, Figures); });
         
-        LoadJsonCommand = new RelayCommand<string>( (FilePath) => LoadFigures(_geometryJsonSerializer.LoadJson(FilePath)) );
+        LoadJsonCommand = new RelayCommand<string>( (FilePath) => { if (FilePath != null) LoadFigures(_geometryJsonSerializer.LoadJson(FilePath)); } );
+
+        SaveSvgCommand = new RelayCommand<string>(SaveToSVG);
+        SavePngCommand = new RelayCommand<string>(SaveToPng);
+        ToDefaultSettingsAndClearCanvas = new RelayCommand(ClearCanvas);
 
     }
 
@@ -97,11 +97,43 @@ public partial class MainWindowViewModel : ViewModelBase
         if (figures is null)
             return;
 
-        Figures.Clear();
+        ToDefaultSettingsAndClearCanvas.Execute(null);
         foreach (var fig in figures)
         {
             fig.Main = this;
+            fig.Active = false;
+
             Figures.Add(fig);
         }
+    }
+
+    private void SaveToSVG(string? filepath) {
+        if (filepath is null) return;
+        if (Figures.Count < 1) return;
+        List<IShape> shapes = new List<IShape>();
+        foreach (var fig in Figures) {
+            shapes.Add(fig.Model);
+        }
+        SvgExporter.Export(filepath, new Vector2(x: (float) Canvasview.OriginalWidth, y: (float) Canvasview.OriginalHeight), shapes);
+        if (!File.Exists(filepath)) Debug.WriteLine($"Warning: ���� {filepath} �� ��� ������!") ;
+    }
+
+    private void SaveToPng(string? filepath) {
+        if (filepath is null) return;
+        RasterExporter.Export(Canvasview.MainCanvas, filepath);
+        if (!File.Exists(filepath)) Debug.WriteLine($"Warning: ���� {filepath} �� ��� ������!");
+    }
+
+    private void ClearCanvas() {
+        Figures.Clear();
+        SelectedFigure = null;
+        SelectedButtonFigure = null;
+        Canvasview.MainCanvas.Background = new SolidColorBrush(Colors.White);
+        Canvasview.OriginalHeight = 500;
+        Canvasview.OriginalWidth = 1000;
+        Canvasview.ZoomFactor = 1;
+        Toolbarsview.LineThickness = 0;
+        Toolbarsview.OutlineColor = Colors.Black;
+        Toolbarsview.SelectedColor = Colors.Red;
     }
 }

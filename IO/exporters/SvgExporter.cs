@@ -7,7 +7,7 @@ using Avalonia.Media;
 
 namespace IO
 {
-    public class SvgExporter
+    public static class SvgExporter
     {
         private static string ConvertColorToHex(Color color)
         {
@@ -22,7 +22,7 @@ namespace IO
                 throw new InvalidOperationException("Canvas dimensions must be positive.");
             }
 
-            // �������� ��� SVG ������ ����� foreach
+            
             var svgBuilder = new StringBuilder();
             svgBuilder.AppendLine($"<svg width=\"{size.X}\" height=\"{size.Y}\" xmlns=\"http://www.w3.org/2000/svg\">");
 
@@ -34,13 +34,13 @@ namespace IO
 
             svgBuilder.AppendLine("</svg>");
 
-            // ������� SVG �������� � ������� SVG.NET
+            
             string svgContent = svgBuilder.ToString();
             var svgDocument = SvgDocument.FromSvg<SvgDocument>(svgContent);
             svgDocument.Width = size.X;
             svgDocument.Height = size.Y;
 
-            // ��������� � ����
+            
             using var stream = File.OpenWrite(filepath);
             svgDocument.Write(stream);
         }

@@ -9,10 +9,7 @@
 
     <!--<UserControl.DataContext>
         <vm:MainWindowViewModel />
-    </UserControl.DataContext>-->
-    <UserControl.Resources>
-        <vm:NegativeValueConverter x:Key="NegativeValueConverter"/>
-    </UserControl.Resources>
+    </UserControl.DataContext>--> 
 
     <ScrollViewer HorizontalScrollBarVisibility="Auto"
                   VerticalScrollBarVisibility="Auto"
@@ -26,7 +23,7 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Canvas PointerPressed="MarkingPressed" PointerReleased="MarkingReleased" PointerMoved="MarkingMoved">
-                            <Path Stroke="Black" StrokeThickness="{Binding Model.StrokeThickness}" Data="{Binding Model.Geometry}" IsVisible="{Binding IsVisibleIcon}">
+                            <Path Stroke="Black" StrokeThickness="{Binding Model.StrokeThickness}" Data="{Binding Model.Geometry}">
                                 <Path.Fill>
                                     <SolidColorBrush Color="{Binding Model.Fill}"/>
                                 </Path.Fill>

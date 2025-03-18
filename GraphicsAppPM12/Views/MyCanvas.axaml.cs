@@ -95,10 +95,14 @@ namespace GraphicsApp.Views
                 if (viewModel.Main is not null)
                 {
                     if (viewModel.Main.SelectedFigure is not null) {
+                        viewModel.Main.SelectedFigure.Active = false;
                         viewModel.Main.SelectedFigure = null;
                     }
+                }
 
-                    if (viewModel.Main.SelectedButtonFigure is not null) {
+                if (viewModel.Main is not null) {
+                    if (viewModel.Main.SelectedButtonFigure is not null)
+                    {
                         var position = e.GetCurrentPoint(_canvas).Position;
                         viewModel.Main.SelectedButtonFigure.CreateCommand.Execute(position);
                     }
@@ -126,10 +130,12 @@ namespace GraphicsApp.Views
                             if (viewmodel.Main.SelectedFigure is null)
                             {
                                 viewmodel.Main.SelectedFigure = figure;
+                                figure.Active = true;
                             }
                             else if (viewmodel.Main.SelectedFigure != figure) {
                                 viewmodel.Main.SelectedFigure.Active = false;
                                 viewmodel.Main.SelectedFigure = figure;
+                                figure.Active = true;
                             }
                             else {
                                 var position = e.GetPosition(rect);
@@ -302,6 +308,7 @@ namespace GraphicsApp.Views
             if (sender is Canvas canvas && DataContext is CanvasViewModel viewModel && viewModel.OriginalHeight > 0 && viewModel.OriginalWidth > 0)
             {
                 // Устанавливаем Clip по размерам Canvas
+                viewModel.MainCanvas = canvas;
                 canvas.Clip = new RectangleGeometry(new Rect(0, 0, viewModel.OriginalWidth, viewModel.OriginalHeight));
 
             }
