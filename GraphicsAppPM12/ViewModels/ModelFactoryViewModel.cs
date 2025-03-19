@@ -5,6 +5,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Composition;
 using Geometry;
+using System.Linq;
 
 namespace GraphicsApp.ViewModels
 {
@@ -25,8 +26,10 @@ namespace GraphicsApp.ViewModels
             var colorFill = Main.Toolbarsview.SelectedColor;
             var tickness = Main.Toolbarsview.LineThickness;
             var colorBorder = Main.Toolbarsview.OutlineColor;
-            var name = $"{Factory} {Random.Shared.Next(100)}";
+            
             var model = Factory.CreateExport().Value;
+            var countFigures = Main.Figures.Count(elem => elem.Name.Split()[0] == Factory.Metadata.Name);
+            var name = $"{Factory.Metadata.Name} {countFigures + 1}";
             model.Fill = colorFill;
             model.Stroke = colorBorder;
             model.StrokeThickness = (float)tickness;

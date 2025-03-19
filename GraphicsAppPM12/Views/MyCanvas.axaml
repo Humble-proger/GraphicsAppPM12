@@ -9,10 +9,7 @@
 
     <!--<UserControl.DataContext>
         <vm:MainWindowViewModel />
-    </UserControl.DataContext>-->
-    <UserControl.Resources>
-        <vm:NegativeValueConverter x:Key="NegativeValueConverter"/>
-    </UserControl.Resources>
+    </UserControl.DataContext>--> 
 
     <ScrollViewer HorizontalScrollBarVisibility="Auto"
                   VerticalScrollBarVisibility="Auto"

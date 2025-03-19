@@ -26,7 +26,7 @@
             </Button>
             
             <!--Кнопка создать-->
-            <Button Height="35" Width="35" Background="#ededed">
+            <Button Height="35" Width="35" Background="#ededed" Click="CreateButton_Pressed">
                 <Viewbox Width="24" Height="24">
                     <Canvas Width="24" Height="24">
                         <!-- Основной контур файла -->
@@ -57,7 +57,7 @@
             </Button>
             
             <!--Кнопка сохранить-->
-            <Button Height="35" Width="35" Background="#ededed">
+            <Button Height="35" Width="35" Background="#ededed" Click="OnSaveButtonClick">
                 <Viewbox  Width="21" Height="21" Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center">
                     <Canvas Width="512" Height="512">
                         <Path Fill="#606060" StrokeThickness="2"

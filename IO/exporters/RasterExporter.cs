@@ -6,9 +6,9 @@ using IO.interfaces;
 
 namespace IO.exporters;
 
-public class RasterExporter: IExporter
+public static class RasterExporter
 {
-    public void Export(Canvas canvas, string filepath)
+    public static void Export(Canvas canvas, string filepath)
     {
         if (canvas.Bounds.Width == 0 || canvas.Bounds.Height == 0)
         {

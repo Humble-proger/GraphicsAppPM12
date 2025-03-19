@@ -16,8 +16,10 @@ namespace Geometry
         private Avalonia.Collections.AvaloniaList<double> _strokeDashArray = [5, 2];
 
         [ObservableProperty]
+        [JsonConverter(typeof(ColorConverter))]
         private Color _stroke = Colors.Gray;
         [ObservableProperty]
+        [JsonConverter(typeof(ColorConverter))]
         private Color _fill = Colors.Transparent;
 
         [ObservableProperty]

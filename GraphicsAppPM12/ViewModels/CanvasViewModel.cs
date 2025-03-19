@@ -1,4 +1,3 @@
-
 using System.Globalization;
 using System;
 using System.Numerics;
@@ -10,6 +9,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
 using GraphicsApp.Views;
+using Avalonia.Controls;
 
 namespace GraphicsApp.ViewModels;
 
@@ -18,6 +18,9 @@ public partial class CanvasViewModel : ViewModelBase
     private double _originalWidth = 1000;
     
     private double _originalHeight = 500;
+
+    [ObservableProperty]
+    private Canvas _mainCanvas;
 
     public double OriginalWidth {
         get => _originalWidth;
@@ -105,26 +108,5 @@ public partial class CanvasViewModel : ViewModelBase
         ZoomFactor += delta;
         if (ZoomFactor < 0.1) ZoomFactor = 0.1;
 
-    }
-}
-
-public class NegativeValueConverter : IValueConverter
-{
-    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-    {
-        if (value is double numericValue)
-        {
-            return -numericValue; // ”множаем на -1
-        }
-        return value; // ¬озвращаем исходное значение, если оно не числовое
-    }
-
-    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-    {
-        if (value is double numericValue)
-        {
-            return -numericValue; // ”множаем на -1 при обратном преобразовании
-        }
-        return value; // ¬озвращаем исходное значение, если оно не числовое
     }
 }

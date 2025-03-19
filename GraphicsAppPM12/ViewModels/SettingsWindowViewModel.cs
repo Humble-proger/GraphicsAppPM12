@@ -9,6 +9,9 @@ public partial class SettingsWindowViewModel : ViewModelBase
     [ObservableProperty]
     private MainWindowViewModel _main;
 
+    [ObservableProperty]
+    private string _saveLocation;
+
     public SettingsWindowViewModel(MainWindowViewModel main) {
         Main = main;
     }
