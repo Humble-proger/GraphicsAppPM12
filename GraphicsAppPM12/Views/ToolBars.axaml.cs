@@ -141,5 +141,13 @@ namespace GraphicsApp.Views
                 viewModel.OutlineColor = e.NewColor;
             }
         }
+
+        private void RotateSelectedFigure_Click(object? sender, RoutedEventArgs e)
+        {
+            if (DataContext is ToolBarsViewModel viewModel)
+            {
+                viewModel.Main.SelectedFigure.Model.Rotate(90);
+            }
+        }
     }
 }
