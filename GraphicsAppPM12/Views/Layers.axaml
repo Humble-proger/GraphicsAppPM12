@@ -45,7 +45,8 @@
                                                     А ещё при наведении курсора на ВЫКЛ. кнопку, она как будто становится ВКЛ. Тоже не очень хорошо.
                                                     1) Хочется, чтобы состояния были ярко отличимы и видны пользователю.
                                                     2) При наведении на ВЫКЛ. кнопку, она не должна как будто становиться ВКЛ.-->
-                                                <ToggleButton Grid.Column="1" Grid.Row="5" IsChecked="True" IsCheckedChanged="OnFillButtonClick"/>
+                                                <!--ToggleButton Grid.Column="1" Grid.Row="5" IsChecked="True" IsCheckedChanged="OnFillButtonClick"/-->
+                                                <CheckBox Grid.Column="1" Grid.Row="5" HorizontalAlignment="Left" IsChecked="{Binding Model.Fill.A}" Margin="1" IsCheckedChanged="OnFillButtonClick" />
                                                 <TextBox Grid.Column="1" Grid.Row="6" Text="{Binding Model.StrokeThickness}" Classes="Options"/>
                                                 <TextBox Grid.Column="1" Grid.Row="7" Watermark="0" Classes="Options" Text="{Binding Model.Angle}"/>
                                             </Grid>
