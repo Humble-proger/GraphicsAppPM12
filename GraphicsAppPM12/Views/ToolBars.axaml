@@ -70,7 +70,7 @@
 
                     </Viewbox>
                     <ToolTip.Tip>
-                        <TextBlock Text="Добавить перо"/>
+                        <TextBlock Text="Добавить точку"/>
                     </ToolTip.Tip>
                 </ToggleButton>
                 <TextBlock Text="Перо" />
@@ -93,7 +93,7 @@
 
                     </Viewbox>
                     <ToolTip.Tip>
-                        <TextBlock Text="Убрать перо"/>
+                        <TextBlock Text="Убрать точку"/>
                     </ToolTip.Tip>
                 </ToggleButton>
                 <TextBlock Text="Перо" />
