@@ -26,22 +26,29 @@
                                 <ContentControl.DataTemplates>
                                     <DataTemplate x:DataType="vm:ShapeViewModel">
                                         <StackPanel>
-                                            <Grid RowDefinitions="*,*,*,Auto,Auto,*,*" ColumnDefinitions="113, *" Margin="5" >
+                                            <Grid RowDefinitions="*,*,*,Auto,Auto,*,*,*" ColumnDefinitions="113, *" Margin="5" >
                                                 <TextBlock Grid.Column="0" Grid.Row="0" Text="Имя фигуры" Classes="OptionsNechet"/>
                                                 <TextBlock Grid.Column="0" Grid.Row="1" Text="Положение по X" Classes="OptionsChet"/>
                                                 <TextBlock Grid.Column="0" Grid.Row="2" Text="Положение по Y" Classes="OptionsNechet"/>
                                                 <TextBlock Grid.Column="0" Grid.Row="3" Text="Цвет" Classes="OptionsChet"/>
                                                 <TextBlock Grid.Column="0" Grid.Row="4" Text="Цвет контура" Classes="OptionsNechet"/>
-                                                <TextBlock Grid.Column="0" Grid.Row="5" Text="Толщина линии" Classes="OptionsChet"/>
-                                                <TextBlock Grid.Column="0" Grid.Row="6" Text="Угол поворота" Classes="OptionsNechet"/>
+                                                <TextBlock Grid.Column="0" Grid.Row="5" Text="Наличие заливки" Classes="OptionsChet"/>
+                                                <TextBlock Grid.Column="0" Grid.Row="6" Text="Толщина линии" Classes="OptionsNechet"/>
+                                                <TextBlock Grid.Column="0" Grid.Row="7" Text="Угол поворота" Classes="OptionsChet"/>
 
                                                 <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding Name, Mode=TwoWay}" Classes="Options"/>
                                                 <TextBox Grid.Column="1" Grid.Row="1" Watermark="12" Classes="Options" Text="{Binding Model.CenterX}"/>
                                                 <TextBox Grid.Column="1" Grid.Row="2" Watermark="12" Classes="Options" Text="{Binding Model.CenterY}"/>
                                                 <ColorPicker Grid.Column="1" Grid.Row="3" Color="{Binding Model.Fill}" HorizontalAlignment="Left" Margin="1"/>
                                                 <ColorPicker Grid.Column="1" Grid.Row="4" Color="{Binding Model.Stroke}" HorizontalAlignment="Left" Margin="1"/>
-                                                <TextBox Grid.Column="1" Grid.Row="5" Text="{Binding Model.StrokeThickness}" Classes="Options"/>
-                                                <TextBox Grid.Column="1" Grid.Row="6" Watermark="0" Classes="Options" Text="{Binding Model.Angle}"/>
+                                                <!--По умолчанию кнопка заливки находится в состоянии ВКЛ. Если на неё нажать, то она меняется, но это не очень бросается в глаза.
+                                                    А ещё при наведении курсора на ВЫКЛ. кнопку, она как будто становится ВКЛ. Тоже не очень хорошо.
+                                                    1) Хочется, чтобы состояния были ярко отличимы и видны пользователю.
+                                                    2) При наведении на ВЫКЛ. кнопку, она не должна как будто становиться ВКЛ.-->
+                                                <!--ToggleButton Grid.Column="1" Grid.Row="5" IsChecked="True" IsCheckedChanged="OnFillButtonClick"/-->
+                                                <CheckBox Grid.Column="1" Grid.Row="5" HorizontalAlignment="Left" IsChecked="{Binding Model.Fill.A}" Margin="1" IsCheckedChanged="OnFillButtonClick" />
+                                                <TextBox Grid.Column="1" Grid.Row="6" Text="{Binding Model.StrokeThickness}" Classes="Options"/>
+                                                <TextBox Grid.Column="1" Grid.Row="7" Watermark="0" Classes="Options" Text="{Binding Model.Angle}"/>
                                             </Grid>
                                             <ContentControl Content="{Binding Model}">
                                                 <ContentControl.DataTemplates>
