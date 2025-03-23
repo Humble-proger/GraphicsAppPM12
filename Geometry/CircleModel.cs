@@ -2,6 +2,8 @@
 using Avalonia.Media;
 using CommunityToolkit.Mvvm.ComponentModel;
 using System.Composition;
+using Avalonia;
+using System.Collections.ObjectModel;
 
 namespace Geometry
 {
@@ -18,11 +20,9 @@ namespace Geometry
         private float _strokeThickness = 1;
 
         [ObservableProperty]
-        [JsonConverter(typeof(ColorConverter))]
         private Color _stroke = Colors.Black;
 
         [ObservableProperty]
-        [JsonConverter(typeof(ColorConverter))]
         private Color _fill = Colors.Black;
 
         [ObservableProperty]
@@ -62,6 +62,34 @@ namespace Geometry
         public float BoxCenterY => CenterY - BoxHeight / 2;
         [JsonIgnore]
         public string Geometry => getGeometry();
+
+
+        public float Width
+        {
+            get => 2 * Radius;
+            set
+            {
+                if (float.Abs(value) > float.Epsilon)
+                {
+                    Radius = value / 2;
+                    OnPropertyChanged(nameof(Width));
+                }
+            }
+        }
+        public float Height
+        {
+            get => 2 * Radius;
+            set
+            {
+                if (float.Abs(value) > float.Epsilon)
+                {
+                    Radius = value / 2;
+                    OnPropertyChanged(nameof(Height));
+                }
+            }
+        }
+
+        public ObservableCollection<Point> ListOfPoints => throw new NotImplementedException();
 
         public void Scale(float ratioX, float ratioY)
         {
