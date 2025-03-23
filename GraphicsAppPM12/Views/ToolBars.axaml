@@ -59,14 +59,42 @@
                 <ToggleButton Name="PenButton" Height="50" Width="50" Background="#ededed" Margin="0,-10,0,3"
                               Click="PenButton_Click">
                     <Viewbox Width="35" Height="35">
-                        <Canvas Width="24" Height="24">
-                            <Path Data="M12 19L19 12L22 15L15 22L12 19Z" />
-                            <Path Data="M18 13L16.5 5.5L2 2L5.5 16.5L13 18L18 13Z" />
-                            <Path Data="M2 2L9.586 9.586" />
-                            <Ellipse Width="4" Height="4" Canvas.Left="9" Canvas.Top="9"
-                                     Stroke="#606060" StrokeThickness="2"/>
+                        <Canvas Width="20" Height="20">
+                            <Path Data="M10 16L16 10L18 12L12 18L10 16Z" Stroke="#606060" StrokeThickness="1.5"/>
+                            <Path Data="M15 11L13.5 4.5L2 2L4.5 13.5L11 15L15 11Z" Stroke="#606060" StrokeThickness="1.5"/>
+                            <Path Data="M2 2L8 8" Stroke="#606060" StrokeThickness="1.5"/>
+                            <Ellipse Width="3" Height="3" Canvas.Left="8" Canvas.Top="8"
+                                     Stroke="#606060" StrokeThickness="1.5"/>
+                            <Path Data="M15 4L19 4M17 2L17 6" Stroke="#606060" StrokeThickness="1"/>
                         </Canvas>
+
                     </Viewbox>
+                    <ToolTip.Tip>
+                        <TextBlock Text="Добавить перо"/>
+                    </ToolTip.Tip>
+                </ToggleButton>
+                <TextBlock Text="Перо" />
+            </StackPanel>
+
+            <!--Кнопка поворот-->
+            <StackPanel>
+                <ToggleButton Name="DeleteButton" Height="50" Width="50" Background="#ededed" Margin="0,-10,0,3"
+                              Click="DeleteButton_Click">
+                    <Viewbox Width="35" Height="35">
+                        <Canvas Width="20" Height="20">
+                            <Path Data="M10 16L16 10L18 12L12 18L10 16Z" Stroke="#606060" StrokeThickness="1.5"/>
+                            <Path Data="M15 11L13.5 4.5L2 2L4.5 13.5L11 15L15 11Z" Stroke="#606060" StrokeThickness="1.5"/>
+                            <Path Data="M2 2L8 8" Stroke="#606060" StrokeThickness="1.5"/>
+                            <Ellipse Width="3" Height="3" Canvas.Left="8" Canvas.Top="8"
+                                     Stroke="#606060" StrokeThickness="1.5"/>
+                            <Path Data="M15 4L18 4" Stroke="#606060" StrokeThickness="1"/>
+                        </Canvas>
+
+
+                    </Viewbox>
+                    <ToolTip.Tip>
+                        <TextBlock Text="Убрать перо"/>
+                    </ToolTip.Tip>
                 </ToggleButton>
                 <TextBlock Text="Перо" />
             </StackPanel>
@@ -87,20 +115,7 @@
                 <TextBlock Text="Заливка" />
             </StackPanel>
 
-            <!--Кнопка удаления-->
-            <StackPanel>
-                <ToggleButton Name="DeleteButton" Height="50" Width="50" Background="#ededed" Margin="0,-10,0,3"
-                              Click="DeleteButton_Click">
-                    <Viewbox Width="35" Height="35">
-                        <Canvas Width="24" Height="24">
-                            <Path Data="M20 10C20 5.6 16.4 2 12 2S4 5.6 4 10s3.6 8 8 8h8"/>
-                            <Path Data="M16 14L20 18L16 22"/>
-                        </Canvas>
-
-                    </Viewbox> 
-                </ToggleButton>
-                <TextBlock Text="Поворот" />
-            </StackPanel>
+            
 
             <!--Толщина-->
             <StackPanel>
