@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.Collections.ObjectModel;
+using System.Text.Json.Serialization;
 
 using Avalonia.Media;
 
@@ -22,17 +23,20 @@ namespace Geometry
         float BoxCenterX { get; }
         float BoxCenterY { get; }
         // координата х центра фигуры
-        float CenterX { get; }
+        float CenterX { get; set; }
         // координата y центра фигуры
-        float CenterY { get; }
+        float CenterY { get; set; }
 
-        float Angle { get; }
+        float Width { get; set; }
+        float Height { get; set; }
+        float Angle { get; set; }
         // толщина обводки)
         float StrokeThickness { get; set; }
         // цвет обводки
         Color Stroke { get; set; }
         // цвет заливки
         Color Fill { get; set; }
+        ObservableCollection<Point> ListOfPoints { get; }
         public void Move(float deltaX, float deltaY);
         public void Scale(float ratioX, float ratioY);
         public void Rotate(float angle);

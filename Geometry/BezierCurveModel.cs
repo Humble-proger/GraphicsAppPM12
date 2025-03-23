@@ -1,118 +1,294 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.Collections.ObjectModel;
+using System.Composition;
+using System.Text.Json.Serialization;
 
+using Avalonia;
 using Avalonia.Media;
 
 using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace Geometry
 {
+
+    [Export(typeof(IShape))]
+    [ExportMetadata("LogoButton", "beziercurve.png")]
+    [ExportMetadata("Name", "BezierCurve")]
     public partial class BezierCurveModel : ObservableObject, IShape
     {
-        [ObservableProperty]
-        [NotifyPropertyChangedFor(nameof(BoxHeight))]
-        [NotifyPropertyChangedFor(nameof(BoxWidth))]
-        [NotifyPropertyChangedFor(nameof(BoxCenterX))]
-        [NotifyPropertyChangedFor(nameof(BoxCenterY))]
-        private float _strokeThickness = 1;
+        private float _strokeThickness = 0;
 
-        [ObservableProperty]
-        [JsonConverter(typeof(ColorConverter))]
-        private Color _stroke = Colors.Black;
-
-        [ObservableProperty]
-        [JsonConverter(typeof(ColorConverter))]
-        private Color _fill = Colors.Black;
-
-        [ObservableProperty]
-        [NotifyPropertyChangedFor(nameof(Geometry))]
-        [NotifyPropertyChangedFor(nameof(BoxWidth))]
-        [NotifyPropertyChangedFor(nameof(BoxHeight))]
-        [NotifyPropertyChangedFor(nameof(BoxCenterX))]
-        [NotifyPropertyChangedFor(nameof(BoxCenterY))]
-        private float _centerX;
-
-        [ObservableProperty]
-        [NotifyPropertyChangedFor(nameof(Geometry))]
-        [NotifyPropertyChangedFor(nameof(BoxWidth))]
-        [NotifyPropertyChangedFor(nameof(BoxHeight))]
-        [NotifyPropertyChangedFor(nameof(BoxCenterX))]
-        [NotifyPropertyChangedFor(nameof(BoxCenterY))]
-        private float _centerY;
-
-        [ObservableProperty]
-        [NotifyPropertyChangedFor(nameof(Geometry))]
-        [NotifyPropertyChangedFor(nameof(BoxWidth))]
-        [NotifyPropertyChangedFor(nameof(BoxHeight))]
-        [NotifyPropertyChangedFor(nameof(BoxCenterX))]
-        [NotifyPropertyChangedFor(nameof(BoxCenterY))]
-        private List<Avalonia.Point> _listOfPoints = [];
-        public BezierCurveModel(List<Avalonia.Point> initialPoints)
+        public float StrokeThickness
         {
-            _listOfPoints = initialPoints;
-            CalculateCenter();
+            get => _strokeThickness;
+            set
+            {
+                var delta = value - _strokeThickness;
+                var angleRad = _angle * Math.PI / 180.0;
+                float cossin = float.Abs((float) Math.Cos(angleRad)) + float.Abs((float) Math.Sin(angleRad));
+                BoxCenterX -= delta * cossin / 2;
+                BoxCenterY -= delta * cossin / 2;
+                BoxWidth += delta * cossin;
+                BoxHeight += delta * cossin;
+                _strokeThickness = value;
+                OnPropertyChanged(nameof(StrokeThickness));
+                OnPropertyChanged(nameof(Geometry));
+            }
         }
 
         [ObservableProperty]
-        [NotifyPropertyChangedFor(nameof(Geometry))]
-        [NotifyPropertyChangedFor(nameof(BoxWidth))]
-        [NotifyPropertyChangedFor(nameof(BoxHeight))]
-        [NotifyPropertyChangedFor(nameof(BoxCenterX))]
-        [NotifyPropertyChangedFor(nameof(BoxCenterY))]
+        private Color _stroke = Colors.Black;
+
+        [ObservableProperty]
+        private Color _fill = Colors.Transparent;
+
+        private float _centerX = 0;
+
+        public float CenterX
+        {
+            get => _centerX;
+            set
+            {
+                var deltaX = value - _centerX;
+                for (int i = 0; i < ListOfPoints.Count; i++)
+                {
+                    var point = ListOfPoints[i];
+                    point.X += deltaX;
+                    ListOfPoints[i] = point;
+                }
+                _centerX = value;
+                BoxCenterX += deltaX;
+                OnPropertyChanged(nameof(CenterX));
+                OnPropertyChanged(nameof(Geometry));
+            }
+        }
+
+        private float _centerY = 0;
+
+        public float CenterY
+        {
+            get => _centerY;
+            set
+            {
+                var deltaY = value - _centerY;
+                for (int i = 0; i < ListOfPoints.Count; i++)
+                {
+                    var point = ListOfPoints[i];
+                    point.Y += deltaY;
+                    ListOfPoints[i] = point;
+                }
+                _centerY = value;
+                BoxCenterY += deltaY;
+                OnPropertyChanged(nameof(CenterY));
+                OnPropertyChanged(nameof(Geometry));
+            }
+        }
+
+        private float _width = 100;
+
+        public float Width
+        {
+            get => _width;
+            set
+            {
+                if (float.Abs(value) > float.Epsilon)
+                {
+                    var ratioX = value / _width;
+                    double minValX = double.MaxValue;
+                    for (int i = 0; i < ListOfPoints.Count; i++)
+                    {
+                        var point = ListOfPoints[i];
+                        point.X = CenterX + (point.X - CenterX) * ratioX;
+                        if (point.X < minValX) minValX = point.X;
+                        ListOfPoints[i] = point;
+                    }
+
+                    _width = value;
+                    var angleRad = _angle * Math.PI / 180.0;
+                    float cossin = float.Abs((float) Math.Cos(angleRad)) + float.Abs((float) Math.Sin(angleRad));
+                    BoxCenterX = (float) (minValX - StrokeThickness * cossin / 2 - 3);
+                    BoxWidth = float.Abs(_width) + StrokeThickness * cossin + 6;
+                    OnPropertyChanged(nameof(Width));
+                    OnPropertyChanged(nameof(Geometry));
+                }
+            }
+        }
+
+        private float _height = 100;
+
+        public float Height
+        {
+            get => _height;
+            set
+            {
+                if (float.Abs(value) > float.Epsilon)
+                {
+                    var ratioY = value / _height;
+                    double minValY = double.MaxValue;
+                    for (int i = 0; i < ListOfPoints.Count; i++)
+                    {
+                        var point = ListOfPoints[i];
+                        point.Y = CenterY + (point.Y - CenterY) * ratioY;
+                        if (point.Y < minValY) minValY = point.Y;
+                        ListOfPoints[i] = point;
+                    }
+                    _height = value;
+                    var angleRad = _angle * Math.PI / 180.0;
+                    float cossin = float.Abs((float) Math.Cos(angleRad)) + float.Abs((float) Math.Sin(angleRad));
+                    BoxHeight = float.Abs(_height) + StrokeThickness * cossin + 6;
+                    BoxCenterY = (float) (minValY - StrokeThickness * cossin / 2 - 3);
+                    OnPropertyChanged(nameof(Height));
+                    OnPropertyChanged(nameof(Geometry));
+                }
+            }
+        }
+
+        public ObservableCollection<Point> ListOfPoints { get; private set; }
+        public BezierCurveModel()
+        {
+            ListOfPoints = new ObservableCollection<Point>() {
+                new Point(CenterX, CenterY)
+            };
+            UpdateBox();
+        }
+
         private float _angle = 0;
 
-        public float BoxHeight => getBoxHeight() + StrokeThickness + 6;
-        public float BoxWidth => getBoxWidth() + StrokeThickness + 6;
+        public float Angle
+        {
+            get => _angle;
+            set
+            {
+                var angleRad = (value - _angle) * Math.PI / 180.0;
+                float cos = (float) Math.Cos(angleRad);
+                float sin = (float) Math.Sin(angleRad);
 
-        public float BoxCenterX => getCenterBoxX() - BoxWidth / 2;
-        public float BoxCenterY => getCenterBoxY() - BoxWidth / 2;
+                for (int i = 0; i < ListOfPoints.Count; i++)
+                {
+                    var point = ListOfPoints[i];
+                    float deltaX = (float) (point.X - CenterX);
+                    float deltaY = (float) (point.Y - CenterY);
+
+                    point.X = CenterX + deltaX * cos - deltaY * sin;
+                    point.Y = CenterY + deltaX * sin + deltaY * cos;
+                    ListOfPoints[i] = point;
+                }
+                _angle = value % 360;
+                UpdateBox();
+                OnPropertyChanged(nameof(Angle));
+                OnPropertyChanged(nameof(Geometry));
+            }
+        }
+
+        [JsonIgnore]
+        [ObservableProperty]
+        private float _boxHeight;
+
+        [JsonIgnore]
+        [ObservableProperty]
+        private float _boxWidth;
+
+        [JsonIgnore]
+        [ObservableProperty]
+        private float _boxCenterX;
+
+        [JsonIgnore]
+        [ObservableProperty]
+        private float _boxCenterY;
 
 
         [JsonIgnore]
-        public string Geometry => getGeometry();
+        public string Geometry => GetGeometry();
+
 
         public void Scale(float ratioX, float ratioY)
         {
+            double minValX = double.MaxValue;
+            double minValY = double.MaxValue;
+
             for (int i = 0; i < ListOfPoints.Count; i++)
             {
-                ListOfPoints[i] = new Avalonia.Point(CenterX + (ListOfPoints[i].X - CenterX) * ratioX, CenterY + (ListOfPoints[i].Y - CenterY) * ratioY);
+                var point = ListOfPoints[i];
+                point.X = CenterX + (point.X - CenterX) * ratioX;
+                point.Y = CenterY + (point.Y - CenterY) * ratioY;
+                ListOfPoints[i] = point;
+
+                if (point.X < minValX) minValX = point.X;
+                if (point.Y < minValY) minValY = point.Y;
             }
+
+            _width *= ratioX;
+            _height *= ratioY;
+
+            var angleRad = _angle * Math.PI / 180.0;
+            var cos = float.Abs((float) Math.Cos(angleRad));
+            var sin = float.Abs((float) Math.Sin(angleRad));
+            BoxCenterX = (float) (minValX - StrokeThickness * (cos + sin) / 2 - 3);
+            BoxCenterY = (float) (minValY - StrokeThickness * (cos + sin) / 2 - 3);
+            BoxWidth = float.Abs(_width) + StrokeThickness * (cos + sin) + 6;
+            BoxHeight = float.Abs(_height) + StrokeThickness * (cos + sin) + 6;
+            OnPropertyChanged(nameof(Width));
+            OnPropertyChanged(nameof(Height));
+            OnPropertyChanged(nameof(Geometry));
         }
 
         public void Move(float deltaX, float deltaY)
         {
             for (int i = 0; i < ListOfPoints.Count; i++)
             {
-                ListOfPoints[i] = new Avalonia.Point(ListOfPoints[i].X + deltaX, ListOfPoints[i].Y + deltaY);
+                var point = ListOfPoints[i];
+                point.X += deltaX;
+                point.Y += deltaY;
+                ListOfPoints[i] = point;
             }
+            _centerX += deltaX;
+            _centerY += deltaY;
+            BoxCenterX += deltaX;
+            BoxCenterY += deltaY;
+            OnPropertyChanged(nameof(CenterX));
+            OnPropertyChanged(nameof(CenterY));
+            OnPropertyChanged(nameof(Geometry));
+        }
+
+        public void MovePoint(double deltaX, double deltaY, int index)
+        {
+            if (index >= 0)
+            {
+                var point = ListOfPoints[index];
+                point.X += deltaX;
+                point.Y += deltaY;
+                ListOfPoints[index] = point;
+                CalculateCenter();
+                UpdateBox();
+
+                OnPropertyChanged(nameof(Geometry));
+            }
+        }
+
+        public void AddPoint(Point newPoint)
+        {
+            ListOfPoints.Add(newPoint);
             CalculateCenter();
+            UpdateBox();
+            OnPropertyChanged(nameof(Geometry));
         }
 
         public void Rotate(float angle)
         {
-            var angleRad = angle * Math.PI / 180.0;
-            for (int i = 0; i < ListOfPoints.Count; i++)
-            {
-                ListOfPoints[i] = new Avalonia.Point((float) (CenterX + (ListOfPoints[i].X - CenterX) * Math.Cos(angleRad) - (ListOfPoints[i].Y - CenterY) * Math.Sin(angleRad)),
-                    (float) (CenterY + (ListOfPoints[i].X - CenterX) * Math.Sin(angleRad) + (ListOfPoints[i].Y - CenterY) * Math.Cos(angleRad)));
-            }
-
             Angle += angle;
-            Angle %= 360;
         }
 
-        public string getGeometry()
+        public string GetGeometry()
         {
             var a = "";
             if (ListOfPoints.Count > 0)
             {
-                a = FormattableString.Invariant($"M{ListOfPoints[0].X},{ListOfPoints[0].Y} ");
+                a = FormattableString.Invariant($"M {ListOfPoints[0].X},{ListOfPoints[0].Y} ");
             }
 
             for (int i = 1; i < ListOfPoints.Count - 1; i += 2)
             {
                 a += FormattableString.Invariant($"Q {ListOfPoints[i].X},{ListOfPoints[i].Y} {ListOfPoints[i + 1].X},{ListOfPoints[i + 1].Y}");
             }
-
             return a;
         }
 
@@ -133,86 +309,44 @@ namespace Geometry
                 avgY /= ListOfPoints.Count;
             }
 
-            CenterX = (float) avgX;
-            CenterY = (float) avgY;
+            _centerX = (float) avgX;
+            _centerY = (float) avgY;
+            OnPropertyChanged(nameof(CenterX));
+            OnPropertyChanged(nameof(CenterY));
         }
 
-        private float getBoxWidth()
+        private void UpdateBox()
         {
-            float maxCoord = float.MinValue;
-            float minCoord = float.MaxValue;
-            for (int i = 0; i < ListOfPoints.Count; i++)
-            {
-                if (ListOfPoints[i].X > maxCoord)
-                {
-                    maxCoord = (float) ListOfPoints[i].X;
-                }
+            Point minval, maxval;
+            (minval, maxval) = FindMinMax();
 
-                if (ListOfPoints[i].X < minCoord)
-                {
-                    minCoord = (float) ListOfPoints[i].X;
-                }
-            }
-            return maxCoord - minCoord;
+            _width = (float) (maxval.X - minval.X);
+            _height = (float) (maxval.Y - minval.Y);
+            var anglerad = _angle * Math.PI / 180.0;
+            var cossin = float.Abs((float) Math.Cos(anglerad)) + float.Abs((float) Math.Sin(anglerad));
+            BoxCenterX = (float) minval.X - StrokeThickness * cossin / 2 - 3;
+            BoxCenterY = (float) minval.Y - StrokeThickness * cossin / 2 - 3;
+            BoxWidth = float.Abs(_width) + StrokeThickness * cossin + 6;
+            BoxHeight = float.Abs(_height) + StrokeThickness * cossin + 6;
+            OnPropertyChanged(nameof(Width));
+            OnPropertyChanged(nameof(Height));
         }
 
-        private float getBoxHeight()
+        private (Point minPoints, Point maxPoints) FindMinMax()
         {
-            float maxCoord = float.MinValue;
-            float minCoord = float.MaxValue;
-            for (int i = 0; i < ListOfPoints.Count; i++)
+            double minValue1 = double.MaxValue;
+            double minValue2 = double.MaxValue;
+            double maxValue1 = double.MinValue;
+            double maxValue2 = double.MinValue;
+
+            foreach (var point in ListOfPoints)
             {
-                if (ListOfPoints[i].Y > maxCoord)
-                {
-                    maxCoord = (float) ListOfPoints[i].Y;
-                }
-
-                if (ListOfPoints[i].Y < minCoord)
-                {
-                    minCoord = (float) ListOfPoints[i].Y;
-                }
+                if (point.X < minValue1) minValue1 = point.X;
+                if (point.X > maxValue1) maxValue1 = point.X;
+                if (point.Y < minValue2) minValue2 = point.Y;
+                if (point.Y > maxValue2) maxValue2 = point.Y;
             }
-            return maxCoord - minCoord;
-        }
-
-        private float getCenterBoxX()
-        {
-            float maxCoord = float.MinValue;
-            float minCoord = float.MaxValue;
-            for (int i = 0; i < ListOfPoints.Count; i++)
-            {
-                if (ListOfPoints[i].X > maxCoord)
-                {
-                    maxCoord = (float) ListOfPoints[i].X;
-                }
-
-                if (ListOfPoints[i].X < minCoord)
-                {
-                    minCoord = (float) ListOfPoints[i].X;
-                }
-            }
-
-            return (float) (minCoord + (maxCoord - minCoord) / 2.0);
-        }
-
-        private float getCenterBoxY()
-        {
-            float maxCoord = float.MinValue;
-            float minCoord = float.MaxValue;
-            for (int i = 0; i < ListOfPoints.Count; i++)
-            {
-                if (ListOfPoints[i].Y > maxCoord)
-                {
-                    maxCoord = (float) ListOfPoints[i].Y;
-                }
-
-                if (ListOfPoints[i].Y < minCoord)
-                {
-                    minCoord = (float) ListOfPoints[i].Y;
-                }
-            }
-
-            return (float) (minCoord + (maxCoord - minCoord) / 2.0);
+            return (new Point(minValue1, minValue2), new Point(maxValue1, maxValue2));
         }
     }
 
