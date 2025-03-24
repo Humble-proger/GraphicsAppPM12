@@ -63,7 +63,7 @@
 
             <!-- Масштаб -->
             <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="5" HorizontalAlignment="Right" Margin="10,0,10,0">
-                <Button Height="25" Width="25" Background="#F6F6F6" Click="OnZoomOutClicked">
+                <Button Height="25" Width="25" Background="#F6F6F6" x:DataType="vm:FooterViewModel" Command="{Binding ZoomOut}">
                     <Viewbox Width="15" Height="15">
                         <Canvas Width="12" Height="12">
                             <Path Data="M4 6H8" Stroke="#606060" StrokeThickness="1.5" StrokeLineCap="Round" StrokeJoin="Round"/>
@@ -73,8 +73,8 @@
                         <TextBlock Text="Уменьшить"/>
                     </ToolTip.Tip>
                 </Button>
-                <TextBlock x:Name="ZoomText" Text="100%"  VerticalAlignment="Center" HorizontalAlignment="Center" Width="37" TextAlignment="Center" TextWrapping="NoWrap"/>
-                <Button Height="25" Width="25" Background="#F6F6F6" Click="OnZoomInClicked">
+                <TextBlock x:DataType="vm:FooterViewModel" Text="{Binding ZoomString}"  VerticalAlignment="Center" HorizontalAlignment="Center" Width="37" TextAlignment="Center" TextWrapping="NoWrap"/>
+                <Button Height="25" Width="25" Background="#F6F6F6" x:DataType="vm:FooterViewModel" Command="{Binding ZoomIn}">
                     <Viewbox Width="15" Height="15">
                         <Canvas Width="12" Height="12">
                             <Path Data="M6 4V8" Stroke="#606060" StrokeThickness="1.5" StrokeLineCap="Round" StrokeJoin="Round"/>
