@@ -13,6 +13,9 @@ namespace Geometry
     [JsonDerivedType(typeof(EllipseModel), typeDiscriminator: "ellipse")]
     [JsonDerivedType(typeof(TriangleModel), typeDiscriminator: "triangle")]
     [JsonDerivedType(typeof(HexagonModel), typeDiscriminator: "hexagon")]
+    [JsonDerivedType(typeof(BezierCurveModel), typeDiscriminator: "beziercurve")]
+    [JsonDerivedType(typeof(PolygonModel), typeDiscriminator: "polygon")]
+    [JsonDerivedType(typeof(RhombModel), typeDiscriminator: "rhomb")]
     public interface IShape
     {
         // ширина описанного прямоугольника

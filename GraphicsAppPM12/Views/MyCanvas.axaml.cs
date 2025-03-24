@@ -323,6 +323,7 @@ namespace GraphicsApp.Views
             if (sender is Canvas canvas && DataContext is CanvasViewModel viewModel && viewModel.OriginalHeight > 0 && viewModel.OriginalWidth > 0)
             {
                 // Устанавливаем Clip по размерам Canvas
+                viewModel.MainCanvas = canvas;
                 canvas.Clip = new RectangleGeometry(new Rect(0, 0, viewModel.OriginalWidth, viewModel.OriginalHeight));
 
             }

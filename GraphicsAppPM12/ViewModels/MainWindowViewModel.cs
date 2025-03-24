@@ -8,9 +8,12 @@ using CommunityToolkit.Mvvm.Input;
 using Geometry;
 using System.Collections.Generic;
 using CommunityToolkit.Mvvm.ComponentModel;
-using Avalonia.Controls.Templates;
 using VecEditor.IO;
 using System.IO;
+using System.Diagnostics;
+using IO.exporters;
+using IO;
+using Avalonia.Media;
 
 
 namespace GraphicsApp.ViewModels;
@@ -102,10 +105,9 @@ public partial class MainWindowViewModel : ViewModelBase
         Settings = new(this);
         _geometryJsonSerializer = new();
 
-        SaveJsonCommand = new RelayCommand<string>(
-            (filePath) => { _geometryJsonSerializer.SaveJson(filename: filePath, Figures); });
-        
-        LoadJsonCommand = new RelayCommand<string>( (FilePath) => LoadFigures(_geometryJsonSerializer.LoadJson(FilePath)) );
+        SaveJsonCommand = new RelayCommand<string>(SaveFiguresJSON);
+
+        LoadJsonCommand = new RelayCommand<string>(LoadFigures);
 
         SaveSvgCommand = new RelayCommand<string>(SaveToSVG);
         SavePngCommand = new RelayCommand<string>(SaveToPng);
@@ -113,25 +115,40 @@ public partial class MainWindowViewModel : ViewModelBase
 
     }
 
-    private void LoadFigures(IEnumerable<ShapeViewModel>? figures)
+    private void SaveFiguresJSON(string? filePath)
     {
-        if (figures is null)
-            return;
-
-        Figures.Clear();
-        foreach (var fig in figures)
+        if (filePath is not null)
         {
-            fig.Main = this;
-            Figures.Add(fig);
+            _geometryJsonSerializer.SaveJson(
+                filePath,
+                new Vector2(x: (float) Canvasview.OriginalWidth, y: (float) Canvasview.OriginalHeight),
+                Figures
+            );
+            if (!File.Exists(filePath)) Debug.WriteLine($"Warning: ���� {filePath} �� ��� ������!");
         }
     }
 
-    private void LoadFigures(IEnumerable<ShapeViewModel>? figures)
+    private void LoadFigures(string? FilePath)
     {
+        if (FilePath is null)
+            return;
+
+        var result = _geometryJsonSerializer.LoadJson(FilePath);
+
+        if (result is null)
+        {
+            Debug.WriteLine($"Warning: Failed to read the selected file {FilePath}");
+            return;
+        }
+        var CanvasSize = result.Value.CanvasSize;
+        var figures = result.Value.Figures;
+
         if (figures is null)
             return;
 
         ToDefaultSettingsAndClearCanvas.Execute(null);
+        Canvasview.ChangeSizeCanvas.Execute(CanvasSize);
+
         foreach (var fig in figures)
         {
             fig.Main = this;
@@ -141,24 +158,28 @@ public partial class MainWindowViewModel : ViewModelBase
         }
     }
 
-    private void SaveToSVG(string? filepath) {
+    private void SaveToSVG(string? filepath)
+    {
         if (filepath is null) return;
         if (Figures.Count < 1) return;
         List<IShape> shapes = new List<IShape>();
-        foreach (var fig in Figures) {
+        foreach (var fig in Figures)
+        {
             shapes.Add(fig.Model);
         }
         SvgExporter.Export(filepath, new Vector2(x: (float) Canvasview.OriginalWidth, y: (float) Canvasview.OriginalHeight), shapes);
-        if (!File.Exists(filepath)) Debug.WriteLine($"Warning: ���� {filepath} �� ��� ������!") ;
+        if (!File.Exists(filepath)) Debug.WriteLine($"Warning: ���� {filepath} �� ��� ������!");
     }
 
-    private void SaveToPng(string? filepath) {
+    private void SaveToPng(string? filepath)
+    {
         if (filepath is null) return;
         RasterExporter.Export(Canvasview.MainCanvas, filepath);
         if (!File.Exists(filepath)) Debug.WriteLine($"Warning: ���� {filepath} �� ��� ������!");
     }
 
-    private void ClearCanvas() {
+    private void ClearCanvas()
+    {
         Figures.Clear();
         SelectedFigure = null;
         SelectedButtonFigure = null;

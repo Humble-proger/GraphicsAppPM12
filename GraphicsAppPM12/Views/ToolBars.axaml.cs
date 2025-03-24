@@ -28,14 +28,6 @@ namespace GraphicsApp.Views
             ClearShapeSelection();
         }
 
-        // Обработчик для кнопки "Выделить"
-        private void SelectionButton_Click(object sender, RoutedEventArgs e)
-        {
-            SetButtonStates(selection: true);
-            //ThicknessPopupControl.ClosePopup();
-            ClearShapeSelection();
-        }
-
         // Обработчик для кнопки "Перо"
         private void PenButton_Click(object sender, RoutedEventArgs e)
         {
@@ -79,7 +71,6 @@ namespace GraphicsApp.Views
             {
                 ThicknessButton.Flyout.ShowAt(ThicknessButton);
                 CursorButton.IsChecked = false;
-                SelectionButton.IsChecked = false;
                 FillButton.IsChecked = false;
                 RotateButton.IsChecked = false;
                 if (DataContext is ToolBarsViewModel viewmodel && viewmodel.Main is not null)
@@ -138,7 +129,6 @@ namespace GraphicsApp.Views
             bool fill = false, bool rotate = false, bool thickness = false, bool shapeSelected = false)
         {
             CursorButton.IsChecked = cursor;
-            SelectionButton.IsChecked = selection;
             PenButton.IsChecked = pen;
             FillButton.IsChecked = fill;
             RotateButton.IsChecked = rotate;

@@ -35,9 +35,11 @@ namespace Geometry
         }
 
         [ObservableProperty]
+        [JsonConverter(typeof(ColorConverter))]
         private Color _stroke = Colors.Black;
 
         [ObservableProperty]
+        [JsonConverter(typeof(ColorConverter))]
         private Color _fill = Colors.Black;
 
         private float _centerX = 0;
@@ -169,24 +171,24 @@ namespace Geometry
             }
         }
 
-        [JsonIgnore]
+        
         [ObservableProperty]
         private float _boxHeight;
 
-        [JsonIgnore]
+        
         [ObservableProperty]
         private float _boxWidth;
 
-        [JsonIgnore]
+        
         [ObservableProperty]
         private float _boxCenterX;
 
-        [JsonIgnore]
+        
         [ObservableProperty]
         private float _boxCenterY;
 
-        [JsonIgnore]
-        public ObservableCollection<Point> ListOfPoints { get; private set; }
+        [JsonConverter(typeof(PointConverter))]
+        public ObservableCollection<Point> ListOfPoints { get; set; }
 
         [JsonIgnore]
         public string Geometry => GetGeometry();

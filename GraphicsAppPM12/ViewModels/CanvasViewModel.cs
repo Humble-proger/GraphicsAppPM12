@@ -8,6 +8,7 @@ using Avalonia.Data.Converters;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Avalonia;
+using Avalonia.Controls;
 
 namespace GraphicsApp.ViewModels
 {

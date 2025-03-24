@@ -63,7 +63,7 @@ namespace Geometry
         [JsonIgnore]
         public string Geometry => getGeometry();
 
-
+        [JsonIgnore]
         public float Width
         {
             get => 2 * Radius;
@@ -76,6 +76,7 @@ namespace Geometry
                 }
             }
         }
+        [JsonIgnore]
         public float Height
         {
             get => 2 * Radius;
@@ -89,7 +90,8 @@ namespace Geometry
             }
         }
 
-        public ObservableCollection<Point> ListOfPoints => throw new NotImplementedException();
+        [JsonIgnore]
+        public ObservableCollection<Point> ListOfPoints => [];
 
         public void Scale(float ratioX, float ratioY)
         {

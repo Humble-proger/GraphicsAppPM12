@@ -1,6 +1,5 @@
 using System.Numerics;
 using System.Text;
-using Svg;
 
 using Geometry;
 using Avalonia.Media;
@@ -22,7 +21,7 @@ namespace IO
                 throw new InvalidOperationException("Canvas dimensions must be positive.");
             }
 
-            
+
             var svgBuilder = new StringBuilder();
             svgBuilder.AppendLine($"<svg width=\"{size.X}\" height=\"{size.Y}\" xmlns=\"http://www.w3.org/2000/svg\">");
 
@@ -34,15 +33,7 @@ namespace IO
 
             svgBuilder.AppendLine("</svg>");
 
-            
-            string svgContent = svgBuilder.ToString();
-            var svgDocument = SvgDocument.FromSvg<SvgDocument>(svgContent);
-            svgDocument.Width = size.X;
-            svgDocument.Height = size.Y;
-
-            
-            using var stream = File.OpenWrite(filepath);
-            svgDocument.Write(stream);
+            File.WriteAllText(filepath, svgBuilder.ToString());
         }
     }
 }

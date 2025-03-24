@@ -13,7 +13,6 @@ namespace Geometry
     public partial class TriangleModel : ObservableObject, IShape
     {
         private float _strokeThickness = 0;
-
         public float StrokeThickness
         {
             get => _strokeThickness;
@@ -33,13 +32,14 @@ namespace Geometry
         }
 
         [ObservableProperty]
+        [JsonConverter(typeof(ColorConverter))]
         private Color _stroke = Colors.Black;
 
         [ObservableProperty]
+        [JsonConverter(typeof(ColorConverter))]
         private Color _fill = Colors.Black;
 
         private float _centerX = 0;
-
         public float CenterX
         {
             get => _centerX;
@@ -58,9 +58,7 @@ namespace Geometry
                 OnPropertyChanged(nameof(Geometry));
             }
         }
-
         private float _centerY = 0;
-
         public float CenterY
         {
             get => _centerY;
@@ -79,9 +77,7 @@ namespace Geometry
                 OnPropertyChanged(nameof(Geometry));
             }
         }
-
         private float _width = 50;
-
         public float Width
         {
             get => _width;
@@ -109,9 +105,7 @@ namespace Geometry
                 }
             }
         }
-
         private float _height = 100;
-
         public float Height
         {
             get => _height;
@@ -138,9 +132,7 @@ namespace Geometry
                 }
             }
         }
-
         private float _angle = 0;
-
         public float Angle
         {
             get => _angle;
@@ -167,24 +159,24 @@ namespace Geometry
             }
         }
 
-        [JsonIgnore]
+        
         [ObservableProperty]
         private float _boxHeight;
 
-        [JsonIgnore]
+        
         [ObservableProperty]
         private float _boxWidth;
 
-        [JsonIgnore]
+        
         [ObservableProperty]
         private float _boxCenterX;
 
-        [JsonIgnore]
+        
         [ObservableProperty]
         private float _boxCenterY;
 
-        [JsonIgnore]
-        public ObservableCollection<Point> ListOfPoints { get; private set; }
+        [JsonConverter(typeof(PointConverter))]
+        public ObservableCollection<Point> ListOfPoints { get; set; }
 
         [JsonIgnore]
         public string Geometry => GetGeometry();

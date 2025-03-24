@@ -9,7 +9,10 @@ public class GeometryJsonSerializer<T>
 {
     private readonly JsonSerializerOptions _jsonSerializerOptions = new()
     {
-        Converters = { new ColorConverter() },
+        Converters = { 
+            new ColorConverter(),
+            new PointConverter()
+        },
         WriteIndented = true,
     };
 

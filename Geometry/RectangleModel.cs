@@ -12,7 +12,6 @@ namespace Geometry
     public partial class RectangleModel : ObservableObject, IShape
     {
         private float _strokeThickness = 0;
-
         public float StrokeThickness {
             get => _strokeThickness;
             set {
@@ -30,13 +29,14 @@ namespace Geometry
         }
 
         [ObservableProperty]
+        [JsonConverter(typeof(ColorConverter))]
         private Color _stroke = Colors.Black;
 
         [ObservableProperty]
+        [JsonConverter(typeof(ColorConverter))]
         private Color _fill = Colors.Black;
 
         private float _centerX = 0;
-
         public float CenterX
         {
             get => _centerX;
@@ -57,7 +57,6 @@ namespace Geometry
         }
 
         private float _centerY = 0;
-
         public float CenterY
         {
             get => _centerY;
@@ -78,7 +77,6 @@ namespace Geometry
         }
 
         private float _width = 150;
-
         public float Width
         {
             get => _width;
@@ -106,9 +104,7 @@ namespace Geometry
                 }
             }
         }
-
         private float _height = 200;
-
         public float Height
         {
             get => _height;
@@ -135,9 +131,7 @@ namespace Geometry
                 }
             }
         }
-
         private float _angle = 0;
-
         public float Angle
         {
             get => _angle;
@@ -164,23 +158,24 @@ namespace Geometry
             }
         }
 
-        [JsonIgnore]
+        
         [ObservableProperty]
         private float _boxHeight;
 
-        [JsonIgnore]
+        
         [ObservableProperty]
         private float _boxWidth;
 
-        [JsonIgnore]
+        
         [ObservableProperty]
         private float _boxCenterX;
 
-        [JsonIgnore]
+        
         [ObservableProperty]
         private float _boxCenterY;
-
-        public ObservableCollection<Point> ListOfPoints { get; private set; }
+        
+        [JsonConverter(typeof(PointConverter))]
+        public ObservableCollection<Point> ListOfPoints { get; set; }
 
         [JsonIgnore]
         public string Geometry => GetGeometry();
