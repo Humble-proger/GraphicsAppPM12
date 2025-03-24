@@ -18,6 +18,9 @@ namespace GraphicsApp.ViewModels
     
         private double _originalHeight = 500;
 
+        [ObservableProperty]
+        private Canvas _mainCanvas;
+
         public double OriginalWidth {
             get => _originalWidth;
             set {
