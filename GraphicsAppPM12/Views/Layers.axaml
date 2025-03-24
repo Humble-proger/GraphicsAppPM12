@@ -13,6 +13,10 @@
         <StyleInclude Source="LayersStyles.axaml"/>
     </UserControl.Styles>
     
+    <UserControl.Resources>
+        <vm:NumericConverter x:Key="NumericConverter" />
+    </UserControl.Resources>
+    
     <Border BorderBrush="#8B8B8B" BorderThickness="1, 0, 0, 0">
         <Grid RowDefinitions="5*, 18*, 17*, 5*, 8*, 47*">
             
@@ -37,77 +41,58 @@
                                                 <TextBlock Grid.Column="0" Grid.Row="7" Text="Угол поворота" Classes="OptionsChet"/>
 
                                                 <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding Name, Mode=TwoWay}" Classes="Options"/>
-                                                <TextBox Grid.Column="1" Grid.Row="1" Watermark="12" Classes="Options" Text="{Binding Model.CenterX}"/>
-                                                <TextBox Grid.Column="1" Grid.Row="2" Watermark="12" Classes="Options" Text="{Binding Model.CenterY}"/>
-                                                <ColorPicker Grid.Column="1" Grid.Row="3" Color="{Binding Model.Fill}" HorizontalAlignment="Left" Margin="1"/>
-                                                <ColorPicker Grid.Column="1" Grid.Row="4" Color="{Binding Model.Stroke}" HorizontalAlignment="Left" Margin="1"/>
-                                                <!--По умолчанию кнопка заливки находится в состоянии ВКЛ. Если на неё нажать, то она меняется, но это не очень бросается в глаза.
-                                                    А ещё при наведении курсора на ВЫКЛ. кнопку, она как будто становится ВКЛ. Тоже не очень хорошо.
-                                                    1) Хочется, чтобы состояния были ярко отличимы и видны пользователю.
-                                                    2) При наведении на ВЫКЛ. кнопку, она не должна как будто становиться ВКЛ.-->
-                                                <!--ToggleButton Grid.Column="1" Grid.Row="5" IsChecked="True" IsCheckedChanged="OnFillButtonClick"/-->
+                                                <TextBox Grid.Column="1" Grid.Row="1" Watermark="12" Classes="Options" Text="{Binding Model.CenterX, Mode=TwoWay, Converter={StaticResource NumericConverter}}"/>
+                                                <TextBox Grid.Column="1" Grid.Row="2" Watermark="12" Classes="Options" Text="{Binding Model.CenterY, Mode=TwoWay, Converter={StaticResource NumericConverter}}"/>
+                                                <ColorPicker Grid.Column="1" Grid.Row="3" Color="{Binding Model.Fill, Mode=TwoWay}" HorizontalAlignment="Left" Margin="1"/>
+                                                <ColorPicker Grid.Column="1" Grid.Row="4" Color="{Binding Model.Stroke, Mode=TwoWay}" HorizontalAlignment="Left" Margin="1"/>
                                                 <CheckBox Grid.Column="1" Grid.Row="5" HorizontalAlignment="Left" IsChecked="{Binding Model.Fill.A}" Margin="1" IsCheckedChanged="OnFillButtonClick" />
-                                                <TextBox Grid.Column="1" Grid.Row="6" Text="{Binding Model.StrokeThickness}" Classes="Options"/>
-                                                <TextBox Grid.Column="1" Grid.Row="7" Watermark="0" Classes="Options" Text="{Binding Model.Angle}"/>
+                                                <TextBox Grid.Column="1" Grid.Row="6" Text="{Binding Model.StrokeThickness, Mode=TwoWay, Converter={StaticResource NumericConverter}}" Classes="Options"/>
+                                                <TextBox Grid.Column="1" Grid.Row="7" Watermark="0" Classes="Options" Text="{Binding Model.Angle, Mode=TwoWay, Converter={StaticResource NumericConverter}}"/>
                                             </Grid>
                                             <ContentControl Content="{Binding Model}">
                                                 <ContentControl.DataTemplates>
                                                     <DataTemplate x:DataType="m:CircleModel">
                                                         <Grid RowDefinitions="*" ColumnDefinitions="113, *" Margin="5" >
                                                             <TextBlock Grid.Column="0" Grid.Row="0" Text="Радиус" Classes="OptionsNechet"/>
-                                                            <TextBox Grid.Column="1" Grid.Row="0" Watermark="9" Classes="Options" Text="{Binding Radius}"/>
+                                                            <TextBox Grid.Column="1" Grid.Row="0" Watermark="9" Classes="Options" Text="{Binding Radius, Mode=TwoWay, Converter={StaticResource NumericConverter}}"/>
                                                         </Grid>
                                                     </DataTemplate>
                                                     <DataTemplate x:DataType="m:EllipseModel">
                                                         <Grid RowDefinitions="*, *" ColumnDefinitions="113, *" Margin="5" >
                                                             <TextBlock Grid.Column="0" Grid.Row="0" Text="Радиус по X" Classes="OptionsNechet"/>
                                                             <TextBlock Grid.Column="0" Grid.Row="1" Text="Радиус по Y" Classes="OptionsNechet"/>
-                                                            <TextBox Grid.Column="1" Grid.Row="0" Watermark="9" Classes="Options" Text="{Binding RadiusX}"/>
-                                                            <TextBox Grid.Column="1" Grid.Row="1" Watermark="9" Classes="Options" Text="{Binding RadiusY}"/>
+                                                            <TextBox Grid.Column="1" Grid.Row="0" Watermark="9" Classes="Options" Text="{Binding RadiusX, Mode=TwoWay, Converter={StaticResource NumericConverter}}"/>
+                                                            <TextBox Grid.Column="1" Grid.Row="1" Watermark="9" Classes="Options" Text="{Binding RadiusY, Mode=TwoWay, Converter={StaticResource NumericConverter}}"/>
                                                         </Grid>
                                                     </DataTemplate>
                                                     <DataTemplate x:DataType="m:RectangleModel">
                                                         <Grid RowDefinitions="*, *, *, *" ColumnDefinitions="113, *" Margin="5" >
                                                             <TextBlock Grid.Column="0" Grid.Row="0" Text="Ширина" Classes="OptionsNechet"/>
                                                             <TextBlock Grid.Column="0" Grid.Row="1" Text="Высота" Classes="OptionsNechet"/>
-                                                            <TextBlock Grid.Column="0" Grid.Row="2" Text="Растяжение по X" Classes="OptionsNechet"/>
-                                                            <TextBlock Grid.Column="0" Grid.Row="3" Text="Растяжение по Y" Classes="OptionsNechet"/>
-                                                            <TextBox Grid.Column="1" Grid.Row="0" Watermark="9" Classes="Options" Text="{Binding Width}"/>
-                                                            <TextBox Grid.Column="1" Grid.Row="1" Watermark="9" Classes="Options" Text="{Binding Height}"/>
-                                                            <TextBox Grid.Column="1" Grid.Row="2" Watermark="9" Classes="Options" Text="{Binding ScaleX}"/>
-                                                            <TextBox Grid.Column="1" Grid.Row="3" Watermark="9" Classes="Options" Text="{Binding ScaleY}"/>
+                                                            <TextBox Grid.Column="1" Grid.Row="0" Watermark="9" Classes="Options" Text="{Binding Width, Mode=TwoWay, Converter={StaticResource NumericConverter}}"/>
+                                                            <TextBox Grid.Column="1" Grid.Row="1" Watermark="9" Classes="Options" Text="{Binding Height, Mode=TwoWay, Converter={StaticResource NumericConverter}}"/>
                                                         </Grid>
                                                     </DataTemplate>
                                                     <DataTemplate x:DataType="m:SquareModel">
                                                         <Grid RowDefinitions="*, *" ColumnDefinitions="113, *" Margin="5" >
                                                             <TextBlock Grid.Column="0" Grid.Row="0" Text="Ширина" Classes="OptionsNechet"/>
-                                                            <TextBlock Grid.Column="0" Grid.Row="1" Text="Растяжение" Classes="OptionsNechet"/>
-                                                            <TextBox Grid.Column="1" Grid.Row="0" Watermark="9" Classes="Options" Text="{Binding Width}"/>
-                                                            <TextBox Grid.Column="1" Grid.Row="1" Watermark="9" Classes="Options" Text="{Binding ScaleW}"/>
+                                                            <TextBox Grid.Column="1" Grid.Row="0" Watermark="9" Classes="Options" Text="{Binding Width, Converter={StaticResource NumericConverter}}"/>
                                                         </Grid>
                                                     </DataTemplate>
                                                     <DataTemplate x:DataType="m:HexagonModel">
                                                         <Grid RowDefinitions="*, *, *, *" ColumnDefinitions="113, *" Margin="5" >
                                                             <TextBlock Grid.Column="0" Grid.Row="0" Text="Ширина" Classes="OptionsNechet"/>
                                                             <TextBlock Grid.Column="0" Grid.Row="1" Text="Высота" Classes="OptionsNechet"/>
-                                                            <TextBlock Grid.Column="0" Grid.Row="2" Text="Растяжение по X" Classes="OptionsNechet"/>
-                                                            <TextBlock Grid.Column="0" Grid.Row="3" Text="Растяжение по Y" Classes="OptionsNechet"/>
-                                                            <TextBox Grid.Column="1" Grid.Row="0" Watermark="9" Classes="Options" Text="{Binding Width}"/>
-                                                            <TextBox Grid.Column="1" Grid.Row="1" Watermark="9" Classes="Options" Text="{Binding Height}"/>
-                                                            <TextBox Grid.Column="1" Grid.Row="2" Watermark="9" Classes="Options" Text="{Binding ScaleX}"/>
-                                                            <TextBox Grid.Column="1" Grid.Row="3" Watermark="9" Classes="Options" Text="{Binding ScaleY}"/>
+                                                            <TextBox Grid.Column="1" Grid.Row="0" Watermark="9" Classes="Options" Text="{Binding Width, Converter={StaticResource NumericConverter}}"/>
+                                                            <TextBox Grid.Column="1" Grid.Row="1" Watermark="9" Classes="Options" Text="{Binding Height, Converter={StaticResource NumericConverter}}"/>
                                                         </Grid>
                                                     </DataTemplate>
                                                     <DataTemplate x:DataType="m:TriangleModel">
                                                         <Grid RowDefinitions="*, *, *, *" ColumnDefinitions="113, *" Margin="5" >
                                                             <TextBlock Grid.Column="0" Grid.Row="0" Text="Ширина" Classes="OptionsNechet"/>
                                                             <TextBlock Grid.Column="0" Grid.Row="1" Text="Высота" Classes="OptionsNechet"/>
-                                                            <TextBlock Grid.Column="0" Grid.Row="2" Text="Растяжение по X" Classes="OptionsNechet"/>
-                                                            <TextBlock Grid.Column="0" Grid.Row="3" Text="Растяжение по Y" Classes="OptionsNechet"/>
-                                                            <TextBox Grid.Column="1" Grid.Row="0" Watermark="9" Classes="Options" Text="{Binding Width}"/>
-                                                            <TextBox Grid.Column="1" Grid.Row="1" Watermark="9" Classes="Options" Text="{Binding Height}"/>
-                                                            <TextBox Grid.Column="1" Grid.Row="2" Watermark="9" Classes="Options" Text="{Binding ScaleX}"/>
-                                                            <TextBox Grid.Column="1" Grid.Row="3" Watermark="9" Classes="Options" Text="{Binding ScaleY}"/>
+                                                            <TextBox Grid.Column="1" Grid.Row="0" Watermark="9" Classes="Options" Text="{Binding Width, Converter={StaticResource NumericConverter}}"/>
+                                                            <TextBox Grid.Column="1" Grid.Row="1" Watermark="9" Classes="Options" Text="{Binding Height, Converter={StaticResource NumericConverter}}"/>
                                                         </Grid>
                                                     </DataTemplate>
                                                 </ContentControl.DataTemplates>

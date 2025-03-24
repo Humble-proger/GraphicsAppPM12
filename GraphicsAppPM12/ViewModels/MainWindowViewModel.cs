@@ -11,14 +11,20 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using Avalonia.Controls.Templates;
 using VecEditor.IO;
 using System.IO;
-using Tmds.DBus.Protocol;
-using IO;
-using System.Diagnostics;
-using IO.exporters;
-using Avalonia.Media;
 
 
 namespace GraphicsApp.ViewModels;
+
+public enum Tools
+{
+    Cursor,
+    Pen,
+    Fill,
+    Rotate,
+    SelectFigure,
+    None
+}
+
 
 public partial class MainWindowViewModel : ViewModelBase
 {
@@ -41,15 +47,30 @@ public partial class MainWindowViewModel : ViewModelBase
     [ObservableProperty]
     private SettingsViewModel _settings;
 
+    [ObservableProperty]
+    private Tools _selectTool = Tools.None;
+
     public ObservableCollection<ShapeViewModel> Figures { get; } = [];
-   
+    
+
     public ObservableCollection<ModelFactoryViewModel> Factories { get; } = [];
     
     [ObservableProperty]
     private ModelFactoryViewModel? _selectedButtonFigure;
     
-    [ObservableProperty]
     private ShapeViewModel? _selectedFigure;
+
+    public ShapeViewModel? SelectedFigure {
+        get => _selectedFigure;
+        set {
+            if (_selectedFigure is not null)
+                _selectedFigure.Active = false;
+            if (value is not null)
+                value.Active = true;
+            _selectedFigure = value;
+            OnPropertyChanged(nameof(SelectedFigure));
+        }
+    }
     
     public ICommand SaveJsonCommand { get; }
     public ICommand LoadJsonCommand { get; }
@@ -82,14 +103,27 @@ public partial class MainWindowViewModel : ViewModelBase
         _geometryJsonSerializer = new();
 
         SaveJsonCommand = new RelayCommand<string>(
-            (filePath) => { if (filePath != null) _geometryJsonSerializer.SaveJson(filePath, Figures); });
+            (filePath) => { _geometryJsonSerializer.SaveJson(filename: filePath, Figures); });
         
-        LoadJsonCommand = new RelayCommand<string>( (FilePath) => { if (FilePath != null) LoadFigures(_geometryJsonSerializer.LoadJson(FilePath)); } );
+        LoadJsonCommand = new RelayCommand<string>( (FilePath) => LoadFigures(_geometryJsonSerializer.LoadJson(FilePath)) );
 
         SaveSvgCommand = new RelayCommand<string>(SaveToSVG);
         SavePngCommand = new RelayCommand<string>(SaveToPng);
         ToDefaultSettingsAndClearCanvas = new RelayCommand(ClearCanvas);
 
+    }
+
+    private void LoadFigures(IEnumerable<ShapeViewModel>? figures)
+    {
+        if (figures is null)
+            return;
+
+        Figures.Clear();
+        foreach (var fig in figures)
+        {
+            fig.Main = this;
+            Figures.Add(fig);
+        }
     }
 
     private void LoadFigures(IEnumerable<ShapeViewModel>? figures)
