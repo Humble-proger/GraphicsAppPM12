@@ -23,6 +23,7 @@
             Height="{Binding ScaledHeight}">
             <ItemsControl ItemsSource="{Binding Main.Figures}">
                 <ItemsControl.ItemTemplate>
+
                     <DataTemplate x:DataType="vm:ShapeViewModel">
                         <Canvas PointerPressed="MarkingPressed" PointerReleased="MarkingReleased" PointerMoved="MarkingMoved">
                                 <Path Stroke="Black" StrokeThickness="{Binding Model.StrokeThickness}" Data="{Binding Model.Geometry}" IsVisible="{Binding IsVisibleIcon}">
