@@ -174,6 +174,7 @@ public partial class MainWindowViewModel : ViewModelBase
     private void SaveToPng(string? filepath)
     {
         if (filepath is null) return;
+        SelectedFigure = null;
         RasterExporter.Export(Canvasview.MainCanvas, filepath);
         if (!File.Exists(filepath)) Debug.WriteLine($"Warning: ���� {filepath} �� ��� ������!");
     }
