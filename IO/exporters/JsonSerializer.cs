@@ -1,3 +1,4 @@
+using System.Numerics;
 using System.Text.Json;
 
 using Geometry;
@@ -12,15 +13,35 @@ public class GeometryJsonSerializer<T>
         WriteIndented = true,
     };
 
-    public void SaveJson(string filename, IEnumerable<T> figures)
+    public void SaveJson(string filename, Vector2 canvasSize, IEnumerable<T> figures)
     {
-        File.WriteAllText(filename, JsonSerializer.Serialize(figures, _jsonSerializerOptions));
+        var data = new Dictionary<string, object>{
+            { "CanvasSize", new { X = canvasSize.X, Y = canvasSize.Y } },
+            { "Figures", figures }
+        };
+        
+        File.WriteAllText(filename, JsonSerializer.Serialize(data, _jsonSerializerOptions));
     }
 
-    public IEnumerable<T>? LoadJson(string filename)
+    public (Vector2 CanvasSize, IEnumerable<T>? Figures)? LoadJson(string filename)
     {
         if (!File.Exists(filename))
             return null;
-        return JsonSerializer.Deserialize<IEnumerable<T>>(File.ReadAllText(filename), _jsonSerializerOptions);
+
+        var json = File.ReadAllText(filename);
+        using var doc = JsonDocument.Parse(json);
+
+        var root = doc.RootElement;
+
+        var CanvasSizeElement = root.GetProperty("CanvasSize");
+        var canvasSize = new Vector2( 
+            CanvasSizeElement.GetProperty("X").GetSingle(), 
+            CanvasSizeElement.GetProperty("Y").GetSingle() 
+            );
+        
+        var figuresElement = root.GetProperty("Figures");
+        var figures = JsonSerializer.Deserialize<IEnumerable<T>>(figuresElement.GetRawText(), _jsonSerializerOptions);
+
+        return ( canvasSize, figures );     
     }
 }
