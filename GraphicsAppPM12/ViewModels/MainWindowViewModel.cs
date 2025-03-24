@@ -74,6 +74,9 @@ public partial class MainWindowViewModel : ViewModelBase
     
     public ICommand SaveJsonCommand { get; }
     public ICommand LoadJsonCommand { get; }
+    public ICommand SaveSvgCommand { get; }
+    public ICommand SavePngCommand { get; }
+    public ICommand ToDefaultSettingsAndClearCanvas { get; }
 
     [ImportMany]
     private IEnumerable<ExportFactory<IShape, ModelMetadata>> ModelFactories { get; set; } = [];
@@ -104,6 +107,10 @@ public partial class MainWindowViewModel : ViewModelBase
         
         LoadJsonCommand = new RelayCommand<string>( (FilePath) => LoadFigures(_geometryJsonSerializer.LoadJson(FilePath)) );
 
+        SaveSvgCommand = new RelayCommand<string>(SaveToSVG);
+        SavePngCommand = new RelayCommand<string>(SaveToPng);
+        ToDefaultSettingsAndClearCanvas = new RelayCommand(ClearCanvas);
+
     }
 
     private void LoadFigures(IEnumerable<ShapeViewModel>? figures)
@@ -117,5 +124,50 @@ public partial class MainWindowViewModel : ViewModelBase
             fig.Main = this;
             Figures.Add(fig);
         }
+    }
+
+    private void LoadFigures(IEnumerable<ShapeViewModel>? figures)
+    {
+        if (figures is null)
+            return;
+
+        ToDefaultSettingsAndClearCanvas.Execute(null);
+        foreach (var fig in figures)
+        {
+            fig.Main = this;
+            fig.Active = false;
+
+            Figures.Add(fig);
+        }
+    }
+
+    private void SaveToSVG(string? filepath) {
+        if (filepath is null) return;
+        if (Figures.Count < 1) return;
+        List<IShape> shapes = new List<IShape>();
+        foreach (var fig in Figures) {
+            shapes.Add(fig.Model);
+        }
+        SvgExporter.Export(filepath, new Vector2(x: (float) Canvasview.OriginalWidth, y: (float) Canvasview.OriginalHeight), shapes);
+        if (!File.Exists(filepath)) Debug.WriteLine($"Warning: ���� {filepath} �� ��� ������!") ;
+    }
+
+    private void SaveToPng(string? filepath) {
+        if (filepath is null) return;
+        RasterExporter.Export(Canvasview.MainCanvas, filepath);
+        if (!File.Exists(filepath)) Debug.WriteLine($"Warning: ���� {filepath} �� ��� ������!");
+    }
+
+    private void ClearCanvas() {
+        Figures.Clear();
+        SelectedFigure = null;
+        SelectedButtonFigure = null;
+        Canvasview.MainCanvas.Background = new SolidColorBrush(Colors.White);
+        Canvasview.OriginalHeight = 500;
+        Canvasview.OriginalWidth = 1000;
+        Canvasview.ZoomFactor = 1;
+        Toolbarsview.LineThickness = 0;
+        Toolbarsview.OutlineColor = Colors.Black;
+        Toolbarsview.SelectedColor = Colors.Red;
     }
 }
