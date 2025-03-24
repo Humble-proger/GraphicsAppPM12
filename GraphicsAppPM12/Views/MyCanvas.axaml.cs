@@ -95,12 +95,12 @@ namespace GraphicsApp.Views
                     var position = e.GetCurrentPoint(_canvas).Position;
                     bool flag = true;
                     if (viewModel.Main.SelectedFigure is not null) {
-                        if (viewModel.Main.SelectedFigure.Model is BezierCurveModel beziermodel && viewModel.Main.SelectTool == Tools.SelectFigure)
+                        if (viewModel.Main.SelectedFigure.Model is BezierCurveModel beziermodel && viewModel.Main.SelectTool == Tools.SelectFigure && viewModel.Main.SelectedButtonFigure.Factory.Metadata.Name == "BezierCurve")
                         {
                             beziermodel.AddPoint(new Point(position.X, position.Y));
                             flag = false;
                         }
-                        else if (viewModel.Main.SelectedFigure.Model is PolygonModel polymodel && viewModel.Main.SelectTool == Tools.SelectFigure) {
+                        else if (viewModel.Main.SelectedFigure.Model is PolygonModel polymodel && viewModel.Main.SelectTool == Tools.SelectFigure && viewModel.Main.SelectedButtonFigure.Factory.Metadata.Name == "Polygon") {
                             polymodel.AddPoint(new Point(position.X, position.Y));
                             flag = false;
                         }
@@ -141,7 +141,7 @@ namespace GraphicsApp.Views
                     {
                         if (viewmodel.Main.SelectTool == Tools.Cursor)
                         {
-                            if (viewmodel.Main.SelectedFigure is null && viewmodel.Main.SelectedFigure != figure)
+                            if (viewmodel.Main.SelectedFigure is null || viewmodel.Main.SelectedFigure != figure)
                             {
                                 viewmodel.Main.SelectedFigure = figure;
                             }
