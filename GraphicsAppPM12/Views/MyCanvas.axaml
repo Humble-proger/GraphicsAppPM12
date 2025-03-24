@@ -3,13 +3,15 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:GraphicsApp.ViewModels"
+             xmlns:local="clr-namespace:GraphicsApp.ViewModels"
+             xmlns:m="using:Geometry"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="GraphicsApp.Views.MyCanvas"
              x:DataType="vm:CanvasViewModel">
 
-    <!--<UserControl.DataContext>
-        <vm:MainWindowViewModel />
-    </UserControl.DataContext>--> 
+    <UserControl.Resources>
+        <local:OffsetConverter x:Key="OffsetConverter"/>
+    </UserControl.Resources>
 
     <ScrollViewer HorizontalScrollBarVisibility="Auto"
                   VerticalScrollBarVisibility="Auto"
@@ -21,9 +23,9 @@
             Height="{Binding ScaledHeight}">
             <ItemsControl ItemsSource="{Binding Main.Figures}">
                 <ItemsControl.ItemTemplate>
-                    <DataTemplate>
+                    <DataTemplate x:DataType="vm:ShapeViewModel">
                         <Canvas PointerPressed="MarkingPressed" PointerReleased="MarkingReleased" PointerMoved="MarkingMoved">
-                            <Path Stroke="Black" StrokeThickness="{Binding Model.StrokeThickness}" Data="{Binding Model.Geometry}">
+                                <Path Stroke="Black" StrokeThickness="{Binding Model.StrokeThickness}" Data="{Binding Model.Geometry}" IsVisible="{Binding IsVisibleIcon}">
                                 <Path.Fill>
                                     <SolidColorBrush Color="{Binding Model.Fill}"/>
                                 </Path.Fill>
@@ -33,31 +35,46 @@
                             </Path>
                             <Rectangle Name="ResizeRectangle" Width="{Binding Model.BoxWidth}" Height="{Binding Model.BoxHeight}" Fill="Transparent" Stroke="#800080FF" StrokeThickness="3" StrokeDashArray="4,2" IsVisible="{Binding Active}" PointerMoved="MarkingCursor">
                                 <Rectangle.RenderTransform>
-
                                     <TranslateTransform X="{Binding Model.BoxCenterX}" Y="{Binding Model.BoxCenterY}"/>                                    <!-- Смещение на половину ширины и высоты в отрицательном направлении -->
                                 </Rectangle.RenderTransform>
                                 <Rectangle.Effect>
                                     <DropShadowEffect BlurRadius="10" Color="Blue" Opacity="0.5"/>
                                 </Rectangle.Effect>
-                                <Rectangle.Styles>
-                                    <Style Selector="Rectangle">
-                                        <Setter Property="Opacity" Value="1"/>
-                                        <Style.Animations>
-                                            <Animation Duration="0:0:1" IterationCount="Infinite">
-                                                <KeyFrame Cue="0%">
-                                                    <Setter Property="Opacity" Value="1"/>
-                                                </KeyFrame>
-                                                <KeyFrame Cue="50%">
-                                                    <Setter Property="Opacity" Value="0.5"/>
-                                                </KeyFrame>
-                                                <KeyFrame Cue="100%">
-                                                    <Setter Property="Opacity" Value="1"/>
-                                                </KeyFrame>
-                                            </Animation>
-                                        </Style.Animations>
-                                    </Style>
-                                </Rectangle.Styles>
                             </Rectangle>
+                            <!-- Отображение центральной точки -->
+                            <Ellipse Width="15" Height="15" Fill="Black" Canvas.Left="{Binding Model.CenterX}" Canvas.Top="{Binding Model.CenterY}"
+                                     Stroke="White" StrokeThickness="2" IsVisible="{Binding Active}" PointerMoved="PointMove">
+                                <Ellipse.RenderTransform>
+                                    <TranslateTransform X="-7.5" Y="-7.5"/>
+                                </Ellipse.RenderTransform>
+                            </Ellipse>
+                            <ItemsControl ItemsSource="{Binding Model.ListOfPoints}" IsVisible="{Binding Active}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Ellipse Width="10" Height="10" Fill="Black" Stroke="White" StrokeThickness="2" 
+                                                 Canvas.Left="{Binding X}" Canvas.Right="{Binding Y}" PointerMoved="MarkingPointMove" PointerPressed="PointPress" PointerReleased="PointReleased">
+                                            <Ellipse.RenderTransform>
+                                                <TranslateTransform X="{Binding X, Converter={StaticResource OffsetConverter}, ConverterParameter=5}"
+                                                                   Y="{Binding Y, Converter={StaticResource OffsetConverter}, ConverterParameter=5}"/>
+                                            </Ellipse.RenderTransform>
+                                        </Ellipse>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <Canvas Width="{Binding Main.Canvasview.OriginalWidth}" Height="{Binding Main.Canvasview.OriginalHeight}" PointerMoved="PointMove"/>
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                            </ItemsControl>
+                            <!--
+                            <ContentControl Content="{Binding Model}">
+                                <ContentControl.DataTemplates>
+                                    <DataTemplate x:DataType="m:RectangleModel">
+                                        
+                                    </DataTemplate>
+                                </ContentControl.DataTemplates>
+                            </ContentControl>
+                            -->
                         </Canvas>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
@@ -75,10 +92,8 @@
                         </Canvas>
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
-                <ItemsControl.Items>
-                    
-                </ItemsControl.Items>
             </ItemsControl>
         </Border>
     </ScrollViewer>
+
 </UserControl>

@@ -29,7 +29,6 @@ namespace GraphicsApp.Views
 
         }
         
-        
         private void OnFillButtonClick(object sender, RoutedEventArgs e)
         {
             if (DataContext is LayersViewModel viewmodel && viewmodel.Main is not null)

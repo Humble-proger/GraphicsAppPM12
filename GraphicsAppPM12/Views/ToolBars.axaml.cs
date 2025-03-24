@@ -1,12 +1,11 @@
 using System;
-using System.Globalization;
+
 using Avalonia.Controls;
-using Avalonia.Input;
 using Avalonia.Interactivity;
+
+using Geometry;
+
 using GraphicsApp.ViewModels;
-using System.Collections.Generic;
-using Avalonia.Media;
-using Avalonia.Controls.Primitives; // Добавьте это
 
 namespace GraphicsApp.Views
 {
@@ -23,6 +22,16 @@ namespace GraphicsApp.Views
         private void CursorButton_Click(object sender, RoutedEventArgs e)
         {
             SetButtonStates(cursor: true);
+            if (DataContext is ToolBarsViewModel viewmodel && viewmodel.Main is not null)
+                viewmodel.Main.SelectTool = Tools.Cursor;
+            //ThicknessPopupControl.ClosePopup();
+            ClearShapeSelection();
+        }
+
+        // Обработчик для кнопки "Выделить"
+        private void SelectionButton_Click(object sender, RoutedEventArgs e)
+        {
+            SetButtonStates(selection: true);
             //ThicknessPopupControl.ClosePopup();
             ClearShapeSelection();
         }
@@ -31,6 +40,10 @@ namespace GraphicsApp.Views
         private void PenButton_Click(object sender, RoutedEventArgs e)
         {
             SetButtonStates(pen: true);
+            if (DataContext is ToolBarsViewModel viewmodel && viewmodel.Main is not null)
+            {
+                viewmodel.Main.SelectTool = Tools.Pen;
+            }
             //ThicknessPopupControl.ClosePopup();
             ClearShapeSelection();
         }
@@ -39,14 +52,24 @@ namespace GraphicsApp.Views
         private void FillButton_Click(object sender, RoutedEventArgs e)
         {
             SetButtonStates(fill: true);
+            if (DataContext is ToolBarsViewModel viewmodel && viewmodel.Main is not null)
+            {
+                viewmodel.Main.SelectTool = Tools.Fill;
+                viewmodel.Main.SelectedFigure = null;
+            }
             //ThicknessPopupControl.ClosePopup();
             ClearShapeSelection();
         }
 
-        // Обработчик для кнопки "Удалить"
-        private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        // Обработчик для кнопки "Поворот"
+        private void RotateButton_Click(object sender, RoutedEventArgs e)
         {
-            SetButtonStates(delete: true);
+            SetButtonStates(rotate: true);
+            if (DataContext is ToolBarsViewModel viewmodel && viewmodel.Main is not null)
+            {
+                viewmodel.Main.SelectTool = Tools.Rotate;
+                viewmodel.Main.SelectedFigure = null;
+            }
             //ThicknessPopupControl.ClosePopup();
             ClearShapeSelection();
         }
@@ -56,8 +79,14 @@ namespace GraphicsApp.Views
             {
                 ThicknessButton.Flyout.ShowAt(ThicknessButton);
                 CursorButton.IsChecked = false;
+                SelectionButton.IsChecked = false;
                 FillButton.IsChecked = false;
-                DeleteButton.IsChecked = false;
+                RotateButton.IsChecked = false;
+                if (DataContext is ToolBarsViewModel viewmodel && viewmodel.Main is not null)
+                {
+                    viewmodel.Main.SelectTool = Tools.None;
+                    viewmodel.Main.SelectedFigure = null;
+                }
             }
             else
             {
@@ -71,12 +100,23 @@ namespace GraphicsApp.Views
             if (!_isClearingSelection)
             {
                 SetButtonStates(shapeSelected: true);
+                if (DataContext is ToolBarsViewModel viewmodel && viewmodel.Main is not null) {
+                    viewmodel.Main.SelectTool = Tools.SelectFigure;
+                    if (viewmodel.Main.SelectedFigure is not null)
+                    {
+                        if (viewmodel.Main.SelectedFigure.Model is not BezierCurveModel)
+                            viewmodel.Main.SelectedFigure = null;
+                    }
+                    else
+                        viewmodel.Main.SelectedFigure = null;
+
+                }
                 //ThicknessPopupControl.ClosePopup();
             }
         }
 
         // Скролл для области "Фигуры"
-        void ScrollListUp(object sender, Avalonia.Interactivity.RoutedEventArgs e)
+        void ScrollListUp(object sender, RoutedEventArgs e)
         {
             if (ShapeScroll != null)
             {
@@ -84,7 +124,7 @@ namespace GraphicsApp.Views
             }
         }
 
-        private void ScrollListDown(object sender, Avalonia.Interactivity.RoutedEventArgs e)
+        private void ScrollListDown(object sender, RoutedEventArgs e)
         {
             if (ShapeScroll != null)
             {
@@ -95,12 +135,13 @@ namespace GraphicsApp.Views
 
         // Helper methods to reduce code duplication
         private void SetButtonStates(bool cursor = false, bool selection = false, bool pen = false,
-            bool fill = false, bool delete = false, bool thickness = false, bool shapeSelected = false)
+            bool fill = false, bool rotate = false, bool thickness = false, bool shapeSelected = false)
         {
             CursorButton.IsChecked = cursor;
+            SelectionButton.IsChecked = selection;
             PenButton.IsChecked = pen;
             FillButton.IsChecked = fill;
-            DeleteButton.IsChecked = delete;
+            RotateButton.IsChecked = rotate;
             ThicknessButton.IsChecked = thickness;
         }
 

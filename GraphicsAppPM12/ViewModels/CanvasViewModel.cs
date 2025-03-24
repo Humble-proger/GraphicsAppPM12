@@ -7,106 +7,121 @@ using Avalonia.Data.Converters;
 
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Avalonia;
 
-using GraphicsApp.Views;
-using Avalonia.Controls;
-
-namespace GraphicsApp.ViewModels;
-
-public partial class CanvasViewModel : ViewModelBase
+namespace GraphicsApp.ViewModels
 {
-    private double _originalWidth = 1000;
-    
-    private double _originalHeight = 500;
 
-    [ObservableProperty]
-    private Canvas _mainCanvas;
-
-    public double OriginalWidth {
-        get => _originalWidth;
-        set {
-            _originalWidth = value;
-            OnPropertyChanged(nameof(OriginalWidth));
-            UpdateScaledSize();
-        }
-    }
-
-    public double OriginalHeight
+    public partial class CanvasViewModel : ViewModelBase
     {
-        get => _originalHeight;
-        set
+        private double _originalWidth = 1000;
+    
+        private double _originalHeight = 500;
+
+        public double OriginalWidth {
+            get => _originalWidth;
+            set {
+                _originalWidth = value;
+                OnPropertyChanged(nameof(OriginalWidth));
+                UpdateScaledSize();
+            }
+        }
+
+        public double OriginalHeight
         {
-            _originalHeight = value;
-            OnPropertyChanged(nameof(OriginalHeight));
+            get => _originalHeight;
+            set
+            {
+                _originalHeight = value;
+                OnPropertyChanged(nameof(OriginalHeight));
+                UpdateScaledSize();
+            }
+        }
+
+        [ObservableProperty]
+        private MainWindowViewModel? _main;
+
+        public ICommand ChangeMouseCoord { get; }
+        public ICommand MouseLeaveCanvas { get; }
+        public ICommand ChangeSizeCanvas { get; }
+
+        [ObservableProperty]
+        private double _scaledWidth;
+        [ObservableProperty]
+        private double _scaledHeight;
+
+
+        public CanvasViewModel(MainWindowViewModel? main)
+        {
+            Main = main;
+            ChangeMouseCoord = new RelayCommand<Avalonia.Point>(OnMouseMove);
+            MouseLeaveCanvas = new RelayCommand(OnMouseLeave);
+            ChangeSizeCanvas = new RelayCommand<Vector2>(OnResizeCanvas);
             UpdateScaledSize();
         }
-    }
-
-    [ObservableProperty]
-    private MainWindowViewModel? _main;
-
-    public ICommand ChangeMouseCoord { get; }
-    public ICommand MouseLeaveCanvas { get; }
-    public ICommand ChangeSizeCanvas { get; }
-
-    [ObservableProperty]
-    private double _scaledWidth;
-    [ObservableProperty]
-    private double _scaledHeight;
-
-
-    public CanvasViewModel(MainWindowViewModel? main)
-    {
-        Main = main;
-        ChangeMouseCoord = new RelayCommand<Avalonia.Point>(OnMouseMove);
-        MouseLeaveCanvas = new RelayCommand(OnMouseLeave);
-        ChangeSizeCanvas = new RelayCommand<Vector2>(OnResizeCanvas);
-        UpdateScaledSize();
-    }
     
-    private void OnMouseMove(Avalonia.Point Point)
-    {
-        if (Main is not null)
-            Main.Footerview.MouseCoords = $"X: {Point.X,5:F1}, Y {Point.Y, 5:F1}";
-    }
+        private void OnMouseMove(Avalonia.Point Point)
+        {
+            if (Main is not null)
+                Main.Footerview.MouseCoords = $"X: {Point.X,5:F1}, Y {Point.Y, 5:F1}";
+        }
 
-    private void OnMouseLeave()
-    {
-        if (Main is not null)
-            Main.Footerview.MouseCoords = "";
-    }
+        private void OnMouseLeave()
+        {
+            if (Main is not null)
+                Main.Footerview.MouseCoords = "";
+        }
 
-    private void OnResizeCanvas(Vector2 size)
-    {
-        if (Main is not null)
-            Main.Footerview.CanvasSize = $"{size.X} x {size.Y}";
-        OriginalHeight = size.Y;
-        OriginalWidth = size.X;
+        private void OnResizeCanvas(Vector2 size)
+        {
+            if (Main is not null)
+                Main.Footerview.CanvasSize = $"{size.X} x {size.Y}";
+            OriginalHeight = size.Y;
+            OriginalWidth = size.X;
 
-        UpdateScaledSize();
+            UpdateScaledSize();
 
-    }
-    private double _zoomFactor = 1.0;
+        }
+        private double _zoomFactor = 1.0;
 
-    public double ZoomFactor
-    {
-        get => _zoomFactor;
-        set { 
-            SetProperty(ref _zoomFactor, value);
-            UpdateScaledSize(); 
+        public double ZoomFactor
+        {
+            get => _zoomFactor;
+            set { 
+                SetProperty(ref _zoomFactor, value);
+                UpdateScaledSize(); 
+            }
+        }
+
+        private void UpdateScaledSize()
+        {
+            ScaledWidth = OriginalWidth * ZoomFactor;
+            ScaledHeight = OriginalHeight * ZoomFactor;
+        }
+
+        public void Zoom(double delta)
+        {
+            ZoomFactor += delta;
+            if (ZoomFactor < 0.1) ZoomFactor = 0.1;
+
         }
     }
-
-    private void UpdateScaledSize()
+    public class OffsetConverter : IValueConverter
     {
-        ScaledWidth = OriginalWidth * ZoomFactor;
-        ScaledHeight = OriginalHeight * ZoomFactor;
-    }
+        public static OffsetConverter Instance { get; } = new OffsetConverter();
 
-    public void Zoom(double delta)
-    {
-        ZoomFactor += delta;
-        if (ZoomFactor < 0.1) ZoomFactor = 0.1;
+        public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
+        {
+            if (value is double coord && parameter is string offsetStr && double.TryParse(offsetStr, out double offset))
+            {
+                return coord - offset;
+            }
+            return value;
+        }
 
+        public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
