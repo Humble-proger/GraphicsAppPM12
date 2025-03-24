@@ -62,8 +62,10 @@ namespace GraphicsApp.Views
                         if (mainWindow is not null)
                             flag = await ShowMassageConfirmationDialog("Вы действительно хотите удалить текущие изменения?", mainWindow);
                     }
-                    if (flag)
+                    if (flag) {
                         viewModel.Main.LoadJsonCommand.Execute(filePath);
+                        viewModel.Main.Settingswindow.SaveLocation = filePath;
+                    }
                 }
             }
         }
@@ -124,6 +126,8 @@ namespace GraphicsApp.Views
                         default:
                             break;
                     }
+                    if (File.Exists(result))
+                        viewModel.Main.Settingswindow.SaveLocation = result;
                 }
             }
         }
@@ -154,7 +158,7 @@ namespace GraphicsApp.Views
                     viewModel.Main.ToDefaultSettingsAndClearCanvas.Execute(null);
             }
         }
-        private void OnSaveButtonClick(object sender, RoutedEventArgs e)
+        private async void OnSaveButtonClick(object sender, RoutedEventArgs e)
         {
             if (DataContext is SettingsViewModel viewModel && viewModel.Main is not null)
             {
@@ -178,6 +182,13 @@ namespace GraphicsApp.Views
                         default:
                             break;
                     }
+                }
+                else {
+                    var dialog = new MessageBoxOk();
+                    dialog.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+                    var mainWindow = (Application.Current?.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime)?.MainWindow;
+                    if (mainWindow is not null)
+                        await dialog.ShowDialog(mainWindow);
                 }
             }
         }
