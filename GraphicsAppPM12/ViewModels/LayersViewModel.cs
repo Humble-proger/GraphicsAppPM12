@@ -1,3 +1,5 @@
+using System;
+using System.Linq.Expressions;
 using System.Windows.Input;
 
 
@@ -36,13 +38,11 @@ public partial class LayersViewModel : ViewModelBase
         var indexEl = Main.Figures.IndexOf(figure);
         if (indexEl > 0)
         {
-            // Свап
-            (Main.Figures[indexEl], Main.Figures[indexEl - 1]) = (Main.Figures[indexEl - 1], Main.Figures[indexEl]);
-
-            // После свапа меняем выделенную фигуру
-            Main.Figures[indexEl].Active = false;
-            Main.SelectedFigure = Main.Figures[indexEl - 1];
-            Main.Figures[indexEl - 1].Active = true;
+            Main.History.Execute(new MoveLayer(
+                Main,
+                indexEl,
+                indexEl - 1
+                ));
         }
     }
 
@@ -51,14 +51,34 @@ public partial class LayersViewModel : ViewModelBase
         var indexEl = Main.Figures.IndexOf(figure);
         if (indexEl < Main.Figures.Count - 1)
         {
-            // Свап
-            (Main.Figures[indexEl], Main.Figures[indexEl + 1]) = (Main.Figures[indexEl + 1], Main.Figures[indexEl]);
-
-            // После свапа меняем выделенную фигуру
-            Main.Figures[indexEl].Active = false;
-            Main.SelectedFigure = Main.Figures[indexEl + 1];
-            Main.Figures[indexEl + 1].Active = true;
+            Main.History.Execute(new MoveLayer(
+                Main,
+                indexEl,
+                indexEl + 1
+                ));
         }
     }
 
+    public class MoveLayer(MainWindowViewModel main, int index, int newIndex) : IUndoCommand
+    {
+        private readonly MainWindowViewModel _main = main;
+        private readonly int _oldIndex = index;
+        private readonly int _newIndex = newIndex;
+        public void Execute()
+        {
+            (_main.Figures[_oldIndex], _main.Figures[_newIndex]) = (_main.Figures[_newIndex], _main.Figures[_oldIndex]);
+
+            _main.Figures[_oldIndex].Active = false;
+            _main.SelectedFigure = _main.Figures[_newIndex];
+            _main.Figures[_newIndex].Active = true;
+        }
+        public void Undo()
+        {
+            (_main.Figures[_oldIndex], _main.Figures[_newIndex]) = (_main.Figures[_newIndex], _main.Figures[_oldIndex]);
+
+            _main.Figures[_newIndex].Active = false;
+            _main.SelectedFigure = _main.Figures[_oldIndex];
+            _main.Figures[_oldIndex].Active = true;
+        }
+    }
 }

@@ -9,6 +9,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Avalonia;
 using Avalonia.Controls;
+using System.Drawing;
 
 namespace GraphicsApp.ViewModels
 {
@@ -76,11 +77,7 @@ namespace GraphicsApp.ViewModels
 
         private void OnResizeCanvas(Vector2 size)
         {
-            if (Main is not null)
-                Main.Footerview.CanvasSize = $"{size.X} x {size.Y}";
-            OriginalHeight = size.Y;
-            OriginalWidth = size.X;
-
+            Main.History.Execute(new ChengeSizeCanvasCommand(Main, size.X, size.Y));
         }
         private double _zoomFactor = 1.0;
 
@@ -121,6 +118,27 @@ namespace GraphicsApp.ViewModels
         public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
         {
             throw new NotImplementedException();
+        }
+    }
+
+    public class ChengeSizeCanvasCommand(MainWindowViewModel main, double newWidth, double newHeight) : IUndoCommand
+    {
+        private readonly MainWindowViewModel _main = main;
+        private readonly double _oldWidth = main.Canvasview.OriginalWidth;
+        private readonly double _oldHeight = main.Canvasview.OriginalHeight;
+        private readonly double _newWidth = newWidth;
+        private readonly double _newHeight = newHeight;
+        public void Execute()
+        {
+            _main.Footerview.CanvasSize = $"{_newWidth,5:F1} x {_newHeight, 5:F1}";
+            _main.Canvasview.OriginalWidth = _newWidth;
+            _main.Canvasview.OriginalHeight = _newHeight;
+        }
+        public void Undo()
+        {
+            _main.Footerview.CanvasSize = $"{_oldWidth,5:F1} x {_oldHeight,5:F1}";
+            _main.Canvasview.OriginalWidth = _oldWidth;
+            _main.Canvasview.OriginalHeight = _oldHeight;
         }
     }
 }

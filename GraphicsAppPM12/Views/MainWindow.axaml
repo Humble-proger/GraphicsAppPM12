@@ -17,6 +17,11 @@
         <vm:MainWindowViewModel/>
     </Design.DataContext> -->
 
+    <Window.KeyBindings>
+        <KeyBinding Command="{Binding UndoCommand}" Gesture="Ctrl+Z"/>
+        <KeyBinding Command="{Binding RedoCommand}" Gesture="Ctrl+Shift+Z"/>
+    </Window.KeyBindings>
+    
     <Grid RowDefinitions="Auto, Auto, *, Auto" Background="#F7F7F7">
         <!--Панель с кнопками сохранить\сохранит как и тд-->
         <local:Settings DataContext="{Binding Settings}"/>

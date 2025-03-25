@@ -6,7 +6,8 @@
              xmlns:m="using:Geometry"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="GraphicsApp.Views.Layers"
-             x:DataType="vm:LayersViewModel">
+             x:DataType="vm:LayersViewModel"
+             x:Name="LayersControl">
 
     <!--xmlns:vm="clr-namespace:GraphicsApp.ViewModels"-->
     <UserControl.Styles>
@@ -29,8 +30,8 @@
                             <ContentControl Content="{Binding Main.SelectedFigure}" >
                                 <ContentControl.DataTemplates>
                                     <DataTemplate x:DataType="vm:ShapeViewModel">
-                                        <StackPanel>
-                                            <Grid RowDefinitions="*,*,*,Auto,Auto,*,*,*" ColumnDefinitions="113, *" Margin="5" >
+                                        <StackPanel x:Name="PropertyFigure">
+                                            <Grid RowDefinitions="*,*,*,Auto,Auto,*,*,*,*,*" ColumnDefinitions="113, *" Margin="5" >
                                                 <TextBlock Grid.Column="0" Grid.Row="0" Text="Имя фигуры" Classes="OptionsNechet"/>
                                                 <TextBlock Grid.Column="0" Grid.Row="1" Text="Положение по X" Classes="OptionsChet"/>
                                                 <TextBlock Grid.Column="0" Grid.Row="2" Text="Положение по Y" Classes="OptionsNechet"/>
@@ -39,22 +40,27 @@
                                                 <TextBlock Grid.Column="0" Grid.Row="5" Text="Наличие заливки" Classes="OptionsChet"/>
                                                 <TextBlock Grid.Column="0" Grid.Row="6" Text="Толщина линии" Classes="OptionsNechet"/>
                                                 <TextBlock Grid.Column="0" Grid.Row="7" Text="Угол поворота" Classes="OptionsChet"/>
+                                                <TextBlock Grid.Column="0" Grid.Row="8" Text="Ширина" Classes="OptionsChet"/>
+                                                <TextBlock Grid.Column="0" Grid.Row="9" Text="Высота" Classes="OptionsChet"/>
 
                                                 <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding Name, Mode=TwoWay}" Classes="Options"/>
-                                                <TextBox Grid.Column="1" Grid.Row="1" Watermark="12" Classes="Options" Text="{Binding Model.CenterX, Mode=TwoWay, Converter={StaticResource NumericConverter}}"/>
-                                                <TextBox Grid.Column="1" Grid.Row="2" Watermark="12" Classes="Options" Text="{Binding Model.CenterY, Mode=TwoWay, Converter={StaticResource NumericConverter}}"/>
-                                                <ColorPicker Grid.Column="1" Grid.Row="3" Color="{Binding Model.Fill, Mode=TwoWay}" HorizontalAlignment="Left" Margin="1"/>
-                                                <ColorPicker Grid.Column="1" Grid.Row="4" Color="{Binding Model.Stroke, Mode=TwoWay}" HorizontalAlignment="Left" Margin="1"/>
-                                                <CheckBox Grid.Column="1" Grid.Row="5" HorizontalAlignment="Left" IsChecked="{Binding Model.Fill.A}" Margin="1" IsCheckedChanged="OnFillButtonClick" />
-                                                <TextBox Grid.Column="1" Grid.Row="6" Text="{Binding Model.StrokeThickness, Mode=TwoWay, Converter={StaticResource NumericConverter}}" Classes="Options"/>
-                                                <TextBox Grid.Column="1" Grid.Row="7" Watermark="0" Classes="Options" Text="{Binding Model.Angle, Mode=TwoWay, Converter={StaticResource NumericConverter}}"/>
+                                                <TextBox Grid.Column="1" Grid.Row="1" Watermark="12" Classes="Options" Text="{Binding CenterX, Mode=TwoWay, Converter={StaticResource NumericConverter}}"/>
+                                                <TextBox Grid.Column="1" Grid.Row="2" Watermark="12" Classes="Options" Text="{Binding CenterY, Mode=TwoWay, Converter={StaticResource NumericConverter}}"/>
+                                                <ColorPicker Grid.Column="1" Grid.Row="3" Color="{Binding Fill, Mode=TwoWay}" HorizontalAlignment="Left" Margin="1"/>
+                                                <ColorPicker Grid.Column="1" Grid.Row="4" Color="{Binding Stroke, Mode=TwoWay}" HorizontalAlignment="Left" Margin="1"/>
+                                                <CheckBox Grid.Column="1" Grid.Row="5" HorizontalAlignment="Left" IsChecked="{Binding Fill.A}" Margin="1" IsCheckedChanged="OnFillButtonClick" />
+                                                <TextBox Grid.Column="1" Grid.Row="6" Text="{Binding StrokeThickness, Mode=TwoWay, Converter={StaticResource NumericConverter}}" Classes="Options"/>
+                                                <TextBox Grid.Column="1" Grid.Row="7" Watermark="0" Classes="Options" Text="{Binding Angle, Mode=TwoWay, Converter={StaticResource NumericConverter}}"/>
+                                                <TextBox Grid.Column="1" Grid.Row="8" Text="{Binding Width, Mode=TwoWay, Converter={StaticResource NumericConverter}}" Classes="Options"/>
+                                                <TextBox Grid.Column="1" Grid.Row="9" Watermark="0" Classes="Options" Text="{Binding Height, Mode=TwoWay, Converter={StaticResource NumericConverter}}"/>
                                             </Grid>
-                                            <ContentControl Content="{Binding Model}">
+                                            <!--
+                                            <ContentControl x:DataType="vm:ShapeViewModel" Content="{Binding Model}">
                                                 <ContentControl.DataTemplates>
                                                     <DataTemplate x:DataType="m:CircleModel">
                                                         <Grid RowDefinitions="*" ColumnDefinitions="113, *" Margin="5" >
                                                             <TextBlock Grid.Column="0" Grid.Row="0" Text="Радиус" Classes="OptionsNechet"/>
-                                                            <TextBox Grid.Column="1" Grid.Row="0" Watermark="9" Classes="Options" Text="{Binding Radius, Mode=TwoWay, Converter={StaticResource NumericConverter}}"/>
+                                                            <TextBox Grid.Column="1" Grid.Row="0" Watermark="9" Classes="Options" Text="{Binding Main.SelectedFigure.Width, Mode=TwoWay, Converter={StaticResource NumericConverter}}"/>
                                                         </Grid>
                                                     </DataTemplate>
                                                     <DataTemplate x:DataType="m:EllipseModel">
@@ -97,6 +103,7 @@
                                                     </DataTemplate>
                                                 </ContentControl.DataTemplates>
                                             </ContentControl>
+                                            -->
                                         </StackPanel> 
                                     </DataTemplate>
                                 </ContentControl.DataTemplates>

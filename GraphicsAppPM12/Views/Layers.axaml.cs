@@ -10,13 +10,13 @@ namespace GraphicsApp.Views
 {
     public partial class Layers : UserControl
     {
-
+        public float Help = 1;
 
         public Layers()
         {
             InitializeComponent();
 
-            DataContext = this; // Устанавливаем контекст данных
+            //DataContext = this; // Устанавливаем контекст данных
             
 
         }
@@ -40,13 +40,13 @@ namespace GraphicsApp.Views
                         {
                             var originalColor = viewmodel.Main.SelectedFigure.Model.Fill;
                             var newColor = Color.FromArgb(255, originalColor.R, originalColor.G, originalColor.B);
-                            viewmodel.Main.SelectedFigure.Model.Fill = newColor;
+                            viewmodel.Main.SelectedFigure.Fill = newColor;
                         }
                         else
                         {
                             var originalColor = viewmodel.Main.SelectedFigure.Model.Fill;
                             var newColor = Color.FromArgb(0, originalColor.R, originalColor.G, originalColor.B);
-                            viewmodel.Main.SelectedFigure.Model.Fill = newColor;
+                            viewmodel.Main.SelectedFigure.Fill = newColor;
                         }
                     }
             }

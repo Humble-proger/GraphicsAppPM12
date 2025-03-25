@@ -6,6 +6,9 @@ using CommunityToolkit.Mvvm.Input;
 using System.Composition;
 using Geometry;
 using System.Linq;
+using GraphicsApp.ViewModels;
+using System.Numerics;
+using System.Collections.ObjectModel;
 
 namespace GraphicsApp.ViewModels
 {
@@ -18,10 +21,10 @@ namespace GraphicsApp.ViewModels
 
         public ModelFactoryViewModel()
         {
-            CreateCommand = new RelayCommand<Avalonia.Point>((Avalonia.Point point) => Main?.Figures.Add(Create(point)));
+            CreateCommand = new RelayCommand<Avalonia.Point>((Avalonia.Point point) => Create(point));
         }
 
-        private ShapeViewModel Create(Avalonia.Point point)
+        private void Create(Avalonia.Point point)
         {
             var colorFill = Main.Toolbarsview.SelectedColor;
             var tickness = Main.Toolbarsview.LineThickness;
@@ -36,7 +39,27 @@ namespace GraphicsApp.ViewModels
             model.Move((float) point.X, (float) point.Y);
             model.StrokeThickness = (float)Main.Toolbarsview.LineThickness;
 
-            return new() { Name = name, Model = model, Main = Main };
+            var figure = new ShapeViewModel() { _name = name, Model = model, Main = Main };
+            Main.History.Execute(new CreateFigure(
+                figure,
+                Main
+                ));
         }
     }
+
+    public class CreateFigure(ShapeViewModel figure, MainWindowViewModel main) : IUndoCommand
+    {
+
+        private readonly ShapeViewModel _shape = figure;
+        private readonly MainWindowViewModel _mainWindow = main;
+        public void Execute()
+        {
+            _mainWindow.Figures.Add(_shape);
+        }
+        public void Undo()
+        {
+            _mainWindow.Figures.Remove(_shape);
+        }
+    }
+
 }
