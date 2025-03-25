@@ -14,6 +14,7 @@ using System.Diagnostics;
 using IO.exporters;
 using IO;
 using Avalonia.Media;
+using System;
 
 
 namespace GraphicsApp.ViewModels;
@@ -22,6 +23,8 @@ public enum Tools
 {
     Cursor,
     Pen,
+    PenAdd,
+    PenRemove,
     Fill,
     Rotate,
     SelectFigure,
@@ -51,7 +54,7 @@ public partial class MainWindowViewModel : ViewModelBase
     private SettingsViewModel _settings;
 
     [ObservableProperty]
-    private Tools _selectTool = Tools.None;
+    private Tools _selectTool = Tools.Cursor;
 
     public ObservableCollection<ShapeViewModel> Figures { get; } = [];
     
@@ -125,12 +128,17 @@ public partial class MainWindowViewModel : ViewModelBase
     {
         if (filePath is not null)
         {
-            _geometryJsonSerializer.SaveJson(
-                filePath,
-                new Vector2(x: (float) Canvasview.OriginalWidth, y: (float) Canvasview.OriginalHeight),
-                Figures
-            );
-            if (!File.Exists(filePath)) Debug.WriteLine($"Warning: ���� {filePath} �� ��� ������!");
+            try {
+                _geometryJsonSerializer.SaveJson(
+                    filePath,
+                    new Vector2(x: (float) Canvasview.OriginalWidth, y: (float) Canvasview.OriginalHeight),
+                    Figures
+                );
+                if (!File.Exists(filePath)) Debug.WriteLine($"Warning: ���� {filePath} �� ��� ������!");
+            }
+            catch (Exception ex) {
+                Debug.WriteLine($"Ошибка сохранения: {ex.Message}");
+            }
         }
     }
 
@@ -139,28 +147,35 @@ public partial class MainWindowViewModel : ViewModelBase
         if (FilePath is null)
             return;
 
-        var result = _geometryJsonSerializer.LoadJson(FilePath);
-
-        if (result is null)
+        try
         {
-            Debug.WriteLine($"Warning: Failed to read the selected file {FilePath}");
-            return;
+            var result = _geometryJsonSerializer.LoadJson(FilePath);
+
+            if (result is null)
+            {
+                Debug.WriteLine($"Warning: Failed to read the selected file {FilePath}");
+                return;
+            }
+            var CanvasSize = result.Value.CanvasSize;
+            var figures = result.Value.Figures;
+
+            if (figures is null)
+                return;
+
+            ToDefaultSettingsAndClearCanvas.Execute(null);
+            Canvasview.ChangeSizeCanvas.Execute(CanvasSize);
+
+            foreach (var fig in figures)
+            {
+                fig.Main = this;
+                fig.Active = false;
+
+                Figures.Add(fig);
+            }
+            History.Clear();
         }
-        var CanvasSize = result.Value.CanvasSize;
-        var figures = result.Value.Figures;
-
-        if (figures is null)
-            return;
-
-        ToDefaultSettingsAndClearCanvas.Execute(null);
-        Canvasview.ChangeSizeCanvas.Execute(CanvasSize);
-
-        foreach (var fig in figures)
-        {
-            fig.Main = this;
-            fig.Active = false;
-
-            Figures.Add(fig);
+        catch (Exception ex) {
+            Debug.WriteLine($"Ошибка сохранения: {ex.Message}");
         }
     }
 
@@ -173,16 +188,28 @@ public partial class MainWindowViewModel : ViewModelBase
         {
             shapes.Add(fig.Model);
         }
-        SvgExporter.Export(filepath, new Vector2(x: (float) Canvasview.OriginalWidth, y: (float) Canvasview.OriginalHeight), shapes);
-        if (!File.Exists(filepath)) Debug.WriteLine($"Warning: ���� {filepath} �� ��� ������!");
+        try
+        {
+            SvgExporter.Export(filepath, new Vector2(x: (float) Canvasview.OriginalWidth, y: (float) Canvasview.OriginalHeight), shapes);
+            if (!File.Exists(filepath)) Debug.WriteLine($"Warning: ���� {filepath} �� ��� ������!");
+        }
+        catch (Exception ex) {
+            Debug.WriteLine($"Ошибка сохранения: {ex.Message}");
+        }
     }
 
     private void SaveToPng(string? filepath)
     {
         if (filepath is null) return;
         SelectedFigure = null;
-        RasterExporter.Export(Canvasview.MainCanvas, filepath);
-        if (!File.Exists(filepath)) Debug.WriteLine($"Warning: ���� {filepath} �� ��� ������!");
+        try
+        {
+            RasterExporter.Export(Canvasview.MainCanvas, filepath);
+            if (!File.Exists(filepath)) Debug.WriteLine($"Warning: ���� {filepath} �� ��� ������!");
+        }
+        catch (Exception ex) {
+            Debug.WriteLine($"Ошибка сохранения: {ex.Message}");
+        }
     }
 
     private void ClearCanvas()
@@ -197,5 +224,6 @@ public partial class MainWindowViewModel : ViewModelBase
         Toolbarsview.LineThickness = 0;
         Toolbarsview.OutlineColor = Colors.Black;
         Toolbarsview.SelectedColor = Colors.Red;
+        History.Clear();
     }
 }

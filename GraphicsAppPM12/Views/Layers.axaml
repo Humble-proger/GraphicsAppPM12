@@ -7,7 +7,7 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="GraphicsApp.Views.Layers"
              x:DataType="vm:LayersViewModel"
-             x:Name="LayersControl">
+             >
 
     <!--xmlns:vm="clr-namespace:GraphicsApp.ViewModels"-->
     <UserControl.Styles>
@@ -30,7 +30,7 @@
                             <ContentControl Content="{Binding Main.SelectedFigure}" >
                                 <ContentControl.DataTemplates>
                                     <DataTemplate x:DataType="vm:ShapeViewModel">
-                                        <StackPanel x:Name="PropertyFigure">
+                                        <StackPanel>
                                             <Grid RowDefinitions="*,*,*,Auto,Auto,*,*,*,*,*" ColumnDefinitions="113, *" Margin="5" >
                                                 <TextBlock Grid.Column="0" Grid.Row="0" Text="Имя фигуры" Classes="OptionsNechet"/>
                                                 <TextBlock Grid.Column="0" Grid.Row="1" Text="Положение по X" Classes="OptionsChet"/>

@@ -43,5 +43,10 @@ namespace GraphicsApp.ViewModels
         {
             _undoStack.Push(command);
         }
+
+        public void Clear() {
+            _redoStack.Clear();
+            _undoStack.Clear();
+        }
     }
 }

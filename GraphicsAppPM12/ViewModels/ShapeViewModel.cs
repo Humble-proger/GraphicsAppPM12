@@ -22,9 +22,10 @@ namespace GraphicsApp.ViewModels
         [ObservableProperty]
         [property: JsonIgnore]
         private MainWindowViewModel? _main;
-
+        
         [JsonPropertyName("Name")]
-        public string _name = "Name";
+        public string _name { get; set; } = "Name";
+        
         [JsonIgnore]
         public string Name {
             get => _name;
@@ -50,8 +51,8 @@ namespace GraphicsApp.ViewModels
                 OnPropertyChanged(nameof(Name));
             }
         }
-
-        public bool _isVisibleIcon = true;
+        [JsonPropertyName("IsVisibleIcon")]
+        public bool _isVisibleIcon { get; set; } = true;
 
         [JsonIgnore]
         public bool IsVisibleIcon {
@@ -458,59 +459,84 @@ public class MovePointFigure(ShapeViewModel figure, float deltaX, float deltaY, 
     public  float DeltaX { get; set; } = deltaX;
     public  float DeltaY { get; set; } = deltaY;
     public  int Index { get; set; } = index;
-    public readonly dynamic typefigure = figure.Model;
+    public readonly ShapeViewModel _typefigure = figure;
     public void Execute()
     {
+        dynamic typefigure = _typefigure.Model;
         if (typefigure.GetType().GetMethod("MovePoint") != null)
         {
             typefigure.MovePoint(DeltaX, DeltaY, Index);
+            _typefigure.UpdateCenterX();
+            _typefigure.UpdateCenterY();
+            _typefigure.UpdateSize();
         }
     }
     public void Undo()
     {
+        dynamic typefigure = _typefigure.Model;
         if (typefigure.GetType().GetMethod("MovePoint") != null)
         {
             typefigure.MovePoint(-DeltaX, -DeltaY, Index);
+            _typefigure.UpdateCenterX();
+            _typefigure.UpdateCenterY();
+            _typefigure.UpdateSize();
         }
     }
 }
 
 public class AddPointFigure(ShapeViewModel figure, float posX, float posY) : IUndoCommand
 {
-    public readonly dynamic _typefigure = figure.Model;
+    public readonly ShapeViewModel _typefigure = figure;
     public  Point Point { get; set; } = new Point(posX, posY);
     public void Execute()
     {
-        if (_typefigure.GetType().GetMethod("AddPoint") != null)
+        dynamic typefigure = _typefigure.Model;
+        if (typefigure.GetType().GetMethod("AddPoint") != null)
         {
-            _typefigure.AddPoint(Point);
+            typefigure.AddPoint(Point);
+            _typefigure.UpdateCenterX();
+            _typefigure.UpdateCenterY();
+            _typefigure.UpdateSize();
+
         }
     }
     public void Undo()
     {
-        if (_typefigure.GetType().GetMethod("RemovePoint") != null)
+        dynamic typefigure = _typefigure.Model;
+        if (typefigure.GetType().GetMethod("RemovePoint") != null)
         {
-            _typefigure.RemovePoint(Point);
+            typefigure.RemovePoint(Point);
+            _typefigure.UpdateCenterX();
+            _typefigure.UpdateCenterY();
+            _typefigure.UpdateSize();
         }
     }
 }
 
 public class RemovePointFigure(ShapeViewModel figure, Point point) : IUndoCommand
 {
-    public readonly dynamic _typefigure = figure.Model;
+    public readonly ShapeViewModel _typefigure = figure;
     public  Point Point { get; set; } = point;
     public void Execute()
     {
-        if (_typefigure.GetType().GetMethod("RemovePoint") != null)
+        dynamic typefigure = _typefigure.Model;
+        if (typefigure.GetType().GetMethod("RemovePoint") != null)
         {
-            _typefigure.RemovePoint(Point);
+            typefigure.RemovePoint(Point);
+            _typefigure.UpdateCenterX();
+            _typefigure.UpdateCenterY();
+            _typefigure.UpdateSize();
         }
     }
     public void Undo()
     {
-        if (_typefigure.GetType().GetMethod("AddPoint") != null)
+        dynamic typefigure = _typefigure.Model;
+        if (typefigure.GetType().GetMethod("AddPoint") != null)
         {
-            _typefigure.AddPoint(Point);
+            typefigure.AddPoint(Point);
+            _typefigure.UpdateCenterX();
+            _typefigure.UpdateCenterY();
+            _typefigure.UpdateSize();
         }
     }
 }

@@ -95,12 +95,12 @@ namespace GraphicsApp.Views
                     var position = e.GetCurrentPoint(_canvas).Position;
                     bool flag = true;
                     if (viewModel.Main.SelectedFigure is not null) {
-                        if (viewModel.Main.SelectedFigure.Model is BezierCurveModel && viewModel.Main.SelectTool == Tools.SelectFigure && viewModel.Main.SelectedButtonFigure.Factory.Metadata.Name == "BezierCurve")
+                        if (viewModel.Main.SelectedFigure.Model is BezierCurveModel && viewModel.Main.SelectTool == Tools.PenAdd)
                         {
                             viewModel.Main.History.Execute(new AddPointFigure(viewModel.Main.SelectedFigure, (float) position.X, (float) position.Y));
                             flag = false;
                         }
-                        else if (viewModel.Main.SelectedFigure.Model is PolygonModel && viewModel.Main.SelectTool == Tools.SelectFigure && viewModel.Main.SelectedButtonFigure.Factory.Metadata.Name == "Polygon") {
+                        else if (viewModel.Main.SelectedFigure.Model is PolygonModel && viewModel.Main.SelectTool == Tools.PenAdd) {
                             viewModel.Main.History.Execute(new AddPointFigure(viewModel.Main.SelectedFigure, (float) position.X, (float) position.Y));
                             flag = false;
                         }
@@ -251,6 +251,8 @@ namespace GraphicsApp.Views
                                 deltaX += _deltaX;
                                 deltaY += _deltaY;
                                 viewmodel.Main.SelectedFigure.Model.Move((float) _deltaX, (float) _deltaY);
+                                viewmodel.Main.SelectedFigure.UpdateCenterX();
+                                viewmodel.Main.SelectedFigure.UpdateCenterY();
                                 break;
                             case Operation.Rotate:
                                 _deltaX = newPosition.X - oldPositionX;
@@ -261,6 +263,7 @@ namespace GraphicsApp.Views
                                 deltaTheta += theta;
                                 _oldTheta += theta;
                                 viewmodel.Main.SelectedFigure.Model.Rotate((float) theta);
+                                viewmodel.Main.SelectedFigure.UpdateAngle();
                                 break;
                             case Operation.ScaleX:
                                 _angle = viewmodel.Main.SelectedFigure.Model.Angle;
@@ -275,12 +278,14 @@ namespace GraphicsApp.Views
                                         var v = float.Abs((float) _deltaX);
                                         deltaScaleX *= v;
                                         viewmodel.Main.SelectedFigure.Model.Scale(v, (float) 1.0);
+                                        viewmodel.Main.SelectedFigure.UpdateSize();
                                     }
                                     else
                                     {
                                         _isReflectionX = true;
                                         deltaScaleX *= (float) _deltaX; 
                                         viewmodel.Main.SelectedFigure.Model.Scale((float) _deltaX, (float) 1.0);
+                                        viewmodel.Main.SelectedFigure.UpdateSize();
                                     }
                                 }
                                 else if (_deltaX > 0)
@@ -290,11 +295,13 @@ namespace GraphicsApp.Views
                                         _isReflectionX = false;
                                         deltaScaleX *= (float) -_deltaX;
                                         viewmodel.Main.SelectedFigure.Model.Scale((float) -_deltaX, (float) 1.0);
+                                        viewmodel.Main.SelectedFigure.UpdateSize();
                                     }
                                     else
                                     {
                                         deltaScaleX *= (float) _deltaX;
                                         viewmodel.Main.SelectedFigure.Model.Scale((float) _deltaX, (float) 1.0);
+                                        viewmodel.Main.SelectedFigure.UpdateSize();
                                     }
                                 }
                                 break;
@@ -311,12 +318,14 @@ namespace GraphicsApp.Views
                                         var h = float.Abs((float) _deltaY);
                                         deltaScaleY *= h;
                                         viewmodel.Main.SelectedFigure.Model.Scale((float) 1.0, h);
+                                        viewmodel.Main.SelectedFigure.UpdateSize();
                                     }
                                     else
                                     {
                                         _isReflectionY = true;
                                         deltaScaleY *= (float) _deltaY;
                                         viewmodel.Main.SelectedFigure.Model.Scale((float) 1.0, (float) _deltaY);
+                                        viewmodel.Main.SelectedFigure.UpdateSize();
                                     }
                                 }
                                 else if (_deltaY > 0)
@@ -326,11 +335,13 @@ namespace GraphicsApp.Views
                                         _isReflectionY = false;
                                         deltaScaleY *= (float) -_deltaY;
                                         viewmodel.Main.SelectedFigure.Model.Scale((float) 1.0, (float) -_deltaY);
+                                        viewmodel.Main.SelectedFigure.UpdateSize();
                                     }
                                     else
                                     {
                                         deltaScaleY *= (float) _deltaY;
                                         viewmodel.Main.SelectedFigure.Model.Scale((float) 1.0, (float) _deltaY);
+                                        viewmodel.Main.SelectedFigure.UpdateSize();
                                     }
                                 }
                                 break;
@@ -444,16 +455,23 @@ namespace GraphicsApp.Views
             if (sender is Ellipse ellipse && e.GetCurrentPoint(ellipse).Properties.IsLeftButtonPressed)
             {
                 if (ellipse.DataContext is Point point && DataContext is CanvasViewModel viewmodel && 
-                    viewmodel.Main is not null && viewmodel.Main.SelectTool == Tools.Pen && viewmodel.Main.SelectedFigure is not null)
+                    viewmodel.Main is not null && viewmodel.Main.SelectedFigure is not null)
                 {
-                    // Устанавливаем выбранную фигуру в ViewModel
+                    if (viewmodel.Main.SelectTool == Tools.Pen)
+                    {
+                        // Устанавливаем выбранную фигуру в ViewModel
 
-                    _isFigureResize = Operation.Translate;
-                    (_startpositionX, _startpositionY) = point;
-                    dynamic figure = viewmodel.Main.SelectedFigure.Model;
-                    if (figure.GetType().GetProperty("ListOfPoints") != null)
-                        _indexPoint = figure.ListOfPoints.IndexOf(point);
-                    e.Handled = true;
+                        _isFigureResize = Operation.Translate;
+                        (_startpositionX, _startpositionY) = point;
+                        dynamic figure = viewmodel.Main.SelectedFigure.Model;
+                        if (figure.GetType().GetProperty("ListOfPoints") != null)
+                            _indexPoint = figure.ListOfPoints.IndexOf(point);
+                        e.Handled = true;
+                    }
+                    else if (viewmodel.Main.SelectTool == Tools.PenRemove) {
+                        viewmodel.Main.History.Execute(new RemovePointFigure(viewmodel.Main.SelectedFigure, point));
+                        e.Handled = true;
+                    }
                 }
             }
         }
@@ -498,9 +516,11 @@ namespace GraphicsApp.Views
                 {
                     if (_isFigureResize == Operation.None)
                     {
-                        marking.Cursor = null;
                         marking.Cursor = new Cursor(StandardCursorType.SizeAll);
                     }
+                }
+                else if (figure.Main.SelectTool == Tools.PenRemove && figure.Main.SelectedFigure.Active && _isFigureResize == Operation.None) {
+                    marking.Cursor = new Cursor(StandardCursorType.No);
                 }
             }
         }
@@ -511,6 +531,9 @@ namespace GraphicsApp.Views
                 if (_isFigureResize == Operation.Translate)
                 {
                     viewModel.Main.History.Add(new MovePointFigure(viewModel.Main.SelectedFigure, (float) deltaX, (float) deltaY, _indexPoint));
+                    viewModel.Main.SelectedFigure.UpdateSize();
+                    viewModel.Main.SelectedFigure.UpdateCenterY();
+                    viewModel.Main.SelectedFigure.UpdateCenterX();
                 }
             }
 
