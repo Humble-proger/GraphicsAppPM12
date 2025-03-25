@@ -29,7 +29,7 @@ namespace GraphicsApp.Views
         }
 
         // Обработчик для кнопки "Перо"
-        private void PenButtonAdd_Click(object sender, RoutedEventArgs e)
+        private void PenButton_Click(object sender, RoutedEventArgs e)
         {
             SetButtonStates(pen: true);
             if (DataContext is ToolBarsViewModel viewmodel && viewmodel.Main is not null)
@@ -39,13 +39,25 @@ namespace GraphicsApp.Views
             //ThicknessPopupControl.ClosePopup();
             ClearShapeSelection();
         }
+
+        // Обработчик для кнопки "Перо"
+        private void PenButtonAdd_Click(object sender, RoutedEventArgs e)
+        {
+            SetButtonStates(penadd: true);
+            if (DataContext is ToolBarsViewModel viewmodel && viewmodel.Main is not null)
+            {
+                viewmodel.Main.SelectTool = Tools.PenAdd;
+            }
+            //ThicknessPopupControl.ClosePopup();
+            ClearShapeSelection();
+        }
         
         private void PenButtonDelete_Click(object sender, RoutedEventArgs e)
         {
-            SetButtonStates(pen: true);
+            SetButtonStates(penremove: true);
             if (DataContext is ToolBarsViewModel viewmodel && viewmodel.Main is not null)
             {
-                viewmodel.Main.SelectTool = Tools.Pen;
+                viewmodel.Main.SelectTool = Tools.PenRemove;
             }
             //ThicknessPopupControl.ClosePopup();
             ClearShapeSelection();
@@ -110,11 +122,13 @@ namespace GraphicsApp.Views
 
         // Helper methods to reduce code duplication
         private void SetButtonStates(bool cursor = false, bool selection = false, bool pen = false,
-            bool fill = false, bool rotate = false, bool thickness = false, bool shapeSelected = false)
+            bool fill = false, bool rotate = false, bool thickness = false, bool shapeSelected = false,
+            bool penadd = false, bool penremove = false)
         {
             CursorButton.IsChecked = cursor;
-            PenButtonAdd.IsChecked = pen;
-            PenButtonDelete.IsChecked = pen;
+            PenButton.IsChecked = pen;
+            PenButtonAdd.IsChecked = penadd;
+            PenButtonDelete.IsChecked = penremove;
             ThicknessButton.IsChecked = thickness;
         }
 

@@ -200,7 +200,8 @@ namespace Geometry
         public string Geometry => GetGeometry();
         
         [JsonConverter(typeof(PointConverter))]
-        private ObservableCollection<Point> ListOfPoints { get; set; }
+        public ObservableCollection<Point> ListOfPoints { get; set; }
+        
         [JsonIgnore]
         ObservableCollection<Point> IShape.ListOfPoints => [];
 
@@ -277,6 +278,24 @@ namespace Geometry
         public void Rotate(float angle)
         {
             Angle += angle;
+        }
+
+        [JsonConstructor]
+        public SquareModel(float angle, float centerX, float centerY, float strokeThickness, Color fill, Color stroke, float width, float boxWidth, float boxHeight, float boxCenterX, float boxCenterY, ObservableCollection<Point> listOfPoints)
+        {
+            _angle = angle;
+            _centerX = centerX;
+            _centerY = centerY;
+            _strokeThickness = strokeThickness;
+            _fill = fill;
+            _stroke = stroke;
+            _width = width;
+            BoxCenterX = boxCenterX;
+            BoxCenterY = boxCenterY;
+            BoxWidth = boxWidth;
+            BoxHeight = boxHeight;
+            ListOfPoints = listOfPoints;
+
         }
 
         public SquareModel() {

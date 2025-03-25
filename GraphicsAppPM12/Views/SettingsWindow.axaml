@@ -17,6 +17,10 @@
         <StyleInclude Source="SettingsWindowStyles.axaml"/>
     </Window.Styles>
 
+    <Window.Resources>
+        <vm:NumericConverter2 x:Key="NumericConverter" />
+    </Window.Resources>
+
     <Grid RowDefinitions="*, Auto">
         
         <ScrollViewer Grid.Row="0" Margin="5">
@@ -24,13 +28,15 @@
 
                 <!-- Автоматическое сохранение -->
                 <TextBlock Text="Автоматическое сохранение" FontWeight="Bold" Margin="5"/>
-                <CheckBox x:Name="AutoSaveCheckBox"
+                <CheckBox x:Name="AutoSaveCheckBox" x:DataType="vm:SettingsWindowViewModel"
                           Content="Включение интервала автоматического сохранения документов"
-                          Margin="5"/>
+                          Margin="5"
+                          IsChecked="{Binding IsAutoSaveEnabled, Mode=TwoWay}"/>
                 <StackPanel Orientation="Horizontal" Margin="5">
                     <TextBlock Text="Интервал:" VerticalAlignment="Center"/>
                     <TextBox Width="50" Margin="5,0,5,0"
-                             IsEnabled="{Binding IsChecked, ElementName=AutoSaveCheckBox}"/>
+                             IsEnabled="{Binding IsChecked, ElementName=AutoSaveCheckBox}" x:DataType="vm:SettingsWindowViewModel"
+                             Text="{Binding AutoSaveInterval, Mode=TwoWay, Converter={StaticResource NumericConverter}}"/>
                     <TextBlock Text="мин" VerticalAlignment="Center"/>
                 </StackPanel>
                 <Separator/>

@@ -27,6 +27,23 @@
                 </ToggleButton>
                 <TextBlock Text="Курсор" />
             </StackPanel>
+
+            <!--Кнопка пера-->
+            <StackPanel>
+                <ToggleButton Name="PenButton" Height="50" Width="50" Background="#ededed" Margin="0,-10,0,3"
+                              Click="PenButton_Click">
+                    <Viewbox Width="35" Height="35">
+                        <Canvas Width="24" Height="24">
+                            <Path Data="M12 19L19 12L22 15L15 22L12 19Z" />
+                            <Path Data="M18 13L16.5 5.5L2 2L5.5 16.5L13 18L18 13Z" />
+                            <Path Data="M2 2L9.586 9.586" />
+                            <Ellipse Width="4" Height="4" Canvas.Left="9" Canvas.Top="9"
+                                     Stroke="#606060" StrokeThickness="2"/>
+                        </Canvas>
+                    </Viewbox>
+                </ToggleButton>
+                <TextBlock Text="Перо" />
+            </StackPanel>
             
             <!--Кнопка добавить точку-->
             <StackPanel>

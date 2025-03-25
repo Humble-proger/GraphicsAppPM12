@@ -31,4 +31,19 @@ namespace GraphicsApp.ViewModels
             return 0.0;
         }
     }
+
+    public class NumericConverter2 : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return value?.ToString();
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (int.TryParse(value?.ToString(), out int result))
+                return result;
+            return 0;
+        }
+    }
 }

@@ -186,6 +186,25 @@ namespace Geometry
         [JsonConverter(typeof(PointConverter))]
         public ObservableCollection<Point> ListOfPoints { get; set; }
 
+
+        [JsonConstructor]
+        public PolygonModel(float angle, float centerX, float centerY, float strokeThickness, Color fill, Color stroke, float width, float height, float boxWidth, float boxHeight, float boxCenterX, float boxCenterY, ObservableCollection<Point> listOfPoints)
+        {
+            _angle = angle;
+            _centerX = centerX;
+            _centerY = centerY;
+            _strokeThickness = strokeThickness;
+            _fill = fill;
+            _stroke = stroke;
+            _width = width;
+            _height = height;
+            BoxCenterX = boxCenterX;
+            BoxCenterY = boxCenterY;
+            BoxWidth = boxWidth;
+            BoxHeight = boxHeight;
+            ListOfPoints = listOfPoints;
+
+        }
         public PolygonModel()
         {
             ListOfPoints = new() {

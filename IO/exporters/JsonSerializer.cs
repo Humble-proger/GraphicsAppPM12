@@ -9,11 +9,13 @@ public class GeometryJsonSerializer<T>
 {
     private readonly JsonSerializerOptions _jsonSerializerOptions = new()
     {
-        Converters = { 
+        Converters = {
             new ColorConverter(),
             new PointConverter()
         },
         WriteIndented = true,
+        PropertyNameCaseInsensitive = true,
+        IncludeFields = true
     };
 
     public void SaveJson(string filename, Vector2 canvasSize, IEnumerable<T> figures)

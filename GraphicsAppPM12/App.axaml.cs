@@ -6,6 +6,7 @@ using System.Linq;
 using Avalonia.Markup.Xaml;
 using GraphicsApp.ViewModels;
 using GraphicsApp.Views;
+using System;
 
 namespace GraphicsApp;
 
@@ -26,6 +27,11 @@ public partial class App : Application
             desktop.MainWindow = new MainWindow
             {
                 DataContext = new MainWindowViewModel(),
+            };
+            desktop.ShutdownRequested += (sender, e) =>
+            {
+                if (DataContext is IDisposable disposable)
+                    disposable.Dispose();
             };
         }
 
