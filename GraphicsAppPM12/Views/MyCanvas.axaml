@@ -55,7 +55,7 @@
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
                                         <Ellipse Width="10" Height="10" Fill="Black" Stroke="White" StrokeThickness="2" 
-                                                 Canvas.Left="{Binding X}" Canvas.Right="{Binding Y}" PointerMoved="MarkingPointMove" PointerPressed="PointPress" PointerReleased="PointReleased">
+                                                 Canvas.Left="{Binding X}" Canvas.Right="{Binding Y}" PointerMoved="MarkingPointMove" PointerPressed="PointPress" >
                                             <Ellipse.RenderTransform>
                                                 <TranslateTransform X="{Binding X, Converter={StaticResource OffsetConverter}, ConverterParameter=5}"
                                                                    Y="{Binding Y, Converter={StaticResource OffsetConverter}, ConverterParameter=5}"/>
@@ -65,7 +65,7 @@
                                 </ItemsControl.ItemTemplate>
                                 <ItemsControl.ItemsPanel>
                                     <ItemsPanelTemplate>
-                                        <Canvas Width="{Binding Main.Canvasview.OriginalWidth}" Height="{Binding Main.Canvasview.OriginalHeight}" PointerMoved="PointMove"/>
+                                        <Canvas Width="{Binding Main.Canvasview.OriginalWidth}" Height="{Binding Main.Canvasview.OriginalHeight}" PointerMoved="PointMove" PointerReleased="PointReleased"/>
                                     </ItemsPanelTemplate>
                                 </ItemsControl.ItemsPanel>
                             </ItemsControl>
@@ -88,7 +88,7 @@
                         <Canvas Background="White" Margin="15" x:DataType="vm:CanvasViewModel"
                                 PointerMoved="MouseMoved" SizeChanged="CanvasResize" Loaded="Canvas_Loaded"
                                 PointerExited="MouseLeave" PointerPressed="CreateFigure"
-                                Height="{Binding OriginalHeight}" Width="{Binding OriginalWidth}" x:Name="MainCanvas">
+                                Height="{Binding OriginalHeight, Mode=OneWay}" Width="{Binding OriginalWidth, Mode=OneWay}" x:Name="MainCanvas">
                             <Canvas.RenderTransform>
                                 <ScaleTransform ScaleX="{Binding ZoomFactor}" ScaleY="{Binding ZoomFactor}" />
                             </Canvas.RenderTransform>

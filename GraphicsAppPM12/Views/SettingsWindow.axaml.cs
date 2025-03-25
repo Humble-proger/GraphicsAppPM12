@@ -9,6 +9,7 @@ using GraphicsApp.ViewModels;
 using System.IO;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia;
+using System.Numerics;
 
 namespace GraphicsApp.Views
 {
@@ -74,6 +75,57 @@ namespace GraphicsApp.Views
                 if (TypeFile != null && NameFile != null)
                 {
                     viewModel.SaveLocation = result;
+                }
+            }
+        }
+
+        private void ResizeCanvasX(object sender, TextChangedEventArgs e)
+        {
+            if (sender is TextBox textBox)
+            {
+                string newText = textBox.Text;
+                double value;
+                // Логика обработки (например, передача в ViewModel)
+                if (newText is null) return;
+                try
+                {
+                    value = double.Parse(newText);
+                }
+                catch {
+                    return;
+                }
+
+                if (DataContext is SettingsWindowViewModel vm && vm.Main is not null && value > 0 && vm.Main.Canvasview.OriginalWidth != value)
+                {
+                    var oldHeight = vm.Main.Canvasview.OriginalHeight;
+                    vm.Main.Canvasview.ChangeSizeCanvas.Execute(new Vector2( (float) value, (float)  oldHeight));
+
+                }
+            }
+        }
+
+        private void ResizeCanvasY(object sender, TextChangedEventArgs e)
+        {
+            if (sender is TextBox textBox)
+            {
+                string newText = textBox.Text;
+                double value;
+                // Логика обработки (например, передача в ViewModel)
+                if (newText is null) return;
+                try
+                {
+                    value = double.Parse(newText);
+                }
+                catch
+                {
+                    return;
+                }
+
+                if (DataContext is SettingsWindowViewModel vm && vm.Main is not null && value > 0 && vm.Main.Canvasview.OriginalHeight != value)
+                {
+                    var oldWidth = vm.Main.Canvasview.OriginalWidth;
+                    vm.Main.Canvasview.ChangeSizeCanvas.Execute(new Vector2((float) oldWidth, (float) value));
+
                 }
             }
         }

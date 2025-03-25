@@ -57,7 +57,9 @@ public partial class MainWindowViewModel : ViewModelBase
     
 
     public ObservableCollection<ModelFactoryViewModel> Factories { get; } = [];
-    
+
+    public CommandHistory History { get; set; } = new();
+
     [ObservableProperty]
     private ModelFactoryViewModel? _selectedButtonFigure;
     
@@ -80,6 +82,8 @@ public partial class MainWindowViewModel : ViewModelBase
     public ICommand SaveSvgCommand { get; }
     public ICommand SavePngCommand { get; }
     public ICommand ToDefaultSettingsAndClearCanvas { get; }
+    public ICommand UndoCommand { get; }
+    public ICommand RedoCommand { get; }
 
     [ImportMany]
     private IEnumerable<ExportFactory<IShape, ModelMetadata>> ModelFactories { get; set; } = [];
@@ -112,6 +116,8 @@ public partial class MainWindowViewModel : ViewModelBase
         SaveSvgCommand = new RelayCommand<string>(SaveToSVG);
         SavePngCommand = new RelayCommand<string>(SaveToPng);
         ToDefaultSettingsAndClearCanvas = new RelayCommand(ClearCanvas);
+        UndoCommand = new RelayCommand(() => History.Undo());
+        RedoCommand = new RelayCommand(() => History.Redo());
 
     }
 

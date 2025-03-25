@@ -266,6 +266,14 @@ namespace Geometry
             UpdateBox();
             OnPropertyChanged(nameof(Geometry));
         }
+
+        public void RemovePoint(Point point)
+        {
+            ListOfPoints.Remove(point);
+            CalculateCenter();
+            UpdateBox();
+            OnPropertyChanged(nameof(Geometry));
+        }
         public void Rotate(float angle)
         {
             Angle += angle;
