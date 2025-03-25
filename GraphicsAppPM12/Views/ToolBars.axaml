@@ -28,52 +28,47 @@
                 <TextBlock Text="Курсор" />
             </StackPanel>
             
-            <!--Кнопка пера-->
+            <!--Кнопка добавить точку-->
             <StackPanel>
-                <ToggleButton Name="PenButton" Height="50" Width="50" Background="#ededed" Margin="0,-10,0,3"
-                              Click="PenButton_Click">
+                <ToggleButton Name="PenButtonAdd" Height="50" Width="50" Background="#ededed" Margin="0,-10,0,3"
+                              Click="PenButtonAdd_Click">
                     <Viewbox Width="35" Height="35">
-                        <Canvas Width="24" Height="24">
-                            <Path Data="M12 19L19 12L22 15L15 22L12 19Z" />
-                            <Path Data="M18 13L16.5 5.5L2 2L5.5 16.5L13 18L18 13Z" />
-                            <Path Data="M2 2L9.586 9.586" />
-                            <Ellipse Width="4" Height="4" Canvas.Left="9" Canvas.Top="9"
-                                     Stroke="#606060" StrokeThickness="2"/>
+                        <Canvas Width="20" Height="20">
+                            <Path Data="M10 16L16 10L18 12L12 18L10 16Z" Stroke="#606060" StrokeThickness="1.5"/>
+                            <Path Data="M15 11L13.5 4.5L2 2L4.5 13.5L11 15L15 11Z" Stroke="#606060" StrokeThickness="1.5"/>
+                            <Path Data="M2 2L8 8" Stroke="#606060" StrokeThickness="1.5"/>
+                            <Ellipse Width="3" Height="3" Canvas.Left="8" Canvas.Top="8"
+                                     Stroke="#606060" StrokeThickness="1.5"/>
+                            <Path Data="M15 4L19 4M17 2L17 6" Stroke="#606060" StrokeThickness="1"/>
+                        </Canvas>
+
+                    </Viewbox>
+                </ToggleButton>
+                <TextBlock Text="Перо" />
+                <ToolTip.Tip>
+                    <TextBlock Text="Добавить точку"/>
+                </ToolTip.Tip>
+            </StackPanel>
+
+            <!--Кнопка убрать точку-->
+            <StackPanel>
+                <ToggleButton Name="PenButtonDelete" Height="50" Width="50" Background="#ededed" Margin="0,-10,0,3"
+                              Click="PenButtonDelete_Click">
+                    <Viewbox Width="35" Height="35">
+                        <Canvas Width="20" Height="20">
+                            <Path Data="M10 16L16 10L18 12L12 18L10 16Z" Stroke="#606060" StrokeThickness="1.5"/>
+                            <Path Data="M15 11L13.5 4.5L2 2L4.5 13.5L11 15L15 11Z" Stroke="#606060" StrokeThickness="1.5"/>
+                            <Path Data="M2 2L8 8" Stroke="#606060" StrokeThickness="1.5"/>
+                            <Ellipse Width="3" Height="3" Canvas.Left="8" Canvas.Top="8"
+                                     Stroke="#606060" StrokeThickness="1.5"/>
+                            <Path Data="M15 4L18 4" Stroke="#606060" StrokeThickness="1"/>
                         </Canvas>
                     </Viewbox>
                 </ToggleButton>
                 <TextBlock Text="Перо" />
-            </StackPanel>
-
-            <!--Кнопка заливки-->
-            <StackPanel>
-                <ToggleButton Name="FillButton" Height="50" Width="50" Background="#ededed" Margin="0,-10,0,3"
-                              Click="FillButton_Click">
-                    <Viewbox Width="35" Height="35">
-                        <Canvas Width="24" Height="24">
-                            <Path Data="M19 11L11 3L2.4 11.6A2 2 0 0 0 2.4 14.4L7.6 19.6C8.4 20.4 9.6 20.4 10.4 19.6L19 11Z"/>
-                            <Path Data="M5 2L10 7" />
-                            <Path Data="M2 13H17"/>
-                            <Path Data="M22 20A2 2 0 1 1 18 20C18 18.4 19.7 17.6 20 16C20.3 17.6 22 18.4 22 20Z"/>
-                        </Canvas>
-                    </Viewbox>
-                </ToggleButton>
-                <TextBlock Text="Заливка" />
-            </StackPanel>
-
-            <!--Кнопка удаления-->
-            <StackPanel>
-                <ToggleButton Name="RotateButton" Height="50" Width="50" Background="#ededed" Margin="0,-10,0,3"
-                              Click="RotateButton_Click">
-                    <Viewbox Width="35" Height="35">
-                        <Canvas Width="24" Height="24">
-                            <Path Data="M20 10C20 5.6 16.4 2 12 2S4 5.6 4 10s3.6 8 8 8h8"/>
-                            <Path Data="M16 14L20 18L16 22"/>
-                        </Canvas>
-
-                    </Viewbox> 
-                </ToggleButton>
-                <TextBlock Text="Поворот" />
+                <ToolTip.Tip>
+                    <TextBlock Text="Убрать точку"/>
+                </ToolTip.Tip>
             </StackPanel>
 
             <!--Толщина-->

@@ -29,7 +29,18 @@ namespace GraphicsApp.Views
         }
 
         // Обработчик для кнопки "Перо"
-        private void PenButton_Click(object sender, RoutedEventArgs e)
+        private void PenButtonAdd_Click(object sender, RoutedEventArgs e)
+        {
+            SetButtonStates(pen: true);
+            if (DataContext is ToolBarsViewModel viewmodel && viewmodel.Main is not null)
+            {
+                viewmodel.Main.SelectTool = Tools.Pen;
+            }
+            //ThicknessPopupControl.ClosePopup();
+            ClearShapeSelection();
+        }
+        
+        private void PenButtonDelete_Click(object sender, RoutedEventArgs e)
         {
             SetButtonStates(pen: true);
             if (DataContext is ToolBarsViewModel viewmodel && viewmodel.Main is not null)
@@ -40,39 +51,12 @@ namespace GraphicsApp.Views
             ClearShapeSelection();
         }
 
-        // Обработчик для кнопки "Заливка"
-        private void FillButton_Click(object sender, RoutedEventArgs e)
-        {
-            SetButtonStates(fill: true);
-            if (DataContext is ToolBarsViewModel viewmodel && viewmodel.Main is not null)
-            {
-                viewmodel.Main.SelectTool = Tools.Fill;
-                viewmodel.Main.SelectedFigure = null;
-            }
-            //ThicknessPopupControl.ClosePopup();
-            ClearShapeSelection();
-        }
-
-        // Обработчик для кнопки "Поворот"
-        private void RotateButton_Click(object sender, RoutedEventArgs e)
-        {
-            SetButtonStates(rotate: true);
-            if (DataContext is ToolBarsViewModel viewmodel && viewmodel.Main is not null)
-            {
-                viewmodel.Main.SelectTool = Tools.Rotate;
-                viewmodel.Main.SelectedFigure = null;
-            }
-            //ThicknessPopupControl.ClosePopup();
-            ClearShapeSelection();
-        }
         private void ThicknessButton_Click(object sender, RoutedEventArgs e)
         {
             if (ThicknessButton.IsChecked == true)
             {
                 ThicknessButton.Flyout.ShowAt(ThicknessButton);
                 CursorButton.IsChecked = false;
-                FillButton.IsChecked = false;
-                RotateButton.IsChecked = false;
                 if (DataContext is ToolBarsViewModel viewmodel && viewmodel.Main is not null)
                 {
                     viewmodel.Main.SelectTool = Tools.None;
@@ -129,9 +113,8 @@ namespace GraphicsApp.Views
             bool fill = false, bool rotate = false, bool thickness = false, bool shapeSelected = false)
         {
             CursorButton.IsChecked = cursor;
-            PenButton.IsChecked = pen;
-            FillButton.IsChecked = fill;
-            RotateButton.IsChecked = rotate;
+            PenButtonAdd.IsChecked = pen;
+            PenButtonDelete.IsChecked = pen;
             ThicknessButton.IsChecked = thickness;
         }
 
