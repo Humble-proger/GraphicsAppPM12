@@ -27,7 +27,7 @@ namespace GraphicsApp.ViewModels
             set {
                 _originalWidth = value;
                 OnPropertyChanged(nameof(OriginalWidth));
-                UpdateScaledSize();
+                OnPropertyChanged(nameof(ScaledWidth));
             }
         }
 
@@ -38,7 +38,7 @@ namespace GraphicsApp.ViewModels
             {
                 _originalHeight = value;
                 OnPropertyChanged(nameof(OriginalHeight));
-                UpdateScaledSize();
+                OnPropertyChanged(nameof(ScaledHeight));
             }
         }
 
@@ -49,10 +49,9 @@ namespace GraphicsApp.ViewModels
         public ICommand MouseLeaveCanvas { get; }
         public ICommand ChangeSizeCanvas { get; }
 
-        [ObservableProperty]
-        private double _scaledWidth;
-        [ObservableProperty]
-        private double _scaledHeight;
+        public double ScaledWidth => OriginalWidth * ZoomFactor;
+
+        public double ScaledHeight => OriginalHeight * ZoomFactor;
 
 
         public CanvasViewModel(MainWindowViewModel? main)
@@ -61,7 +60,6 @@ namespace GraphicsApp.ViewModels
             ChangeMouseCoord = new RelayCommand<Avalonia.Point>(OnMouseMove);
             MouseLeaveCanvas = new RelayCommand(OnMouseLeave);
             ChangeSizeCanvas = new RelayCommand<Vector2>(OnResizeCanvas);
-            UpdateScaledSize();
         }
     
         private void OnMouseMove(Avalonia.Point Point)
@@ -83,8 +81,6 @@ namespace GraphicsApp.ViewModels
             OriginalHeight = size.Y;
             OriginalWidth = size.X;
 
-            UpdateScaledSize();
-
         }
         private double _zoomFactor = 1.0;
 
@@ -93,21 +89,20 @@ namespace GraphicsApp.ViewModels
             get => _zoomFactor;
             set { 
                 SetProperty(ref _zoomFactor, value);
-                UpdateScaledSize(); 
+                if (Main is not null)
+                    Main.Footerview.ZoomString = $"{Math.Round(value * 100)}%";
+                OnPropertyChanged(nameof(ScaledHeight));
+                OnPropertyChanged(nameof(ScaledWidth));
             }
-        }
-
-        private void UpdateScaledSize()
-        {
-            ScaledWidth = OriginalWidth * ZoomFactor;
-            ScaledHeight = OriginalHeight * ZoomFactor;
         }
 
         public void Zoom(double delta)
         {
-            ZoomFactor += delta;
-            if (ZoomFactor < 0.1) ZoomFactor = 0.1;
-
+            var temp = ZoomFactor + delta;
+            if (temp < 5 && temp > 0.1)
+            {
+                ZoomFactor = temp;
+            }
         }
     }
     public class OffsetConverter : IValueConverter

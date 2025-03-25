@@ -19,7 +19,7 @@ namespace GraphicsApp.ViewModels
             // �������������� �� ������ � �������� (TwoWay)
             string strValue = value as string ?? string.Empty;
             if (string.IsNullOrEmpty(strValue))
-                return null;
+                return 0.0;
 
             // �������� ������������� � �����
             if (double.TryParse(strValue, out double numericValue))
@@ -28,7 +28,7 @@ namespace GraphicsApp.ViewModels
             }
 
             // ���� �� �����, ���������� null ��� ������� ��������
-            return null;
+            return 0.0;
         }
     }
 }

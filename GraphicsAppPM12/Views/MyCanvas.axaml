@@ -34,7 +34,9 @@
                                     <SolidColorBrush Color="{Binding Model.Stroke}"/>
                                 </Path.Stroke>
                             </Path>
-                            <Rectangle Name="ResizeRectangle" Width="{Binding Model.BoxWidth}" Height="{Binding Model.BoxHeight}" Fill="Transparent" Stroke="#800080FF" StrokeThickness="3" StrokeDashArray="4,2" IsVisible="{Binding Active}" PointerMoved="MarkingCursor">
+                            <Rectangle Name="ResizeRectangle" Width="{Binding Model.BoxWidth}" Height="{Binding Model.BoxHeight}" Fill="Transparent" Stroke="#800080FF" StrokeThickness="3" StrokeDashArray="4,2" IsVisible="{Binding Active}">
+                                <!--PointerMoved="MarkingCursor"-->
+                                
                                 <Rectangle.RenderTransform>
                                     <TranslateTransform X="{Binding Model.BoxCenterX}" Y="{Binding Model.BoxCenterY}"/>                                    <!-- Смещение на половину ширины и высоты в отрицательном направлении -->
                                 </Rectangle.RenderTransform>

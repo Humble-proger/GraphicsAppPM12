@@ -219,97 +219,161 @@ namespace GraphicsApp.Views
 
         private void MarkingMoved(object sender, PointerEventArgs e)
         {
-            if (_isFigureResize != Operation.None && sender is Canvas canvas)
-            {
-                // Устанавливаем выбранную фигуру в ViewModel
-                if (DataContext is CanvasViewModel viewmodel && viewmodel.Main is not null && viewmodel.Main.SelectTool == Tools.Cursor)
+            if (sender is Canvas canvas && DataContext is CanvasViewModel viewmodel && viewmodel.Main is not null) {
+                if (_isFigureResize != Operation.None)
                 {
-                    if (viewmodel.Main.SelectedFigure is null)
-                        return;
-                    var newPosition = e.GetPosition(canvas);
-                    var oldPositionX = viewmodel.Main.SelectedFigure.Model.CenterX;
-                    var oldPositionY = viewmodel.Main.SelectedFigure.Model.CenterY;
-                    double deltaX, deltaY, _angle, theta;
-                    switch (_isFigureResize) {
-                        case Operation.Translate:
-                            deltaX = newPosition.X - _startpositionX;
-                            deltaY = newPosition.Y - _startpositionY;
-                            _startpositionX = _startpositionX + deltaX;
-                            _startpositionY = _startpositionY + deltaY;
-                            viewmodel.Main.SelectedFigure.Model.Move((float) deltaX, (float) deltaY);
-                            break;
-                        case Operation.Rotate:
-                            deltaX = newPosition.X - oldPositionX;
-                            deltaY = newPosition.Y - oldPositionY;
-                            theta = CalcAngle(deltaX, deltaY);
-                            theta += _startAngle;
-                            theta -= _oldTheta;
-                            _oldTheta += theta;
-                            viewmodel.Main.SelectedFigure.Model.Rotate((float) theta);
-                            break;
-                        case Operation.ScaleX:
-                            _angle = viewmodel.Main.SelectedFigure.Model.Angle;
-                            if (_angle < 0)
-                                _angle += 360;
-                            deltaX = 2 * _inversionScale * (newPosition.X - oldPositionX) / float.Abs(viewmodel.Main.SelectedFigure.Model.Width);
+                    canvas.Cursor = new Cursor(StandardCursorType.SizeAll);
+                    // Устанавливаем выбранную фигуру в ViewModel
+                    if (viewmodel.Main.SelectTool == Tools.Cursor)
+                    {
+                        if (viewmodel.Main.SelectedFigure is null)
+                            return;
+                        var newPosition = e.GetPosition(canvas);
+                        var oldPositionX = viewmodel.Main.SelectedFigure.Model.CenterX;
+                        var oldPositionY = viewmodel.Main.SelectedFigure.Model.CenterY;
+                        double deltaX, deltaY, _angle, theta;
+                        switch (_isFigureResize)
+                        {
+                            case Operation.Translate:
+                                deltaX = newPosition.X - _startpositionX;
+                                deltaY = newPosition.Y - _startpositionY;
+                                _startpositionX = _startpositionX + deltaX;
+                                _startpositionY = _startpositionY + deltaY;
+                                viewmodel.Main.SelectedFigure.Model.Move((float) deltaX, (float) deltaY);
+                                break;
+                            case Operation.Rotate:
+                                deltaX = newPosition.X - oldPositionX;
+                                deltaY = newPosition.Y - oldPositionY;
+                                theta = CalcAngle(deltaX, deltaY);
+                                theta += _startAngle;
+                                theta -= _oldTheta;
+                                _oldTheta += theta;
+                                viewmodel.Main.SelectedFigure.Model.Rotate((float) theta);
+                                break;
+                            case Operation.ScaleX:
+                                _angle = viewmodel.Main.SelectedFigure.Model.Angle;
+                                if (_angle < 0)
+                                    _angle += 360;
+                                deltaX = 2 * _inversionScale * (newPosition.X - oldPositionX) / float.Abs(viewmodel.Main.SelectedFigure.Model.Width);
 
-                            if (deltaX < 0)
-                            {
-                                if (_isReflectionX)
-                                    viewmodel.Main.SelectedFigure.Model.Scale(float.Abs((float) deltaX), (float) 1.0);
-                                else
+                                if (deltaX < 0)
                                 {
-                                    _isReflectionX = true;
-                                    viewmodel.Main.SelectedFigure.Model.Scale((float) deltaX, (float) 1.0);
+                                    if (_isReflectionX)
+                                        viewmodel.Main.SelectedFigure.Model.Scale(float.Abs((float) deltaX), (float) 1.0);
+                                    else
+                                    {
+                                        _isReflectionX = true;
+                                        viewmodel.Main.SelectedFigure.Model.Scale((float) deltaX, (float) 1.0);
+                                    }
                                 }
-                            }
-                            else if (deltaX > 0) {
-                                if (_isReflectionX)
+                                else if (deltaX > 0)
                                 {
-                                    _isReflectionX = false;
-                                    viewmodel.Main.SelectedFigure.Model.Scale((float) -deltaX, (float) 1.0);
+                                    if (_isReflectionX)
+                                    {
+                                        _isReflectionX = false;
+                                        viewmodel.Main.SelectedFigure.Model.Scale((float) -deltaX, (float) 1.0);
+                                    }
+                                    else
+                                    {
+                                        viewmodel.Main.SelectedFigure.Model.Scale((float) deltaX, (float) 1.0);
+                                    }
                                 }
-                                else {
-                                    viewmodel.Main.SelectedFigure.Model.Scale((float) deltaX, (float) 1.0);
-                                }
-                            }
-                            break;
-                        case Operation.ScaleY:
-                            _angle = viewmodel.Main.SelectedFigure.Model.Angle;
-                            if (_angle < 0)
-                                _angle += 360;
-                            deltaY = 2 * _inversionScale * (newPosition.Y - oldPositionY) / float.Abs(viewmodel.Main.SelectedFigure.Model.Height);
-                                
-                            if (deltaY < 0)
-                            {
-                                if (_isReflectionY)
-                                    viewmodel.Main.SelectedFigure.Model.Scale((float) 1.0, float.Abs((float) deltaY));
-                                else
+                                break;
+                            case Operation.ScaleY:
+                                _angle = viewmodel.Main.SelectedFigure.Model.Angle;
+                                if (_angle < 0)
+                                    _angle += 360;
+                                deltaY = 2 * _inversionScale * (newPosition.Y - oldPositionY) / float.Abs(viewmodel.Main.SelectedFigure.Model.Height);
+
+                                if (deltaY < 0)
                                 {
-                                    _isReflectionY = true;
-                                    viewmodel.Main.SelectedFigure.Model.Scale((float) 1.0, (float) deltaY);
+                                    if (_isReflectionY)
+                                        viewmodel.Main.SelectedFigure.Model.Scale((float) 1.0, float.Abs((float) deltaY));
+                                    else
+                                    {
+                                        _isReflectionY = true;
+                                        viewmodel.Main.SelectedFigure.Model.Scale((float) 1.0, (float) deltaY);
+                                    }
                                 }
-                            }
-                            else if (deltaY > 0)
-                            {
-                                if (_isReflectionY)
+                                else if (deltaY > 0)
                                 {
-                                    _isReflectionY = false;
-                                    viewmodel.Main.SelectedFigure.Model.Scale((float) 1.0, (float) -deltaY);
+                                    if (_isReflectionY)
+                                    {
+                                        _isReflectionY = false;
+                                        viewmodel.Main.SelectedFigure.Model.Scale((float) 1.0, (float) -deltaY);
+                                    }
+                                    else
+                                    {
+                                        viewmodel.Main.SelectedFigure.Model.Scale((float) 1.0, (float) deltaY);
+                                    }
                                 }
-                                else
-                                {
-                                    viewmodel.Main.SelectedFigure.Model.Scale((float) 1.0, (float) deltaY);
-                                }
-                            }
-                            break;
-                        default:
-                            break;
+                                break;
+                            default:
+                                break;
+                        }
+
+                        e.Handled = true;
                     }
-                    
-                    e.Handled = true;
-                }
 
+                }
+                else {
+                    var rect = canvas.Children[1] as Rectangle;
+                    if (rect is not null && rect.DataContext is ShapeViewModel figure && figure.Active)
+                    {
+                        if (viewmodel.Main.SelectTool == Tools.Cursor)
+                        {
+                            var position = e.GetPosition(rect);
+                            var thickness = rect.StrokeThickness;
+                            var width = rect.Width;
+                            var height = rect.Height;
+
+                            canvas.Cursor = null;
+                            if (position.X <= thickness && position.Y <= thickness) // Левый верхний угол
+                            {
+                                canvas.Cursor = new Cursor(StandardCursorType.Hand); // Курсор поворота
+                            }
+                            else if (position.X >= width - thickness && position.Y <= thickness) // Правый верхний угол
+                            {
+                                canvas.Cursor = new Cursor(StandardCursorType.Hand); // Курсор поворота
+                            }
+                            else if (position.X <= thickness && position.Y >= height - thickness) // Левый нижний угол
+                            {
+                                canvas.Cursor = new Cursor(StandardCursorType.Hand); // Курсор поворота
+                            }
+                            else if (position.X >= width - thickness && position.Y >= height - thickness) // Правый нижний угол
+                            {
+                                canvas.Cursor = new Cursor(StandardCursorType.Hand); // Курсор поворота
+                            }
+                            // Проверка границ
+                            else if (position.X <= thickness) // Левая граница
+                            {
+                                canvas.Cursor = new Cursor(StandardCursorType.SizeWestEast);
+                            }
+                            else if (position.X >= width - thickness) // Правая граница
+                            {
+                                canvas.Cursor = new Cursor(StandardCursorType.SizeWestEast);
+                            }
+                            else if (position.Y <= thickness) // Верхняя граница
+                            {
+                                canvas.Cursor = new Cursor(StandardCursorType.SizeNorthSouth);
+                            }
+                            else if (position.Y >= height - thickness) // Нижняя граница
+                            {
+                                canvas.Cursor = new Cursor(StandardCursorType.SizeNorthSouth);
+                            }
+                            else // Внутренняя область
+                            {
+                                canvas.Cursor = new Cursor(StandardCursorType.SizeAll);
+                            }
+                        }
+                        else
+                        {
+                            canvas.Cursor = new Cursor(StandardCursorType.Arrow);
+                        }
+                        e.Handled = true;
+                    }
+                }
+                    
             }
         }
 
@@ -328,7 +392,7 @@ namespace GraphicsApp.Views
 
             }
         }
-
+        /*
         private void MarkingCursor(object sender, PointerEventArgs e)
         {
             
@@ -387,7 +451,7 @@ namespace GraphicsApp.Views
             }
             //e.Handled = true;
         }
-
+        */
         private void PointPress(object sender, PointerPressedEventArgs e)
         {
             if (sender is Ellipse ellipse && e.GetCurrentPoint(ellipse).Properties.IsLeftButtonPressed)
